@@ -1,0 +1,224 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const tools = [
+  {
+    slug: 'compress-image',
+    name: 'Image Compressor',
+    description: 'Reduce image file size without losing quality. Works with JPG, PNG, WebP.',
+    icon: '🗜️',
+    category: 'Image',
+    popular: true,
+  },
+  {
+    slug: 'resize-image',
+    name: 'Image Resizer',
+    description: 'Resize any image to exact pixel dimensions. Fast, free, no upload needed.',
+    icon: '📐',
+    category: 'Image',
+    popular: true,
+  },
+  {
+    slug: 'png-to-jpg',
+    name: 'PNG to JPG',
+    description: 'Convert PNG files to JPG instantly. Adjust quality, download in seconds.',
+    icon: '🔄',
+    category: 'Image',
+    popular: false,
+  },
+  {
+    slug: 'word-count',
+    name: 'Word Counter',
+    description: 'Count words, characters, sentences and paragraphs in any text.',
+    icon: '📝',
+    category: 'Text',
+    popular: false,
+  },
+  {
+    slug: 'base64',
+    name: 'Base64 Encoder',
+    description: 'Encode or decode Base64 strings instantly. Useful for developers.',
+    icon: '🔐',
+    category: 'Developer',
+    popular: false,
+  },
+];
+
+const categories = ['All', 'Image', 'Text', 'Developer'];
+---
+
+<Layout
+  title="Free Online Tools"
+  description="Fast, free online tools. Compress images, resize photos, convert files and more. No login, no upload, everything runs in your browser."
+>
+
+  <section class="hero">
+    <h1 class="hero-title">Free tools that just work.</h1>
+    <p class="hero-sub">No login. No upload. No nonsense. Everything runs in your browser.</p>
+  </section>
+
+  <!-- Ad slot top -->
+  <div class="ad-slot ad-slot-horizontal">Advertisement</div>
+
+  <section class="tools-section" id="all-tools">
+    <div class="tools-grid">
+      {tools.map(tool => (
+        <a href={`/tools/${tool.slug}`} class="tool-card">
+          {tool.popular && <span class="badge">Popular</span>}
+          <span class="tool-icon">{tool.icon}</span>
+          <h2 class="tool-name">{tool.name}</h2>
+          <p class="tool-desc">{tool.description}</p>
+          <span class="tool-category">{tool.category}</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- Ad slot bottom -->
+  <div class="ad-slot ad-slot-horizontal">Advertisement</div>
+
+  <section class="trust-section">
+    <div class="trust-grid">
+      <div class="trust-item">
+        <span class="trust-icon">🔒</span>
+        <strong>100% Private</strong>
+        <p>Files never leave your device</p>
+      </div>
+      <div class="trust-item">
+        <span class="trust-icon">⚡</span>
+        <strong>Instant Results</strong>
+        <p>No waiting, no queues</p>
+      </div>
+      <div class="trust-item">
+        <span class="trust-icon">🆓</span>
+        <strong>Always Free</strong>
+        <p>No account, no payment</p>
+      </div>
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+  .hero {
+    text-align: center;
+    padding: 20px 0 48px;
+  }
+
+  .hero-title {
+    font-size: clamp(36px, 6vw, 64px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    margin-bottom: 16px;
+  }
+
+  .hero-sub {
+    font-size: 18px;
+    color: var(--text-muted);
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+
+  .tool-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    cursor: pointer;
+    position: relative;
+    transition: box-shadow 0.15s, border-color 0.15s, transform 0.15s;
+  }
+
+  .tool-card:hover {
+    box-shadow: var(--shadow);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .badge {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: var(--accent);
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 999px;
+    letter-spacing: 0.04em;
+  }
+
+  .tool-icon {
+    font-size: 28px;
+    margin-bottom: 4px;
+  }
+
+  .tool-name {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .tool-desc {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.5;
+    flex: 1;
+  }
+
+  .tool-category {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-top: 8px;
+  }
+
+  .trust-section {
+    margin-top: 48px;
+  }
+
+  .trust-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+  }
+
+  .trust-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .trust-icon {
+    font-size: 28px;
+    margin-bottom: 4px;
+  }
+
+  .trust-item strong {
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  .trust-item p {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+</style>
