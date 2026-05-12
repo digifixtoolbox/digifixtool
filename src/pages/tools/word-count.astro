@@ -1,0 +1,40 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import WordCounter from '../../components/WordCounter.jsx';
+---
+
+<Layout
+  title="Word Counter Online Free"
+  description="Count words, characters, sentences and paragraphs instantly. Free online word counter. No login, no upload needed."
+>
+  <div class="tool-page">
+    <div class="tool-header">
+      <a href="/" class="back-link">← All tools</a>
+      <h1 class="tool-title">Word Counter</h1>
+      <p class="tool-subtitle">Count words, characters, sentences and paragraphs instantly as you type.</p>
+    </div>
+    <div class="ad-slot ad-slot-horizontal">Advertisement</div>
+    <WordCounter client:load />
+    <div class="ad-slot ad-slot-horizontal" style="margin-top: 32px;">Advertisement</div>
+    <section class="seo-content">
+      <h2>How to count words online</h2>
+      <p>Just paste or type your text in the box above. Word count, character count and all stats update instantly.</p>
+      <h2>What is read time?</h2>
+      <p>Read time is calculated based on an average reading speed of 200 words per minute.</p>
+      <h2>Is my text saved?</h2>
+      <p>No. Everything stays in your browser. Nothing is sent to any server.</p>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .tool-page { max-width: 860px; margin: 0 auto; }
+  .back-link { font-size: 14px; color: var(--text-muted); font-weight: 500; display: inline-block; margin-bottom: 20px; }
+  .tool-header { margin-bottom: 32px; }
+  .tool-title { font-size: clamp(28px, 5vw, 48px); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 12px; }
+  .tool-subtitle { font-size: 16px; color: var(--text-muted); line-height: 1.5; }
+  .seo-content { margin-top: 56px; padding-top: 48px; border-top: 1px solid var(--border); }
+  .seo-content h2 { font-size: 20px; font-weight: 700; margin-bottom: 10px; margin-top: 32px; }
+  .seo-content h2:first-child { margin-top: 0; }
+  .seo-content p { color: var(--text-muted); line-height: 1.65; font-size: 15px; }
+</style>

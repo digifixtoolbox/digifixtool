@@ -1,0 +1,40 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import QRGenerator from '../../components/QRGenerator.jsx';
+---
+
+<Layout
+  title="Free QR Code Generator Online"
+  description="Generate QR codes instantly for free. Enter any URL, text, email or phone number. Download as PNG. No login, no signup needed."
+>
+  <div class="tool-page">
+    <div class="tool-header">
+      <a href="/" class="back-link">← All tools</a>
+      <h1 class="tool-title">QR Code Generator</h1>
+      <p class="tool-subtitle">Generate a QR code for any URL, text, email or phone number. Download instantly for free.</p>
+    </div>
+    <div class="ad-slot ad-slot-horizontal">Advertisement</div>
+    <QRGenerator client:load />
+    <div class="ad-slot ad-slot-horizontal" style="margin-top: 32px;">Advertisement</div>
+    <section class="seo-content">
+      <h2>How to create a QR code</h2>
+      <p>Type or paste your URL or text, and your QR code generates instantly. Customize the size and colors, then download as a PNG file.</p>
+      <h2>What can I encode in a QR code?</h2>
+      <p>Anything. Website URLs, plain text, email addresses, phone numbers, Wi-Fi passwords, or any other text.</p>
+      <h2>Is it free?</h2>
+      <p>Yes, completely free. No account, no watermark, no limits.</p>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .tool-page { max-width: 860px; margin: 0 auto; }
+  .back-link { font-size: 14px; color: var(--text-muted); font-weight: 500; display: inline-block; margin-bottom: 20px; }
+  .tool-header { margin-bottom: 32px; }
+  .tool-title { font-size: clamp(28px, 5vw, 48px); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 12px; }
+  .tool-subtitle { font-size: 16px; color: var(--text-muted); line-height: 1.5; }
+  .seo-content { margin-top: 56px; padding-top: 48px; border-top: 1px solid var(--border); }
+  .seo-content h2 { font-size: 20px; font-weight: 700; margin-bottom: 10px; margin-top: 32px; }
+  .seo-content h2:first-child { margin-top: 0; }
+  .seo-content p { color: var(--text-muted); line-height: 1.65; font-size: 15px; }
+</style>

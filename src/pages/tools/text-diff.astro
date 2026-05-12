@@ -1,0 +1,40 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import TextDiff from '../../components/TextDiff.jsx';
+---
+
+<Layout
+  title="Text Difference Checker Online Free"
+  description="Compare two texts and find the differences instantly. See added, removed and unchanged lines. Free, no login, works in your browser."
+>
+  <div class="tool-page">
+    <div class="tool-header">
+      <a href="/" class="back-link">← All tools</a>
+      <h1 class="tool-title">Text Difference Checker</h1>
+      <p class="tool-subtitle">Paste two texts and instantly see what changed. Added lines in green, removed in red.</p>
+    </div>
+    <div class="ad-slot ad-slot-horizontal">Advertisement</div>
+    <TextDiff client:load />
+    <div class="ad-slot ad-slot-horizontal" style="margin-top: 32px;">Advertisement</div>
+    <section class="seo-content">
+      <h2>How to compare two texts</h2>
+      <p>Paste your original text on the left and the modified version on the right. Differences appear instantly.</p>
+      <h2>What does it show?</h2>
+      <p>Added lines are highlighted in green, removed lines in red, and unchanged lines in white.</p>
+      <h2>Is it safe?</h2>
+      <p>Your text never leaves your device. Everything runs locally in your browser.</p>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .tool-page { max-width: 960px; margin: 0 auto; }
+  .back-link { font-size: 14px; color: var(--text-muted); font-weight: 500; display: inline-block; margin-bottom: 20px; }
+  .tool-header { margin-bottom: 32px; }
+  .tool-title { font-size: clamp(28px, 5vw, 48px); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 12px; }
+  .tool-subtitle { font-size: 16px; color: var(--text-muted); line-height: 1.5; }
+  .seo-content { margin-top: 56px; padding-top: 48px; border-top: 1px solid var(--border); }
+  .seo-content h2 { font-size: 20px; font-weight: 700; margin-bottom: 10px; margin-top: 32px; }
+  .seo-content h2:first-child { margin-top: 0; }
+  .seo-content p { color: var(--text-muted); line-height: 1.65; font-size: 15px; }
+</style>

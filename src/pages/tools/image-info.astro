@@ -1,0 +1,40 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ImageInfo from '../../components/ImageInfo.jsx';
+---
+
+<Layout
+  title="Image Size Checker - Find Image Dimensions Online Free"
+  description="Upload any image to instantly find its pixel dimensions, file size, aspect ratio, format and more. Free, no upload, works in your browser."
+>
+  <div class="tool-page">
+    <div class="tool-header">
+      <a href="/" class="back-link">← All tools</a>
+      <h1 class="tool-title">Image Info</h1>
+      <p class="tool-subtitle">Upload any image to instantly see its dimensions, file size, format and aspect ratio.</p>
+    </div>
+    <div class="ad-slot ad-slot-horizontal">Advertisement</div>
+    <ImageInfo client:load />
+    <div class="ad-slot ad-slot-horizontal" style="margin-top: 32px;">Advertisement</div>
+    <section class="seo-content">
+      <h2>How to find image dimensions</h2>
+      <p>Upload your image and all details appear instantly. Width, height, file size, format and aspect ratio in one click.</p>
+      <h2>What information does it show?</h2>
+      <p>Width and height in pixels, file size, image format, aspect ratio, megapixels and orientation.</p>
+      <h2>Is it safe?</h2>
+      <p>Your image never leaves your device. Everything runs locally in your browser.</p>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .tool-page { max-width: 860px; margin: 0 auto; }
+  .back-link { font-size: 14px; color: var(--text-muted); font-weight: 500; display: inline-block; margin-bottom: 20px; }
+  .tool-header { margin-bottom: 32px; }
+  .tool-title { font-size: clamp(28px, 5vw, 48px); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 12px; }
+  .tool-subtitle { font-size: 16px; color: var(--text-muted); line-height: 1.5; }
+  .seo-content { margin-top: 56px; padding-top: 48px; border-top: 1px solid var(--border); }
+  .seo-content h2 { font-size: 20px; font-weight: 700; margin-bottom: 10px; margin-top: 32px; }
+  .seo-content h2:first-child { margin-top: 0; }
+  .seo-content p { color: var(--text-muted); line-height: 1.65; font-size: 15px; }
+</style>

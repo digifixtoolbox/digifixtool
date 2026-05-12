@@ -1,0 +1,90 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Privacy Policy - PixMidas"
+  description="PixMidas privacy policy. Learn how we handle your data and files when using our free online tools."
+>
+  <div class="page">
+    <h1>Privacy Policy</h1>
+    <p class="updated">Last updated: May 2025</p>
+
+    <section>
+      <h2>Local Processing</h2>
+      <p>PixMidas tools are designed to process your files, images and text locally inside your browser. Your content is not uploaded to PixMidas servers. We do not collect, store, review or access the files or text you process through our tools.</p>
+    </section>
+
+    <section>
+      <h2>What We Collect</h2>
+      <p>We do not require account creation. We do not collect your name, email address or any personal information to use our tools.</p>
+      <p>Like most websites, we may collect anonymous usage data through analytics tools such as page views and general traffic patterns. This data does not identify you personally.</p>
+    </section>
+
+    <section>
+      <h2>Cookies</h2>
+      <p>PixMidas may use essential cookies to ensure the website functions correctly. We do not use tracking cookies for advertising purposes at this time.</p>
+    </section>
+
+    <section>
+      <h2>Third Party Services</h2>
+      <p>PixMidas may display advertisements through third party advertising networks such as Google AdSense. These networks may use cookies to serve relevant ads. Please refer to Google's privacy policy for more information on how they handle data.</p>
+      <p>The QR Code Generator tool uses the QR Server API to generate QR codes. Your input text is sent to this external API to generate the QR image. Please review their privacy policy at goqr.me if you have concerns about this.</p>
+    </section>
+
+    <section>
+      <h2>Your Responsibility</h2>
+      <p>Users are solely responsible for the files, text, links and other content they choose to process with PixMidas tools. Do not process illegal, harmful, abusive or unauthorized material.</p>
+    </section>
+
+    <section>
+      <h2>Changes</h2>
+      <p>We may update this privacy policy from time to time. Continued use of PixMidas after changes constitutes acceptance of the updated policy.</p>
+    </section>
+
+    <section>
+      <h2>Contact</h2>
+      <p>For privacy related questions, please contact us at privacy@pixmidas.com</p>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 20px 0 80px;
+  }
+  h1 {
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin-bottom: 8px;
+  }
+  .updated {
+    color: var(--text-muted);
+    font-size: 14px;
+    margin-bottom: 48px;
+  }
+  section {
+    margin-bottom: 36px;
+    padding-bottom: 36px;
+    border-bottom: 1px solid var(--border);
+  }
+  section:last-child {
+    border-bottom: none;
+  }
+  h2 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+  }
+  p {
+    color: var(--text-muted);
+    line-height: 1.7;
+    font-size: 15px;
+    margin-bottom: 12px;
+  }
+  p:last-child { margin-bottom: 0; }
+</style>

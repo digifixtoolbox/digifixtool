@@ -1,0 +1,40 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import SocialSizes from '../../components/SocialSizes.jsx';
+---
+
+<Layout
+  title="Social Media Image Sizes 2025 - All Platforms"
+  description="Find the correct image dimensions for every social media platform. Instagram, YouTube, TikTok, Facebook, LinkedIn, Twitter. Free tool with blank canvas download."
+>
+  <div class="tool-page">
+    <div class="tool-header">
+      <a href="/" class="back-link">← All tools</a>
+      <h1 class="tool-title">Social Media Sizes</h1>
+      <p class="tool-subtitle">Find the exact image dimensions for every platform and format. Download a blank canvas at the right size instantly.</p>
+    </div>
+    <div class="ad-slot ad-slot-horizontal">Advertisement</div>
+    <SocialSizes client:load />
+    <div class="ad-slot ad-slot-horizontal" style="margin-top: 32px;">Advertisement</div>
+    <section class="seo-content">
+      <h2>Why do social media image sizes matter?</h2>
+      <p>Each platform crops and displays images differently. Using the wrong size results in blurry, cropped or distorted images that hurt engagement.</p>
+      <h2>Which platforms are covered?</h2>
+      <p>Instagram, YouTube, TikTok, Facebook, LinkedIn, Twitter/X and Pinterest. All major content types including posts, stories, banners, profile pictures and thumbnails.</p>
+      <h2>What is the blank canvas download?</h2>
+      <p>A blank JPG file at exactly the right pixel dimensions for your chosen format. Open it in any design tool and start creating at the correct size.</p>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .tool-page { max-width: 960px; margin: 0 auto; }
+  .back-link { font-size: 14px; color: var(--text-muted); font-weight: 500; display: inline-block; margin-bottom: 20px; }
+  .tool-header { margin-bottom: 32px; }
+  .tool-title { font-size: clamp(28px, 5vw, 48px); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 12px; }
+  .tool-subtitle { font-size: 16px; color: var(--text-muted); line-height: 1.5; max-width: 600px; }
+  .seo-content { margin-top: 56px; padding-top: 48px; border-top: 1px solid var(--border); }
+  .seo-content h2 { font-size: 20px; font-weight: 700; margin-bottom: 10px; margin-top: 32px; }
+  .seo-content h2:first-child { margin-top: 0; }
+  .seo-content p { color: var(--text-muted); line-height: 1.65; font-size: 15px; }
+</style>

@@ -1,0 +1,97 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="About PixMidas - Free Online Tools"
+  description="PixMidas is a collection of free browser-based tools for images, text and more. No login, no upload, everything runs locally."
+>
+  <div class="page">
+    <h1>About PixMidas</h1>
+
+    <section class="intro">
+      <p class="lead">PixMidas is a growing collection of free online tools built to make everyday digital tasks simple, fast and private.</p>
+    </section>
+
+    <section>
+      <h2>What We Do</h2>
+      <p>We build lightweight, browser-based tools that run locally on your device. Compress images, resize photos, convert file formats, generate QR codes, count words and more, without creating an account or uploading your files to a server.</p>
+    </section>
+
+    <section>
+      <h2>Why PixMidas</h2>
+      <p>Most online tools make you sign up, upload your files to their servers, or hit usage limits after a few tries. PixMidas is different. Our tools run directly in your browser, which means they're faster, more private and always free.</p>
+      <p>The name comes from King Midas, who turned everything he touched into gold. We want to do the same for your files.</p>
+    </section>
+
+    <section>
+      <h2>Our Tools</h2>
+      <ul class="tool-list">
+        <li>Free Image Compressor</li>
+        <li>Free Image Resizer</li>
+        <li>Free Image Converter (PNG to JPG and JPG to PNG)</li>
+        <li>Free Image Info Tool</li>
+        <li>Free Images to PDF Tool</li>
+        <li>Social Media Sizes Guide</li>
+        <li>Free Word Counter</li>
+        <li>Free Text Difference Checker</li>
+        <li>Free QR Code Generator</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Beta</h2>
+      <p>PixMidas is currently in beta. We are actively building and improving. New tools are added regularly. If something doesn't work as expected, we appreciate your patience.</p>
+    </section>
+
+    <section>
+      <h2>Contact</h2>
+      <p>For questions, feedback or suggestions, reach us at hello@pixmidas.com</p>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 20px 0 80px;
+  }
+  h1 {
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin-bottom: 32px;
+  }
+  .lead {
+    font-size: 20px;
+    line-height: 1.6;
+    color: var(--text);
+    font-weight: 500;
+  }
+  section {
+    margin-bottom: 36px;
+    padding-bottom: 36px;
+    border-bottom: 1px solid var(--border);
+  }
+  section:last-child { border-bottom: none; }
+  h2 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+  }
+  p {
+    color: var(--text-muted);
+    line-height: 1.7;
+    font-size: 15px;
+    margin-bottom: 12px;
+  }
+  p:last-child { margin-bottom: 0; }
+  .tool-list {
+    padding-left: 20px;
+    color: var(--text-muted);
+    font-size: 15px;
+    line-height: 2;
+  }
+</style>

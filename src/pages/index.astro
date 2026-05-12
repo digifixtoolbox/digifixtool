@@ -1,142 +1,352 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import PromoBanner from '../components/PromoBanner.jsx';
 
 const tools = [
-  {
-    slug: 'compress-image',
-    name: 'Image Compressor',
-    description: 'Reduce image file size without losing quality. Works with JPG, PNG, WebP.',
-    icon: '🗜️',
-    category: 'Image',
-    popular: true,
-  },
-  {
-    slug: 'resize-image',
-    name: 'Image Resizer',
-    description: 'Resize any image to exact pixel dimensions. Fast, free, no upload needed.',
-    icon: '📐',
-    category: 'Image',
-    popular: true,
-  },
-  {
-    slug: 'png-to-jpg',
-    name: 'PNG to JPG',
-    description: 'Convert PNG files to JPG instantly. Adjust quality, download in seconds.',
-    icon: '🔄',
-    category: 'Image',
-    popular: false,
-  },
-  {
-    slug: 'word-count',
-    name: 'Word Counter',
-    description: 'Count words, characters, sentences and paragraphs in any text.',
-    icon: '📝',
-    category: 'Text',
-    popular: false,
-  },
-  {
-    slug: 'base64',
-    name: 'Base64 Encoder',
-    description: 'Encode or decode Base64 strings instantly. Useful for developers.',
-    icon: '🔐',
-    category: 'Developer',
-    popular: false,
-  },
+  { slug: 'compress-image', name: 'Image Compressor', description: 'Make image files smaller in seconds.', icon: '🗜️', bg: '#e8f4fd', category: 'Image', popular: true },
+  { slug: 'resize-image', name: 'Image Resizer', description: 'Resize photos to exact dimensions.', icon: '📐', bg: '#e8f4fd', category: 'Image', popular: true },
+  { slug: 'convert-image', name: 'Image Converter', description: 'Convert PNG, JPG and WebP files.', icon: '🔄', bg: '#e8f4fd', category: 'Image', popular: false },
+  { slug: 'image-info', name: 'Image Info', description: 'Check size, format and dimensions.', icon: '🔍', bg: '#e8f4fd', category: 'Image', popular: false },
+  { slug: 'images-to-pdf', name: 'Images to PDF', description: 'Turn photos into one PDF file.', icon: '📄', bg: '#fef3e8', category: 'PDF', popular: false },
+  { slug: 'social-sizes', name: 'Social Media Sizes', description: 'Find correct sizes for social posts.', icon: '📱', bg: '#f0e8fd', category: 'Social', popular: false },
+  { slug: 'word-count', name: 'Word Counter', description: 'Count words and characters instantly.', icon: '📝', bg: '#e8fdf0', category: 'Text', popular: false },
+  { slug: 'text-diff', name: 'Text Difference Checker', description: 'Compare two texts and spot changes.', icon: '🔎', bg: '#e8fdf0', category: 'Text', popular: false },
+  { slug: 'qr-code', name: 'QR Code Generator', description: 'Create QR codes for links or text.', icon: '🔳', bg: '#fdf0e8', category: 'Utility', popular: false },
 ];
 
-const categories = ['All', 'Image', 'Text', 'Developer'];
+const categories = ['All', 'Image', 'PDF', 'Text', 'Social', 'Utility'];
 ---
 
 <Layout
-  title="Free Online Tools"
-  description="Fast, free online tools. Compress images, resize photos, convert files and more. No login, no upload, everything runs in your browser."
+  title="PixMidas | Free Online Tools"
+  description="Fast, free browser-based tools for images, text, PDFs and everyday files. No login needed. Many tools run privately in your browser."
 >
-
   <section class="hero">
-    <h1 class="hero-title">Free tools that just work.</h1>
-    <p class="hero-sub">No login. No upload. No nonsense. Everything runs in your browser.</p>
+    <p class="eyebrow">PixMidas Tools</p>
+    <h1 class="hero-title">Simple tools<br />that just work.</h1>
+    <p class="hero-sub">
+      Compress, resize, convert and fix everyday files.
+      No login. No confusion.
+    </p>
+
+    <div class="quick-links">
+      <a href="/tools/compress-image/">Compress Image</a>
+      <span>•</span>
+      <a href="/tools/resize-image/">Resize Image</a>
+      <span>•</span>
+      <a href="/tools/convert-image/">Convert Image</a>
+    </div>
+
+    <a href="#all-tools" class="hero-btn">See all tools ↓</a>
   </section>
 
-  <!-- Ad slot top -->
-  <div class="ad-slot ad-slot-horizontal">Advertisement</div>
+  <div class="promo-wrap">
+    <PromoBanner client:load />
+  </div>
 
-  <section class="tools-section" id="all-tools">
+  <section id="all-tools" class="tools-section">
+    <div class="section-head">
+      <h2>All tools</h2>
+      <p>Fast browser tools for small digital problems.</p>
+    </div>
+
+    <div class="filter-bar">
+      {categories.map((cat) => (
+        <button class="filter-btn" data-category={cat} aria-pressed={cat === 'All' ? 'true' : 'false'}>
+          {cat}
+        </button>
+      ))}
+    </div>
+
     <div class="tools-grid">
-      {tools.map(tool => (
-        <a href={`/tools/${tool.slug}`} class="tool-card">
-          {tool.popular && <span class="badge">Popular</span>}
-          <span class="tool-icon">{tool.icon}</span>
-          <h2 class="tool-name">{tool.name}</h2>
-          <p class="tool-desc">{tool.description}</p>
-          <span class="tool-category">{tool.category}</span>
+      {tools.map((tool) => (
+        <a class="tool-card" data-category={tool.category} data-slug={tool.slug}>
+          <div class="tool-icon-wrap" data-bg={tool.bg}>
+            <span class="tool-icon">{tool.icon}</span>
+          </div>
+
+          <div class="tool-body">
+            <div class="tool-name-row">
+              <h3 class="tool-name">{tool.name}</h3>
+              {tool.popular && <span class="badge">Popular</span>}
+            </div>
+            <p class="tool-desc">{tool.description}</p>
+          </div>
+
+          <span class="tool-arrow">→</span>
         </a>
       ))}
     </div>
+
+    <p class="no-results" id="no-results" style="display:none">
+      No tools in this category yet. Check back soon.
+    </p>
   </section>
 
-  <!-- Ad slot bottom -->
-  <div class="ad-slot ad-slot-horizontal">Advertisement</div>
+  <div class="promo-wrap">
+    <PromoBanner client:load />
+  </div>
 
   <section class="trust-section">
     <div class="trust-grid">
       <div class="trust-item">
         <span class="trust-icon">🔒</span>
-        <strong>100% Private</strong>
-        <p>Files never leave your device</p>
+        <div>
+          <strong>Private by design</strong>
+          <p>Many tools run locally in your browser.</p>
+        </div>
       </div>
+
       <div class="trust-item">
         <span class="trust-icon">⚡</span>
-        <strong>Instant Results</strong>
-        <p>No waiting, no queues</p>
+        <div>
+          <strong>Fast and simple</strong>
+          <p>No heavy software or confusing steps.</p>
+        </div>
       </div>
+
       <div class="trust-item">
         <span class="trust-icon">🆓</span>
-        <strong>Always Free</strong>
-        <p>No account, no payment</p>
+        <div>
+          <strong>Free to use</strong>
+          <p>No account needed for basic tools.</p>
+        </div>
       </div>
     </div>
   </section>
 
+  <section class="seo-content">
+    <h2>Free Online Tools for Images, Text and More</h2>
+    <p>
+      PixMidas is a growing collection of free online tools designed to work directly inside your browser.
+      Compress images, resize photos, convert image files, generate QR codes, compare text differences,
+      count words and more without complicated software or account creation.
+    </p>
+    <p>
+      Unlike many traditional online utilities, PixMidas focuses on lightweight, fast and privacy-friendly browser tools.
+      Many tools process files locally on your device instead of uploading them to external servers.
+    </p>
+
+    <h3>Popular tools</h3>
+    <ul class="seo-list">
+      <li>Free Image Compressor</li>
+      <li>Online Image Resizer</li>
+      <li>PNG to JPG Converter</li>
+      <li>QR Code Generator</li>
+      <li>Word Counter Tool</li>
+      <li>Image Information Viewer</li>
+      <li>Text Difference Checker</li>
+      <li>Images to PDF Converter</li>
+      <li>Social Media Sizes Guide</li>
+    </ul>
+  </section>
+
+  <section class="legal-section">
+    <div class="legal-grid">
+      <div class="legal-item">
+        <strong>PixMidas Beta</strong>
+        <p>Some tools may still be under construction or experience occasional issues.</p>
+      </div>
+
+      <div class="legal-item">
+        <strong>Privacy & Local Processing</strong>
+        <p>When possible, files are processed locally in your browser.</p>
+      </div>
+
+      <div class="legal-item">
+        <strong>Responsible Use</strong>
+        <p>Do not use PixMidas to process illegal or unauthorized material.</p>
+      </div>
+    </div>
+  </section>
 </Layout>
+
+<script>
+  document.querySelectorAll('.tool-card').forEach(function(card) {
+    var slug = card.getAttribute('data-slug');
+    card.setAttribute('href', '/tools/' + slug + '/');
+  });
+
+  document.querySelectorAll('.tool-icon-wrap').forEach(function(wrap) {
+    var bg = wrap.getAttribute('data-bg');
+    wrap.style.background = bg;
+  });
+
+  var buttons = document.querySelectorAll('.filter-btn');
+  var cards = document.querySelectorAll('.tool-card');
+  var noResults = document.getElementById('no-results');
+
+  buttons.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var category = btn.getAttribute('data-category');
+
+      buttons.forEach(function(b) {
+        b.setAttribute('aria-pressed', 'false');
+      });
+
+      btn.setAttribute('aria-pressed', 'true');
+
+      var visible = 0;
+
+      cards.forEach(function(card) {
+        var match = category === 'All' || card.getAttribute('data-category') === category;
+        card.style.display = match ? 'flex' : 'none';
+
+        if (match) visible++;
+      });
+
+      noResults.style.display = visible === 0 ? 'block' : 'none';
+    });
+  });
+</script>
 
 <style>
   .hero {
     text-align: center;
-    padding: 20px 0 48px;
+    padding: 56px 0 42px;
   }
 
-  .hero-title {
-    font-size: clamp(36px, 6vw, 64px);
-    font-weight: 800;
-    letter-spacing: -0.03em;
-    line-height: 1.05;
+  .eyebrow {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     margin-bottom: 16px;
   }
 
+  .hero-title {
+    font-size: clamp(44px, 8vw, 78px);
+    font-weight: 850;
+    letter-spacing: -0.055em;
+    line-height: 1.04;
+    margin-bottom: 20px;
+    color: var(--text);
+  }
+
   .hero-sub {
-    font-size: 18px;
+    font-size: clamp(18px, 2.4vw, 22px);
     color: var(--text-muted);
-    max-width: 500px;
-    margin: 0 auto;
+    line-height: 1.55;
+    max-width: 650px;
+    margin: 0 auto 18px;
+  }
+
+  .quick-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+    color: var(--text-light);
+    font-size: 15px;
+  }
+
+  .quick-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .quick-links a:hover {
+    color: var(--accent);
+  }
+
+  .hero-btn {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    padding: 16px 36px;
+    border-radius: 999px;
+    text-decoration: none;
+    transition: background 0.15s, transform 0.15s, box-shadow 0.15s;
+    box-shadow: 0 10px 28px rgba(0, 113, 227, 0.22);
+  }
+
+  .hero-btn:hover {
+    background: #0077ed;
+    transform: translateY(-1px);
+  }
+
+  .promo-wrap {
+    margin: 26px 0;
+  }
+
+  .tools-section {
+    scroll-margin-top: 90px;
+  }
+
+  .section-head {
+    margin-bottom: 18px;
+    text-align: left;
+  }
+
+  .section-head h2 {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--text);
+    letter-spacing: -0.03em;
+    margin-bottom: 6px;
+  }
+
+  .section-head p {
+    color: var(--text-muted);
+    font-size: 15px;
+  }
+
+  .filter-bar {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+
+  .filter-btn {
+    padding: 10px 22px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    color: var(--text-muted);
+    font-size: 15px;
+    font-weight: 650;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-family: inherit;
+  }
+
+  .filter-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .filter-btn[aria-pressed="true"] {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
   }
 
   .tools-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
   }
 
   .tool-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 24px;
     display: flex;
-    flex-direction: column;
-    gap: 8px;
+    align-items: center;
+    gap: 20px;
+    background: var(--surface);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
+    box-shadow: var(--shadow-sm);
     cursor: pointer;
-    position: relative;
-    transition: box-shadow 0.15s, border-color 0.15s, transform 0.15s;
   }
 
   .tool-card:hover {
@@ -145,80 +355,308 @@ const categories = ['All', 'Image', 'Text', 'Developer'];
     transform: translateY(-2px);
   }
 
-  .badge {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    background: var(--accent);
-    color: white;
-    font-size: 11px;
-    font-weight: 700;
-    padding: 3px 8px;
-    border-radius: 999px;
-    letter-spacing: 0.04em;
+  .tool-icon-wrap {
+    width: 62px;
+    height: 62px;
+    border-radius: 17px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
   }
 
   .tool-icon {
-    font-size: 28px;
-    margin-bottom: 4px;
+    font-size: 30px;
+    line-height: 1;
+  }
+
+  .tool-body {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .tool-name-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 5px;
   }
 
   .tool-name {
-    font-size: 18px;
-    font-weight: 700;
-    letter-spacing: -0.02em;
+    font-size: 20px;
+    font-weight: 750;
+    letter-spacing: -0.025em;
+    color: var(--text);
+  }
+
+  .badge {
+    background: var(--accent);
+    color: white;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 3px 10px;
+    border-radius: 999px;
+    letter-spacing: 0.04em;
+    flex-shrink: 0;
   }
 
   .tool-desc {
-    font-size: 14px;
+    font-size: 15px;
     color: var(--text-muted);
-    line-height: 1.5;
-    flex: 1;
+    line-height: 1.45;
   }
 
-  .tool-category {
-    font-size: 12px;
-    font-weight: 600;
+  .tool-arrow {
+    font-size: 22px;
+    color: var(--text-light);
+    flex-shrink: 0;
+    transition: color 0.15s, transform 0.15s;
+  }
+
+  .tool-card:hover .tool-arrow {
     color: var(--accent);
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    margin-top: 8px;
+    transform: translateX(4px);
+  }
+
+  .no-results {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 16px;
+    padding: 40px 0;
   }
 
   .trust-section {
-    margin-top: 48px;
+    margin-top: 18px;
   }
 
   .trust-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 16px;
   }
 
   .trust-item {
-    background: var(--surface);
-    border: 1px solid var(--border);
+    background: var(--surface-2);
     border-radius: var(--radius);
-    padding: 24px;
+    padding: 24px 20px;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
   }
 
   .trust-icon {
-    font-size: 28px;
+    font-size: 34px;
     margin-bottom: 4px;
   }
 
   .trust-item strong {
-    font-size: 16px;
-    font-weight: 700;
+    font-size: 17px;
+    font-weight: 750;
+    letter-spacing: -0.02em;
   }
 
   .trust-item p {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  .seo-content {
+    max-width: 720px;
+    margin: 76px auto 0;
+    color: var(--text-muted);
+    line-height: 1.8;
+  }
+
+  .seo-content h2 {
+    font-size: 26px;
+    font-weight: 850;
+    color: var(--text);
+    margin-bottom: 20px;
+    letter-spacing: -0.035em;
+    text-align: center;
+  }
+
+  .seo-content h3 {
+    font-size: 20px;
+    font-weight: 750;
+    color: var(--text);
+    margin-top: 32px;
+    margin-bottom: 12px;
+  }
+
+  .seo-content p {
+    margin-bottom: 16px;
+    font-size: 15px;
+  }
+
+  .seo-list {
+    padding-left: 20px;
+  }
+
+  .seo-list li {
+    margin-bottom: 8px;
+    font-size: 15px;
+  }
+
+  .legal-section {
+    margin-top: 60px;
+  }
+
+  .legal-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .legal-item {
+    background: var(--surface-2);
+    border-radius: var(--radius-sm);
+    padding: 20px;
+  }
+
+  .legal-item strong {
+    display: block;
+    font-size: 14px;
+    font-weight: 750;
+    margin-bottom: 8px;
+    color: var(--text);
+  }
+
+  .legal-item p {
     font-size: 13px;
     color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding: 42px 0 32px;
+    }
+
+    .eyebrow {
+      font-size: 12px;
+      margin-bottom: 12px;
+    }
+
+    .hero-title {
+      font-size: clamp(42px, 14vw, 64px);
+      letter-spacing: -0.06em;
+      margin-bottom: 18px;
+    }
+
+    .hero-sub {
+      font-size: 19px;
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+
+    .quick-links {
+      font-size: 14px;
+      margin-bottom: 28px;
+      padding: 0 14px;
+    }
+
+    .hero-btn {
+      width: min(100%, 340px);
+      padding: 16px 28px;
+      font-size: 18px;
+    }
+
+    .promo-wrap {
+      margin: 20px 0;
+    }
+
+    .section-head {
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .section-head h2 {
+      font-size: 25px;
+    }
+
+    .filter-bar {
+      justify-content: center;
+      gap: 9px;
+      margin-bottom: 20px;
+    }
+
+    .filter-btn {
+      padding: 10px 18px;
+      font-size: 15px;
+    }
+
+    .tool-card {
+      padding: 16px;
+      gap: 14px;
+      border-radius: 20px;
+    }
+
+    .tool-icon-wrap {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+    }
+
+    .tool-icon {
+      font-size: 25px;
+    }
+
+    .tool-name-row {
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .tool-name {
+      font-size: 17px;
+    }
+
+    .tool-desc {
+      font-size: 14px;
+    }
+
+    .tool-arrow {
+      font-size: 19px;
+    }
+
+    .trust-grid {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .trust-item {
+      flex-direction: row;
+      text-align: left;
+      padding: 18px;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .trust-icon {
+      font-size: 30px;
+      margin-bottom: 0;
+      flex-shrink: 0;
+    }
+
+    .seo-content {
+      margin-top: 48px;
+      line-height: 1.7;
+    }
+
+    .seo-content h2 {
+      font-size: 24px;
+    }
+
+    .legal-grid {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .legal-section {
+      margin-top: 44px;
+    }
   }
 </style>

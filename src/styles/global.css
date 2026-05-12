@@ -1,20 +1,28 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 :root {
-  --bg: #f5f4f0;
+  --bg: #ffffff;
   --surface: #ffffff;
-  --border: #e2e0d8;
-  --text: #1a1916;
-  --text-muted: #6b6960;
-  --accent: #2563eb;
-  --accent-light: #eff6ff;
-  --accent-border: #bfdbfe;
-  --success: #166534;
-  --success-bg: #dcfce7;
-  --success-border: #86efac;
-  --radius: 16px;
-  --radius-sm: 10px;
-  --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
+  --surface-2: #f5f5f7;
+  --surface-3: #e8e8ed;
+  --border: #d2d2d7;
+  --border-light: #e8e8ed;
+  --text: #1d1d1f;
+  --text-muted: #6e6e73;
+  --text-light: #86868b;
+  --accent: #0071e3;
+  --accent-hover: #0077ed;
+  --accent-light: #f0f7ff;
+  --success: #1d8348;
+  --success-bg: #f0faf4;
+  --success-border: #a8d5b5;
+  --radius: 20px;
+  --radius-sm: 14px;
+  --radius-xs: 10px;
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+  --shadow: 0 4px 20px rgba(0,0,0,0.08);
+  --shadow-lg: 0 8px 40px rgba(0,0,0,0.12);
+  --max-width: 1080px;
 }
 
 *, *::before, *::after {
@@ -24,10 +32,11 @@
 }
 
 html {
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   background: var(--bg);
   color: var(--text);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
@@ -41,26 +50,36 @@ a {
   text-decoration: none;
 }
 
-/* Ad slot placeholder styling */
+button {
+  font-family: inherit;
+}
+
+img {
+  max-width: 100%;
+}
+
 .ad-slot {
-  background: var(--border);
+  background: var(--surface-2);
   border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--text-muted);
-  font-size: 12px;
-  letter-spacing: 0.05em;
+  color: var(--text-light);
+  font-size: 11px;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
+  font-weight: 500;
 }
 
 .ad-slot-horizontal {
   width: 100%;
-  height: 90px;
-  margin: 24px 0;
+  height: 80px;
+  margin: 32px 0;
 }
 
-.ad-slot-square {
-  width: 300px;
-  height: 250px;
+@media (max-width: 768px) {
+  .ad-slot-horizontal {
+    height: 60px;
+    margin: 20px 0;
+  }
 }

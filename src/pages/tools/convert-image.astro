@@ -1,0 +1,40 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ImageConverter from '../../components/ImageConverter.jsx';
+---
+
+<Layout
+  title="Convert Image Online Free - PNG to JPG, JPG to PNG"
+  description="Convert PNG to JPG or JPG to PNG online for free. No upload, no login, works 100% in your browser."
+>
+  <div class="tool-page">
+    <div class="tool-header">
+      <a href="/" class="back-link">← All tools</a>
+      <h1 class="tool-title">Image Converter</h1>
+      <p class="tool-subtitle">Convert PNG to JPG, JPG to PNG, or WebP to either format. Free, instant, private.</p>
+    </div>
+    <div class="ad-slot ad-slot-horizontal">Advertisement</div>
+    <ImageConverter client:load />
+    <div class="ad-slot ad-slot-horizontal" style="margin-top: 32px;">Advertisement</div>
+    <section class="seo-content">
+      <h2>How to convert an image format</h2>
+      <p>Select your conversion direction, upload your image, and click Convert. Download instantly. No account needed.</p>
+      <h2>PNG to JPG vs JPG to PNG</h2>
+      <p>JPG is smaller and better for photos. PNG supports transparency and is better for logos and graphics.</p>
+      <h2>Is it safe?</h2>
+      <p>Your images never leave your device. Everything runs locally in your browser.</p>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .tool-page { max-width: 860px; margin: 0 auto; }
+  .back-link { font-size: 14px; color: var(--text-muted); font-weight: 500; display: inline-block; margin-bottom: 20px; }
+  .tool-header { margin-bottom: 32px; }
+  .tool-title { font-size: clamp(28px, 5vw, 48px); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 12px; }
+  .tool-subtitle { font-size: 16px; color: var(--text-muted); line-height: 1.5; }
+  .seo-content { margin-top: 56px; padding-top: 48px; border-top: 1px solid var(--border); }
+  .seo-content h2 { font-size: 20px; font-weight: 700; margin-bottom: 10px; margin-top: 32px; }
+  .seo-content h2:first-child { margin-top: 0; }
+  .seo-content p { color: var(--text-muted); line-height: 1.65; font-size: 15px; }
+</style>

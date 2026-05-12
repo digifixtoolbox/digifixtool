@@ -1,0 +1,22 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ImagesToPDF from '../../components/ImagesToPDF.jsx';
+---
+
+<Layout title="Images to PDF - PixMidas" description="Convert multiple images into one PDF file directly in your browser.">
+  <main class="min-h-screen bg-slate-950 text-white px-6 py-12">
+    <section class="max-w-5xl mx-auto">
+      <a href="/" class="text-sm text-slate-400 hover:text-white">← Back to tools</a>
+
+      <div class="mt-8 mb-10">
+        <p class="text-sm uppercase tracking-[0.25em] text-yellow-400 mb-3">PDF Tool</p>
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">Images to PDF</h1>
+        <p class="text-slate-300 text-lg max-w-2xl">
+          Upload JPG, PNG or WebP images and convert them into a single PDF file. Everything runs inside your browser.
+        </p>
+      </div>
+
+      <ImagesToPDF client:load />
+    </section>
+  </main>
+</Layout>
