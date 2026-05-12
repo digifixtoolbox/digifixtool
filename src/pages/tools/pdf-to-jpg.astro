@@ -1,0 +1,46 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PdfToJpg from '../../components/PdfToJpg.jsx';
+---
+
+<Layout
+  title="PDF to JPG Converter Online Free"
+  description="Convert PDF pages to JPG images online for free. No login, no upload to servers. Works directly in your browser."
+>
+  <div class="tool-page">
+    <div class="tool-header">
+      <a href="/" class="back-link">← All tools</a>
+      <h1 class="tool-title">PDF tJPG Converter</h1>
+      <p class="tool-subtitle">Convert every page of your PDF into a JPG image. Free, fast, no login needed.</p>
+    </div>
+    <div class="ad-slot ad-slot-horizontal">Advertisement</div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" is:inline></script>
+    <script is:inline>
+      if (typeof window !== 'undefined' && window.pdfjsLib) {
+        window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+      }
+    </script>
+    <PdfToJpg client:load />
+    <div class="ad-slot ad-slot-horizontal" style="margin-top: 32px;">Advertisement</div>
+    <section class="seo-content">
+      <h2>How to convert PDF to JPG</h2>
+      <p>Upload your PDF file and each page will be converted to a JPG image. Download individual pages or all at once.</p>
+      <h2>How many pages can I convert?</h2>
+      <p>There is no page limit. All pages are converted automatically.</p>
+      <h2>Is it safe?</h2>
+      <p>Yes. Your PDF never leaves your device. Everything runs locally in your browser using PDF.js.</p>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .tool-page { max-width: 860px; margin: 0 auto; }
+  .back-link { font-size: 14px; color: var(--text-muted); font-weight: 500; display: inline-block; margin-bottom: 20px; }
+  .tool-header { margin-bottom: 32px; }
+  .tool-title { font-size: clamp(28px, 5vw, 48px); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 12px; }
+  .tool-subtitle { font-size: 16px; color: var(--text-muted); line-height: 1.5; }
+  .seo-content { margin-top: 56px; padding-top: 48px; border-top: 1px solid var(--border); }
+  .seo-content h2 { font-size: 20px; font-weight: 700; margin-bottom: 10px; margin-top: 32px; }
+  .seo-content h2:first-child { margin-top: 0; }
+  .seo-content p { color: var(--text-muted); line-height: 1.65; font-size: 15px; }
+</style>

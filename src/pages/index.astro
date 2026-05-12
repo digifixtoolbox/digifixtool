@@ -3,38 +3,41 @@ import Layout from '../layouts/Layout.astro';
 import PromoBanner from '../components/PromoBanner.jsx';
 
 const tools = [
-  { slug: 'compress-image', name: 'Image Compressor', description: 'Make image files smaller in seconds.', icon: '🗜️', bg: '#e8f4fd', category: 'Image', popular: true },
-  { slug: 'resize-image', name: 'Image Resizer', description: 'Resize photos to exact dimensions.', icon: '📐', bg: '#e8f4fd', category: 'Image', popular: true },
-  { slug: 'convert-image', name: 'Image Converter', description: 'Convert PNG, JPG and WebP files.', icon: '🔄', bg: '#e8f4fd', category: 'Image', popular: false },
-  { slug: 'image-info', name: 'Image Info', description: 'Check size, format and dimensions.', icon: '🔍', bg: '#e8f4fd', category: 'Image', popular: false },
-  { slug: 'images-to-pdf', name: 'Images to PDF', description: 'Turn photos into one PDF file.', icon: '📄', bg: '#fef3e8', category: 'PDF', popular: false },
-  { slug: 'social-sizes', name: 'Social Media Sizes', description: 'Find correct sizes for social posts.', icon: '📱', bg: '#f0e8fd', category: 'Social', popular: false },
-  { slug: 'word-count', name: 'Word Counter', description: 'Count words and characters instantly.', icon: '📝', bg: '#e8fdf0', category: 'Text', popular: false },
-  { slug: 'text-diff', name: 'Text Difference Checker', description: 'Compare two texts and spot changes.', icon: '🔎', bg: '#e8fdf0', category: 'Text', popular: false },
-  { slug: 'qr-code', name: 'QR Code Generator', description: 'Create QR codes for links or text.', icon: '🔳', bg: '#fdf0e8', category: 'Utility', popular: false },
+  { slug: 'compress-image', name: 'Image Compressor', description: 'Make image files smaller without losing quality.', icon: String.fromCodePoint(0x1F5DC)+String.fromCodePoint(0xFE0F), bg: '#e8f4fd', category: 'Image', popular: true },
+  { slug: 'resize-image', name: 'Image Resizer', description: 'Resize photos to exact pixel dimensions.', icon: String.fromCodePoint(0x1F4D0), bg: '#e8f4fd', category: 'Image', popular: true },
+  { slug: 'image-cropper', name: 'Image Cropper', description: 'Crop any image instantly. Draw a selection and download.', icon: String.fromCodePoint(0x2702)+String.fromCodePoint(0xFE0F), bg: '#e8f4fd', category: 'Image', popular: false },
+  { slug: 'convert-image', name: 'Image Converter', description: 'Convert PNG to JPG or JPG to PNG in one click.', icon: String.fromCodePoint(0x1F504), bg: '#e8f4fd', category: 'Image', popular: false },
+  { slug: 'image-info', name: 'Image Info', description: 'Check the size, format and dimensions of any image.', icon: String.fromCodePoint(0x1F50D), bg: '#e8f4fd', category: 'Image', popular: false },
+  { slug: 'webp-to-jpg', name: 'WebP to JPG', description: 'Convert WebP images to JPG instantly. Multiple files supported.', icon: String.fromCodePoint(0x1F5BC)+String.fromCodePoint(0xFE0F), bg: '#e8f4fd', category: 'Image', popular: false },
+  { slug: 'images-to-pdf', name: 'Images to PDF', description: 'Combine multiple photos into one PDF document.', icon: String.fromCodePoint(0x1F4C4), bg: '#fef3e8', category: 'PDF', popular: false },
+  { slug: 'pdf-to-jpg', name: 'PDF to JPG', description: 'Convert every PDF page to a JPG image instantly.', icon: String.fromCodePoint(0x1F4F8), bg: '#fef3e8', category: 'PDF', popular: false },
+  { slug: 'merge-pdfs', name: 'Merge PDFs', description: 'Combine multiple PDF files into one document.', icon: String.fromCodePoint(0x1F4D1), bg: '#fef3e8', category: 'PDF', popular: false },
+  { slug: 'word-count', name: 'Word Counter', description: 'Count words, characters and paragraphs instantly.', icon: String.fromCodePoint(0x1F4DD), bg: '#e8fdf0', category: 'Text', popular: false },
+  { slug: 'case-converter', name: 'Case Converter', description: 'Convert text to uppercase, lowercase, title case and more.', icon: String.fromCodePoint(0x1F521), bg: '#e8fdf0', category: 'Text', popular: false },
+  { slug: 'text-diff', name: 'Text Difference Checker', description: 'Compare two texts and see exactly what changed.', icon: String.fromCodePoint(0x1F50E), bg: '#e8fdf0', category: 'Text', popular: false },
+  { slug: 'qr-code', name: 'QR Code Generator', description: 'Create QR codes for any link, text or phone number.', icon: String.fromCodePoint(0x1F533), bg: '#fdf0e8', category: 'Utility', popular: false },
+  { slug: 'password-generator', name: 'Password Generator', description: 'Generate strong, secure passwords instantly.', icon: String.fromCodePoint(0x1F510), bg: '#e8fdf0', category: 'Utility', popular: false },
+  { slug: 'color-picker', name: 'Color Picker', description: 'Pick any color and get HEX, RGB and HSL values.', icon: String.fromCodePoint(0x1F3A8), bg: '#fef3e8', category: 'Utility', popular: false },
+  { slug: 'social-sizes', name: 'Social Media Sizes', description: 'Find the correct image size for every social platform.', icon: String.fromCodePoint(0x1F4F1), bg: '#f0e8fd', category: 'Social', popular: false },
 ];
 
-const categories = ['All', 'Image', 'PDF', 'Text', 'Social', 'Utility'];
+const categories = ['All', 'Image', 'PDF', 'Text', 'Utility', 'Social'];
 ---
 
 <Layout
-  title="PixMidas | Free Online Tools"
-  description="Fast, free browser-based tools for images, text, PDFs and everyday files. No login needed. Many tools run privately in your browser."
+  title="Free Online Tools | PixMidas"
+  description="Fast, free browser-based tools for images, text, PDFs and more. No login needed. Many tools run privately in your browser."
 >
   <section class="hero">
-    <p class="eyebrow">PixMidas Tools</p>
-    <h1 class="hero-title">Simple tools<br />that just work.</h1>
-    <p class="hero-sub">
-      Compress, resize, convert and fix everyday files.
-      No login. No confusion.
-    </p>
+    <h1 class="hero-title">Free tools<br/>that just work.</h1>
+    <p class="hero-sub">No login. No confusion. Fast browser tools for everyday digital tasks.</p>
 
     <div class="quick-links">
       <a href="/tools/compress-image/">Compress Image</a>
-      <span>•</span>
+      <span>·</span>
       <a href="/tools/resize-image/">Resize Image</a>
-      <span>•</span>
-      <a href="/tools/convert-image/">Convert Image</a>
+      <span>·</span>
+      <a href="/tools/qr-code/">QR Code Generator</a>
     </div>
 
     <a href="#all-tools" class="hero-btn">See all tools ↓</a>
@@ -45,26 +48,32 @@ const categories = ['All', 'Image', 'PDF', 'Text', 'Social', 'Utility'];
   </div>
 
   <section id="all-tools" class="tools-section">
-    <div class="section-head">
-      <h2>All tools</h2>
-      <p>Fast browser tools for small digital problems.</p>
+    <div class="search-wrap">
+      <input
+        id="tool-search"
+        class="tool-search"
+        type="search"
+        placeholder="Search tools..."
+        aria-label="Search tools"
+      />
     </div>
 
-    <div class="filter-bar">
-      {categories.map((cat) => (
-        <button class="filter-btn" data-category={cat} aria-pressed={cat === 'All' ? 'true' : 'false'}>
-          {cat}
-        </button>
-      ))}
+    <div class="filter-bar-wrap">
+      <div class="filter-bar">
+        {categories.map((cat) => (
+          <button class="filter-btn" data-category={cat} aria-pressed={cat === 'All' ? 'true' : 'false'}>
+            {cat}
+          </button>
+        ))}
+      </div>
     </div>
 
     <div class="tools-grid">
       {tools.map((tool) => (
-        <a class="tool-card" data-category={tool.category} data-slug={tool.slug}>
+        <a class="tool-card" href={"/tools/" + tool.slug + "/"} data-category={tool.category} data-name={tool.name.toLowerCase()} data-description={tool.description.toLowerCase()}>
           <div class="tool-icon-wrap" data-bg={tool.bg}>
             <span class="tool-icon">{tool.icon}</span>
           </div>
-
           <div class="tool-body">
             <div class="tool-name-row">
               <h3 class="tool-name">{tool.name}</h3>
@@ -72,18 +81,17 @@ const categories = ['All', 'Image', 'PDF', 'Text', 'Social', 'Utility'];
             </div>
             <p class="tool-desc">{tool.description}</p>
           </div>
-
           <span class="tool-arrow">→</span>
         </a>
       ))}
     </div>
 
     <p class="no-results" id="no-results" style="display:none">
-      No tools in this category yet. Check back soon.
+      No tools found. Try another search or category.
     </p>
   </section>
 
-  <div class="promo-wrap">
+  <div class="promo-wrap promo-bottom">
     <PromoBanner client:load />
   </div>
 
@@ -93,23 +101,21 @@ const categories = ['All', 'Image', 'PDF', 'Text', 'Social', 'Utility'];
         <span class="trust-icon">🔒</span>
         <div>
           <strong>Private by design</strong>
-          <p>Many tools run locally in your browser.</p>
+          <p>Many tools run locally in your browser. Your files stay on your device.</p>
         </div>
       </div>
-
       <div class="trust-item">
         <span class="trust-icon">⚡</span>
         <div>
           <strong>Fast and simple</strong>
-          <p>No heavy software or confusing steps.</p>
+          <p>No heavy software or confusing steps. Results in seconds.</p>
         </div>
       </div>
-
       <div class="trust-item">
         <span class="trust-icon">🆓</span>
         <div>
-          <strong>Free to use</strong>
-          <p>No account needed for basic tools.</p>
+          <strong>Always free</strong>
+          <p>No account needed. No payment. No hidden limits.</p>
         </div>
       </div>
     </div>
@@ -117,56 +123,30 @@ const categories = ['All', 'Image', 'PDF', 'Text', 'Social', 'Utility'];
 
   <section class="seo-content">
     <h2>Free Online Tools for Images, Text and More</h2>
-    <p>
-      PixMidas is a growing collection of free online tools designed to work directly inside your browser.
-      Compress images, resize photos, convert image files, generate QR codes, compare text differences,
-      count words and more without complicated software or account creation.
-    </p>
-    <p>
-      Unlike many traditional online utilities, PixMidas focuses on lightweight, fast and privacy-friendly browser tools.
-      Many tools process files locally on your device instead of uploading them to external servers.
-    </p>
-
-    <h3>Popular tools</h3>
+    <p>PixMidas is a growing collection of free online tools for everyday digital tasks. Compress images, resize photos, convert files, generate QR codes, compare text, count words, merge PDFs and more without complicated software or account creation.</p>
+    <p>PixMidas focuses on lightweight, fast and privacy-friendly browser tools. Many tools process files locally on your device instead of uploading them to external servers.</p>
+    <h3>Popular Free Tools</h3>
     <ul class="seo-list">
       <li>Free Image Compressor</li>
       <li>Online Image Resizer</li>
+      <li>Free Image Cropper</li>
       <li>PNG to JPG Converter</li>
-      <li>QR Code Generator</li>
+      <li>WebP to JPG Converter</li>
+      <li>PDF to JPG Converter</li>
+      <li>Merge PDF Files</li>
+      <li>Free QR Code Generator</li>
+      <li>Password Generator</li>
+      <li>Case Converter</li>
+      <li>Color Picker HEX RGB</li>
       <li>Word Counter Tool</li>
-      <li>Image Information Viewer</li>
       <li>Text Difference Checker</li>
       <li>Images to PDF Converter</li>
       <li>Social Media Sizes Guide</li>
     </ul>
   </section>
-
-  <section class="legal-section">
-    <div class="legal-grid">
-      <div class="legal-item">
-        <strong>PixMidas Beta</strong>
-        <p>Some tools may still be under construction or experience occasional issues.</p>
-      </div>
-
-      <div class="legal-item">
-        <strong>Privacy & Local Processing</strong>
-        <p>When possible, files are processed locally in your browser.</p>
-      </div>
-
-      <div class="legal-item">
-        <strong>Responsible Use</strong>
-        <p>Do not use PixMidas to process illegal or unauthorized material.</p>
-      </div>
-    </div>
-  </section>
 </Layout>
 
 <script>
-  document.querySelectorAll('.tool-card').forEach(function(card) {
-    var slug = card.getAttribute('data-slug');
-    card.setAttribute('href', '/tools/' + slug + '/');
-  });
-
   document.querySelectorAll('.tool-icon-wrap').forEach(function(wrap) {
     var bg = wrap.getAttribute('data-bg');
     wrap.style.background = bg;
@@ -175,61 +155,67 @@ const categories = ['All', 'Image', 'PDF', 'Text', 'Social', 'Utility'];
   var buttons = document.querySelectorAll('.filter-btn');
   var cards = document.querySelectorAll('.tool-card');
   var noResults = document.getElementById('no-results');
+  var searchInput = document.getElementById('tool-search');
+  var activeCategory = 'All';
+
+  function updateTools() {
+    var query = searchInput ? searchInput.value.trim().toLowerCase() : '';
+    var visible = 0;
+
+    cards.forEach(function(card) {
+      var categoryMatch = activeCategory === 'All' || card.getAttribute('data-category') === activeCategory;
+      var name = card.getAttribute('data-name') || '';
+      var description = card.getAttribute('data-description') || '';
+      var searchMatch = !query || name.includes(query) || description.includes(query);
+
+      var match = categoryMatch && searchMatch;
+      card.style.display = match ? 'flex' : 'none';
+
+      if (match) visible++;
+    });
+
+    noResults.style.display = visible === 0 ? 'block' : 'none';
+  }
 
   buttons.forEach(function(btn) {
     btn.addEventListener('click', function() {
-      var category = btn.getAttribute('data-category');
+      activeCategory = btn.getAttribute('data-category');
 
       buttons.forEach(function(b) {
         b.setAttribute('aria-pressed', 'false');
       });
 
       btn.setAttribute('aria-pressed', 'true');
-
-      var visible = 0;
-
-      cards.forEach(function(card) {
-        var match = category === 'All' || card.getAttribute('data-category') === category;
-        card.style.display = match ? 'flex' : 'none';
-
-        if (match) visible++;
-      });
-
-      noResults.style.display = visible === 0 ? 'block' : 'none';
+      updateTools();
     });
   });
+
+  if (searchInput) {
+    searchInput.addEventListener('input', updateTools);
+  }
 </script>
 
 <style>
   .hero {
     text-align: center;
-    padding: 56px 0 42px;
-  }
-
-  .eyebrow {
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--accent);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    margin-bottom: 16px;
+    padding: 72px 0 56px;
   }
 
   .hero-title {
-    font-size: clamp(44px, 8vw, 78px);
-    font-weight: 850;
-    letter-spacing: -0.055em;
+    font-size: clamp(44px, 8vw, 82px);
+    font-weight: 800;
+    letter-spacing: -0.04em;
     line-height: 1.04;
     margin-bottom: 20px;
     color: var(--text);
   }
 
   .hero-sub {
-    font-size: clamp(18px, 2.4vw, 22px);
+    font-size: clamp(17px, 2.4vw, 21px);
     color: var(--text-muted);
     line-height: 1.55;
-    max-width: 650px;
-    margin: 0 auto 18px;
+    max-width: 500px;
+    margin: 0 auto 24px;
   }
 
   .quick-links {
@@ -238,83 +224,113 @@ const categories = ['All', 'Image', 'PDF', 'Text', 'Social', 'Utility'];
     align-items: center;
     gap: 10px;
     flex-wrap: wrap;
-    margin-bottom: 32px;
-    color: var(--text-light);
+    margin-bottom: 28px;
     font-size: 15px;
   }
 
   .quick-links a {
-    color: var(--text-muted);
-    text-decoration: none;
+    color: var(--text);
     font-weight: 600;
+    text-decoration: none;
+    transition: color 0.15s;
   }
 
   .quick-links a:hover {
     color: var(--accent);
   }
 
+  .quick-links span {
+    color: var(--text);
+    font-weight: 900;
+    font-size: 18px;
+  }
+
   .hero-btn {
     display: inline-block;
     background: var(--accent);
     color: white;
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 700;
     padding: 16px 36px;
     border-radius: 999px;
-    text-decoration: none;
-    transition: background 0.15s, transform 0.15s, box-shadow 0.15s;
-    box-shadow: 0 10px 28px rgba(0, 113, 227, 0.22);
+    transition: background 0.15s, transform 0.15s;
+    box-shadow: 0 8px 24px rgba(0,113,227,0.22);
   }
 
   .hero-btn:hover {
-    background: #0077ed;
+    background: var(--accent-hover);
     transform: translateY(-1px);
   }
 
   .promo-wrap {
-    margin: 26px 0;
+    width: 100%;
+    margin: 36px 0 48px;
+  }
+
+  .promo-bottom {
+    margin-top: 48px;
+    margin-bottom: 0;
   }
 
   .tools-section {
-    scroll-margin-top: 90px;
+    scroll-margin-top: 80px;
   }
 
-  .section-head {
-    margin-bottom: 18px;
-    text-align: left;
+  .search-wrap {
+    margin-bottom: 14px;
   }
 
-  .section-head h2 {
-    font-size: 28px;
-    font-weight: 800;
+  .tool-search {
+    width: 100%;
+    min-height: 48px;
+    border: 1px solid var(--border);
+    background: var(--surface);
     color: var(--text);
-    letter-spacing: -0.03em;
-    margin-bottom: 6px;
+    border-radius: 999px;
+    padding: 0 20px;
+    font-size: 15px;
+    font-family: inherit;
+    outline: none;
+    box-shadow: var(--shadow-sm);
+    transition: border-color 0.15s, box-shadow 0.15s;
   }
 
-  .section-head p {
-    color: var(--text-muted);
-    font-size: 15px;
+  .tool-search:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px rgba(0,113,227,0.10);
+  }
+
+  .filter-bar-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    margin-bottom: 20px;
+  }
+
+  .filter-bar-wrap::-webkit-scrollbar {
+    display: none;
   }
 
   .filter-bar {
     display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin-bottom: 24px;
+    gap: 8px;
+    width: max-content;
+    padding-bottom: 4px;
   }
 
   .filter-btn {
-    padding: 10px 22px;
+    padding: 10px 20px;
     border-radius: 999px;
     border: 1px solid var(--border);
     background: var(--surface-2);
     color: var(--text-muted);
     font-size: 15px;
-    font-weight: 650;
+    font-weight: 600;
     cursor: pointer;
     transition: all 0.15s;
     font-family: inherit;
+    white-space: nowrap;
+    min-height: 44px;
   }
 
   .filter-btn:hover {
@@ -331,22 +347,23 @@ const categories = ['All', 'Image', 'PDF', 'Text', 'Social', 'Utility'];
   .tools-grid {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
   }
 
   .tool-card {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 16px;
     background: var(--surface);
     border: 1px solid var(--border-light);
     border-radius: var(--radius);
-    padding: 20px 24px;
+    padding: 18px 20px;
     text-decoration: none;
     color: inherit;
     transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
     box-shadow: var(--shadow-sm);
     cursor: pointer;
+    min-height: 80px;
   }
 
   .tool-card:hover {
@@ -356,9 +373,9 @@ const categories = ['All', 'Image', 'PDF', 'Text', 'Social', 'Utility'];
   }
 
   .tool-icon-wrap {
-    width: 62px;
-    height: 62px;
-    border-radius: 17px;
+    width: 60px;
+    height: 60px;
+    border-radius: 14px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -378,14 +395,15 @@ const categories = ['All', 'Image', 'PDF', 'Text', 'Social', 'Utility'];
   .tool-name-row {
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 5px;
+    gap: 8px;
+    margin-bottom: 3px;
+    flex-wrap: wrap;
   }
 
   .tool-name {
-    font-size: 20px;
-    font-weight: 750;
-    letter-spacing: -0.025em;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
     color: var(--text);
   }
 
@@ -393,21 +411,21 @@ const categories = ['All', 'Image', 'PDF', 'Text', 'Social', 'Utility'];
     background: var(--accent);
     color: white;
     font-size: 11px;
-    font-weight: 800;
-    padding: 3px 10px;
+    font-weight: 700;
+    padding: 2px 8px;
     border-radius: 999px;
     letter-spacing: 0.04em;
     flex-shrink: 0;
   }
 
   .tool-desc {
-    font-size: 15px;
+    font-size: 14px;
     color: var(--text-muted);
-    line-height: 1.45;
+    line-height: 1.4;
   }
 
   .tool-arrow {
-    font-size: 22px;
+    font-size: 18px;
     color: var(--text-light);
     flex-shrink: 0;
     transition: color 0.15s, transform 0.15s;
@@ -426,7 +444,7 @@ const categories = ['All', 'Image', 'PDF', 'Text', 'Social', 'Utility'];
   }
 
   .trust-section {
-    margin-top: 18px;
+    margin-top: 56px;
   }
 
   .trust-grid {
@@ -439,56 +457,57 @@ const categories = ['All', 'Image', 'PDF', 'Text', 'Social', 'Utility'];
     background: var(--surface-2);
     border-radius: var(--radius);
     padding: 24px 20px;
-    text-align: center;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 14px;
   }
 
   .trust-icon {
-    font-size: 34px;
-    margin-bottom: 4px;
+    font-size: 30px;
+    flex-shrink: 0;
   }
 
   .trust-item strong {
-    font-size: 17px;
-    font-weight: 750;
+    font-size: 15px;
+    font-weight: 700;
     letter-spacing: -0.02em;
+    display: block;
+    margin-bottom: 5px;
   }
 
   .trust-item p {
-    font-size: 14px;
+    font-size: 13px;
     color: var(--text-muted);
     line-height: 1.5;
   }
 
   .seo-content {
     max-width: 720px;
-    margin: 76px auto 0;
+    margin: 72px auto 0;
     color: var(--text-muted);
     line-height: 1.8;
   }
 
   .seo-content h2 {
-    font-size: 26px;
-    font-weight: 850;
+    font-size: 24px;
+    font-weight: 800;
     color: var(--text);
-    margin-bottom: 20px;
-    letter-spacing: -0.035em;
+    margin-bottom: 18px;
+    letter-spacing: -0.03em;
     text-align: center;
   }
 
   .seo-content h3 {
-    font-size: 20px;
-    font-weight: 750;
+    font-size: 18px;
+    font-weight: 700;
     color: var(--text);
-    margin-top: 32px;
-    margin-bottom: 12px;
+    margin-top: 24px;
+    margin-bottom: 10px;
   }
 
   .seo-content p {
-    margin-bottom: 16px;
+    margin-bottom: 14px;
     font-size: 15px;
   }
 
@@ -497,166 +516,119 @@ const categories = ['All', 'Image', 'PDF', 'Text', 'Social', 'Utility'];
   }
 
   .seo-list li {
-    margin-bottom: 8px;
+    margin-bottom: 7px;
     font-size: 15px;
-  }
-
-  .legal-section {
-    margin-top: 60px;
-  }
-
-  .legal-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-  }
-
-  .legal-item {
-    background: var(--surface-2);
-    border-radius: var(--radius-sm);
-    padding: 20px;
-  }
-
-  .legal-item strong {
-    display: block;
-    font-size: 14px;
-    font-weight: 750;
-    margin-bottom: 8px;
-    color: var(--text);
-  }
-
-  .legal-item p {
-    font-size: 13px;
-    color: var(--text-muted);
-    line-height: 1.6;
   }
 
   @media (max-width: 768px) {
     .hero {
-      padding: 42px 0 32px;
-    }
-
-    .eyebrow {
-      font-size: 12px;
-      margin-bottom: 12px;
+      padding: 36px 0 28px;
     }
 
     .hero-title {
-      font-size: clamp(42px, 14vw, 64px);
-      letter-spacing: -0.06em;
-      margin-bottom: 18px;
+      font-size: clamp(36px, 10vw, 52px);
+      margin-bottom: 12px;
     }
 
     .hero-sub {
-      font-size: 19px;
-      line-height: 1.5;
-      margin-bottom: 16px;
+      font-size: 15px;
+      margin-bottom: 18px;
     }
 
     .quick-links {
       font-size: 14px;
-      margin-bottom: 28px;
-      padding: 0 14px;
-    }
-
-    .hero-btn {
-      width: min(100%, 340px);
-      padding: 16px 28px;
-      font-size: 18px;
-    }
-
-    .promo-wrap {
-      margin: 20px 0;
-    }
-
-    .section-head {
-      text-align: center;
-      margin-bottom: 16px;
-    }
-
-    .section-head h2 {
-      font-size: 25px;
-    }
-
-    .filter-bar {
-      justify-content: center;
-      gap: 9px;
+      gap: 8px;
       margin-bottom: 20px;
     }
 
-    .filter-btn {
-      padding: 10px 18px;
-      font-size: 15px;
+    .hero-btn {
+      font-size: 16px;
+      padding: 15px 30px;
+    }
+
+    .promo-wrap {
+      margin: 20px 0 28px;
+    }
+
+    .promo-bottom {
+      margin-top: 28px;
+    }
+
+    .search-wrap {
+      margin-bottom: 12px;
+    }
+
+    .tool-search {
+      min-height: 46px;
+      font-size: 14px;
+      padding: 0 18px;
+    }
+
+    .tools-section {
+      scroll-margin-top: 70px;
     }
 
     .tool-card {
-      padding: 16px;
-      gap: 14px;
-      border-radius: 20px;
+      padding: 14px 16px;
+      gap: 12px;
+      min-height: 72px;
+      border-radius: 16px;
     }
 
     .tool-icon-wrap {
-      width: 52px;
-      height: 52px;
-      border-radius: 14px;
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
     }
 
     .tool-icon {
-      font-size: 25px;
-    }
-
-    .tool-name-row {
-      gap: 8px;
-      flex-wrap: wrap;
+      font-size: 24px;
     }
 
     .tool-name {
-      font-size: 17px;
+      font-size: 16px;
     }
 
     .tool-desc {
-      font-size: 14px;
+      font-size: 13px;
     }
 
     .tool-arrow {
-      font-size: 19px;
+      font-size: 15px;
+    }
+
+    .trust-section {
+      margin-top: 40px;
     }
 
     .trust-grid {
       grid-template-columns: 1fr;
-      gap: 12px;
+      gap: 10px;
     }
 
     .trust-item {
-      flex-direction: row;
-      text-align: left;
-      padding: 18px;
-      gap: 16px;
-      align-items: flex-start;
+      padding: 16px;
+      border-radius: 16px;
     }
 
     .trust-icon {
-      font-size: 30px;
-      margin-bottom: 0;
-      flex-shrink: 0;
+      font-size: 26px;
     }
 
     .seo-content {
-      margin-top: 48px;
-      line-height: 1.7;
+      margin-top: 44px;
     }
 
     .seo-content h2 {
-      font-size: 24px;
+      font-size: 20px;
     }
 
-    .legal-grid {
-      grid-template-columns: 1fr;
-      gap: 12px;
+    .seo-content p {
+      font-size: 14px;
     }
 
-    .legal-section {
-      margin-top: 44px;
+    .seo-list li {
+      font-size: 14px;
     }
   }
 </style>

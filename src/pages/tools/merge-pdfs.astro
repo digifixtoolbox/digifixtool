@@ -1,0 +1,41 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import MergePdf from '../../components/MergePdf.jsx';
+---
+
+<Layout
+  title="Merge PDF Files Online Free"
+  description="Combine multiple PDF files into one. Free online PDF merger. No login, no upload to servers. Works in your browser."
+>
+  <div class="tool-page">
+    <div class="tool-header">
+      <a href="/" class="back-link">← All tools</a>
+      <h1 class="tool-title">Merge PDFs</h1>
+      <p class="tool-subtitle">Combine multiple PDF files into one. Reorder pages, then download the merged result.</p>
+    </div>
+    <div class="ad-slot ad-slot-horizontal">Advertisement</div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js" is:inline></script>
+    <MergePdf client:load />
+    <div class="ad-slot ad-slot-horizontal" style="margin-top: 32px;">Advertisement</div>
+    <section class="seo-content">
+      <h2>How to merge PDF files</h2>
+      <p>Add your PDF files, reorder them if needed using the arrows, then click Merge. The combined PDF will download automatically.</p>
+      <h2>How many PDFs can I merge?</h2>
+    <p>There is no limit. Add as many PDF files as you need.</p>
+      <h2>Is it safe?</h2>
+      <p>Yes. Your files never leave your device. Everything runs locally in your browser.</p>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .tool-page { max-width: 860px; margin: 0 auto; }
+  .back-link { font-size: 14px; color: var(--text-muted); font-weight: 500; display: inline-block; margin-bottom: 20px; }
+  .tool-header { margin-bottom: 32px; }
+  .tool-title { font-size: clamp(28px, 5vw, 48px); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 12px; }
+  .tool-subtitle { font-size: 16px; color: var(--text-muted); line-height: 1.5; }
+  .seo-content { margin-top: 56px; padding-top: 48px; border-top: 1px solid var(--border); }
+  .seo-content h2 { font-size: 20px; font-weight: 700; margin-bottom: 10px; margin-top: 32px; }
+  .seo-content h2:first-child { margin-top: 0; }
+  .seo-content p { color: var(--text-muted); line-height: 1.65; font-size: 15px; }
+</style>

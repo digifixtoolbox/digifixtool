@@ -1,0 +1,40 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import WebpToJpg from '../../components/WebpToJpg.jsx';
+---
+
+<Layout
+  title="WebP to JPG Converter Online Free"
+  description="Convert WebP images to JPG online for free. Fast, no login, no upload to servers. Works directly in your browser."
+>
+  <div class="tool-page">
+    <div class="tool-header">
+      <a href="/" class="back-link">← All tools</a>
+      <h1 class="tool-title">WebP to JPG Converter</h1>
+      <p class="tool-subtitle">Convert WebP images to JPG instantly. Multiple files supported. No upload needed.</p>
+    </div>
+    <div class="ad-slot ad-slot-horizontal">Advertisement</div>
+    <WebpToJpg client:load />
+    <div class="ad-slot ad-slot-horizontal" style="margin-top: 32px;">Advertisement</div>
+    <section class="seo-content">
+      <h2>How to convert WebP to JPG</h2>
+      <p>Upload your WebP image or images, click Convert to JPG, then download the result. Works with multiple files at once.</p>
+      <h2>Why convert WebP to JPG?</h2>
+      <p>WebP is a moderformat but not supported everywhere. JPG works on all devices, apps and platforms.</p>
+      <h2>Is it safe?</h2>
+      <p>Yes. Your images never leave your device. Everything runs locally in your browser.</p>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .tool-page { max-width: 860px; margin: 0 auto; }
+  .back-link { font-size: 14px; color: var(--text-muted); font-weight: 500; display: inline-block; margin-bottom: 20px; }
+  .tool-header { margin-bottom: 32px; }
+  .tool-title { font-size: clamp(28px, 5vw, 48px); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 12px; }
+  .tool-subtitle { font-size: 16px; color: var(--text-muted); line-height: 1.5; }
+  .seo-content { margin-top: 56px; padding-top: 48px; border-top: 1px solid var(--border); }
+  .seo-content h2 { font-size: 20px; font-weight: 700; margin-bottom: 10px; margin-top: 32px; }
+  .seo-content h2:first-child { margin-top: 0; }
+  .seo-content p { color: var(--text-muted); line-height: 1.65; font-size: 15px; }
+</style>

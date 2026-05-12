@@ -1,0 +1,40 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ImageCropper from '../../components/ImageCropper.jsx';
+---
+
+<Layout
+  title="Free Image Cropper Online"
+  description="Crop images online for free. Draw a selection, crop and download instantly. No upload, no login, works in your browser."
+>
+  <div class="tool-page">
+    <div class="tool-header">
+      <a href="/" class="back-link">← All tools</a>
+      <h1 class="tool-title">Image Cropper</h1>
+      <p class="tool-subtitle">Crop any image instantly. Draw a selection box and download the cropped result.</p>
+    </div>
+    <div class="ad-slot ad-slot-horizontal">Advertisement</div>
+    <ImageCropper client:load />
+    <div class="ad-slot ad-slot-horizontal" style="margin-top: 32px;">Advertisement</div>
+    <section class="seo-content">
+      <h2>How to crop an image online</h2>
+      <p>Upload your image, draw a selection box over the area you want to keep, then click Download. Done in seconds.</p>
+      <h2>What formats are supported?</h2>
+      <p>JPG, PNG, WebP and most common image formats. The cropped image is saved as JPG.</p>
+      <h2>Is it safe?</h2>
+      <p>Yes. Your image never leaves your device. Everything runs locally in your browser.</p>
+    </secti>
+  </div>
+</Layout>
+
+<style>
+  .tool-page { max-width: 860px; margin: 0 auto; }
+  .back-link { font-size: 14px; color: var(--text-muted); font-weight: 500; display: inline-block; margin-bottom: 20px; }
+  .tool-header { margin-bottom: 32px; }
+  .tool-title { font-size: clamp(28px, 5vw, 48px); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 12px; }
+  .tool-subtitle { font-size: 16px; color: var(--text-muted); line-height: 1.5; }
+  .seo-content { margin-top: 56px; padding-top: 48px; border-top: 1px solid var(--border); }
+  .seo-content h2 { font-size: 20px; font-weight: 700; margin-bottom: 10px; margin-top: 32px; }
+  .seo-content h2:first-child { margin-top: 0; }
+  .seo-content p { color: var(--text-muted); line-height: 1.65; font-size: 15px; }
+</style>

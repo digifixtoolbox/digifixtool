@@ -1,0 +1,40 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ColorPicker from '../../components/ColorPicker.jsx';
+---
+
+<Layout
+  title="Color Picker Online Free - HEX RGB HSL"
+  description="Pick any color and get HEX, RGB and HSL values instantly. Free online color picker. No login needed."
+>
+  <div class="tool-page">
+    <div class="tool-header">
+      <a href="/" class="back-link">← All tools</a>
+      <h1 class="tool-title">Color Picker</h1>
+      <p class="tool-subtitle">Pick any color and instantly get the HEX, RGB and HSL values. Copy with one click.</p>
+    </div>
+    <div class="ad-slot ad-slot-horizontal">Advertisement</div>
+    <ColorPicker client:load/>
+    <div class="ad-slot ad-slot-horizontal" style="margin-top: 32px;">Advertisement</div>
+    <section class="seo-content">
+      <h2>How to use the color picker</h2>
+      <p>Click the color selector, choose your color, and instantly see the HEX, RGB and HSL values. Click Copy to copy any format.</p>
+      <h2>What is HEX, RGB and HSL?</h2>
+      <p>HEX is used in web design and CSS. RGB stands for Red, Green, Blue. HSL stands for Hue, Saturation, Lightness.</p>
+      <h2>Is this tool free?</h2>
+      <p>Yes. Completely free, no login required. Everything runs in your browser.</p>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .tool-page { max-width: 860px; margin: 0 auto; }
+  .back-link { font-size: 14px; color: var(--text-muted); font-weight: 500; display: inline-block; margin-bottom: 20px; }
+  .tool-header { margin-bottom: 32px; }
+  .tool-title { font-size: clamp(28px, 5vw, 48px); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 12px; }
+  .tool-subtitle { font-size: 16px; color: var(--text-muted); line-height: 1.5; }
+  .seo-content { margin-top: 56px; padding-top: 48px; border-top: 1px solid var(--border); }
+  .seo-content h2 { font-size: 20px; font-weight: 700; margin-bottom: 10px; margin-top: 32px; }
+  .seo-content h2:first-child { margin-top: 0; }
+  .seo-content p { color: var(--text-muted); line-height: 1.65; font-size: 15px; }
+</style>

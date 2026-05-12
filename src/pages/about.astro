@@ -3,95 +3,172 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout
-  title="About PixMidas - Free Online Tools"
-  description="PixMidas is a collection of free browser-based tools for images, text and more. No login, no upload, everything runs locally."
+  title="About PixMidas"
+  description="PixMidas is a collection of free browser-based tools for images, text, PDFs and everyday digital tasks. No login needed."
 >
   <div class="page">
     <h1>About PixMidas</h1>
 
-    <section class="intro">
-      <p class="lead">PixMidas is a growing collection of free online tools built to make everyday digital tasks simple, fast and private.</p>
+    <p class="lead">
+      PixMidas is a growing collection of free online tools built to make everyday digital tasks faster, easier and less confusing.
+    </p>
+
+    <section>
+      <h2>What we do</h2>
+      <p>
+        PixMidas offers lightweight browser-based tools for common tasks like compressing images, resizing photos, converting files, generating QR codes, counting words and comparing text. New tools are added regularly.
+      </p>
     </section>
 
     <section>
-      <h2>What We Do</h2>
-      <p>We build lightweight, browser-based tools that run locally on your device. Compress images, resize photos, convert file formats, generate QR codes, count words and more, without creating an account or uploading your files to a server.</p>
+      <h2>Private by design</h2>
+      <p>
+        Whenever possible, PixMidas tools run directly inside your browser. This means many files are processed locally on your own device without being uploaded to any external server. Your content stays yours.
+      </p>
     </section>
 
     <section>
-      <h2>Why PixMidas</h2>
-      <p>Most online tools make you sign up, upload your files to their servers, or hit usage limits after a few tries. PixMidas is different. Our tools run directly in your browser, which means they're faster, more private and always free.</p>
-      <p>The name comes from King Midas, who turned everything he touched into gold. We want to do the same for your files.</p>
+      <h2>Simple tools that just work</h2>
+      <p>
+        No unnecessary accounts. No complicated software. No confusing steps. Just clean, fast tools for small digital problems that come up every day.
+      </p>
     </section>
 
     <section>
-      <h2>Our Tools</h2>
-      <ul class="tool-list">
-        <li>Free Image Compressor</li>
-        <li>Free Image Resizer</li>
-        <li>Free Image Converter (PNG to JPG and JPG to PNG)</li>
-        <li>Free Image Info Tool</li>
-        <li>Free Images to PDF Tool</li>
-        <li>Social Media Sizes Guide</li>
-        <li>Free Word Counter</li>
-        <li>Free Text Difference Checker</li>
-        <li>Free QR Code Generator</li>
-      </ul>
+      <h2>Always free</h2>
+      <p>
+        Every tool on PixMidas is free to use. No subscription, no payment, no hidden limits. We are supported by non-intrusive advertising.
+      </p>
     </section>
 
     <section>
-      <h2>Beta</h2>
-      <p>PixMidas is currently in beta. We are actively building and improving. New tools are added regularly. If something doesn't work as expected, we appreciate your patience.</p>
+      <h2>Currently in beta</h2>
+      <p>
+        PixMidas is actively being developed. Some tools may still be improved or expanded over time. If you find a bug or have a suggestion, we would love to hear from you.
+      </p>
     </section>
 
-    <section>
-      <h2>Contact</h2>
-      <p>For questions, feedback or suggestions, reach us at hello@pixmidas.com</p>
-    </section>
+    <div class="cta-row">
+      <a href="/" class="btn-primary">Explore all tools</a>
+      <a href="/contact/" class="btn-secondary">Get in touch</a>
+    </div>
   </div>
 </Layout>
 
 <style>
   .page {
-    max-width: 720px;
+    max-width: 680px;
     margin: 0 auto;
-    padding: 20px 0 80px;
+    padding: 32px 0 80px;
   }
+
   h1 {
-    font-size: clamp(28px, 4vw, 42px);
+    font-size: clamp(32px, 6vw, 52px);
     font-weight: 800;
-    letter-spacing: -0.03em;
-    margin-bottom: 32px;
-  }
-  .lead {
-    font-size: 20px;
-    line-height: 1.6;
+    letter-spacing: -0.04em;
+    margin-bottom: 20px;
     color: var(--text);
-    font-weight: 500;
   }
+
+  .lead {
+    font-size: 19px;
+    line-height: 1.65;
+    color: var(--text-muted);
+    margin-bottom: 48px;
+  }
+
   section {
-    margin-bottom: 36px;
-    padding-bottom: 36px;
-    border-bottom: 1px solid var(--border);
+    margin-bottom: 32px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--border-light);
   }
-  section:last-child { border-bottom: none; }
+
+  section:last-of-type {
+    border-bottom: none;
+    margin-bottom: 48px;
+  }
+
   h2 {
     font-size: 20px;
     font-weight: 700;
-    margin-bottom: 12px;
     letter-spacing: -0.02em;
+    margin-bottom: 10px;
+    color: var(--text);
   }
+
   p {
     color: var(--text-muted);
-    line-height: 1.7;
-    font-size: 15px;
-    margin-bottom: 12px;
+    line-height: 1.75;
+    font-size: 16px;
   }
-  p:last-child { margin-bottom: 0; }
-  .tool-list {
-    padding-left: 20px;
-    color: var(--text-muted);
-    font-size: 15px;
-    line-height: 2;
+
+  .cta-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 14px 28px;
+    border-radius: 999px;
+    transition: background 0.15s, transform 0.15s;
+    box-shadow: 0 6px 20px rgba(0,113,227,0.2);
+  }
+
+  .btn-primary:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+  }
+
+  .btn-secondary {
+    display: inline-block;
+    background: var(--surface-2);
+    color: var(--text);
+    font-size: 16px;
+    font-weight: 600;
+    padding: 14px 28px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    transition: border-color 0.15s, color 0.15s;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  @media (max-width: 768px) {
+    .page {
+      padding: 20px 0 56px;
+    }
+
+    .lead {
+      font-size: 17px;
+      margin-bottom: 36px;
+    }
+
+    h2 {
+      font-size: 18px;
+    }
+
+    p {
+      font-size: 15px;
+    }
+
+    .cta-row {
+      flex-direction: column;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+      text-align: center;
+      font-size: 15px;
+      padding: 14px 24px;
+    }
   }
 </style>
