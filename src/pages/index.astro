@@ -10,7 +10,7 @@ const tools = [
   { slug: 'image-info', name: 'Image Info', description: 'Check the size, format and dimensions of any image.', icon: String.fromCodePoint(0x1F50D), bg: '#e8f4fd', category: 'Image', popular: false },
   { slug: 'webp-to-jpg', name: 'WebP to JPG', description: 'Convert WebP images to JPG instantly. Multiple files supported.', icon: String.fromCodePoint(0x1F5BC)+String.fromCodePoint(0xFE0F), bg: '#e8f4fd', category: 'Image', popular: false },
   { slug: 'exif-remover', name: 'EXIF Data Remover', description: 'Strip hidden GPS, device info and timestamps from photos.', icon: String.fromCodePoint(0x1F6E1)+String.fromCodePoint(0xFE0F), bg: '#e8f4fd', category: 'Image', popular: false },
-  { slug: 'social-sizes', name: 'Social Media Sizes', description: 'Find the correct image size for every social platform.', icon: String.fromCodePoint(0x1F4F1), bg: '#f0e8fd', category: 'Image', popular: false },
+  { slug: 'social-sizes', name: 'Social Media Sizes', description: 'Find the correct image size for every social platform.', icon: String.fromCodePoint(0x1F4F1), bg: '#f0e8fd', category: 'Social', popular: false },
   { slug: 'images-to-pdf', name: 'Images to PDF', description: 'Combine multiple photos into one PDF document.', icon: String.fromCodePoint(0x1F4C4), bg: '#fef3e8', category: 'PDF', popular: false },
   { slug: 'pdf-to-jpg', name: 'PDF to JPG', description: 'Convert every PDF page to a JPG image instantly.', icon: String.fromCodePoint(0x1F4F8), bg: '#fef3e8', category: 'PDF', popular: false },
   { slug: 'merge-pdfs', name: 'Merge PDFs', description: 'Combine multiple PDF files into one document.', icon: String.fromCodePoint(0x1F4D1), bg: '#fef3e8', category: 'PDF', popular: false },
@@ -19,13 +19,13 @@ const tools = [
   { slug: 'text-diff', name: 'Text Difference Checker', description: 'Compare two texts and see exactly what changed.', icon: String.fromCodePoint(0x1F50E), bg: '#e8fdf0', category: 'Text', popular: false },
   { slug: 'lorem-ipsum', name: 'Lorem Ipsum Generator', description: 'Generate placeholder text for layouts and mockups.', icon: String.fromCodePoint(0x1F4C3), bg: '#e8fdf0', category: 'Text', popular: false },
   { slug: 'json-formatter', name: 'JSON Formatter', description: 'Format, validate and minify JSON data instantly.', icon: String.fromCodePoint(0x1F4CB), bg: '#e8fdf0', category: 'Developer', popular: false },
-  { slug: 'qr-code', name: 'QR Code Generator', description: 'Create QR codes for any link, text or phone number.', icon: String.fromCodePoint(0x1F533), bg: '#fdf0e8', category: 'Developer', popular: false },
-  { slug: 'password-generator', name: 'Password Generator', description: 'Generate strong, secure passwords instantly.', icon: String.fromCodePoint(0x1F510), bg: '#e8fdf0', category: 'Developer', popular: false },
-  { slug: 'color-picker', name: 'Color Picker', description: 'Pick any color and get HEX, RGB and HSL values.', icon: String.fromCodePoint(0x1F3A8), bg: '#fef3e8', category: 'Developer', popular: false },
+  { slug: 'qr-code', name: 'QR Code Generator', description: 'Create QR codes for any link, text or phone number.', icon: String.fromCodePoint(0x1F533), bg: '#fdf0e8', category: 'Utility', popular: false },
+  { slug: 'password-generator', name: 'Password Generator', description: 'Generate strong, secure passwords instantly.', icon: String.fromCodePoint(0x1F510), bg: '#e8fdf0', category: 'Utility', popular: false },
+  { slug: 'color-picker', name: 'Color Picker', description: 'Pick any color and get HEX, RGB and HSL values.', icon: String.fromCodePoint(0x1F3A8), bg: '#fef3e8', category: 'Utility', popular: false },
   { slug: 'base64', name: 'Base64 Encoder / Decoder', description: 'Encode text to Base64 or decode Base64 strings instantly.', icon: String.fromCodePoint(0x1F4BB), bg: '#e8fdf0', category: 'Developer', popular: false },
 ];
 
-const categories = ['All', 'Image', 'PDF', 'Text', 'Developer'];
+const categories = ['All', 'Image', 'PDF', 'Text', 'Utility', 'Social', 'Developer'];
 ---
 
 <Layout
