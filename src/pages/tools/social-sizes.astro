@@ -1,40 +1,92 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import SocialSizes from '../../components/SocialSizes.jsx';
+import RelatedTools from '../../components/RelatedTools.astro';
 ---
 
 <Layout
-  title="Social Media Image Sizes 2025 - All Platforms"
-  description="Find the correct image dimensions for every social media platform. Instagram, YouTube, TikTok, Facebook, LinkedIn, Twitter. Free tool with blank canvas download."
+  title="Social Media Image Sizes 2025 – Every Platform Guide"
+  description="Find the exact image dimensions for Instagram, YouTube, TikTok, Facebook, LinkedIn, Twitter and Pinterest in 2025. Download blank canvas templates at the right size."
 >
-  <div class="tool-page">
+  <div class="tool-page" style="max-width: 960px;">
     <div class="tool-header">
-      <a href="/" class="back-link">← All tools</a>
-      <h1 class="tool-title">Social Media Sizes</h1>
-      <p class="tool-subtitle">Find the exact image dimensions for every platform and format. Download a blank canvas at the right size instantly.</p>
+      <a href="/categories/image-tools/" class="back-link">← Image Tools</a>
+      <h1 class="tool-title">Social Media Image Sizes 2025</h1>
+      <p class="tool-subtitle">Find the correct image dimensions for every platform and content type. Download a blank canvas template at the exact size instantly.</p>
     </div>
-    <div class="ad-slot ad-slot-horizontal">Advertisement</div>
+
+    <div class="ad-slot ad-slot-horizontal">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
     <SocialSizes client:load />
-    <div class="ad-slot ad-slot-horizontal" style="margin-top: 32px;">Advertisement</div>
+
+    <div class="ad-slot ad-slot-horizontal" style="margin-top: 32px;">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="0987654321" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
     <section class="seo-content">
       <h2>Why do social media image sizes matter?</h2>
-      <p>Each platform crops and displays images differently. Using the wrong size results in blurry, cropped or distorted images that hurt engagement.</p>
-      <h2>Which platforms are covered?</h2>
-      <p>Instagram, YouTube, TikTok, Facebook, LinkedIn, Twitter/X and Pinterest. All major content types including posts, stories, banners, profile pictures and thumbnails.</p>
+      <p>Each platform has its own display format and will automatically crop, compress or scale images that don't match the expected dimensions. Using the wrong size means your carefully designed graphic might be cut off, blurry or distorted in feeds and notifications. Getting the right dimensions from the start prevents wasted design time and poor engagement caused by bad cropping.</p>
+
+      <h2>Instagram image sizes 2025</h2>
+      <p>Square post: 1080×1080px (1:1). Portrait post: 1080×1350px (4:5). Landscape post: 1080×566px (1.91:1). Stories and Reels: 1080×1920px (9:16). Profile picture: 320×320px (displayed as a circle). Using the maximum 1080px width ensures your images stay sharp on high-density screens.</p>
+
+      <h2>YouTube image sizes 2025</h2>
+      <p>Thumbnail: 1280×720px (16:9, minimum 2MB recommended). Channel banner: 2560×1440px (safe zone 1546×423px for display across all devices). Profile picture: 800×800px. Shorts thumbnail: 1080×1920px (9:16). YouTube thumbnails are one of the most important factors for click-through rate — use bold text, high contrast and a face when possible.</p>
+
+      <h2>LinkedIn image sizes 2025</h2>
+      <p>Profile photo: 400×400px minimum. Cover photo: 1584×396px. Post image: 1200×627px (1.91:1). Company logo: 300×300px. Article cover image: 1920×1080px. LinkedIn posts with images get significantly higher engagement than text-only posts, so using the correct dimensions is especially important for professional reach.</p>
+
       <h2>What is the blank canvas download?</h2>
-      <p>A blank JPG file at exactly the right pixel dimensions for your chosen format. Open it in any design tool and start creating at the correct size.</p>
+      <p>A blank white JPG file at exactly the right pixel dimensions for your chosen platform and content type. Open it in Canva, Figma, Photoshop, or any design tool and you'll be starting at the correct size without any setup. It eliminates guesswork and the risk of building a design at the wrong aspect ratio.</p>
     </section>
+
+    <RelatedTools slugs={["color-picker", "image-cropper", "compress-image"]} />
   </div>
 </Layout>
 
-<style>
-  .tool-page { max-width: 960px; margin: 0 auto; }
-  .back-link { font-size: 14px; color: var(--text-muted); font-weight: 500; display: inline-block; margin-bottom: 20px; }
-  .tool-header { margin-bottom: 32px; }
-  .tool-title { font-size: clamp(28px, 5vw, 48px); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 12px; }
-  .tool-subtitle { font-size: 16px; color: var(--text-muted); line-height: 1.5; max-width: 600px; }
-  .seo-content { margin-top: 56px; padding-top: 48px; border-top: 1px solid var(--border); }
-  .seo-content h2 { font-size: 20px; font-weight: 700; margin-bottom: 10px; margin-top: 32px; }
-  .seo-content h2:first-child { margin-top: 0; }
-  .seo-content p { color: var(--text-muted); line-height: 1.65; font-size: 15px; }
-</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Social Media Image Sizes Guide",
+  "url": "https://www.pixmidas.com/tools/social-sizes/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Find the exact image dimensions for every social media platform in 2025. Download blank canvas templates at the right size."
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What are the correct social media image sizes in 2025?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Instagram square post: 1080×1080px. Stories/Reels: 1080×1920px. YouTube thumbnail: 1280×720px. LinkedIn post: 1200×627px. Each platform has specific requirements — using the wrong size causes cropping and distortion." }
+    },
+    {
+      "@type": "Question",
+      "name": "What are the Instagram image sizes for 2025?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Square post: 1080×1080px (1:1). Portrait post: 1080×1350px (4:5). Landscape post: 1080×566px. Stories and Reels: 1080×1920px (9:16). Profile picture: 320×320px." }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the YouTube thumbnail size?",
+      "acceptedAnswer": { "@type": "Answer", "text": "YouTube thumbnails should be 1280×720px (16:9 aspect ratio). Use bold text, high contrast and a face when possible, as thumbnails are one of the most important factors for click-through rate." }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the blank canvas download?",
+      "acceptedAnswer": { "@type": "Answer", "text": "A blank white JPG file at exactly the right pixel dimensions for your chosen platform. Open it in Canva, Figma or Photoshop to start designing at the correct size immediately." }
+    }
+  ]
+}
+</script>

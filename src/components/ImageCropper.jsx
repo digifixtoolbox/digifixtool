@@ -103,7 +103,7 @@ export default function ImageCropper() {
             ref={containerRef}
             onMouseDown={onMouseDown}
             onMouseMove={onMouseMove}
-         nMouseUp={onMouseUp}
+            onMouseUp={onMouseUp}
             onMouseLeave={onMouseUp}
             onTouchStart={onMouseDown}
             onTouchMove={onMouseMove}

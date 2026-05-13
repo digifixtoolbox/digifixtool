@@ -1,0 +1,98 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ExifRemover from '../../components/ExifRemover.jsx';
+import RelatedTools from '../../components/RelatedTools.astro';
+---
+
+<Layout
+  title="EXIF Data Remover Free – Strip Photo Metadata Online"
+  description="Remove hidden EXIF metadata from photos before sharing. Strip GPS location, device info, timestamps and all camera data. Free, private, runs in your browser."
+>
+  <div class="tool-page">
+    <div class="tool-header">
+      <a href="/categories/image-tools/" class="back-link">← Image Tools</a>
+      <h1 class="tool-title">EXIF Data Remover</h1>
+      <p class="tool-subtitle">Upload a photo to strip all hidden metadata — GPS coordinates, device information, timestamps and camera settings — before sharing.</p>
+    </div>
+
+    <div class="ad-slot ad-slot-horizontal">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <ExifRemover client:load />
+
+    <div class="ad-slot ad-slot-horizontal" style="margin-top: 32px;">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="0987654321" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <section class="seo-content">
+      <h2>What is EXIF data?</h2>
+      <p>EXIF (Exchangeable Image File Format) is a standard for storing metadata inside image files. Every time you take a photo on a smartphone or digital camera, the device automatically embeds a collection of data alongside the image pixels. This metadata travels with the image file wherever it goes — when you share, upload or email the photo — unless it is explicitly removed.</p>
+
+      <h2>What personal information can EXIF data contain?</h2>
+      <p>EXIF data commonly includes: precise GPS latitude and longitude (the exact location where the photo was taken), the device make and model (e.g. "Apple iPhone 15 Pro"), camera serial number, date and time the photo was taken, camera settings (aperture, shutter speed, ISO, focal length, flash), software version used, and sometimes the owner's name or copyright string. A single photo can reveal where you live, work or travel without any visible indication.</p>
+
+      <h2>Why remove EXIF data before sharing photos?</h2>
+      <p>Privacy and safety. If you post a photo taken at your home, the embedded GPS coordinates can reveal your exact address to anyone who inspects the file metadata. Journalists, activists, domestic abuse survivors and whistleblowers need to strip location data from photos before publishing. Even for casual use, many people prefer not to share their precise location, device model and daily schedule with every website, platform or person that receives their photos.</p>
+
+      <h2>How does EXIF removal work?</h2>
+      <p>This tool draws your image onto an HTML5 Canvas element and exports the canvas as a new image file. The Canvas API outputs raw pixel data only — it has no mechanism to copy or preserve the original file's metadata. The result is a clean image identical in visual appearance to the original but completely stripped of all EXIF, XMP, IPTC and other embedded data. No third-party library is required.</p>
+
+      <h2>Does removing EXIF data affect image quality?</h2>
+      <p>For JPEG images, the output is re-encoded at 95% quality, which is visually indistinguishable from the original and typically smaller than the original file due to JPEG's efficient recompression. For PNG images, the canvas output is lossless — quality is perfectly preserved. The only change is the removal of metadata.</p>
+
+      <h2>Which image formats are supported?</h2>
+      <p>JPG/JPEG (the format that most commonly contains EXIF data), PNG (which can contain iTXt, tEXt and XMP metadata), and WebP. All three formats produce clean output with no embedded metadata. If you upload a HEIC or TIFF file, your browser may convert it to JPEG automatically depending on your operating system.</p>
+
+      <h2>Is my photo safe?</h2>
+      <p>Yes. Your photo never leaves your device. Everything runs locally in your browser. No image data is uploaded to any server, stored in any database or transmitted anywhere. The clean image is generated and downloaded directly on your machine.</p>
+    </section>
+
+    <RelatedTools slugs={["image-info", "compress-image", "convert-image"]} />
+  </div>
+</Layout>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "EXIF Data Remover",
+  "url": "https://www.pixmidas.com/tools/exif-remover/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Remove hidden EXIF metadata from photos. Strips GPS location, device info and timestamps. Free, private, runs in your browser."
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is EXIF data in photos?",
+      "acceptedAnswer": { "@type": "Answer", "text": "EXIF (Exchangeable Image File Format) is metadata automatically embedded in photos by smartphones and cameras. It can include GPS coordinates, device make/model, serial number, date and time, and camera settings." }
+    },
+    {
+      "@type": "Question",
+      "name": "Why should I remove EXIF data before sharing photos?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Photos taken at your home contain GPS coordinates that reveal your exact address. Removing EXIF data protects your privacy and prevents others from knowing your location, device model, and daily schedule from your photos." }
+    },
+    {
+      "@type": "Question",
+      "name": "Does removing EXIF data affect image quality?",
+      "acceptedAnswer": { "@type": "Answer", "text": "For JPEG images, the output is re-encoded at 95% quality, which is visually indistinguishable from the original. For PNG images, the output is lossless — quality is perfectly preserved." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my photo safe when removing EXIF data?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Your photo never leaves your device. Everything runs locally in your browser. No image data is uploaded to any server, stored in any database or transmitted anywhere." }
+    }
+  ]
+}
+</script>

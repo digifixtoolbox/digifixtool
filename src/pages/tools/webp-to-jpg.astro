@@ -1,40 +1,92 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import WebpToJpg from '../../components/WebpToJpg.jsx';
+import RelatedTools from '../../components/RelatedTools.astro';
 ---
 
 <Layout
-  title="WebP to JPG Converter Online Free"
-  description="Convert WebP images to JPG online for free. Fast, no login, no upload to servers. Works directly in your browser."
+  title="WebP to JPG Converter Free – Convert WebP Images"
+  description="Convert WebP images to JPG online for free. Batch convert multiple WebP files at once. No upload to servers, works instantly in your browser."
 >
   <div class="tool-page">
     <div class="tool-header">
-      <a href="/" class="back-link">← All tools</a>
+      <a href="/categories/image-tools/" class="back-link">← Image Tools</a>
       <h1 class="tool-title">WebP to JPG Converter</h1>
-      <p class="tool-subtitle">Convert WebP images to JPG instantly. Multiple files supported. No upload needed.</p>
+      <p class="tool-subtitle">Convert WebP images to JPG instantly. Multiple files at once. No upload, no account needed.</p>
     </div>
-    <div class="ad-slot ad-slot-horizontal">Advertisement</div>
+
+    <div class="ad-slot ad-slot-horizontal">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
     <WebpToJpg client:load />
-    <div class="ad-slot ad-slot-horizontal" style="margin-top: 32px;">Advertisement</div>
+
+    <div class="ad-slot ad-slot-horizontal" style="margin-top: 32px;">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="0987654321" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
     <section class="seo-content">
-      <h2>How to convert WebP to JPG</h2>
-      <p>Upload your WebP image or images, click Convert to JPG, then download the result. Works with multiple files at once.</p>
+      <h2>How to convert WebP to JPG online</h2>
+      <p>Upload one or more WebP images, click Convert to JPG, then download the results. Batch conversion is supported — you can drop multiple WebP files at once and download them all as JPGs without processing them one at a time.</p>
+
       <h2>Why convert WebP to JPG?</h2>
-      <p>WebP is a moderformat but not supported everywhere. JPG works on all devices, apps and platforms.</p>
-      <h2>Is it safe?</h2>
-      <p>Yes. Your images never leave your device. Everything runs locally in your browser.</p>
+      <p>WebP is a modern image format developed by Google that achieves excellent compression for web use. However, it is not universally supported by older operating systems, desktop image editors, email clients and some social platforms. Converting to JPG gives you maximum compatibility — JPG works everywhere, on every device, in every application.</p>
+
+      <h2>Will I lose quality converting WebP to JPG?</h2>
+      <p>The conversion introduces minimal quality degradation. JPG is a lossy format, so a small amount of recompression occurs during conversion. For most practical purposes — sharing, email, social media — the quality difference is imperceptible. If you need pixel-perfect lossless output, convert to PNG instead of JPG.</p>
+
+      <h2>Why do websites use WebP?</h2>
+      <p>WebP files are typically 25–35% smaller than equivalent JPG files at the same visual quality. Smaller image files mean faster page loads, lower bandwidth costs and better Core Web Vitals scores. Google's search ranking algorithm rewards fast-loading pages, which is why web developers serve WebP wherever possible.</p>
+
+      <h2>Is my image safe?</h2>
+      <p>Yes. All conversion happens locally inside your browser using the HTML5 Canvas API. Your WebP files are never uploaded to any server. Nothing is stored or transmitted.</p>
     </section>
+
+    <RelatedTools slugs={["convert-image", "compress-image", "image-info"]} />
   </div>
 </Layout>
 
-<style>
-  .tool-page { max-width: 860px; margin: 0 auto; }
-  .back-link { font-size: 14px; color: var(--text-muted); font-weight: 500; display: inline-block; margin-bottom: 20px; }
-  .tool-header { margin-bottom: 32px; }
-  .tool-title { font-size: clamp(28px, 5vw, 48px); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 12px; }
-  .tool-subtitle { font-size: 16px; color: var(--text-muted); line-height: 1.5; }
-  .seo-content { margin-top: 56px; padding-top: 48px; border-top: 1px solid var(--border); }
-  .seo-content h2 { font-size: 20px; font-weight: 700; margin-bottom: 10px; margin-top: 32px; }
-  .seo-content h2:first-child { margin-top: 0; }
-  .seo-content p { color: var(--text-muted); line-height: 1.65; font-size: 15px; }
-</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "WebP to JPG Converter",
+  "url": "https://www.pixmidas.com/tools/webp-to-jpg/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Convert WebP images to JPG online for free. Batch convert multiple files. No upload to servers."
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do I convert WebP to JPG online for free?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Upload one or more WebP images, click Convert to JPG, then download the results. Batch conversion is supported — drop multiple WebP files at once and download them all as JPGs." }
+    },
+    {
+      "@type": "Question",
+      "name": "Why do I need to convert WebP to JPG?",
+      "acceptedAnswer": { "@type": "Answer", "text": "WebP is not universally supported by older operating systems, desktop image editors, email clients and some social platforms. Converting to JPG gives maximum compatibility — JPG works everywhere, on every device, in every application." }
+    },
+    {
+      "@type": "Question",
+      "name": "Will I lose quality converting WebP to JPG?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The conversion introduces minimal quality degradation. For most practical purposes — sharing, email, social media — the quality difference is imperceptible. For pixel-perfect lossless output, convert to PNG instead." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my WebP image safe during conversion?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. All conversion happens locally inside your browser using the HTML5 Canvas API. Your WebP files are never uploaded to any server. Nothing is stored or transmitted." }
+    }
+  ]
+}
+</script>

@@ -1,22 +1,92 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import ImagesToPDF from '../../components/ImagesToPDF.jsx';
+import RelatedTools from '../../components/RelatedTools.astro';
 ---
 
-<Layout title="Images to PDF - PixMidas" description="Convert multiple images into one PDF file directly in your browser.">
-  <main class="min-h-screen bg-slate-950 text-white px-6 py-12">
-    <section class="max-w-5xl mx-auto">
-      <a href="/" class="text-sm text-slate-400 hover:text-white">← Back to tools</a>
+<Layout
+  title="Convert Images to PDF Free – JPG PNG WebP to PDF"
+  description="Combine multiple JPG, PNG or WebP images into a single PDF file online for free. Reorder images before merging. No upload, no login, runs in your browser."
+>
+  <div class="tool-page">
+    <div class="tool-header">
+      <a href="/categories/pdf-tools/" class="back-link">← PDF Tools</a>
+      <h1 class="tool-title">Images to PDF Converter</h1>
+      <p class="tool-subtitle">Upload multiple photos and combine them into a single PDF document. Reorder pages, then download.</p>
+    </div>
 
-      <div class="mt-8 mb-10">
-        <p class="text-sm uppercase tracking-[0.25em] text-yellow-400 mb-3">PDF Tool</p>
-        <h1 class="text-4xl md:text-5xl font-bold mb-4">Images to PDF</h1>
-        <p class="text-slate-300 text-lg max-w-2xl">
-          Upload JPG, PNG or WebP images and convert them into a single PDF file. Everything runs inside your browser.
-        </p>
-      </div>
+    <div class="ad-slot ad-slot-horizontal">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
 
-      <ImagesToPDF client:load />
+    <ImagesToPDF client:load />
+
+    <div class="ad-slot ad-slot-horizontal" style="margin-top: 32px;">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="0987654321" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <section class="seo-content">
+      <h2>How to convert images to PDF online</h2>
+      <p>Upload your JPG, PNG or WebP images, reorder them by dragging if needed, then click Convert to PDF. The resulting PDF downloads directly to your device. Each image becomes one page in the PDF, sized to fit the page cleanly.</p>
+
+      <h2>What image formats are supported?</h2>
+      <p>The converter accepts JPG, JPEG, PNG and WebP images. You can mix different formats in the same PDF — for example, combine a PNG logo with several JPG photographs in one document.</p>
+
+      <h2>Common uses for Images to PDF</h2>
+      <p>Send multiple photos as a single professional attachment instead of a ZIP file. Create a portable photo album or lookbook. Compile scanned document pages into one PDF. Submit multiple screenshots or images as a single file for a job application, report or presentation. PDFs are universally readable on all devices without any special software.</p>
+
+      <h2>How many images can I combine?</h2>
+      <p>There is no hard limit. You can combine as many images as your browser memory allows. For very large batches of high-resolution photos, consider compressing the images first using the Image Compressor tool to keep the final PDF file size manageable.</p>
+
+      <h2>Is my data safe?</h2>
+      <p>Yes. Your images never leave your device. The PDF is assembled entirely inside your browser. Nothing is uploaded, and no copies are kept anywhere.</p>
     </section>
-  </main>
+
+    <RelatedTools slugs={["merge-pdfs", "pdf-to-jpg", "compress-image"]} />
+  </div>
 </Layout>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Images to PDF Converter",
+  "url": "https://www.pixmidas.com/tools/images-to-pdf/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Convert multiple JPG, PNG or WebP images into a single PDF file. Free, no upload needed, runs in your browser."
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do I convert images to a PDF online for free?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Upload your JPG, PNG or WebP images, reorder them by dragging if needed, then click Convert to PDF. The resulting PDF downloads directly to your device. Each image becomes one page in the PDF." }
+    },
+    {
+      "@type": "Question",
+      "name": "How many images can I combine into one PDF?",
+      "acceptedAnswer": { "@type": "Answer", "text": "There is no hard limit. You can combine as many images as your browser memory allows. For large batches of high-resolution photos, compress them first using the Image Compressor to keep the final PDF size manageable." }
+    },
+    {
+      "@type": "Question",
+      "name": "What image formats can I convert to PDF?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The converter accepts JPG, JPEG, PNG and WebP images. You can mix different formats in the same PDF — for example, combine a PNG logo with several JPG photographs in one document." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my data safe when converting images to PDF?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Your images never leave your device. The PDF is assembled entirely inside your browser. Nothing is uploaded, and no copies are kept anywhere." }
+    }
+  ]
+}
+</script>

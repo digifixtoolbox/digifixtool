@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function TextDiff() {
+export default function ImagesToPDF() {
   const [text1, setText1] = useState("");
   const [text2, setText2] = useState("");
 

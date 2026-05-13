@@ -1,46 +1,99 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import PdfToJpg from '../../components/PdfToJpg.jsx';
+import RelatedTools from '../../components/RelatedTools.astro';
 ---
 
 <Layout
-  title="PDF to JPG Converter Online Free"
-  description="Convert PDF pages to JPG images online for free. No login, no upload to servers. Works directly in your browser."
+  title="PDF to JPG Converter Free – Convert PDF Pages to Images"
+  description="Convert every page of a PDF to JPG images online for free. No upload to servers, no login required. Works in your browser using PDF.js."
 >
   <div class="tool-page">
     <div class="tool-header">
-      <a href="/" class="back-link">← All tools</a>
-      <h1 class="tool-title">PDF tJPG Converter</h1>
-      <p class="tool-subtitle">Convert every page of your PDF into a JPG image. Free, fast, no login needed.</p>
+      <a href="/categories/pdf-tools/" class="back-link">← PDF Tools</a>
+      <h1 class="tool-title">PDF to JPG Converter</h1>
+      <p class="tool-subtitle">Convert every PDF page to a JPG image. Download individually or all at once. Free, fast, no login needed.</p>
     </div>
-    <div class="ad-slot ad-slot-horizontal">Advertisement</div>
+
+    <div class="ad-slot ad-slot-horizontal">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" is:inline></script>
     <script is:inline>
       if (typeof window !== 'undefined' && window.pdfjsLib) {
         window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
       }
     </script>
+
     <PdfToJpg client:load />
-    <div class="ad-slot ad-slot-horizontal" style="margin-top: 32px;">Advertisement</div>
+
+    <div class="ad-slot ad-slot-horizontal" style="margin-top: 32px;">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="0987654321" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
     <section class="seo-content">
-      <h2>How to convert PDF to JPG</h2>
-      <p>Upload your PDF file and each page will be converted to a JPG image. Download individual pages or all at once.</p>
+      <h2>How to convert PDF to JPG online</h2>
+      <p>Upload your PDF file and every page is rendered as a JPG image automatically. You can download each page individually, or download all pages at once. The converter handles multi-page PDFs of any length without page limits.</p>
+
+      <h2>Why convert PDF to JPG?</h2>
+      <p>JPG images are universally viewable on any device without special software. Common reasons to convert: extracting a specific page from a PDF to use as an image, sharing PDF content on social media, inserting a PDF page into a presentation or document, or creating a thumbnail preview of a PDF report.</p>
+
+      <h2>How good is the image quality?</h2>
+      <p>The converter renders each PDF page at high resolution using PDF.js, Mozilla's open-source PDF rendering engine. Text remains sharp and crisp in the output JPG. For PDFs with very small text, the rendered image will be large enough to remain readable when zoomed in.</p>
+
       <h2>How many pages can I convert?</h2>
-      <p>There is no page limit. All pages are converted automatically.</p>
-      <h2>Is it safe?</h2>
-      <p>Yes. Your PDF never leaves your device. Everything runs locally in your browser using PDF.js.</p>
+      <p>There is no page limit. All pages in the PDF are converted automatically. The process may take a few extra seconds for very long documents, but all pages will render in the same session.</p>
+
+      <h2>Is my PDF safe?</h2>
+      <p>Yes. Your PDF is rendered entirely inside your browser using PDF.js. The file is never uploaded to any server, and no content from your document is transmitted anywhere.</p>
     </section>
+
+    <RelatedTools slugs={["images-to-pdf", "merge-pdfs", "compress-image"]} />
   </div>
 </Layout>
 
-<style>
-  .tool-page { max-width: 860px; margin: 0 auto; }
-  .back-link { font-size: 14px; color: var(--text-muted); font-weight: 500; display: inline-block; margin-bottom: 20px; }
-  .tool-header { margin-bottom: 32px; }
-  .tool-title { font-size: clamp(28px, 5vw, 48px); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 12px; }
-  .tool-subtitle { font-size: 16px; color: var(--text-muted); line-height: 1.5; }
-  .seo-content { margin-top: 56px; padding-top: 48px; border-top: 1px solid var(--border); }
-  .seo-content h2 { font-size: 20px; font-weight: 700; margin-bottom: 10px; margin-top: 32px; }
-  .seo-content h2:first-child { margin-top: 0; }
-  .seo-content p { color: var(--text-muted); line-height: 1.65; font-size: 15px; }
-</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "PDF to JPG Converter",
+  "url": "https://www.pixmidas.com/tools/pdf-to-jpg/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Convert every page of a PDF to JPG images online for free. No upload needed. Runs in your browser."
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do I convert PDF to JPG online for free?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Upload your PDF file and every page is rendered as a JPG image automatically. You can download each page individually, or download all pages at once. No page limits." }
+    },
+    {
+      "@type": "Question",
+      "name": "Why convert PDF pages to JPG images?",
+      "acceptedAnswer": { "@type": "Answer", "text": "JPG images are universally viewable on any device without special software. Common uses: extracting a specific page as an image, sharing PDF content on social media, inserting a page into a presentation, or creating a PDF thumbnail preview." }
+    },
+    {
+      "@type": "Question",
+      "name": "How many PDF pages can I convert to JPG?",
+      "acceptedAnswer": { "@type": "Answer", "text": "There is no page limit. All pages in the PDF are converted automatically. The process may take a few extra seconds for very long documents, but all pages will render in the same session." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my PDF safe when converting to JPG?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Your PDF is rendered entirely inside your browser using PDF.js. The file is never uploaded to any server, and no content from your document is transmitted anywhere." }
+    }
+  ]
+}
+</script>

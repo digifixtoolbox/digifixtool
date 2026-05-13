@@ -1,40 +1,92 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import ImageInfo from '../../components/ImageInfo.jsx';
+import RelatedTools from '../../components/RelatedTools.astro';
 ---
 
 <Layout
-  title="Image Size Checker - Find Image Dimensions Online Free"
-  description="Upload any image to instantly find its pixel dimensions, file size, aspect ratio, format and more. Free, no upload, works in your browser."
+  title="Check Image Size & Dimensions Online Free"
+  description="Instantly check any image's pixel dimensions, file size, format, aspect ratio and megapixel count. Free, no upload needed. Works in your browser."
 >
   <div class="tool-page">
     <div class="tool-header">
-      <a href="/" class="back-link">← All tools</a>
-      <h1 class="tool-title">Image Info</h1>
-      <p class="tool-subtitle">Upload any image to instantly see its dimensions, file size, format and aspect ratio.</p>
+      <a href="/categories/image-tools/" class="back-link">← Image Tools</a>
+      <h1 class="tool-title">Image Info Checker</h1>
+      <p class="tool-subtitle">Upload any image to instantly see its width, height, file size, format, aspect ratio and megapixel count.</p>
     </div>
-    <div class="ad-slot ad-slot-horizontal">Advertisement</div>
+
+    <div class="ad-slot ad-slot-horizontal">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
     <ImageInfo client:load />
-    <div class="ad-slot ad-slot-horizontal" style="margin-top: 32px;">Advertisement</div>
+
+    <div class="ad-slot ad-slot-horizontal" style="margin-top: 32px;">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="0987654321" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
     <section class="seo-content">
-      <h2>How to find image dimensions</h2>
-      <p>Upload your image and all details appear instantly. Width, height, file size, format and aspect ratio in one click.</p>
-      <h2>What information does it show?</h2>
-      <p>Width and height in pixels, file size, image format, aspect ratio, megapixels and orientation.</p>
-      <h2>Is it safe?</h2>
-      <p>Your image never leaves your device. Everything runs locally in your browser.</p>
+      <h2>How to check image dimensions and file size</h2>
+      <p>Upload your image and all metadata appears instantly — no button clicks needed. You'll see the exact pixel width and height, the file size in KB or MB, the image format, the aspect ratio and the total megapixel count. Results appear in under a second, all locally in your browser.</p>
+
+      <h2>What information does the checker show?</h2>
+      <p>Width and height in pixels, file size (raw and formatted), image format (JPG, PNG, WebP, GIF etc.), aspect ratio expressed as a simplified fraction (e.g. 16:9), and megapixels. This is all the information you need to decide whether an image meets the requirements for a website, social media platform, print job or email attachment.</p>
+
+      <h2>Why do image dimensions matter?</h2>
+      <p>Every platform has specific image requirements. Social networks crop or reject images that are the wrong aspect ratio. Website templates require images within certain file size limits for performance. Print shops need images above a minimum pixel density (typically 300 DPI) to avoid blurry output. Knowing your image's exact dimensions lets you make informed decisions before uploading or submitting.</p>
+
+      <h2>What is an aspect ratio?</h2>
+      <p>Aspect ratio is the proportional relationship between an image's width and height, expressed as two numbers (e.g. 16:9, 4:3, 1:1). A 1920×1080 image has a 16:9 ratio. A 1080×1080 image has a 1:1 ratio (square). Understanding aspect ratio helps you choose the right crop and avoid distortion when placing images into fixed-ratio containers.</p>
+
+      <h2>Is my image safe?</h2>
+      <p>Yes. Your image is read locally by the browser — it is never uploaded to any server. All metadata is extracted using browser APIs without any network requests.</p>
     </section>
+
+    <RelatedTools slugs={["exif-remover", "compress-image", "convert-image"]} />
   </div>
 </Layout>
 
-<style>
-  .tool-page { max-width: 860px; margin: 0 auto; }
-  .back-link { font-size: 14px; color: var(--text-muted); font-weight: 500; display: inline-block; margin-bottom: 20px; }
-  .tool-header { margin-bottom: 32px; }
-  .tool-title { font-size: clamp(28px, 5vw, 48px); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 12px; }
-  .tool-subtitle { font-size: 16px; color: var(--text-muted); line-height: 1.5; }
-  .seo-content { margin-top: 56px; padding-top: 48px; border-top: 1px solid var(--border); }
-  .seo-content h2 { font-size: 20px; font-weight: 700; margin-bottom: 10px; margin-top: 32px; }
-  .seo-content h2:first-child { margin-top: 0; }
-  .seo-content p { color: var(--text-muted); line-height: 1.65; font-size: 15px; }
-</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Image Info Checker",
+  "url": "https://www.pixmidas.com/tools/image-info/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Check any image's pixel dimensions, file size, format and aspect ratio instantly. Free, no upload needed."
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do I check image dimensions and file size online?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Upload your image and all metadata appears instantly — width, height, file size, format, aspect ratio and megapixel count. All processed locally in your browser with no server uploads." }
+    },
+    {
+      "@type": "Question",
+      "name": "What information does the image info checker show?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Width and height in pixels, file size in KB or MB, image format (JPG, PNG, WebP, GIF etc.), aspect ratio as a simplified fraction (e.g. 16:9), and total megapixels." }
+    },
+    {
+      "@type": "Question",
+      "name": "What is aspect ratio and why does it matter?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Aspect ratio is the proportional relationship between an image's width and height, expressed as two numbers (e.g. 16:9, 4:3, 1:1). Understanding aspect ratio helps you choose the right crop and avoid distortion when placing images into fixed-ratio containers." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my image safe when checking image info?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Your image is read locally by the browser and is never uploaded to any server. All metadata is extracted using browser APIs without any network requests." }
+    }
+  ]
+}
+</script>

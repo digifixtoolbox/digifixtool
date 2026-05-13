@@ -55,7 +55,7 @@ export default function PdfToJpg() {
       <p style={{ fontSize: "14px", color: "#6e6e73", marginBottom: "20px" }}>Each page will be converted to JPG</p>
       <input id="pdf-input" type="file" accept="application/pdf" onChange={handleFile} style={{ display: "none" }} />
       <span style={btnBlue}>Choose PDF</span>
-      {error && <p style={{ color: "red", marnTop: "16px", fontSize: "14px" }}>{error}</p>}
+      {error && <p style={{ color: "red", marginTop: "16px", fontSize: "14px" }}>{error}</p>}
     </div>
   );
 
@@ -72,7 +72,7 @@ export default function PdfToJpg() {
         {images.map(function(img, i) {
           return (
             <div key={i} style={{ display: "flex", alignItems: "center", gap: "12px", background: "#f5f5f7", borderRadius: "12px", padding: "14px 16px" }}>
-              <img src={img.url} alt={"p" + i} style={{ width: "48px", height: "48px", objectFit: "cover", borderRadius: "6px" }} />
+              <img src={img.url} alt={"p" + i} loading="lazy" style={{ width: "48px", height: "48px", objectFit: "cover", borderRadius: "6px" }} />
               <span style={{ flex: "1", fontSize: "14px", fontWeight: "600" }}>{img.name}</span>
               <button onClick={function() { download(img); }} style={{ background: "#0071e3", color: "white", border: "none", borderRadius: "8px", padding: "8px 16px", fontSize: "13px", fontWeight: "600", cursor: "pointer" }}>Download</button>
             </div>

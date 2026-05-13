@@ -9,24 +9,28 @@ const tools = [
   { slug: 'convert-image', name: 'Image Converter', description: 'Convert PNG to JPG or JPG to PNG in one click.', icon: String.fromCodePoint(0x1F504), bg: '#e8f4fd', category: 'Image', popular: false },
   { slug: 'image-info', name: 'Image Info', description: 'Check the size, format and dimensions of any image.', icon: String.fromCodePoint(0x1F50D), bg: '#e8f4fd', category: 'Image', popular: false },
   { slug: 'webp-to-jpg', name: 'WebP to JPG', description: 'Convert WebP images to JPG instantly. Multiple files supported.', icon: String.fromCodePoint(0x1F5BC)+String.fromCodePoint(0xFE0F), bg: '#e8f4fd', category: 'Image', popular: false },
+  { slug: 'exif-remover', name: 'EXIF Data Remover', description: 'Strip hidden GPS, device info and timestamps from photos.', icon: String.fromCodePoint(0x1F6E1)+String.fromCodePoint(0xFE0F), bg: '#e8f4fd', category: 'Image', popular: false },
+  { slug: 'social-sizes', name: 'Social Media Sizes', description: 'Find the correct image size for every social platform.', icon: String.fromCodePoint(0x1F4F1), bg: '#f0e8fd', category: 'Image', popular: false },
   { slug: 'images-to-pdf', name: 'Images to PDF', description: 'Combine multiple photos into one PDF document.', icon: String.fromCodePoint(0x1F4C4), bg: '#fef3e8', category: 'PDF', popular: false },
   { slug: 'pdf-to-jpg', name: 'PDF to JPG', description: 'Convert every PDF page to a JPG image instantly.', icon: String.fromCodePoint(0x1F4F8), bg: '#fef3e8', category: 'PDF', popular: false },
   { slug: 'merge-pdfs', name: 'Merge PDFs', description: 'Combine multiple PDF files into one document.', icon: String.fromCodePoint(0x1F4D1), bg: '#fef3e8', category: 'PDF', popular: false },
   { slug: 'word-count', name: 'Word Counter', description: 'Count words, characters and paragraphs instantly.', icon: String.fromCodePoint(0x1F4DD), bg: '#e8fdf0', category: 'Text', popular: false },
   { slug: 'case-converter', name: 'Case Converter', description: 'Convert text to uppercase, lowercase, title case and more.', icon: String.fromCodePoint(0x1F521), bg: '#e8fdf0', category: 'Text', popular: false },
   { slug: 'text-diff', name: 'Text Difference Checker', description: 'Compare two texts and see exactly what changed.', icon: String.fromCodePoint(0x1F50E), bg: '#e8fdf0', category: 'Text', popular: false },
-  { slug: 'qr-code', name: 'QR Code Generator', description: 'Create QR codes for any link, text or phone number.', icon: String.fromCodePoint(0x1F533), bg: '#fdf0e8', category: 'Utility', popular: false },
-  { slug: 'password-generator', name: 'Password Generator', description: 'Generate strong, secure passwords instantly.', icon: String.fromCodePoint(0x1F510), bg: '#e8fdf0', category: 'Utility', popular: false },
-  { slug: 'color-picker', name: 'Color Picker', description: 'Pick any color and get HEX, RGB and HSL values.', icon: String.fromCodePoint(0x1F3A8), bg: '#fef3e8', category: 'Utility', popular: false },
-  { slug: 'social-sizes', name: 'Social Media Sizes', description: 'Find the correct image size for every social platform.', icon: String.fromCodePoint(0x1F4F1), bg: '#f0e8fd', category: 'Social', popular: false },
+  { slug: 'lorem-ipsum', name: 'Lorem Ipsum Generator', description: 'Generate placeholder text for layouts and mockups.', icon: String.fromCodePoint(0x1F4C3), bg: '#e8fdf0', category: 'Text', popular: false },
+  { slug: 'json-formatter', name: 'JSON Formatter', description: 'Format, validate and minify JSON data instantly.', icon: String.fromCodePoint(0x1F4CB), bg: '#e8fdf0', category: 'Developer', popular: false },
+  { slug: 'qr-code', name: 'QR Code Generator', description: 'Create QR codes for any link, text or phone number.', icon: String.fromCodePoint(0x1F533), bg: '#fdf0e8', category: 'Developer', popular: false },
+  { slug: 'password-generator', name: 'Password Generator', description: 'Generate strong, secure passwords instantly.', icon: String.fromCodePoint(0x1F510), bg: '#e8fdf0', category: 'Developer', popular: false },
+  { slug: 'color-picker', name: 'Color Picker', description: 'Pick any color and get HEX, RGB and HSL values.', icon: String.fromCodePoint(0x1F3A8), bg: '#fef3e8', category: 'Developer', popular: false },
+  { slug: 'base64', name: 'Base64 Encoder / Decoder', description: 'Encode text to Base64 or decode Base64 strings instantly.', icon: String.fromCodePoint(0x1F4BB), bg: '#e8fdf0', category: 'Developer', popular: false },
 ];
 
-const categories = ['All', 'Image', 'PDF', 'Text', 'Utility', 'Social'];
+const categories = ['All', 'Image', 'PDF', 'Text', 'Developer'];
 ---
 
 <Layout
-  title="Free Online Tools | PixMidas"
-  description="Fast, free browser-based tools for images, text, PDFs and more. No login needed. Many tools run privately in your browser."
+  title="Free Online Tools – Fast, Private & No Login Required"
+  description="Free browser-based tools for images, text, PDFs and more. Compress images, resize photos, generate QR codes, count words and much more. No login, no upload, runs in your browser."
 >
   <section class="hero">
     <h1 class="hero-title">Free tools<br/>that just work.</h1>
@@ -48,16 +52,6 @@ const categories = ['All', 'Image', 'PDF', 'Text', 'Utility', 'Social'];
   </div>
 
   <section id="all-tools" class="tools-section">
-    <div class="search-wrap">
-      <input
-        id="tool-search"
-        class="tool-search"
-        type="search"
-        placeholder="Search tools..."
-        aria-label="Search tools"
-      />
-    </div>
-
     <div class="filter-bar-wrap">
       <div class="filter-bar">
         {categories.map((cat) => (
@@ -68,9 +62,31 @@ const categories = ['All', 'Image', 'PDF', 'Text', 'Utility', 'Social'];
       </div>
     </div>
 
+    <div class="search-wrap">
+      <svg class="search-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+        <circle cx="7.5" cy="7.5" r="5" stroke="currentColor" stroke-width="1.6"/>
+        <path d="M11.5 11.5L15.5 15.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+      <input
+        type="search"
+        id="tool-search"
+        class="search-input"
+        placeholder="Search tools… (e.g. compress, PDF, QR)"
+        aria-label="Search tools"
+        autocomplete="off"
+        spellcheck="false"
+      />
+      <span class="search-kbd" aria-hidden="true">/</span>
+    </div>
+
     <div class="tools-grid">
       {tools.map((tool) => (
-        <a class="tool-card" href={"/tools/" + tool.slug + "/"} data-category={tool.category} data-name={tool.name.toLowerCase()} data-description={tool.description.toLowerCase()}>
+        <a
+          class="tool-card"
+          href={"/tools/" + tool.slug + "/"}
+          data-category={tool.category}
+          data-search={(tool.name + ' ' + tool.description + ' ' + tool.category).toLowerCase()}
+        >
           <div class="tool-icon-wrap" data-bg={tool.bg}>
             <span class="tool-icon">{tool.icon}</span>
           </div>
@@ -87,7 +103,7 @@ const categories = ['All', 'Image', 'PDF', 'Text', 'Utility', 'Social'];
     </div>
 
     <p class="no-results" id="no-results" style="display:none">
-      No tools found. Try another search or category.
+      No tools found for that. Try something else.
     </p>
   </section>
 
@@ -122,28 +138,58 @@ const categories = ['All', 'Image', 'PDF', 'Text', 'Utility', 'Social'];
   </section>
 
   <section class="seo-content">
-    <h2>Free Online Tools for Images, Text and More</h2>
-    <p>PixMidas is a growing collection of free online tools for everyday digital tasks. Compress images, resize photos, convert files, generate QR codes, compare text, count words, merge PDFs and more without complicated software or account creation.</p>
-    <p>PixMidas focuses on lightweight, fast and privacy-friendly browser tools. Many tools process files locally on your device instead of uploading them to external servers.</p>
-    <h3>Popular Free Tools</h3>
+    <h2>Free Online Tools for Images, Text, PDFs and More</h2>
+    <p>PixMidas is a growing collection of free browser-based tools built for everyday digital tasks. Compress and resize images, convert between formats, generate QR codes, count words, merge PDFs, pick colors, compare text differences and more — all without installing software, creating an account or uploading your files to a server.</p>
+    <p>Privacy is a first principle here. Most tools process your files entirely on your device using browser APIs. Your images, documents and text stay on your machine. Nothing is transmitted, logged or stored. Fast, simple and private by design.</p>
+    <h3>Image Tools</h3>
+    <p>Compress JPG, PNG and WebP images to reduce file size without visible quality loss. Resize photos to exact pixel dimensions. Crop images by drawing a selection. Convert between PNG, JPG and WebP formats. Check image dimensions and file size. Convert WebP images to JPG for maximum compatibility.</p>
+    <h3>PDF Tools</h3>
+    <p>Convert PDF pages to JPG images. Combine multiple images into a single PDF. Merge several PDF files into one document. All PDF processing runs in the browser — no cloud upload required.</p>
+    <h3>Text Tools</h3>
+    <p>Count words, characters and sentences in real time. Convert text between uppercase, lowercase, title case, camelCase, snake_case and kebab-case. Compare two texts side by side and highlight every difference. Generate lorem ipsum placeholder text for layouts and mockups.</p>
+    <h3>Developer Tools</h3>
+    <p>Format and validate JSON data. Encode text to Base64 or decode Base64 strings. Generate QR codes for any URL, text, email or phone number. Create strong random passwords. Pick colors and get HEX, RGB and HSL codes.</p>
+    <h3>All Free Tools on PixMidas</h3>
     <ul class="seo-list">
-      <li>Free Image Compressor</li>
-      <li>Online Image Resizer</li>
-      <li>Free Image Cropper</li>
-      <li>PNG to JPG Converter</li>
-      <li>WebP to JPG Converter</li>
-      <li>PDF to JPG Converter</li>
-      <li>Merge PDF Files</li>
-      <li>Free QR Code Generator</li>
-      <li>Password Generator</li>
-      <li>Case Converter</li>
-      <li>Color Picker HEX RGB</li>
-      <li>Word Counter Tool</li>
-      <li>Text Difference Checker</li>
-      <li>Images to PDF Converter</li>
-      <li>Social Media Sizes Guide</li>
+      <li><a href="/tools/compress-image/">Free Image Compressor</a></li>
+      <li><a href="/tools/resize-image/">Online Image Resizer</a></li>
+      <li><a href="/tools/image-cropper/">Free Image Cropper</a></li>
+      <li><a href="/tools/convert-image/">PNG to JPG Converter</a></li>
+      <li><a href="/tools/image-info/">Image Dimensions Checker</a></li>
+      <li><a href="/tools/webp-to-jpg/">WebP to JPG Converter</a></li>
+      <li><a href="/tools/pdf-to-jpg/">PDF to JPG Converter</a></li>
+      <li><a href="/tools/images-to-pdf/">Images to PDF Converter</a></li>
+      <li><a href="/tools/merge-pdfs/">Merge PDF Files</a></li>
+      <li><a href="/tools/word-count/">Word Counter Tool</a></li>
+      <li><a href="/tools/case-converter/">Text Case Converter</a></li>
+      <li><a href="/tools/text-diff/">Text Difference Checker</a></li>
+      <li><a href="/tools/lorem-ipsum/">Lorem Ipsum Generator</a></li>
+      <li><a href="/tools/qr-code/">Free QR Code Generator</a></li>
+      <li><a href="/tools/password-generator/">Password Generator</a></li>
+      <li><a href="/tools/color-picker/">Color Picker HEX RGB HSL</a></li>
+      <li><a href="/tools/social-sizes/">Social Media Image Sizes 2025</a></li>
+      <li><a href="/tools/base64/">Base64 Encoder / Decoder</a></li>
+      <li><a href="/tools/json-formatter/">JSON Formatter &amp; Validator</a></li>
+      <li><a href="/tools/exif-remover/">EXIF Data Remover</a></li>
     </ul>
   </section>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "PixMidas",
+    "url": "https://www.pixmidas.com/",
+    "description": "Free browser-based tools for images, text, PDFs and more. No login, no upload, runs in your browser.",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://www.pixmidas.com/#all-tools",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
+
 </Layout>
 
 <script>
@@ -152,47 +198,49 @@ const categories = ['All', 'Image', 'PDF', 'Text', 'Utility', 'Social'];
     wrap.style.background = bg;
   });
 
+  var searchInput = document.getElementById('tool-search');
   var buttons = document.querySelectorAll('.filter-btn');
   var cards = document.querySelectorAll('.tool-card');
   var noResults = document.getElementById('no-results');
-  var searchInput = document.getElementById('tool-search');
   var activeCategory = 'All';
 
-  function updateTools() {
-    var query = searchInput ? searchInput.value.trim().toLowerCase() : '';
+  function filterTools() {
+    var query = searchInput.value.toLowerCase().trim();
     var visible = 0;
-
     cards.forEach(function(card) {
-      var categoryMatch = activeCategory === 'All' || card.getAttribute('data-category') === activeCategory;
-      var name = card.getAttribute('data-name') || '';
-      var description = card.getAttribute('data-description') || '';
-      var searchMatch = !query || name.includes(query) || description.includes(query);
-
-      var match = categoryMatch && searchMatch;
-      card.style.display = match ? 'flex' : 'none';
-
-      if (match) visible++;
+      var catMatch = activeCategory === 'All' || card.getAttribute('data-category') === activeCategory;
+      var searchMatch = !query || (card.getAttribute('data-search') || '').includes(query);
+      var show = catMatch && searchMatch;
+      card.style.display = show ? 'flex' : 'none';
+      if (show) visible++;
     });
-
     noResults.style.display = visible === 0 ? 'block' : 'none';
   }
 
   buttons.forEach(function(btn) {
     btn.addEventListener('click', function() {
       activeCategory = btn.getAttribute('data-category');
-
-      buttons.forEach(function(b) {
-        b.setAttribute('aria-pressed', 'false');
-      });
-
+      buttons.forEach(function(b) { b.setAttribute('aria-pressed', 'false'); });
       btn.setAttribute('aria-pressed', 'true');
-      updateTools();
+      filterTools();
     });
   });
 
-  if (searchInput) {
-    searchInput.addEventListener('input', updateTools);
-  }
+  searchInput.addEventListener('input', filterTools);
+
+  document.addEventListener('keydown', function(e) {
+    var tag = document.activeElement.tagName;
+    if (e.key === '/' && tag !== 'INPUT' && tag !== 'TEXTAREA' && tag !== 'SELECT') {
+      e.preventDefault();
+      searchInput.focus();
+      searchInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    if (e.key === 'Escape' && document.activeElement === searchInput) {
+      searchInput.value = '';
+      filterTools();
+      searchInput.blur();
+    }
+  });
 </script>
 
 <style>
@@ -276,35 +324,82 @@ const categories = ['All', 'Image', 'PDF', 'Text', 'Utility', 'Social'];
     scroll-margin-top: 80px;
   }
 
+  /* Search bar */
   .search-wrap {
-    margin-bottom: 14px;
+    position: relative;
+    margin-bottom: 16px;
   }
 
-  .tool-search {
+  .search-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-light);
+    pointer-events: none;
+    flex-shrink: 0;
+  }
+
+  .search-input {
     width: 100%;
-    min-height: 48px;
+    padding: 14px 48px 14px 42px;
+    font-size: 16px;
+    font-family: inherit;
     border: 1px solid var(--border);
+    border-radius: var(--radius);
     background: var(--surface);
     color: var(--text);
-    border-radius: 999px;
-    padding: 0 20px;
-    font-size: 15px;
-    font-family: inherit;
     outline: none;
-    box-shadow: var(--shadow-sm);
     transition: border-color 0.15s, box-shadow 0.15s;
+    box-shadow: var(--shadow-sm);
+    -webkit-appearance: none;
+    appearance: none;
   }
 
-  .tool-search:focus {
+  .search-input:focus {
     border-color: var(--accent);
-    box-shadow: 0 0 0 4px rgba(0,113,227,0.10);
+    box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.1);
   }
 
+  .search-input::placeholder {
+    color: var(--text-light);
+  }
+
+  .search-input::-webkit-search-decoration,
+  .search-input::-webkit-search-cancel-button,
+  .search-input::-webkit-search-results-button,
+  .search-input::-webkit-search-results-decoration {
+    display: none;
+  }
+
+  .search-kbd {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-light);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: 2px 7px;
+    font-family: inherit;
+    pointer-events: none;
+    transition: opacity 0.12s;
+    line-height: 1.6;
+  }
+
+  .search-input:focus ~ .search-kbd {
+    opacity: 0;
+  }
+
+  /* Filter bar */
   .filter-bar-wrap {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    margin-bottom: 20px;
+    margin-bottom: 12px;
   }
 
   .filter-bar-wrap::-webkit-scrollbar {
@@ -344,6 +439,27 @@ const categories = ['All', 'Image', 'PDF', 'Text', 'Utility', 'Social'];
     color: white;
   }
 
+  /* Category page links */
+  .cat-links {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+
+  .cat-link {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .cat-link:hover {
+    color: var(--accent);
+  }
+
+  /* Tool grid */
   .tools-grid {
     display: flex;
     flex-direction: column;
@@ -443,6 +559,7 @@ const categories = ['All', 'Image', 'PDF', 'Text', 'Utility', 'Social'];
     padding: 40px 0;
   }
 
+  /* Trust section */
   .trust-section {
     margin-top: 56px;
   }
@@ -482,6 +599,7 @@ const categories = ['All', 'Image', 'PDF', 'Text', 'Utility', 'Social'];
     line-height: 1.5;
   }
 
+  /* SEO content */
   .seo-content {
     max-width: 720px;
     margin: 72px auto 0;
@@ -520,6 +638,16 @@ const categories = ['All', 'Image', 'PDF', 'Text', 'Utility', 'Social'];
     font-size: 15px;
   }
 
+  .seo-list a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .seo-list a:hover {
+    text-decoration: underline;
+  }
+
   @media (max-width: 768px) {
     .hero {
       padding: 36px 0 28px;
@@ -554,18 +682,17 @@ const categories = ['All', 'Image', 'PDF', 'Text', 'Utility', 'Social'];
       margin-top: 28px;
     }
 
-    .search-wrap {
-      margin-bottom: 12px;
-    }
-
-    .tool-search {
-      min-height: 46px;
-      font-size: 14px;
-      padding: 0 18px;
-    }
-
     .tools-section {
       scroll-margin-top: 70px;
+    }
+
+    .search-input {
+      font-size: 16px;
+      padding: 13px 44px 13px 40px;
+    }
+
+    .cat-links {
+      gap: 6px;
     }
 
     .tool-card {

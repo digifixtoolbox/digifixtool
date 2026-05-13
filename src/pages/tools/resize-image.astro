@@ -1,38 +1,92 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import ImageResizer from '../../components/ImageResizer.jsx';
+import RelatedTools from '../../components/RelatedTools.astro';
 ---
 
 <Layout
-  title="Resize Image Online Free"
-  description="Resize any image to exact pixel dimensions online for free. No upload, no login, works 100% in your browser."
+  title="Resize Image Free – Change Photo Dimensions Instantly"
+  description="Resize any image to exact pixel dimensions online for free. Set custom width and height, lock aspect ratio, and download instantly. No upload needed."
 >
   <div class="tool-page">
     <div class="tool-header">
-      <a href="/" class="back-link">← All tools</a>
+      <a href="/categories/image-tools/" class="back-link">← Image Tools</a>
       <h1 class="tool-title">Image Resizer</h1>
-      <p class="tool-subtitle">Resize any image to exact pixel dimensions. Lock aspect ratio or set freely.</p>
+      <p class="tool-subtitle">Resize any photo to exact pixel dimensions. Lock aspect ratio or set width and height freely.</p>
     </div>
-    <div class="ad-slot ad-slot-horizontal">Advertisement</div>
+
+    <div class="ad-slot ad-slot-horizontal">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
     <ImageResizer client:load />
-    <div class="ad-slot ad-slot-horizontal" style="margin-top: 32px;">Advertisement</div>
+
+    <div class="ad-slot ad-slot-horizontal" style="margin-top: 32px;">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="0987654321" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
     <section class="seo-content">
       <h2>How to resize an image online</h2>
-      <p>Upload your image, enter the width and height you need, and click Resize. Download instantly.</p>
-      <h2>Is it fe?</h2>
-      <p>Your images never leave your device. Everything runs locally in your browser.</p>
+      <p>Upload your image, enter the target width and/or height in pixels, then click Resize and Download. If aspect ratio lock is enabled, adjusting one dimension automatically recalculates the other so your image never appears stretched or distorted.</p>
+
+      <h2>Should I lock the aspect ratio?</h2>
+      <p>For most use cases, yes. Locking the aspect ratio preserves the original proportions of your image, preventing distortion. Only disable it when you need exact dimensions for a specific slot — such as a profile picture or banner — where cropping isn't an option and slight distortion is acceptable.</p>
+
+      <h2>Common image sizes for web and social media</h2>
+      <p>Some frequently used dimensions: HD wallpaper (1920×1080), standard thumbnail (1280×720), social media square post (1080×1080), Twitter/X header (1500×500), Facebook cover (820×312), LinkedIn banner (1584×396). Use the resize tool to hit any of these targets instantly.</p>
+
+      <h2>Will resizing reduce image quality?</h2>
+      <p>Scaling an image down (making it smaller) has minimal quality impact. Scaling an image up (making it larger) will reduce sharpness because the browser must interpolate new pixels from existing data. For best results, always start from a higher-resolution original and resize downward.</p>
+
+      <h2>Is my photo safe?</h2>
+      <p>Yes. Everything runs locally in your browser. Your image is never uploaded to any server, and no data is collected or stored. The resize operation uses the HTML5 Canvas API entirely on your device.</p>
     </section>
+
+    <RelatedTools slugs={["compress-image", "image-cropper", "convert-image"]} />
   </div>
 </Layout>
 
-<style>
-  .tool-page { max-width: 860px; margin: 0 auto; }
-  .back-link { font-size: 14px; color: var(--text-muted); font-weight: 500; display: inline-block; margin-bottom: 20px; }
-  .tool-header { margin-bottom: 32px; }
-  .tool-title { font-size: clamp(28px, 5vw, 48px); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 12px; }
-  .tool-subtitle { font-size: 16px; color: var(--text-muted); line-height: 1.5; }
-  .seo-content { margin-top: 56px; padding-top: 48px; border-top: 1px solid var(--border); }
-  .seo-content h2 { font-size: 20px; font-weight: 700; margin-bottom: 10px; margin-top: 32px; }
-  .seo-content h2:first-child { margin-top: 0; }
-  .seo-content p { color: var(--text-muted); line-height: 1.65; font-size: 15px; }
-</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Image Resizer",
+  "url": "https://www.pixmidas.com/tools/resize-image/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Resize any image to exact pixel dimensions online for free. Lock aspect ratio or set custom dimensions. Runs in your browser."
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do I resize an image online for free?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Upload your image, enter the target width and/or height in pixels, then click Resize and Download. If aspect ratio lock is enabled, adjusting one dimension automatically recalculates the other so your image never appears stretched or distorted." }
+    },
+    {
+      "@type": "Question",
+      "name": "Should I lock the aspect ratio when resizing?",
+      "acceptedAnswer": { "@type": "Answer", "text": "For most use cases, yes. Locking the aspect ratio preserves the original proportions of your image, preventing distortion. Only disable it when you need exact dimensions for a specific slot where slight distortion is acceptable." }
+    },
+    {
+      "@type": "Question",
+      "name": "Will resizing reduce image quality?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Scaling an image down has minimal quality impact. Scaling an image up will reduce sharpness because the browser must interpolate new pixels. For best results, always start from a higher-resolution original and resize downward." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my photo safe when using the image resizer?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Everything runs locally in your browser using the HTML5 Canvas API. Your image is never uploaded to any server, and no data is collected or stored." }
+    }
+  ]
+}
+</script>

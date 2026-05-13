@@ -1,0 +1,92 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import LoremIpsum from '../../components/LoremIpsum.jsx';
+import RelatedTools from '../../components/RelatedTools.astro';
+---
+
+<Layout
+  title="Lorem Ipsum Generator Free – Placeholder Text Online"
+  description="Generate lorem ipsum placeholder text instantly. Choose how many paragraphs you need. Free, no login required. Classic and randomized text options."
+>
+  <div class="tool-page">
+    <div class="tool-header">
+      <a href="/categories/text-tools/" class="back-link">← Text Tools</a>
+      <h1 class="tool-title">Lorem Ipsum Generator</h1>
+      <p class="tool-subtitle">Generate placeholder text for your layouts and mockups. Choose how many paragraphs you need and copy instantly.</p>
+    </div>
+
+    <div class="ad-slot ad-slot-horizontal">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <LoremIpsum client:load />
+
+    <div class="ad-slot ad-slot-horizontal" style="margin-top: 32px;">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="0987654321" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <section class="seo-content">
+      <h2>What is Lorem Ipsum?</h2>
+      <p>Lorem ipsum is a type of placeholder text used by designers, developers and publishers since the 1960s to fill space in layouts and mockups where final content is not yet available. The standard Lorem ipsum passage begins "Lorem ipsum dolor sit amet, consectetur adipiscing elit…" and derives from a scrambled excerpt of Cicero's "de Finibus Bonorum et Malorum" (45 BC), a work on the theory of ethics.</p>
+
+      <h2>When do designers and developers use Lorem Ipsum?</h2>
+      <p>When designing a website layout, newsletter template, mobile app or printed document, real content usually isn't available at the design stage. Placeholder text fills the space so you can visualize how typography, line height, column widths and spacing will look with actual content. It prevents reviewers from getting distracted by the meaning of real text and focusing on the design decisions instead.</p>
+
+      <h2>How many paragraphs do I need?</h2>
+      <p>For a typical webpage section or article mockup, 2–3 paragraphs is usually sufficient to show how the layout handles real text volume. For a full-page design like a landing page or brochure, 4–6 paragraphs give a more realistic preview. For testing how a layout handles very long content — pagination, overflow, scrolling — use the maximum setting.</p>
+
+      <h2>Is Lorem Ipsum still the best placeholder text?</h2>
+      <p>Lorem ipsum remains the industry standard because reviewers recognize it as intentional placeholder text, preventing confusion with real content. Some designers prefer "blind text" generators in their native language, or use AI to generate topically relevant placeholder copy. For language-sensitive layouts like right-to-left scripts, you should always test with real representative text rather than Latin placeholder copy.</p>
+
+      <h2>Is this free?</h2>
+      <p>Yes. Completely free, no login required. Generate as much placeholder text as you need.</p>
+    </section>
+
+    <RelatedTools slugs={["word-count", "case-converter", "text-diff"]} />
+  </div>
+</Layout>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Lorem Ipsum Generator",
+  "url": "https://www.pixmidas.com/tools/lorem-ipsum/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Free lorem ipsum placeholder text generator. Choose how many paragraphs you need and copy instantly."
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is Lorem Ipsum placeholder text?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Lorem ipsum is placeholder text used by designers and developers since the 1960s to fill layouts where final content is not yet available. It derives from a scrambled excerpt of Cicero's 'de Finibus Bonorum et Malorum' (45 BC)." }
+    },
+    {
+      "@type": "Question",
+      "name": "When do designers use Lorem Ipsum?",
+      "acceptedAnswer": { "@type": "Answer", "text": "When designing websites, newsletters or app interfaces where real content isn't available yet. Placeholder text fills the space so you can visualize typography, line height, column widths and spacing. It prevents reviewers from being distracted by content meaning." }
+    },
+    {
+      "@type": "Question",
+      "name": "How many Lorem Ipsum paragraphs do I need?",
+      "acceptedAnswer": { "@type": "Answer", "text": "For a typical webpage section: 2–3 paragraphs. For a full-page design like a landing page: 4–6 paragraphs. For testing how a layout handles long content: use the maximum setting." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is the Lorem Ipsum generator free?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Completely free, no login required. Generate as much placeholder text as you need." }
+    }
+  ]
+}
+</script>

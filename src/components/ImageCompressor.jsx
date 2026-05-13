@@ -143,7 +143,7 @@ export default function ImageCompressor() {
           <div style={s.previewGrid}>
             <div style={s.previewCard}>
               <p style={s.previewLabel}>Original</p>
-              <img src={originalPreview} alt="Original" style={s.previewImg} />
+              <img src={originalPreview} alt="Original" style={s.previewImg} loading="lazy" />
               <p style={s.previewSize}>{formatBytes(originalFile.size)}</p>
             </div>
 
@@ -156,7 +156,7 @@ export default function ImageCompressor() {
                 </div>
               ) : (
                 compressedUrl && (
-                  <img src={compressedUrl} alt="Compressed" style={s.previewImg} />
+                  <img src={compressedUrl} alt="Compressed" style={s.previewImg} loading="lazy" />
                 )
               )}
               <p style={s.previewSize}>

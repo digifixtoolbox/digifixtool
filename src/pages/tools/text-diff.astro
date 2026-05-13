@@ -1,40 +1,92 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import TextDiff from '../../components/TextDiff.jsx';
+import RelatedTools from '../../components/RelatedTools.astro';
 ---
 
 <Layout
-  title="Text Difference Checker Online Free"
-  description="Compare two texts and find the differences instantly. See added, removed and unchanged lines. Free, no login, works in your browser."
+  title="Text Difference Checker Free – Compare Two Texts"
+  description="Compare two blocks of text and instantly see every difference. Added lines in green, removed lines in red. Free online diff checker. No login, no upload."
 >
-  <div class="tool-page">
+  <div class="tool-page" style="max-width: 960px;">
     <div class="tool-header">
-      <a href="/" class="back-link">← All tools</a>
+      <a href="/categories/text-tools/" class="back-link">← Text Tools</a>
       <h1 class="tool-title">Text Difference Checker</h1>
-      <p class="tool-subtitle">Paste two texts and instantly see what changed. Added lines in green, removed in red.</p>
+      <p class="tool-subtitle">Paste two versions of your text side by side and see exactly what changed — additions in green, deletions in red.</p>
     </div>
-    <div class="ad-slot ad-slot-horizontal">Advertisement</div>
+
+    <div class="ad-slot ad-slot-horizontal">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
     <TextDiff client:load />
-    <div class="ad-slot ad-slot-horizontal" style="margin-top: 32px;">Advertisement</div>
+
+    <div class="ad-slot ad-slot-horizontal" style="margin-top: 32px;">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="0987654321" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
     <section class="seo-content">
-      <h2>How to compare two texts</h2>
-      <p>Paste your original text on the left and the modified version on the right. Differences appear instantly.</p>
-      <h2>What does it show?</h2>
-      <p>Added lines are highlighted in green, removed lines in red, and unchanged lines in white.</p>
-      <h2>Is it safe?</h2>
-      <p>Your text never leaves your device. Everything runs locally in your browser.</p>
+      <h2>How to compare two texts online</h2>
+      <p>Paste your original text in the left panel and your revised version in the right panel. The differences appear instantly below — no button press required. Added lines are highlighted in green, removed lines in red, and unchanged lines are shown in their original color.</p>
+
+      <h2>What is a text diff?</h2>
+      <p>A diff (short for difference) is a comparison output that shows exactly which lines, words or characters changed between two versions of a text. The concept originates from software version control — developers use diff tools daily to review code changes before merging. The same technique is useful for tracking edits to any text: articles, contracts, scripts, emails and more.</p>
+
+      <h2>Who uses a text difference checker?</h2>
+      <p>Writers comparing drafts to see what an editor changed. Developers reviewing code changes without a full IDE. Legal teams verifying that only approved edits were made to contracts. Students checking which parts of their essay were flagged for revision. Translators comparing the source text against a reference translation. SEO professionals auditing changes to page copy or metadata.</p>
+
+      <h2>Line diff vs character diff — what's better?</h2>
+      <p>Line-level diffs (comparing line by line) are better for code and structured text where lines have semantic meaning. Character or word-level diffs are better for prose where a single sentence may change across multiple lines. This tool operates at the line level, which gives clear, readable output for most document comparison tasks.</p>
+
+      <h2>Is my text safe?</h2>
+      <p>Yes. Both text inputs never leave your browser. All comparison logic runs locally using JavaScript. Nothing is transmitted to any server.</p>
     </section>
+
+    <RelatedTools slugs={["word-count", "case-converter", "json-formatter"]} />
   </div>
 </Layout>
 
-<style>
-  .tool-page { max-width: 960px; margin: 0 auto; }
-  .back-link { font-size: 14px; color: var(--text-muted); font-weight: 500; display: inline-block; margin-bottom: 20px; }
-  .tool-header { margin-bottom: 32px; }
-  .tool-title { font-size: clamp(28px, 5vw, 48px); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 12px; }
-  .tool-subtitle { font-size: 16px; color: var(--text-muted); line-height: 1.5; }
-  .seo-content { margin-top: 56px; padding-top: 48px; border-top: 1px solid var(--border); }
-  .seo-content h2 { font-size: 20px; font-weight: 700; margin-bottom: 10px; margin-top: 32px; }
-  .seo-content h2:first-child { margin-top: 0; }
-  .seo-content p { color: var(--text-muted); line-height: 1.65; font-size: 15px; }
-</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Text Difference Checker",
+  "url": "https://www.pixmidas.com/tools/text-diff/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Compare two texts and see every difference instantly. Added lines in green, removed in red. Free, no login needed."
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do I compare two texts online for free?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Paste your original text in the left panel and your revised version in the right panel. Differences appear instantly — added lines are highlighted in green, removed lines in red, and unchanged lines are shown normally." }
+    },
+    {
+      "@type": "Question",
+      "name": "What is a text diff?",
+      "acceptedAnswer": { "@type": "Answer", "text": "A diff (short for difference) is a comparison output showing exactly which lines changed between two versions of a text. Originally from software version control, it is useful for tracking edits to articles, contracts, scripts, emails and more." }
+    },
+    {
+      "@type": "Question",
+      "name": "Who uses a text difference checker?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Writers comparing drafts, developers reviewing code changes, legal teams verifying contract edits, students checking essay revisions, translators comparing source text, and SEO professionals auditing copy changes." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my text safe when comparing online?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Both text inputs never leave your browser. All comparison logic runs locally using JavaScript. Nothing is transmitted to any server." }
+    }
+  ]
+}
+</script>

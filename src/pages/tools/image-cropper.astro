@@ -1,40 +1,92 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import ImageCropper from '../../components/ImageCropper.jsx';
+import RelatedTools from '../../components/RelatedTools.astro';
 ---
 
 <Layout
-  title="Free Image Cropper Online"
-  description="Crop images online for free. Draw a selection, crop and download instantly. No upload, no login, works in your browser."
+  title="Crop Image Free Online – Trim & Cut Photos Instantly"
+  description="Crop any image online for free. Draw a selection area and download the cropped result in seconds. No upload to servers, no login, works in your browser."
 >
   <div class="tool-page">
     <div class="tool-header">
-      <a href="/" class="back-link">← All tools</a>
+      <a href="/categories/image-tools/" class="back-link">← Image Tools</a>
       <h1 class="tool-title">Image Cropper</h1>
-      <p class="tool-subtitle">Crop any image instantly. Draw a selection box and download the cropped result.</p>
+      <p class="tool-subtitle">Draw a selection on any photo and download the cropped result instantly. Free, private, no account needed.</p>
     </div>
-    <div class="ad-slot ad-slot-horizontal">Advertisement</div>
+
+    <div class="ad-slot ad-slot-horizontal">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
     <ImageCropper client:load />
-    <div class="ad-slot ad-slot-horizontal" style="margin-top: 32px;">Advertisement</div>
+
+    <div class="ad-slot ad-slot-horizontal" style="margin-top: 32px;">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="0987654321" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
     <section class="seo-content">
       <h2>How to crop an image online</h2>
-      <p>Upload your image, draw a selection box over the area you want to keep, then click Download. Done in seconds.</p>
-      <h2>What formats are supported?</h2>
-      <p>JPG, PNG, WebP and most common image formats. The cropped image is saved as JPG.</p>
-      <h2>Is it safe?</h2>
-      <p>Yes. Your image never leaves your device. Everything runs locally in your browser.</p>
-    </secti>
+      <p>Upload your image, then click and drag to draw a selection box over the area you want to keep. You can reposition and resize the selection before clicking Download to save the cropped image. The whole process takes seconds and requires no software installation.</p>
+
+      <h2>Cropping vs resizing — what's the difference?</h2>
+      <p>Resizing changes the dimensions of the entire image while keeping all content visible (scaled). Cropping removes the parts of the image outside your selection, so the subject fills the frame more tightly. Crop when you want to remove distracting backgrounds, reframe a subject, or hit a specific aspect ratio like 1:1 for a profile photo.</p>
+
+      <h2>What image formats are supported?</h2>
+      <p>The cropper accepts JPG, JPEG, PNG, WebP and most other common image formats supported by your browser. The downloaded result is saved as a JPG file, which is compatible with all devices and platforms.</p>
+
+      <h2>Tips for better crops</h2>
+      <p>Apply the rule of thirds — place your subject at one of the four intersection points of an imaginary 3×3 grid for a more visually dynamic result. For profile pictures, crop tightly around the subject's face with a small amount of space above their head. For product photos, leave equal padding on all sides for a clean, professional look.</p>
+
+      <h2>Is my image safe?</h2>
+      <p>Yes. Your image never leaves your device. The crop is performed using the HTML5 Canvas API entirely inside your browser. Nothing is uploaded, stored or shared.</p>
+    </section>
+
+    <RelatedTools slugs={["resize-image", "compress-image", "convert-image"]} />
   </div>
 </Layout>
 
-<style>
-  .tool-page { max-width: 860px; margin: 0 auto; }
-  .back-link { font-size: 14px; color: var(--text-muted); font-weight: 500; display: inline-block; margin-bottom: 20px; }
-  .tool-header { margin-bottom: 32px; }
-  .tool-title { font-size: clamp(28px, 5vw, 48px); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 12px; }
-  .tool-subtitle { font-size: 16px; color: var(--text-muted); line-height: 1.5; }
-  .seo-content { margin-top: 56px; padding-top: 48px; border-top: 1px solid var(--border); }
-  .seo-content h2 { font-size: 20px; font-weight: 700; margin-bottom: 10px; margin-top: 32px; }
-  .seo-content h2:first-child { margin-top: 0; }
-  .seo-content p { color: var(--text-muted); line-height: 1.65; font-size: 15px; }
-</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Image Cropper",
+  "url": "https://www.pixmidas.com/tools/image-cropper/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Crop any image online for free. Draw a selection and download the cropped result instantly. Runs in your browser."
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do I crop an image online?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Upload your image, then click and drag to draw a selection box over the area you want to keep. You can reposition and resize the selection before clicking Download to save the cropped image." }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between cropping and resizing?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Resizing changes the dimensions of the entire image while keeping all content visible. Cropping removes the parts of the image outside your selection, so the subject fills the frame more tightly." }
+    },
+    {
+      "@type": "Question",
+      "name": "What image formats does the cropper support?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The cropper accepts JPG, JPEG, PNG, WebP and most other common image formats supported by your browser. The downloaded result is saved as a JPG file." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my image safe when using the online cropper?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Your image never leaves your device. The crop is performed using the HTML5 Canvas API entirely inside your browser. Nothing is uploaded, stored or shared." }
+    }
+  ]
+}
+</script>

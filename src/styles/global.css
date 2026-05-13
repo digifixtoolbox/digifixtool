@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 :root {
   --bg: #ffffff;
@@ -58,28 +57,128 @@ img {
   max-width: 100%;
 }
 
+/* Ad slot container – holds AdSense ins tags */
 .ad-slot {
   background: var(--surface-2);
   border-radius: var(--radius-sm);
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.ad-slot-horizontal {
+  width: 100%;
+  min-height: 90px;
+  margin: 32px 0;
+}
+
+/* Ensure ins tags fill the container */
+.ad-slot ins.adsbygoogle {
+  display: block !important;
+  width: 100%;
+  min-height: 90px;
+}
+
+/* Fallback label shown when no ad loads */
+.ad-slot-label {
   color: var(--text-light);
   font-size: 11px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   font-weight: 500;
+  pointer-events: none;
 }
 
-.ad-slot-horizontal {
-  width: 100%;
-  height: 80px;
-  margin: 32px 0;
+/* Shared tool page layout */
+.tool-page {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.back-link {
+  font-size: 14px;
+  color: var(--text-muted);
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-bottom: 16px;
+  transition: color 0.15s;
+}
+
+.back-link:hover {
+  color: var(--accent);
+}
+
+.tool-header {
+  margin-bottom: 32px;
+}
+
+.tool-title {
+  font-size: clamp(28px, 5vw, 48px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 12px;
+}
+
+.tool-subtitle {
+  font-size: 16px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.seo-content {
+  margin-top: 56px;
+  padding-top: 48px;
+  border-top: 1px solid var(--border);
+}
+
+.seo-content h2 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  margin-top: 32px;
+}
+
+.seo-content h2:first-child {
+  margin-top: 0;
+}
+
+.seo-content p {
+  color: var(--text-muted);
+  line-height: 1.65;
+  font-size: 15px;
 }
 
 @media (max-width: 768px) {
   .ad-slot-horizontal {
-    height: 60px;
+    min-height: 60px;
     margin: 20px 0;
+  }
+
+  .ad-slot ins.adsbygoogle {
+    min-height: 60px;
+  }
+
+  .tool-title {
+    font-size: clamp(24px, 7vw, 36px);
+  }
+
+  .tool-subtitle {
+    font-size: 15px;
+  }
+
+  .seo-content {
+    margin-top: 40px;
+    padding-top: 36px;
+  }
+
+  .seo-content h2 {
+    font-size: 18px;
+  }
+
+  .seo-content p {
+    font-size: 14px;
   }
 }

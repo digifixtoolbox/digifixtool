@@ -1,40 +1,92 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import ImageCompressor from '../../components/ImageCompressor.jsx';
+import RelatedTools from '../../components/RelatedTools.astro';
 ---
 
 <Layout
-  title="Compress Image Online Free"
-  description="Compress JPG, PNG and WebP images online for free. No upload, no login, works 100% in your browser."
+  title="Compress Image Free – Reduce JPG, PNG & WebP Size"
+  description="Free online image compressor. Reduce JPG, PNG and WebP file size by up to 80% without visible quality loss. No upload to servers – runs 100% in your browser."
 >
   <div class="tool-page">
     <div class="tool-header">
-      <a href="/" class="back-link">← All tools</a>
+      <a href="/categories/image-tools/" class="back-link">← Image Tools</a>
       <h1 class="tool-title">Image Compressor</h1>
-      <p class="tool-subtitle">Reduce image file size instantly. No upload needed. Everything runs in your browser.</p>
+      <p class="tool-subtitle">Reduce image file size instantly — no quality loss, no uploads, no account needed.</p>
     </div>
-    <div class="ad-slot ad-slot-horizontal">Advertisement</div>
+
+    <div class="ad-slot ad-slot-horizontal">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
     <ImageCompressor client:load />
-    <div class="ad-slot ad-slot-horizontal" style="margin-top: 32px;">Advertisement</div>
+
+    <div class="ad-slot ad-slot-horizontal" style="margin-top: 32px;">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="0987654321" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
     <section class="seo-content">
-      <h2>How to compress an image online</h2>
-      <p>Upload your image, adjust the compression slider, then download. Done in seconds.</p>
-      <h2>Which formats are supported?</h2>
-      <p>JPG, PNG, and WebP. Output is always saved as JPG.</p>
-      <h2>Is it safe?</h2>
-      <p>No files are ever uploaded. Everything runs in your browser. Nothing is sent to any server.</p>
+      <h2>How to compress an image without losing quality</h2>
+      <p>Upload your JPG, PNG or WebP image, drag the quality slider to your preferred setting, and click Download. The compressor uses browser-based canvas rendering to reduce file size while preserving as much visual quality as possible. For most photos, a quality setting of 70–80% reduces file size by 50–80% with barely noticeable degradation.</p>
+
+      <h2>Which image formats are supported?</h2>
+      <p>The compressor accepts JPG, JPEG, PNG and WebP images. The output file is saved as a JPG, which gives the best balance of file size and compatibility across all devices, browsers and platforms.</p>
+
+      <h2>How much smaller will my image get?</h2>
+      <p>Results vary depending on the original file and quality setting, but typical reductions are 40–80%. A 3 MB photo from a smartphone can often be reduced to under 500 KB with no perceptible quality loss at 75% quality. Use a lower quality setting for thumbnails or previews, and a higher setting for print or detailed work.</p>
+
+      <h2>Why compress images?</h2>
+      <p>Smaller images load faster on websites and apps, which improves Core Web Vitals scores and SEO rankings. Compressed images are also easier to share by email or messaging, and take up less storage on your device. Page speed studies consistently show that image optimization is one of the highest-impact improvements a website can make.</p>
+
+      <h2>Is my image safe?</h2>
+      <p>Yes. Your image never leaves your device. All compression happens locally inside your browser using the HTML5 Canvas API. No files are ever uploaded to any server, which means your photos stay completely private.</p>
     </section>
+
+    <RelatedTools slugs={["resize-image", "convert-image", "exif-remover"]} />
   </div>
 </Layout>
 
-<style>
-  .tool-page { max-width: 860px; margin: 0 auto; }
-  .back-link { font-size: 14px; color: var(--text-muted); font-weight: 500; display: inline-block; margin-bottom: 20px; }
-  .tool-header { margin-bottom: 32px; }
-  .tool-title { font-size: clamp(28px, 5vw, 48px); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 12px; }
-  .tool-subtitle { font-size: 16px; color: var(--text-muted); line-height: 1.5; }
-  .seo-content { margin-top: 56px; padding-top: 48px; border-top: 1px solid var(--border); }
-  .seo-content h2 { font-size: 20px; font-weight: 700; margin-bottom: 10px; margin-top: 32px; }
-  .seo-content h2:first-child { margin-top: 0; }
-  .seo-content p { color: var(--text-muted); line-height: 1.65; font-size: 15px; }
-</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Image Compressor",
+  "url": "https://www.pixmidas.com/tools/compress-image/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Free online image compressor. Reduce JPG, PNG and WebP file size without visible quality loss. Runs entirely in your browser."
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How to compress an image without losing quality?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Upload your JPG, PNG or WebP image, drag the quality slider to your preferred setting, and click Download. For most photos, a quality setting of 70–80% reduces file size by 50–80% with barely noticeable degradation." }
+    },
+    {
+      "@type": "Question",
+      "name": "Which image formats does the compressor support?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The compressor accepts JPG, JPEG, PNG and WebP images. The output file is saved as a JPG, which gives the best balance of file size and compatibility across all devices, browsers and platforms." }
+    },
+    {
+      "@type": "Question",
+      "name": "How much smaller will my image get after compression?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Typical reductions are 40–80%. A 3 MB photo from a smartphone can often be reduced to under 500 KB with no perceptible quality loss at 75% quality." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my image safe when using this compressor?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Your image never leaves your device. All compression happens locally inside your browser using the HTML5 Canvas API. No files are ever uploaded to any server." }
+    }
+  ]
+}
+</script>

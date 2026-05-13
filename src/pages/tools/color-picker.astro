@@ -1,40 +1,92 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import ColorPicker from '../../components/ColorPicker.jsx';
+import RelatedTools from '../../components/RelatedTools.astro';
 ---
 
 <Layout
-  title="Color Picker Online Free - HEX RGB HSL"
-  description="Pick any color and get HEX, RGB and HSL values instantly. Free online color picker. No login needed."
+  title="Color Picker Free – Get HEX, RGB & HSL Color Values"
+  description="Pick any color and instantly get the HEX, RGB and HSL values. Copy any format with one click. Free online color picker. No login required."
 >
   <div class="tool-page">
     <div class="tool-header">
-      <a href="/" class="back-link">← All tools</a>
+      <a href="/categories/developer-tools/" class="back-link">← Developer Tools</a>
       <h1 class="tool-title">Color Picker</h1>
-      <p class="tool-subtitle">Pick any color and instantly get the HEX, RGB and HSL values. Copy with one click.</p>
+      <p class="tool-subtitle">Pick any color and instantly get its HEX, RGB and HSL values. Copy any format in one click.</p>
     </div>
-    <div class="ad-slot ad-slot-horizontal">Advertisement</div>
-    <ColorPicker client:load/>
-    <div class="ad-slot ad-slot-horizontal" style="margin-top: 32px;">Advertisement</div>
+
+    <div class="ad-slot ad-slot-horizontal">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <ColorPicker client:load />
+
+    <div class="ad-slot ad-slot-horizontal" style="margin-top: 32px;">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="0987654321" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
     <section class="seo-content">
       <h2>How to use the color picker</h2>
-      <p>Click the color selector, choose your color, and instantly see the HEX, RGB and HSL values. Click Copy to copy any format.</p>
-      <h2>What is HEX, RGB and HSL?</h2>
-      <p>HEX is used in web design and CSS. RGB stands for Red, Green, Blue. HSL stands for Hue, Saturation, Lightness.</p>
+      <p>Click the color swatch to open the native browser color selector. Choose your color by clicking, dragging or entering a hex value directly. The HEX, RGB and HSL codes update instantly. Click Copy next to any format to copy it to your clipboard, ready to paste into your code or design tool.</p>
+
+      <h2>What is HEX color?</h2>
+      <p>HEX (hexadecimal) color is the most widely used color format in web design and CSS. It is a six-character code preceded by a hash symbol (e.g. #0071e3), where pairs of characters represent the red, green and blue channels on a scale from 00 (zero) to FF (255). HEX is supported everywhere — HTML, CSS, SVG, most design applications and most email clients.</p>
+
+      <h2>What is RGB color?</h2>
+      <p>RGB stands for Red, Green, Blue. Each channel is expressed as a number from 0 to 255 (e.g. rgb(0, 113, 227)). RGB is the native color model of screens and is used in CSS, image editors and design applications. It is especially useful when you need to set color opacity using rgba() notation, adding a fourth value from 0 (transparent) to 1 (fully opaque).</p>
+
+      <h2>What is HSL color?</h2>
+      <p>HSL stands for Hue, Saturation, Lightness. Hue is the color angle on a 360-degree wheel (0 = red, 120 = green, 240 = blue). Saturation is the intensity (0% = grey, 100% = full color). Lightness ranges from 0% (black) to 100% (white), with 50% being the pure color. HSL is intuitive for designers because adjusting lightness or saturation while keeping the same hue is much easier than tweaking RGB values manually.</p>
+
       <h2>Is this tool free?</h2>
-      <p>Yes. Completely free, no login required. Everything runs in your browser.</p>
+      <p>Yes. Completely free, no login required. The color picker uses your browser's built-in color selector API — nothing is uploaded or stored.</p>
     </section>
+
+    <RelatedTools slugs={["social-sizes", "image-info", "qr-code"]} />
   </div>
 </Layout>
 
-<style>
-  .tool-page { max-width: 860px; margin: 0 auto; }
-  .back-link { font-size: 14px; color: var(--text-muted); font-weight: 500; display: inline-block; margin-bottom: 20px; }
-  .tool-header { margin-bottom: 32px; }
-  .tool-title { font-size: clamp(28px, 5vw, 48px); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 12px; }
-  .tool-subtitle { font-size: 16px; color: var(--text-muted); line-height: 1.5; }
-  .seo-content { margin-top: 56px; padding-top: 48px; border-top: 1px solid var(--border); }
-  .seo-content h2 { font-size: 20px; font-weight: 700; margin-bottom: 10px; margin-top: 32px; }
-  .seo-content h2:first-child { margin-top: 0; }
-  .seo-content p { color: var(--text-muted); line-height: 1.65; font-size: 15px; }
-</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Color Picker",
+  "url": "https://www.pixmidas.com/tools/color-picker/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Free online color picker. Pick any color and get HEX, RGB and HSL values instantly. Copy with one click."
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is HEX color code?",
+      "acceptedAnswer": { "@type": "Answer", "text": "HEX (hexadecimal) color is the most widely used format in web design. It is a six-character code preceded by # (e.g. #0071e3), where each pair of characters represents the red, green and blue channels from 00 to FF." }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between RGB and HSL color?",
+      "acceptedAnswer": { "@type": "Answer", "text": "RGB expresses color as three channels (Red, Green, Blue) from 0–255. HSL expresses color as Hue (0–360 degree angle), Saturation (0–100%), and Lightness (0–100%). HSL is more intuitive for designers because you can adjust brightness while keeping the same hue." }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I convert HEX to RGB or HSL?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Pick your color using the color swatch. The HEX, RGB and HSL values all appear simultaneously and update in real time. Click Copy next to any format to copy it to your clipboard." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is the online color picker free?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Completely free, no login required. The color picker uses your browser's built-in color selector API — nothing is uploaded or stored." }
+    }
+  ]
+}
+</script>

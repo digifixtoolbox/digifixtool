@@ -5,11 +5,26 @@ interface Props {
   title: string;
   description: string;
   canonical?: string;
+  image?: string;
 }
 
-const { title, description, canonical } = Astro.props;
+const { title, description, canonical, image } = Astro.props;
 const fullTitle = `${title} | PixMidas`;
 const canonicalUrl = canonical || Astro.url.href;
+const ogImage = image || 'https://www.pixmidas.com/og-default.png';
+const ogImageAlt = `${title} – PixMidas`;
+const isToolPage = Astro.url.pathname.startsWith('/tools/');
+const FONT_URL = 'https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap';
+
+const breadcrumbSchema = isToolPage ? JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.pixmidas.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://www.pixmidas.com/#all-tools" },
+    { "@type": "ListItem", "position": 3, "name": title, "item": canonicalUrl }
+  ]
+}) : null;
 ---
 
 <!DOCTYPE html>
@@ -19,7 +34,18 @@ const canonicalUrl = canonical || Astro.url.href;
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{fullTitle}</title>
   <meta name="description" content={description} />
+  <meta name="robots" content="index, follow" />
   <link rel="canonical" href={canonicalUrl} />
+
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://www.googletagmanager.com" />
+
+  <!-- Non-blocking Inter font -->
+  <link rel="preload" as="style" href={FONT_URL} />
+  <link rel="stylesheet" href={FONT_URL} media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href={FONT_URL} /></noscript>
 
   <!-- Open Graph -->
   <meta property="og:title" content={fullTitle} />
@@ -27,11 +53,17 @@ const canonicalUrl = canonical || Astro.url.href;
   <meta property="og:url" content={canonicalUrl} />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="PixMidas" />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content={ogImageAlt} />
 
   <!-- Twitter -->
-  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@pixmidas" />
   <meta name="twitter:title" content={fullTitle} />
   <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImage} />
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -45,8 +77,15 @@ const canonicalUrl = canonical || Astro.url.href;
     gtag('config', 'G-9S0NG8RV4Z');
   </script>
 
-  <!-- Google AdSense (activate when approved) -->
+  <!--
+    Google AdSense – replace ca-pub-XXXXXXXXXXXXXXXX with your publisher ID once approved.
+    Then uncomment this script tag to activate ads on all pages.
+  -->
   <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
+
+  {breadcrumbSchema && (
+    <script type="application/ld+json" set:html={breadcrumbSchema} />
+  )}
 </head>
 
 <body>
@@ -67,6 +106,16 @@ const canonicalUrl = canonical || Astro.url.href;
     </div>
   </header>
 
+  {isToolPage && (
+    <div class="trust-bar">
+      <span>Runs in your browser</span>
+      <span class="trust-sep">·</span>
+      <span>No files uploaded</span>
+      <span class="trust-sep">·</span>
+      <span>No account needed</span>
+    </div>
+  )}
+
   <main class="main-content">
     <slot />
   </main>
@@ -75,6 +124,18 @@ const canonicalUrl = canonical || Astro.url.href;
     <div class="footer-inner">
       <p class="footer-brand">⚡ PixMidas</p>
       <p class="footer-copy">Free browser-based tools. No login required. Runs locally in your browser.</p>
+      <div class="footer-tools">
+        <a href="/tools/compress-image/">Compress Image</a>
+        <a href="/tools/resize-image/">Resize Image</a>
+        <a href="/tools/convert-image/">Convert Image</a>
+        <a href="/tools/image-cropper/">Crop Image</a>
+        <a href="/tools/pdf-to-jpg/">PDF to JPG</a>
+        <a href="/tools/merge-pdfs/">Merge PDFs</a>
+        <a href="/tools/qr-code/">QR Code</a>
+        <a href="/tools/word-count/">Word Count</a>
+        <a href="/tools/json-formatter/">JSON Formatter</a>
+        <a href="/tools/password-generator/">Password Generator</a>
+      </div>
       <div class="footer-links">
         <a href="/about/">About</a>
         <a href="/contact/">Contact</a>
@@ -140,11 +201,32 @@ const canonicalUrl = canonical || Astro.url.href;
     color: var(--text-muted);
     transition: color 0.15s;
     text-decoration: none;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
   }
 
   .nav-left a:hover,
   .nav-right a:hover {
     color: var(--text);
+  }
+
+  .trust-bar {
+    background: var(--surface-2);
+    border-bottom: 1px solid var(--border-light);
+    padding: 8px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+
+  .trust-sep {
+    color: var(--border);
   }
 
   .main-content {
@@ -184,6 +266,27 @@ const canonicalUrl = canonical || Astro.url.href;
     line-height: 1.5;
   }
 
+  .footer-tools {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+    justify-content: center;
+    margin-top: 16px;
+    margin-bottom: 4px;
+    max-width: 680px;
+  }
+
+  .footer-tools a {
+    font-size: 13px;
+    color: var(--text-muted);
+    transition: color 0.15s;
+    text-decoration: none;
+  }
+
+  .footer-tools a:hover {
+    color: var(--accent);
+  }
+
   .footer-links {
     display: flex;
     gap: 24px;
@@ -195,6 +298,9 @@ const canonicalUrl = canonical || Astro.url.href;
     color: var(--text-muted);
     transition: color 0.15s;
     text-decoration: none;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
   }
 
   .footer-links a:hover {
@@ -231,12 +337,22 @@ const canonicalUrl = canonical || Astro.url.href;
       font-size: 14px;
     }
 
+    .trust-bar {
+      padding: 7px 16px;
+      font-size: 11px;
+      gap: 8px;
+    }
+
     .main-content {
       padding: 32px 20px;
     }
 
     .site-footer {
       padding: 36px 20px;
+    }
+
+    .footer-tools {
+      gap: 6px 16px;
     }
 
     .footer-links {

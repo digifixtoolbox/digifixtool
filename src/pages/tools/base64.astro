@@ -1,0 +1,92 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Base64Tool from '../../components/Base64Tool.jsx';
+import RelatedTools from '../../components/RelatedTools.astro';
+---
+
+<Layout
+  title="Base64 Encoder & Decoder – Free Online Tool"
+  description="Encode plain text to Base64 or decode Base64 strings back to readable text. Instant, free, runs in your browser. No login, no upload, completely private."
+>
+  <div class="tool-page">
+    <div class="tool-header">
+      <a href="/categories/developer-tools/" class="back-link">← Developer Tools</a>
+      <h1 class="tool-title">Base64 Encoder / Decoder</h1>
+      <p class="tool-subtitle">Encode text to Base64 or decode Base64 strings back to plain text. Instant results, nothing leaves your browser.</p>
+    </div>
+
+    <div class="ad-slot ad-slot-horizontal">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <Base64Tool client:load />
+
+    <div class="ad-slot ad-slot-horizontal" style="margin-top: 32px;">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="0987654321" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <section class="seo-content">
+      <h2>What is Base64 encoding?</h2>
+      <p>Base64 is a binary-to-text encoding scheme that converts arbitrary data into a string of 64 printable ASCII characters (A–Z, a–z, 0–9, + and /). It is named for the 64-character alphabet it uses. Every 3 bytes of input data produce 4 Base64 characters, making the encoded output approximately 33% larger than the original. The encoded string is safe to transmit over any system that handles text, including HTTP headers, JSON, XML and email.</p>
+
+      <h2>When is Base64 used?</h2>
+      <p>Embedding images directly in HTML or CSS as data URIs (e.g. <code>src="data:image/png;base64,..."</code>). Encoding binary attachments in email via MIME. Transmitting binary data in JSON API payloads. Storing credentials and tokens in configuration files and environment variables. Encoding font files in CSS. Passing data through URL parameters without breaking URL parsing.</p>
+
+      <h2>How to decode a Base64 string</h2>
+      <p>Switch to Decode mode, paste your Base64 string into the input field, and the decoded plain text appears instantly. If the string is not valid Base64, an error message will explain the issue. Common reasons a Base64 string fails to decode: missing padding characters (=), incorrect character set, or content that was encoded multiple times.</p>
+
+      <h2>Base64 vs Base64URL — what's the difference?</h2>
+      <p>Standard Base64 uses + and / characters that have special meaning in URLs, which can break URL parsing if the encoded string appears in a query parameter or path. Base64URL is a variant that replaces + with - and / with _ to make the output URL-safe without additional percent-encoding. JWT (JSON Web Tokens) use Base64URL encoding for their header and payload sections.</p>
+
+      <h2>Is this tool private?</h2>
+      <p>Yes. All encoding and decoding happens locally inside your browser using JavaScript's built-in btoa() and atob() functions. Nothing you type is ever sent to any server or logged anywhere.</p>
+    </section>
+
+    <RelatedTools slugs={["json-formatter", "text-diff", "password-generator"]} />
+  </div>
+</Layout>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Base64 Encoder / Decoder",
+  "url": "https://www.pixmidas.com/tools/base64/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Encode text to Base64 or decode Base64 strings back to plain text. Free, instant, runs in your browser."
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is Base64 encoding?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Base64 converts binary data into a string of 64 printable ASCII characters. Every 3 bytes of input produce 4 Base64 characters, making the encoded output about 33% larger. The encoded string is safe for HTTP headers, JSON, XML and email." }
+    },
+    {
+      "@type": "Question",
+      "name": "When is Base64 used in web development?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Embedding images in HTML or CSS as data URIs, encoding attachments in email via MIME, transmitting binary data in JSON API payloads, storing credentials in environment variables, and passing data through URL parameters." }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I decode a Base64 string?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Switch to Decode mode, paste your Base64 string, and the decoded plain text appears instantly. If invalid, an error explains the issue. Common causes: missing padding (=), incorrect character set, or multiple encodings." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is the Base64 encoder tool private?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. All encoding and decoding happens locally in your browser using JavaScript's built-in btoa() and atob() functions. Nothing you type is ever sent to any server or logged anywhere." }
+    }
+  ]
+}
+</script>

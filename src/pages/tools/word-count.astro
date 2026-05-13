@@ -1,40 +1,92 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import WordCounter from '../../components/WordCounter.jsx';
+import RelatedTools from '../../components/RelatedTools.astro';
 ---
 
 <Layout
-  title="Word Counter Online Free"
-  description="Count words, characters, sentences and paragraphs instantly. Free online word counter. No login, no upload needed."
+  title="Word Counter Free – Count Words, Characters & More"
+  description="Count words, characters, sentences and paragraphs as you type. See estimated reading time. Free online word counter. No login, no upload needed."
 >
   <div class="tool-page">
     <div class="tool-header">
-      <a href="/" class="back-link">← All tools</a>
+      <a href="/categories/text-tools/" class="back-link">← Text Tools</a>
       <h1 class="tool-title">Word Counter</h1>
-      <p class="tool-subtitle">Count words, characters, sentences and paragraphs instantly as you type.</p>
+      <p class="tool-subtitle">Paste or type your text and instantly see word count, character count, sentence count, paragraph count and estimated reading time.</p>
     </div>
-    <div class="ad-slot ad-slot-horizontal">Advertisement</div>
+
+    <div class="ad-slot ad-slot-horizontal">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
     <WordCounter client:load />
-    <div class="ad-slot ad-slot-horizontal" style="margin-top: 32px;">Advertisement</div>
+
+    <div class="ad-slot ad-slot-horizontal" style="margin-top: 32px;">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="0987654321" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
     <section class="seo-content">
       <h2>How to count words online</h2>
-      <p>Just paste or type your text in the box above. Word count, character count and all stats update instantly.</p>
-      <h2>What is read time?</h2>
-      <p>Read time is calculated based on an average reading speed of 200 words per minute.</p>
-      <h2>Is my text saved?</h2>
-      <p>No. Everything stays in your browser. Nothing is sent to any server.</p>
+      <p>Paste or type your text into the box above. All counts — words, characters (with and without spaces), sentences and paragraphs — update in real time as you type. No button press needed. Works with text of any length.</p>
+
+      <h2>What is estimated reading time?</h2>
+      <p>Reading time is calculated based on an average adult reading speed of approximately 200 words per minute for general prose. The estimate is a useful guide for blog posts, articles and emails where you want to set reader expectations. A 1,000-word article typically takes around 5 minutes to read.</p>
+
+      <h2>Who uses a word counter?</h2>
+      <p>Students checking essay or assignment word limits. Writers tracking chapter or article length. Social media managers verifying post character counts before publishing. SEO professionals checking meta description or title tag lengths. Email marketers keeping subject lines within recommended limits. Journalists working to a specific word budget set by an editor.</p>
+
+      <h2>What counts as a word?</h2>
+      <p>A word is any sequence of characters separated by whitespace (spaces, tabs, line breaks). Numbers, hyphenated words and contractions each count as one word. Punctuation at the start or end of a word is excluded from the word itself but included in the character count.</p>
+
+      <h2>Is my text stored?</h2>
+      <p>No. Everything runs entirely in your browser. Your text is never sent to any server, logged or stored in any way. The counter works offline once the page is loaded.</p>
     </section>
+
+    <RelatedTools slugs={["text-diff", "case-converter", "lorem-ipsum"]} />
   </div>
 </Layout>
 
-<style>
-  .tool-page { max-width: 860px; margin: 0 auto; }
-  .back-link { font-size: 14px; color: var(--text-muted); font-weight: 500; display: inline-block; margin-bottom: 20px; }
-  .tool-header { margin-bottom: 32px; }
-  .tool-title { font-size: clamp(28px, 5vw, 48px); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 12px; }
-  .tool-subtitle { font-size: 16px; color: var(--text-muted); line-height: 1.5; }
-  .seo-content { margin-top: 56px; padding-top: 48px; border-top: 1px solid var(--border); }
-  .seo-content h2 { font-size: 20px; font-weight: 700; margin-bottom: 10px; margin-top: 32px; }
-  .seo-content h2:first-child { margin-top: 0; }
-  .seo-content p { color: var(--text-muted); line-height: 1.65; font-size: 15px; }
-</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Word Counter",
+  "url": "https://www.pixmidas.com/tools/word-count/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Count words, characters, sentences and paragraphs in real time. Free online word counter. No login needed."
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do I count words online for free?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Paste or type your text into the box. All counts — words, characters, sentences and paragraphs — update in real time as you type. No button press needed. Works with text of any length." }
+    },
+    {
+      "@type": "Question",
+      "name": "How is estimated reading time calculated?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Reading time is calculated based on an average adult reading speed of approximately 200 words per minute. A 1,000-word article typically takes around 5 minutes to read." }
+    },
+    {
+      "@type": "Question",
+      "name": "What counts as a word in the word counter?",
+      "acceptedAnswer": { "@type": "Answer", "text": "A word is any sequence of characters separated by whitespace. Numbers, hyphenated words and contractions each count as one word. Punctuation is excluded from word counts but included in character counts." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my text stored when using the word counter?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. Everything runs entirely in your browser. Your text is never sent to any server, logged or stored in any way. The counter works offline once the page is loaded." }
+    }
+  ]
+}
+</script>

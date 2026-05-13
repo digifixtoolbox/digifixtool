@@ -1,0 +1,201 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { CATEGORIES } from '../../data/categories.js';
+import { TOOLS } from '../../data/tools.js';
+
+export function getStaticPaths() {
+  return CATEGORIES.map(cat => ({
+    params: { slug: cat.slug },
+    props: { category: cat },
+  }));
+}
+
+const { category } = Astro.props;
+const categoryTools = category.toolSlugs.map(s => TOOLS.find(t => t.slug === s)).filter(Boolean);
+const canonicalUrl = `https://www.pixmidas.com/categories/${category.slug}/`;
+const otherCategories = CATEGORIES.filter(c => c.slug !== category.slug);
+
+const itemListSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": category.h1,
+  "description": category.metaDescription,
+  "url": canonicalUrl,
+  "numberOfItems": categoryTools.length,
+  "itemListElement": categoryTools.map((tool, i) => ({
+    "@type": "ListItem",
+    "position": i + 1,
+    "name": tool.name,
+    "description": tool.description,
+    "url": `https://www.pixmidas.com/tools/${tool.slug}/`,
+  })),
+});
+---
+
+<Layout
+  title={category.metaTitle}
+  description={category.metaDescription}
+  canonical={canonicalUrl}
+>
+  <div class="tool-page">
+    <div class="tool-header">
+      <a href="/#all-tools" class="back-link">← All tools</a>
+      <h1 class="tool-title">{category.h1}</h1>
+      <p class="tool-subtitle">{category.intro}</p>
+    </div>
+
+    <div class="cat-tools-list">
+      {categoryTools.map(tool => (
+        <a href={`/tools/${tool.slug}/`} class="cat-tool-row">
+          <span class="cat-tool-icon">{tool.icon}</span>
+          <div class="cat-tool-info">
+            <span class="cat-tool-name">{tool.name}</span>
+            <span class="cat-tool-desc">{tool.description}</span>
+          </div>
+          <span class="cat-tool-arrow">→</span>
+        </a>
+      ))}
+    </div>
+
+    <div class="other-cats">
+      <p class="other-cats-label">Browse other categories</p>
+      <div class="other-cats-list">
+        {otherCategories.map(cat => (
+          <a href={`/categories/${cat.slug}/`} class="other-cat-link">{cat.name} →</a>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <script type="application/ld+json" set:html={itemListSchema} />
+</Layout>
+
+<style>
+  .cat-tools-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 8px;
+  }
+
+  .cat-tool-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 20px;
+    background: var(--surface);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius);
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow 0.2s, border-color 0.2s, transform 0.2s;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .cat-tool-row:hover {
+    box-shadow: var(--shadow);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .cat-tool-icon {
+    font-size: 26px;
+    flex-shrink: 0;
+    width: 40px;
+    text-align: center;
+    font-style: normal;
+  }
+
+  .cat-tool-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+  }
+
+  .cat-tool-name {
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text);
+  }
+
+  .cat-tool-desc {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+
+  .cat-tool-arrow {
+    font-size: 17px;
+    color: var(--text-light);
+    flex-shrink: 0;
+    transition: color 0.15s, transform 0.15s;
+  }
+
+  .cat-tool-row:hover .cat-tool-arrow {
+    color: var(--accent);
+    transform: translateX(4px);
+  }
+
+  .other-cats {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border-light);
+  }
+
+  .other-cats-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 12px;
+  }
+
+  .other-cats-list {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .other-cat-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 9px 18px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: border-color 0.15s, color 0.15s;
+    min-height: 44px;
+  }
+
+  .other-cat-link:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  @media (max-width: 768px) {
+    .cat-tool-row {
+      padding: 14px 16px;
+      border-radius: 16px;
+      gap: 12px;
+    }
+
+    .cat-tool-name {
+      font-size: 15px;
+    }
+
+    .cat-tool-desc {
+      font-size: 13px;
+    }
+
+    .other-cats {
+      margin-top: 36px;
+    }
+  }
+</style>
