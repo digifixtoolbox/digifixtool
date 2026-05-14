@@ -1,0 +1,92 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import BackgroundRemover from '../../components/BackgroundRemover.jsx';
+import RelatedTools from '../../components/RelatedTools.astro';
+---
+
+<Layout
+  title="Free Background Remover — No Upload, No Login"
+  description="Remove the background from any image instantly. Runs in your browser. Free, private, no account needed."
+>
+  <div class="tool-page">
+    <div class="tool-header">
+      <a href="/categories/image-tools/" class="back-link">← Image Tools</a>
+      <h1 class="tool-title">Background Remover</h1>
+      <p class="tool-subtitle">Remove any background in seconds. AI-powered, runs entirely in your browser — nothing is uploaded.</p>
+    </div>
+
+    <div class="ad-slot ad-slot-horizontal">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <BackgroundRemover client:load />
+
+    <div class="ad-slot ad-slot-horizontal" style="margin-top: 32px;">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="0987654321" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <section class="seo-content">
+      <h2>How to remove an image background</h2>
+      <p>Click Choose Image or drag and drop a JPG, PNG or WebP file onto the upload area. The AI model loads in your browser on first use — this takes a few seconds. Once loaded, it removes the background automatically and shows you a before-and-after preview. Click Download PNG to save the result with a transparent background.</p>
+
+      <h2>What happens on first use?</h2>
+      <p>The background removal model (~50 MB) is downloaded from a CDN directly into your browser the first time you use the tool. After that, subsequent uses on the same device are much faster because the model is cached. Nothing is ever uploaded to any server — the AI runs entirely inside your browser using WebAssembly.</p>
+
+      <h2>What is the output format?</h2>
+      <p>The result is saved as a PNG file with a transparent background (alpha channel). PNG is the standard format for images with transparency and is supported by all major image editors, design tools and web browsers. You can place the result directly onto any background in Figma, Canva, Photoshop or any other design application.</p>
+
+      <h2>Which images work best?</h2>
+      <p>The AI model works best on images with a clear subject — portraits, product photos, animals and objects with defined edges. Very complex scenes, hair with fine strands, or subjects that blend into the background may produce edges that need minor touchups. For clean product photos or headshots, results are typically excellent without any manual editing.</p>
+
+      <h2>Is this background remover free?</h2>
+      <p>Yes. Completely free, with no account, no subscription and no file limits. The tool uses an open-source AI model that runs entirely inside your browser. Your images never leave your device.</p>
+    </section>
+
+    <RelatedTools slugs={["image-cropper", "compress-image", "exif-remover"]} />
+  </div>
+</Layout>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Background Remover",
+  "url": "https://www.pixmidas.com/tools/background-remover/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Free AI-powered background remover. Remove image backgrounds instantly in your browser. No upload, no account needed."
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do I remove the background from an image for free?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Upload your JPG, PNG or WebP image using the drag-and-drop area or file picker. The AI model runs in your browser, removes the background automatically, and lets you download the result as a transparent PNG — all for free, with no account required." }
+    },
+    {
+      "@type": "Question",
+      "name": "Does the background remover work offline?",
+      "acceptedAnswer": { "@type": "Answer", "text": "An internet connection is needed the first time to download the AI model (~50 MB). After that, the model is cached in your browser and the tool can process images without re-downloading the model." }
+    },
+    {
+      "@type": "Question",
+      "name": "What format does the background remover output?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The result is a PNG file with a transparent background (alpha channel). PNG transparency is supported by all major design tools including Figma, Canva, Photoshop and Adobe Illustrator." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my image uploaded to a server?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. Everything runs entirely inside your browser using WebAssembly and ONNX Runtime. Your image never leaves your device and is never sent to any server." }
+    }
+  ]
+}
+</script>

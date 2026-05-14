@@ -71,6 +71,30 @@ const platforms = {
       { name: "Board Cover", w: 800, h: 450, note: "16:9 ratio" },
     ],
   },
+  Snapchat: {
+    icon: "👻",
+    formats: [
+      { name: "Story", w: 1080, h: 1920, note: "Full screen vertical" },
+      { name: "Profile Picture", w: 320, h: 320, note: "Displays as circle" },
+      { name: "Spotlight", w: 1080, h: 1920, note: "Full screen vertical" },
+    ],
+  },
+  Threads: {
+    icon: "🧵",
+    formats: [
+      { name: "Feed Post (Square)", w: 1080, h: 1080, note: "Square format" },
+      { name: "Feed Post (Portrait)", w: 1080, h: 1350, note: "More screen space in feed" },
+      { name: "Profile Picture", w: 320, h: 320, note: "Displays as circle" },
+    ],
+  },
+  WhatsApp: {
+    icon: "💬",
+    formats: [
+      { name: "Profile Picture", w: 500, h: 500, note: "Displays as circle" },
+      { name: "Status", w: 1080, h: 1920, note: "Full screen vertical" },
+      { name: "Business Cover", w: 1024, h: 512, note: "2:1 ratio" },
+    ],
+  },
 };
 
 export default function SocialSizes() {

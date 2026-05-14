@@ -1,31 +1,33 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import PromoBanner from '../components/PromoBanner.jsx';
+import ShareSection from '../components/ShareSection.astro';
 
 const tools = [
-  { slug: 'compress-image', name: 'Image Compressor', description: 'Make image files smaller without losing quality.', icon: String.fromCodePoint(0x1F5DC)+String.fromCodePoint(0xFE0F), bg: '#e8f4fd', category: 'Image', popular: true },
-  { slug: 'resize-image', name: 'Image Resizer', description: 'Resize photos to exact pixel dimensions.', icon: String.fromCodePoint(0x1F4D0), bg: '#e8f4fd', category: 'Image', popular: true },
-  { slug: 'image-cropper', name: 'Image Cropper', description: 'Crop any image instantly. Draw a selection and download.', icon: String.fromCodePoint(0x2702)+String.fromCodePoint(0xFE0F), bg: '#e8f4fd', category: 'Image', popular: false },
-  { slug: 'convert-image', name: 'Image Converter', description: 'Convert PNG to JPG or JPG to PNG in one click.', icon: String.fromCodePoint(0x1F504), bg: '#e8f4fd', category: 'Image', popular: false },
-  { slug: 'image-info', name: 'Image Info', description: 'Check the size, format and dimensions of any image.', icon: String.fromCodePoint(0x1F50D), bg: '#e8f4fd', category: 'Image', popular: false },
-  { slug: 'webp-to-jpg', name: 'WebP to JPG', description: 'Convert WebP images to JPG instantly. Multiple files supported.', icon: String.fromCodePoint(0x1F5BC)+String.fromCodePoint(0xFE0F), bg: '#e8f4fd', category: 'Image', popular: false },
-  { slug: 'exif-remover', name: 'EXIF Data Remover', description: 'Strip hidden GPS, device info and timestamps from photos.', icon: String.fromCodePoint(0x1F6E1)+String.fromCodePoint(0xFE0F), bg: '#e8f4fd', category: 'Image', popular: false },
-  { slug: 'social-sizes', name: 'Social Media Sizes', description: 'Find the correct image size for every social platform.', icon: String.fromCodePoint(0x1F4F1), bg: '#f0e8fd', category: 'Social', popular: false },
-  { slug: 'images-to-pdf', name: 'Images to PDF', description: 'Combine multiple photos into one PDF document.', icon: String.fromCodePoint(0x1F4C4), bg: '#fef3e8', category: 'PDF', popular: false },
-  { slug: 'pdf-to-jpg', name: 'PDF to JPG', description: 'Convert every PDF page to a JPG image instantly.', icon: String.fromCodePoint(0x1F4F8), bg: '#fef3e8', category: 'PDF', popular: false },
-  { slug: 'merge-pdfs', name: 'Merge PDFs', description: 'Combine multiple PDF files into one document.', icon: String.fromCodePoint(0x1F4D1), bg: '#fef3e8', category: 'PDF', popular: false },
-  { slug: 'word-count', name: 'Word Counter', description: 'Count words, characters and paragraphs instantly.', icon: String.fromCodePoint(0x1F4DD), bg: '#e8fdf0', category: 'Text', popular: false },
-  { slug: 'case-converter', name: 'Case Converter', description: 'Convert text to uppercase, lowercase, title case and more.', icon: String.fromCodePoint(0x1F521), bg: '#e8fdf0', category: 'Text', popular: false },
-  { slug: 'text-diff', name: 'Text Difference Checker', description: 'Compare two texts and see exactly what changed.', icon: String.fromCodePoint(0x1F50E), bg: '#e8fdf0', category: 'Text', popular: false },
-  { slug: 'lorem-ipsum', name: 'Lorem Ipsum Generator', description: 'Generate placeholder text for layouts and mockups.', icon: String.fromCodePoint(0x1F4C3), bg: '#e8fdf0', category: 'Text', popular: false },
-  { slug: 'json-formatter', name: 'JSON Formatter', description: 'Format, validate and minify JSON data instantly.', icon: String.fromCodePoint(0x1F4CB), bg: '#e8fdf0', category: 'Developer', popular: false },
-  { slug: 'qr-code', name: 'QR Code Generator', description: 'Create QR codes for any link, text or phone number.', icon: String.fromCodePoint(0x1F533), bg: '#fdf0e8', category: 'Utility', popular: false },
-  { slug: 'password-generator', name: 'Password Generator', description: 'Generate strong, secure passwords instantly.', icon: String.fromCodePoint(0x1F510), bg: '#e8fdf0', category: 'Utility', popular: false },
-  { slug: 'color-picker', name: 'Color Picker', description: 'Pick any color and get HEX, RGB and HSL values.', icon: String.fromCodePoint(0x1F3A8), bg: '#fef3e8', category: 'Utility', popular: false },
-  { slug: 'base64', name: 'Base64 Encoder / Decoder', description: 'Encode text to Base64 or decode Base64 strings instantly.', icon: String.fromCodePoint(0x1F4BB), bg: '#e8fdf0', category: 'Developer', popular: false },
+  { slug: 'compress-image', name: 'Image Compressor', description: 'Make image files smaller without losing quality.', icon: String.fromCodePoint(0x1F5DC)+String.fromCodePoint(0xFE0F), bg: '#e8f4fd', category: 'Image', popular: true, tags: ['photo', 'foto', 'picture', 'photography', 'editing', 'image editing', 'jpg', 'jpeg', 'png', 'webp', 'shrink', 'reduce', 'optimize', 'optimise', 'smaller', 'file size', 'upload', 'lighter', 'web', 'website speed', 'loading', 'performance', 'reduce size', 'make smaller'] },
+  { slug: 'resize-image', name: 'Image Resizer', description: 'Resize photos to exact pixel dimensions.', icon: String.fromCodePoint(0x1F4D0), bg: '#e8f4fd', category: 'Image', popular: true, tags: ['photo', 'foto', 'picture', 'photography', 'editing', 'image editing', 'scale', 'dimensions', 'width', 'height', 'pixels', 'resolution', 'thumbnail', 'rescale', 'stretch', 'change size', 'make bigger', 'make smaller', 'fit', 'custom size'] },
+  { slug: 'image-cropper', name: 'Image Cropper', description: 'Crop any image instantly. Draw a selection and download.', icon: String.fromCodePoint(0x2702)+String.fromCodePoint(0xFE0F), bg: '#e8f4fd', category: 'Image', popular: false, tags: ['photo', 'foto', 'picture', 'photography', 'editing', 'image editing', 'photo editing', 'trim', 'cut', 'frame', 'aspect ratio', 'portrait', 'landscape', 'square', 'selection', 'clip', 'cut out', 'remove border'] },
+  { slug: 'convert-image', name: 'Image Converter', description: 'Convert PNG to JPG or JPG to PNG in one click.', icon: String.fromCodePoint(0x1F504), bg: '#e8f4fd', category: 'Image', popular: false, tags: ['photo', 'foto', 'picture', 'photography', 'editing', 'image editing', 'format', 'jpg', 'jpeg', 'png', 'webp', 'gif', 'bmp', 'tiff', 'change format', 'transform', 'export', 'save as', 'file format'] },
+  { slug: 'image-info', name: 'Image Info', description: 'Check the size, format and dimensions of any image.', icon: String.fromCodePoint(0x1F50D), bg: '#e8f4fd', category: 'Image', popular: false, tags: ['photo', 'foto', 'picture', 'photography', 'editing', 'metadata', 'details', 'dimensions', 'resolution', 'megapixel', 'aspect ratio', 'file type', 'properties', 'inspect', 'dpi', 'camera info', 'check image', 'view details'] },
+  { slug: 'webp-to-jpg', name: 'WebP to JPG', description: 'Convert WebP images to JPG instantly. Multiple files supported.', icon: String.fromCodePoint(0x1F5BC)+String.fromCodePoint(0xFE0F), bg: '#e8f4fd', category: 'Image', popular: false, tags: ['photo', 'foto', 'picture', 'photography', 'editing', 'image editing', 'format', 'convert', 'webp converter', 'compatibility', 'apple', 'ios', 'safari', 'chrome', 'browser', 'batch', 'multiple files'] },
+  { slug: 'exif-remover', name: 'EXIF Data Remover', description: 'Strip hidden GPS, device info and timestamps from photos.', icon: String.fromCodePoint(0x1F6E1)+String.fromCodePoint(0xFE0F), bg: '#e8f4fd', category: 'Image', popular: false, tags: ['photo', 'foto', 'picture', 'photography', 'editing', 'metadata', 'privacy', 'gps', 'location', 'coordinates', 'strip', 'clean', 'anonymous', 'secure', 'camera data', 'personal data', 'geolocation', 'remove metadata', 'sharing safely'] },
+  { slug: 'background-remover', name: 'Background Remover', description: 'Remove the background from any image instantly using AI.', icon: String.fromCodePoint(0x1FA84), bg: '#e8f4fd', category: 'Image', popular: false, newTool: true, tags: ['photo', 'foto', 'picture', 'photography', 'editing', 'image editing', 'background', 'remove background', 'transparent', 'png', 'cutout', 'erase background', 'photo editing', 'ai', 'artificial intelligence', 'subject', 'portrait', 'product photo', 'studio', 'white background', 'silhouette', 'transparency'] },
+  { slug: 'images-to-pdf', name: 'Images to PDF', description: 'Combine multiple photos into one PDF document.', icon: String.fromCodePoint(0x1F4C4), bg: '#fef3e8', category: 'PDF', popular: false, tags: ['photo', 'foto', 'picture', 'photography', 'creation', 'jpg', 'jpeg', 'png', 'combine', 'merge', 'create document', 'scans', 'album', 'portfolio', 'presentation', 'print', 'pages', 'book'] },
+  { slug: 'pdf-to-jpg', name: 'PDF to JPG', description: 'Convert every PDF page to a JPG image instantly.', icon: String.fromCodePoint(0x1F4F8), bg: '#fef3e8', category: 'PDF', popular: false, tags: ['document', 'pages', 'extract', 'photo', 'picture', 'scan', 'view', 'render', 'creation', 'presentation', 'slide', 'export image', 'screenshot', 'page to image'] },
+  { slug: 'merge-pdfs', name: 'Merge PDFs', description: 'Combine multiple PDF files into one document.', icon: String.fromCodePoint(0x1F4D1), bg: '#fef3e8', category: 'PDF', popular: false, tags: ['document', 'combine', 'join', 'concatenate', 'files', 'pages', 'stitch', 'creation', 'merge files', 'report', 'presentation', 'paperwork', 'combine documents'] },
+  { slug: 'word-count', name: 'Word Counter', description: 'Count words, characters and paragraphs instantly.', icon: String.fromCodePoint(0x1F4DD), bg: '#e8fdf0', category: 'Text', popular: false, tags: ['writing', 'editing', 'article', 'essay', 'blog', 'letter', 'character count', 'reading time', 'sentences', 'paragraphs', 'typing', 'content', 'seo', 'word limit', 'copywriting', 'script', 'story', 'document'] },
+  { slug: 'case-converter', name: 'Case Converter', description: 'Convert text to uppercase, lowercase, title case and more.', icon: String.fromCodePoint(0x1F521), bg: '#e8fdf0', category: 'Text', popular: false, tags: ['editing', 'writing', 'uppercase', 'lowercase', 'title case', 'camelcase', 'snake_case', 'kebab-case', 'capitalize', 'sentence case', 'programming', 'transform', 'formatting', 'fix caps', 'coding', 'change case'] },
+  { slug: 'text-diff', name: 'Text Difference Checker', description: 'Compare two texts and see exactly what changed.', icon: String.fromCodePoint(0x1F50E), bg: '#e8fdf0', category: 'Text', popular: false, tags: ['editing', 'writing', 'compare', 'difference', 'delta', 'changes', 'version', 'before after', 'diff', 'code review', 'track changes', 'duplicate', 'programming', 'git', 'revision', 'find changes', 'document comparison'] },
+  { slug: 'lorem-ipsum', name: 'Lorem Ipsum Generator', description: 'Generate placeholder text for layouts and mockups.', icon: String.fromCodePoint(0x1F4C3), bg: '#e8fdf0', category: 'Text', popular: false, tags: ['editing', 'writing', 'creation', 'design', 'web design', 'placeholder', 'dummy text', 'filler', 'mockup', 'sample', 'prototype', 'fake text', 'latin', 'ipsum', 'ui design', 'wireframe', 'template', 'content', 'paragraph generator'] },
+  { slug: 'json-formatter', name: 'JSON Formatter', description: 'Format, validate and minify JSON data instantly.', icon: String.fromCodePoint(0x1F4CB), bg: '#ede8fd', category: 'Developer', popular: false, tags: ['developer', 'web', 'internet', 'online', 'programming', 'code', 'api', 'data', 'pretty print', 'validate', 'minify', 'syntax', 'javascript', 'object', 'lint', 'parse', 'backend', 'frontend', 'rest api', 'debugging', 'format code'] },
+  { slug: 'base64', name: 'Base64 Encoder / Decoder', description: 'Encode text to Base64 or decode Base64 strings instantly.', icon: String.fromCodePoint(0x1F4BB), bg: '#ede8fd', category: 'Developer', popular: false, tags: ['developer', 'web', 'internet', 'online', 'programming', 'encode', 'decode', 'encoding', 'binary', 'string', 'data uri', 'api', 'cipher', 'obfuscate', 'web development', 'email', 'url safe', 'image embedding', 'encryption'] },
+  { slug: 'social-sizes', name: 'Social Media Sizes', description: 'Find the correct image size for every social platform.', icon: String.fromCodePoint(0x1F4F1), bg: '#f0e8fd', category: 'Social', popular: false, tags: ['internet', 'web', 'online', 'network', 'media', 'photo', 'foto', 'picture', 'photography', 'design', 'creation', 'instagram', 'facebook', 'twitter', 'x', 'youtube', 'tiktok', 'linkedin', 'pinterest', 'snapchat', 'reddit', 'banner', 'cover photo', 'profile picture', 'post', 'social media', 'dimensions', 'thumbnail', 'story', 'reel', 'header', 'marketing', 'content creator', 'influencer', 'digital marketing', 'ads'] },
+  { slug: 'qr-code', name: 'QR Code Generator', description: 'Create QR codes for any link, text or phone number.', icon: String.fromCodePoint(0x1F533), bg: '#fef9e3', category: 'Utility', popular: false, tags: ['internet', 'web', 'online', 'network', 'creation', 'link', 'url', 'scan', 'barcode', 'mobile', 'phone', 'camera', 'wifi', 'contact', 'vcard', 'share', 'digital', 'contactless', 'payment', 'restaurant menu', 'event', 'marketing', 'print', 'poster', 'business card'] },
+  { slug: 'password-generator', name: 'Password Generator', description: 'Generate strong, secure passwords instantly.', icon: String.fromCodePoint(0x1F510), bg: '#fef9e3', category: 'Utility', popular: false, tags: ['internet', 'web', 'online', 'network', 'security', 'random', 'strong password', 'secure', 'credentials', 'login', 'account', 'passphrase', 'secret', 'cybersecurity', 'safe', 'protection', 'authentication', 'privacy', 'pin', 'encryption', 'hack proof'] },
+  { slug: 'color-picker', name: 'Color Picker', description: 'Pick any color and get HEX, RGB and HSL values.', icon: String.fromCodePoint(0x1F3A8), bg: '#fef9e3', category: 'Utility', popular: false, tags: ['internet', 'web', 'online', 'editing', 'creation', 'media', 'design', 'colour', 'colour picker', 'hex', 'rgb', 'hsl', 'cmyk', 'palette', 'brand', 'css', 'web design', 'graphics', 'shade', 'tint', 'art', 'ui', 'ux', 'branding', 'logo', 'color scheme', 'colour scheme', 'color code', 'colour code', 'website color', 'marketing'] },
 ];
 
-const categories = ['All', 'Image', 'PDF', 'Text', 'Utility', 'Social', 'Developer'];
+const categories = ['All', 'Image', 'PDF', 'Text', 'Developer', 'Social', 'Utility'];
 ---
 
 <Layout
@@ -34,14 +36,14 @@ const categories = ['All', 'Image', 'PDF', 'Text', 'Utility', 'Social', 'Develop
 >
   <section class="hero">
     <h1 class="hero-title">Free tools<br/>that just work.</h1>
-    <p class="hero-sub">No login. No confusion. Fast browser tools for everyday digital tasks.</p>
+    <p class="hero-sub">Fast, free online tools with zero friction!</p>
 
     <div class="quick-links">
       <a href="/tools/compress-image/">Compress Image</a>
       <span>·</span>
       <a href="/tools/resize-image/">Resize Image</a>
       <span>·</span>
-      <a href="/tools/qr-code/">QR Code Generator</a>
+      <span><a href="/tools/qr-code/">QR Code</a> &amp; More</span>
     </div>
 
     <a href="#all-tools" class="hero-btn">See all tools ↓</a>
@@ -85,7 +87,7 @@ const categories = ['All', 'Image', 'PDF', 'Text', 'Utility', 'Social', 'Develop
           class="tool-card"
           href={"/tools/" + tool.slug + "/"}
           data-category={tool.category}
-          data-search={(tool.name + ' ' + tool.description + ' ' + tool.category).toLowerCase()}
+          data-search={(tool.name + ' ' + tool.description + ' ' + tool.category + ' ' + tool.tags.join(' ')).toLowerCase()}
         >
           <div class="tool-icon-wrap" data-bg={tool.bg}>
             <span class="tool-icon">{tool.icon}</span>
@@ -94,6 +96,7 @@ const categories = ['All', 'Image', 'PDF', 'Text', 'Utility', 'Social', 'Develop
             <div class="tool-name-row">
               <h3 class="tool-name">{tool.name}</h3>
               {tool.popular && <span class="badge">Popular</span>}
+              {tool.newTool && <span class="badge badge-new">New</span>}
             </div>
             <p class="tool-desc">{tool.description}</p>
           </div>
@@ -136,6 +139,8 @@ const categories = ['All', 'Image', 'PDF', 'Text', 'Utility', 'Social', 'Develop
       </div>
     </div>
   </section>
+
+  <ShareSection pageUrl="https://www.pixmidas.com/" />
 
   <section class="seo-content">
     <h2>Free Online Tools for Images, Text, PDFs and More</h2>
@@ -189,59 +194,97 @@ const categories = ['All', 'Image', 'PDF', 'Text', 'Utility', 'Social', 'Develop
   }
   </script>
 
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', function () {
+      document.querySelectorAll('.tool-icon-wrap').forEach(function (wrap) {
+        var bg = wrap.getAttribute('data-bg');
+        if (bg) wrap.style.background = bg;
+      });
 
+      var searchInput = document.getElementById('tool-search');
+      var buttons = Array.from(document.querySelectorAll('.filter-btn'));
+      var cards = Array.from(document.querySelectorAll('.tool-card'));
+      var noResults = document.getElementById('no-results');
+      var activeCategory = 'All';
+
+      if (!searchInput || !noResults || !cards.length) return;
+
+      function normalize(text) {
+        return String(text || '').toLowerCase().trim();
+      }
+
+      function filterTools() {
+        var query = normalize(searchInput.value);
+        var words = query.split(/\s+/).filter(Boolean);
+        var visible = 0;
+
+        cards.forEach(function (card) {
+          var catMatch =
+            activeCategory === 'All' ||
+            card.getAttribute('data-category') === activeCategory;
+
+          var haystack = card.getAttribute('data-search') || '';
+
+          var searchMatch =
+            words.length === 0 ||
+            words.every(function (word) {
+              return haystack.indexOf(word) !== -1;
+            });
+
+          var show = catMatch && searchMatch;
+
+          card.style.display = show ? 'flex' : 'none';
+
+          if (show) visible++;
+        });
+
+        noResults.style.display = visible === 0 ? 'block' : 'none';
+      }
+
+      buttons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          activeCategory = btn.getAttribute('data-category') || 'All';
+
+          buttons.forEach(function (button) {
+            button.setAttribute('aria-pressed', 'false');
+          });
+
+          btn.setAttribute('aria-pressed', 'true');
+          filterTools();
+        });
+      });
+
+      searchInput.addEventListener('input', filterTools);
+      searchInput.addEventListener('search', filterTools);
+      searchInput.addEventListener('keyup', filterTools);
+
+      document.addEventListener('keydown', function (e) {
+        var activeElement = document.activeElement;
+        var tag = activeElement && activeElement.tagName
+          ? activeElement.tagName.toUpperCase()
+          : '';
+
+        if (
+          e.key === '/' &&
+          tag !== 'INPUT' &&
+          tag !== 'TEXTAREA' &&
+          tag !== 'SELECT'
+        ) {
+          e.preventDefault();
+          searchInput.focus();
+        }
+
+        if (e.key === 'Escape' && document.activeElement === searchInput) {
+          searchInput.value = '';
+          filterTools();
+          searchInput.blur();
+        }
+      });
+
+      filterTools();
+    });
+  </script>
 </Layout>
-
-<script>
-  document.querySelectorAll('.tool-icon-wrap').forEach(function(wrap) {
-    var bg = wrap.getAttribute('data-bg');
-    wrap.style.background = bg;
-  });
-
-  var searchInput = document.getElementById('tool-search');
-  var buttons = document.querySelectorAll('.filter-btn');
-  var cards = document.querySelectorAll('.tool-card');
-  var noResults = document.getElementById('no-results');
-  var activeCategory = 'All';
-
-  function filterTools() {
-    var query = searchInput.value.toLowerCase().trim();
-    var visible = 0;
-    cards.forEach(function(card) {
-      var catMatch = activeCategory === 'All' || card.getAttribute('data-category') === activeCategory;
-      var searchMatch = !query || (card.getAttribute('data-search') || '').includes(query);
-      var show = catMatch && searchMatch;
-      card.style.display = show ? 'flex' : 'none';
-      if (show) visible++;
-    });
-    noResults.style.display = visible === 0 ? 'block' : 'none';
-  }
-
-  buttons.forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      activeCategory = btn.getAttribute('data-category');
-      buttons.forEach(function(b) { b.setAttribute('aria-pressed', 'false'); });
-      btn.setAttribute('aria-pressed', 'true');
-      filterTools();
-    });
-  });
-
-  searchInput.addEventListener('input', filterTools);
-
-  document.addEventListener('keydown', function(e) {
-    var tag = document.activeElement.tagName;
-    if (e.key === '/' && tag !== 'INPUT' && tag !== 'TEXTAREA' && tag !== 'SELECT') {
-      e.preventDefault();
-      searchInput.focus();
-      searchInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-    if (e.key === 'Escape' && document.activeElement === searchInput) {
-      searchInput.value = '';
-      filterTools();
-      searchInput.blur();
-    }
-  });
-</script>
 
 <style>
   .hero {
@@ -250,7 +293,7 @@ const categories = ['All', 'Image', 'PDF', 'Text', 'Utility', 'Social', 'Develop
   }
 
   .hero-title {
-    font-size: clamp(44px, 8vw, 82px);
+    font-size: clamp(52px, 9.6vw, 98px);
     font-weight: 800;
     letter-spacing: -0.04em;
     line-height: 1.04;
@@ -288,9 +331,9 @@ const categories = ['All', 'Image', 'PDF', 'Text', 'Utility', 'Social', 'Develop
   }
 
   .quick-links span {
-    color: var(--text);
-    font-weight: 900;
-    font-size: 18px;
+    color: var(--text-muted);
+    font-weight: 400;
+    font-size: 1em;
   }
 
   .hero-btn {
@@ -324,7 +367,6 @@ const categories = ['All', 'Image', 'PDF', 'Text', 'Utility', 'Social', 'Develop
     scroll-margin-top: 80px;
   }
 
-  /* Search bar */
   .search-wrap {
     position: relative;
     margin-bottom: 16px;
@@ -394,7 +436,6 @@ const categories = ['All', 'Image', 'PDF', 'Text', 'Utility', 'Social', 'Develop
     opacity: 0;
   }
 
-  /* Filter bar */
   .filter-bar-wrap {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
@@ -439,7 +480,6 @@ const categories = ['All', 'Image', 'PDF', 'Text', 'Utility', 'Social', 'Develop
     color: white;
   }
 
-  /* Category page links */
   .cat-links {
     display: flex;
     gap: 8px;
@@ -459,10 +499,9 @@ const categories = ['All', 'Image', 'PDF', 'Text', 'Utility', 'Social', 'Develop
     color: var(--accent);
   }
 
-  /* Tool grid */
   .tools-grid {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 10px;
   }
 
@@ -489,17 +528,24 @@ const categories = ['All', 'Image', 'PDF', 'Text', 'Utility', 'Social', 'Develop
   }
 
   .tool-icon-wrap {
-    width: 60px;
-    height: 60px;
-    border-radius: 14px;
+    width: 72px;
+    height: 72px;
+    border-radius: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
   }
 
+  .tool-card[data-category="Image"] .tool-icon-wrap    { background: #e8f4fd; }
+  .tool-card[data-category="PDF"] .tool-icon-wrap      { background: #fef3e8; }
+  .tool-card[data-category="Text"] .tool-icon-wrap     { background: #e8fdf0; }
+  .tool-card[data-category="Developer"] .tool-icon-wrap { background: #ede8fd; }
+  .tool-card[data-category="Social"] .tool-icon-wrap   { background: #f0e8fd; }
+  .tool-card[data-category="Utility"] .tool-icon-wrap  { background: #fef9e3; }
+
   .tool-icon {
-    font-size: 30px;
+    font-size: 36px;
     line-height: 1;
   }
 
@@ -534,6 +580,10 @@ const categories = ['All', 'Image', 'PDF', 'Text', 'Utility', 'Social', 'Develop
     flex-shrink: 0;
   }
 
+  .badge-new {
+    background: #16a34a;
+  }
+
   .tool-desc {
     font-size: 14px;
     color: var(--text-muted);
@@ -559,7 +609,6 @@ const categories = ['All', 'Image', 'PDF', 'Text', 'Utility', 'Social', 'Develop
     padding: 40px 0;
   }
 
-  /* Trust section */
   .trust-section {
     margin-top: 56px;
   }
@@ -599,7 +648,6 @@ const categories = ['All', 'Image', 'PDF', 'Text', 'Utility', 'Social', 'Develop
     line-height: 1.5;
   }
 
-  /* SEO content */
   .seo-content {
     max-width: 720px;
     margin: 72px auto 0;
@@ -654,7 +702,7 @@ const categories = ['All', 'Image', 'PDF', 'Text', 'Utility', 'Social', 'Develop
     }
 
     .hero-title {
-      font-size: clamp(36px, 10vw, 52px);
+      font-size: clamp(46px, 12vw, 64px);
       margin-bottom: 12px;
     }
 
@@ -695,6 +743,10 @@ const categories = ['All', 'Image', 'PDF', 'Text', 'Utility', 'Social', 'Develop
       gap: 6px;
     }
 
+    .tools-grid {
+      grid-template-columns: 1fr;
+    }
+
     .tool-card {
       padding: 14px 16px;
       gap: 12px;
@@ -703,13 +755,13 @@ const categories = ['All', 'Image', 'PDF', 'Text', 'Utility', 'Social', 'Develop
     }
 
     .tool-icon-wrap {
-      width: 50px;
-      height: 50px;
-      border-radius: 12px;
+      width: 56px;
+      height: 56px;
+      border-radius: 13px;
     }
 
     .tool-icon {
-      font-size: 24px;
+      font-size: 28px;
     }
 
     .tool-name {
