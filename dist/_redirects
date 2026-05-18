@@ -1,0 +1,9 @@
+https://pixmidas.com/* https://www.pixmidas.com/:splat 301
+
+/tools/remove-background/ /tools/background-remover/ 301
+/tools/crop-image/ /tools/image-cropper/ 301
+/tools/image-converter/ /tools/convert-image/ 301
+/tools/resize/ /tools/resize-image/ 301
+/tools/compress/ /tools/compress-image/ 301
+/tools/pdf-compress/ /tools/compress-pdf/ 301
+/tools/merge-pdf/ /tools/merge-pdfs/ 301

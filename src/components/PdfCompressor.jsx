@@ -1,0 +1,352 @@
+import { useState, useRef, useCallback } from "react";
+import { PDFDocument } from "pdf-lib";
+
+export default function PdfCompressor() {
+  var [file, setFile]               = useState(null);
+  var [level, setLevel]             = useState("recommended");
+  var [status, setStatus]           = useState("idle"); // idle | compressing | done
+  var [progress, setProgress]       = useState(0);
+  var [progressLabel, setProgressLabel] = useState("");
+  var [result, setResult]           = useState(null); // { origSize, newSize, blob }
+  var [error, setError]             = useState("");
+  var [dragOver, setDragOver]       = useState(false);
+  var inputRef = useRef(null);
+
+  function fmt(bytes) {
+    if (bytes < 1024)           return bytes + " B";
+    if (bytes < 1024 * 1024)   return (bytes / 1024).toFixed(1) + " KB";
+    return (bytes / 1024 / 1024).toFixed(2) + " MB";
+  }
+
+  function pickFile(f) {
+    if (!f) return;
+    if (f.type !== "application/pdf" && !f.name.toLowerCase().endsWith(".pdf")) {
+      setError("Please select a PDF file (.pdf).");
+      return;
+    }
+    setFile(f);
+    setError("");
+    setResult(null);
+    setStatus("idle");
+  }
+
+  var onDragOver = useCallback(function(e) {
+    e.preventDefault();
+    setDragOver(true);
+  }, []);
+
+  var onDragLeave = useCallback(function() {
+    setDragOver(false);
+  }, []);
+
+  var onDrop = useCallback(function(e) {
+    e.preventDefault();
+    setDragOver(false);
+    pickFile(e.dataTransfer.files[0]);
+  }, []);
+
+  function onInputChange(e) {
+    pickFile(e.target.files[0]);
+  }
+
+  async function compress() {
+    if (!file) return;
+
+    var pdfjsLib = window.pdfjsLib;
+    if (!pdfjsLib) {
+      setError("PDF library not loaded. Please refresh the page.");
+      return;
+    }
+
+    var scale   = level === "high" ? 1.5 : 2.0;
+    var quality = level === "high" ? 0.65 : 0.85;
+
+    setStatus("compressing");
+    setProgress(0);
+    setProgressLabel("Loading PDF…");
+    setError("");
+    setResult(null);
+
+    try {
+      var arrayBuffer = await file.arrayBuffer();
+      var uint8 = new Uint8Array(arrayBuffer);
+
+      var pdfJsDoc = await pdfjsLib.getDocument({ data: uint8 }).promise;
+      var numPages = pdfJsDoc.numPages;
+      var newPdf   = await PDFDocument.create();
+
+      for (var i = 1; i <= numPages; i++) {
+        setProgressLabel("Compressing page " + i + " of " + numPages + "…");
+        setProgress(Math.round(((i - 1) / numPages) * 90));
+
+        var page     = await pdfJsDoc.getPage(i);
+        var viewport = page.getViewport({ scale: scale });
+
+        var canvas   = document.createElement("canvas");
+        canvas.width  = Math.round(viewport.width);
+        canvas.height = Math.round(viewport.height);
+        var ctx = canvas.getContext("2d");
+        await page.render({ canvasContext: ctx, viewport: viewport }).promise;
+
+        var dataUrl   = canvas.toDataURL("image/jpeg", quality);
+        var b64       = dataUrl.split(",")[1];
+        var jpegBytes = Uint8Array.from(atob(b64), function(c) { return c.charCodeAt(0); });
+
+        var img     = await newPdf.embedJpg(jpegBytes);
+        var newPage = newPdf.addPage([canvas.width, canvas.height]);
+        newPage.drawImage(img, { x: 0, y: 0, width: canvas.width, height: canvas.height });
+      }
+
+      setProgressLabel("Finalising PDF…");
+      setProgress(97);
+
+      var compressedBytes = await newPdf.save({ useObjectStreams: true });
+      setProgress(100);
+
+      var blob = new Blob([compressedBytes], { type: "application/pdf" });
+      setResult({ origSize: file.size, newSize: compressedBytes.byteLength, blob: blob });
+      setStatus("done");
+
+    } catch (err) {
+      console.error("Compression error:", err);
+      setError(
+        "Compression failed. The PDF may be password-protected, corrupted, " +
+        "or use features not supported in this browser."
+      );
+      setStatus("idle");
+    }
+  }
+
+  function handleSave() {
+    if (!result) return;
+    var url = URL.createObjectURL(result.blob);
+    var a   = document.createElement("a");
+    a.href     = url;
+    a.download = "compressed_" + file.name;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  async function handleSaveAs() {
+    if (!result) return;
+    var filename = "compressed_" + file.name;
+    if (typeof window.showSaveFilePicker === "function") {
+      try {
+        var handle = await window.showSaveFilePicker({ suggestedName: filename, types: [{ description: "File", accept: { "application/pdf": [".pdf"] } }] });
+        var writable = await handle.createWritable();
+        await writable.write(result.blob);
+        await writable.close();
+        return;
+      } catch(e) {
+        if (e.name === "AbortError") return;
+      }
+    }
+    handleSave();
+  }
+
+  var saveBtn = { background: "#0071e3", color: "white", border: "none", borderRadius: "99px", padding: "14px 28px", fontSize: "16px", fontWeight: "700", cursor: "pointer", minHeight: "44px", fontFamily: "inherit" };
+  var saveAsBtn = { background: "transparent", color: "#0071e3", border: "1.5px solid #0071e3", borderRadius: "99px", padding: "14px 28px", fontSize: "16px", fontWeight: "700", cursor: "pointer", minHeight: "44px", fontFamily: "inherit" };
+  var resetBtn = { background: "var(--surface-2)", color: "var(--text-muted)", border: "none", borderRadius: "99px", padding: "14px 28px", fontSize: "16px", fontWeight: "600", cursor: "pointer", minHeight: "44px", fontFamily: "inherit" };
+
+  function reset() {
+    setFile(null);
+    setStatus("idle");
+    setResult(null);
+    setError("");
+    setProgress(0);
+    if (inputRef.current) inputRef.current.value = "";
+  }
+
+  var cardStyle = { background: "var(--surface)", border: "1px solid var(--border-light)", borderRadius: 20, padding: 32 };
+
+  var primaryBtn = {
+    display: "block", width: "100%",
+    padding: "17px 24px", borderRadius: "99px",
+    background: "#0071e3", color: "#fff", border: "none",
+    fontSize: "17px", fontWeight: "700", cursor: "pointer",
+    fontFamily: "inherit", transition: "background 0.15s",
+  };
+  var secondaryBtn = {
+    display: "block", width: "100%",
+    padding: "15px 24px", borderRadius: "99px",
+    background: "var(--surface-2)", color: "var(--text)",
+    border: "1px solid var(--border-light)",
+    fontSize: "15px", fontWeight: "600", cursor: "pointer",
+    fontFamily: "inherit",
+  };
+
+  if (status === "idle") {
+    return (
+      <div style={cardStyle}>
+        <div
+          role="button"
+          tabIndex={0}
+          style={{
+            border: "2px dashed " + (dragOver ? "#0071e3" : "var(--border)"),
+            borderRadius: "20px",
+            padding: "56px 24px",
+            textAlign: "center",
+            background: dragOver ? "#f0f7ff" : "var(--surface-2)",
+            cursor: "pointer",
+            transition: "border-color 0.18s, background 0.18s",
+          }}
+          onDragOver={onDragOver}
+          onDragLeave={onDragLeave}
+          onDrop={onDrop}
+          onClick={function() { inputRef.current && inputRef.current.click(); }}
+          onKeyDown={function(e) {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              inputRef.current && inputRef.current.click();
+            }
+          }}
+        >
+          <input
+            ref={inputRef}
+            type="file"
+            accept=".pdf,application/pdf"
+            style={{ display: "none" }}
+            onChange={onInputChange}
+          />
+
+          <div style={{ fontSize: "40px", marginBottom: "12px" }}><i className="ti ti-file-minus" style={{color:'#E54D2E'}}></i></div>
+
+          {file ? (
+            <div>
+              <p style={{ fontSize: "16px", fontWeight: "600", color: "var(--text)", marginBottom: "4px" }}>
+                📄 {file.name}
+              </p>
+              <p style={{ fontSize: "14px", color: "var(--text-muted)" }}>{fmt(file.size)}</p>
+              <p style={{ fontSize: "13px", color: "var(--text-muted)", marginTop: "8px" }}>Click to change file</p>
+            </div>
+          ) : (
+            <div>
+              <p style={{ fontSize: "17px", fontWeight: "600", color: "var(--text)", marginBottom: "6px" }}>
+                Drop your PDF here or{" "}
+                <span style={{ color: "#0071e3" }}>browse</span>
+              </p>
+              <p style={{ fontSize: "13px", color: "var(--text-muted)", marginBottom: "16px" }}>
+                Supports .pdf files
+              </p>
+              <div style={{textAlign:"center",marginTop:"4px"}}><a href="/report-bug" style={{color:"var(--text-muted)",textDecoration:"none",fontSize:"13px"}}>🐞 Found an issue with this tool? Report a bug →</a></div>
+            </div>
+          )}
+        </div>
+
+        {error && (
+          <p style={{ color: "#dc2626", fontSize: "14px", fontWeight: "500", marginTop: "12px" }}>
+            ⚠️ {error}
+          </p>
+        )}
+
+        {file && (
+          <div style={{ marginTop: "20px" }}>
+            <label style={{ display: "block", fontSize: "15px", fontWeight: "600", marginBottom: "8px", color: "var(--text)" }}>
+              Compression Level
+            </label>
+            <select
+              value={level}
+              onChange={function(e) { setLevel(e.target.value); }}
+              style={{
+                display: "block", width: "100%",
+                padding: "12px 16px", borderRadius: "12px",
+                border: "1px solid var(--border-light)", fontSize: "15px",
+                background: "var(--surface-2)", color: "var(--text)",
+                appearance: "none", cursor: "pointer",
+                fontFamily: "inherit", marginBottom: "16px",
+              }}
+            >
+              <option value="recommended">Recommended — sharp output, good size reduction</option>
+              <option value="high">High compression — smaller file, slightly softer</option>
+            </select>
+            <p style={{ fontSize: "12px", color: "var(--text-muted)", marginBottom: "12px", lineHeight: "1.5" }}>
+              Pages are re-rendered as high-quality images. Works best on scanned documents and image-heavy PDFs. Text-only PDFs may not compress much.
+            </p>
+            <button onClick={compress} style={primaryBtn}>
+              Compress PDF
+            </button>
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  if (status === "compressing") {
+    return (
+      <div style={cardStyle}>
+        <div style={{
+          background: "var(--surface-2)", borderRadius: "20px",
+          padding: "48px 32px", textAlign: "center",
+        }}>
+          <p style={{ fontSize: "17px", fontWeight: "600", color: "var(--text)", marginBottom: "16px" }}>
+            {progressLabel || "Processing…"}
+          </p>
+          <div style={{
+            height: "8px", background: "var(--border-light)", borderRadius: "99px",
+            overflow: "hidden", maxWidth: "380px", margin: "0 auto 10px",
+          }}>
+            <div style={{
+              height: "100%", background: "#0071e3", borderRadius: "99px",
+              width: progress + "%", transition: "width 0.35s ease",
+            }} />
+          </div>
+          <p style={{ fontSize: "14px", color: "var(--text-muted)" }}>{progress}%</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (status === "done" && result) {
+    var saved          = result.origSize - result.newSize;
+    var pct            = ((saved / result.origSize) * 100).toFixed(1);
+    var alreadyOptimal = (saved / result.origSize) < 0.05;
+
+    return (
+      <div style={cardStyle}>
+        <div style={{
+          display: "flex", alignItems: "center", justifyContent: "center",
+          gap: "24px", flexWrap: "wrap",
+          background: "var(--surface-2)", borderRadius: "16px",
+          padding: "24px", marginBottom: "16px",
+        }}>
+          <div style={{ textAlign: "center" }}>
+            <div style={{ fontSize: "11px", fontWeight: "600", color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "4px" }}>Original</div>
+            <div style={{ fontSize: "24px", fontWeight: "700", color: "var(--text)" }}>{fmt(result.origSize)}</div>
+          </div>
+          <div style={{ fontSize: "24px", color: "var(--text-muted)" }}>→</div>
+          <div style={{ textAlign: "center" }}>
+            <div style={{ fontSize: "11px", fontWeight: "600", color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "4px" }}>Compressed</div>
+            <div style={{ fontSize: "24px", fontWeight: "700", color: "var(--text)" }}>{fmt(result.newSize)}</div>
+          </div>
+          <div style={{ textAlign: "center" }}>
+            <div style={{ fontSize: "22px", fontWeight: "800", color: saved > 0 ? "#16a34a" : "#dc2626" }}>
+              {saved > 0 ? "−" + pct + "%" : "+" + Math.abs(parseFloat(pct)) + "%"}
+            </div>
+            <div style={{ fontSize: "12px", color: "var(--text-muted)", marginTop: "2px" }}>
+              {saved > 0 ? "saved" : "larger"}
+            </div>
+          </div>
+        </div>
+
+        {alreadyOptimal && (
+          <div style={{
+            background: "#fffbeb", border: "1px solid #fde68a",
+            borderRadius: "12px", padding: "14px 18px",
+            marginBottom: "16px", fontSize: "14px",
+            color: "#92400e", lineHeight: "1.55",
+          }}>
+            This PDF is already well optimized. Less than 5% was saved. It may be text-only or previously compressed. Download anyway?
+          </div>
+        )}
+
+        <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", marginBottom: "10px" }}>
+          <button onClick={handleSave} style={saveBtn}>Save</button>
+          <button onClick={handleSaveAs} style={saveAsBtn}>Save As...</button>
+          <button onClick={reset} style={resetBtn}>Reset</button>
+        </div>
+      </div>
+    );
+  }
+
+  return null;
+}

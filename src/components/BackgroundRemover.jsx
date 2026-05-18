@@ -48,8 +48,7 @@ export default function BackgroundRemover() {
 
       setResultUrl(URL.createObjectURL(blob));
       setStatus("done");
-    } catch (err) {
-      console.error(err);
+    } catch {
       setErrorMsg("Something went wrong. Please try a different image or check your connection.");
       setStatus("error");
     }
@@ -71,6 +70,33 @@ export default function BackgroundRemover() {
     if (fileInputRef.current) fileInputRef.current.value = "";
   };
 
+  function handleSave() {
+    var a = document.createElement("a");
+    a.href = resultUrl;
+    a.download = downloadName;
+    a.click();
+  }
+
+  async function handleSaveAs() {
+    if (typeof window.showSaveFilePicker === "function") {
+      try {
+        var handle = await window.showSaveFilePicker({ suggestedName: downloadName, types: [{ description: "File", accept: { "image/png": [".png"] } }] });
+        var blob = await fetch(resultUrl).then(function(r) { return r.blob(); });
+        var writable = await handle.createWritable();
+        await writable.write(blob);
+        await writable.close();
+        return;
+      } catch(e) {
+        if (e.name === "AbortError") return;
+      }
+    }
+    handleSave();
+  }
+
+  var saveBtn = { background: "#0071e3", color: "white", border: "none", borderRadius: "99px", padding: "14px 28px", fontSize: "16px", fontWeight: "700", cursor: "pointer", minHeight: "44px", fontFamily: "inherit" };
+  var saveAsBtn = { background: "transparent", color: "#0071e3", border: "1.5px solid #0071e3", borderRadius: "99px", padding: "14px 28px", fontSize: "16px", fontWeight: "700", cursor: "pointer", minHeight: "44px", fontFamily: "inherit" };
+  var resetBtn = { background: "var(--surface-2)", color: "var(--text-muted)", border: "none", borderRadius: "99px", padding: "14px 28px", fontSize: "16px", fontWeight: "600", cursor: "pointer", minHeight: "44px", fontFamily: "inherit" };
+
   return (
     <div style={s.wrapper}>
 
@@ -79,14 +105,14 @@ export default function BackgroundRemover() {
           style={{
             ...s.dropzone,
             borderColor: isDragging ? "#2563eb" : "#d1d5db",
-            background: isDragging ? "#eff6ff" : "#fafaf9",
+            background: isDragging ? "#eff6ff" : "var(--surface-2)",
           }}
           onDrop={handleDrop}
           onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
           onDragLeave={() => setIsDragging(false)}
           onClick={() => fileInputRef.current.click()}
         >
-          <div style={s.uploadIcon}>✂️</div>
+          <div style={s.uploadIcon}><i className="ti ti-wand" style={{color:'#E54D2E'}}></i></div>
           <h2 style={s.dropTitle}>Drop your image here</h2>
           <p style={s.dropText}>JPG, PNG or WebP. AI removes the background in your browser.</p>
           <button style={s.btn} type="button">Choose Image</button>
@@ -141,19 +167,18 @@ export default function BackgroundRemover() {
 
           <div style={s.actions}>
             {status === "done" && (
-              <a href={resultUrl} download={downloadName} style={s.downloadBtn}>
-                ⬇ Download PNG
-              </a>
+              <>
+                <button onClick={handleSave} style={saveBtn} type="button">Save</button>
+                <button onClick={handleSaveAs} style={saveAsBtn} type="button">Save As...</button>
+              </>
             )}
-            <button onClick={reset} style={s.resetBtn} type="button">
-              Try another image
-            </button>
+            <button onClick={reset} style={resetBtn} type="button">Reset</button>
           </div>
         </div>
       )}
 
       <div style={s.privacyNote}>
-        🔒 Your files never leave your device. Everything happens locally.
+        <a href="/report-bug" style={{ color: 'var(--text-muted)', textDecoration: 'none' }}>🐞 Found an issue with this tool? Report a bug →</a>
       </div>
     </div>
   );
@@ -161,8 +186,8 @@ export default function BackgroundRemover() {
 
 const s = {
   wrapper: {
-    background: "#ffffff",
-    border: "1px solid #e5e7eb",
+    background: "var(--surface)",
+    border: "1px solid var(--border-light)",
     borderRadius: 20,
     padding: 32,
     boxShadow: "0 1px 3px rgba(0,0,0,0.06)",
@@ -184,20 +209,20 @@ const s = {
     fontWeight: 800,
     letterSpacing: "-0.02em",
     marginBottom: 8,
-    color: "#111827",
+    color: "var(--text)",
   },
   dropText: {
     fontSize: 15,
-    color: "#6b7280",
+    color: "var(--text-muted)",
     marginBottom: 24,
   },
   btn: {
-    background: "#111827",
-    color: "#fff",
+    background: "var(--upload-btn-bg)",
+    color: "var(--upload-btn-color)",
     border: "none",
     borderRadius: 999,
     padding: "14px 28px",
-    fontWeight: 700,
+    fontWeight: 600,
     fontSize: 15,
     cursor: "pointer",
     fontFamily: "inherit",
@@ -220,32 +245,32 @@ const s = {
   loadingTitle: {
     fontSize: 17,
     fontWeight: 600,
-    color: "#111827",
+    color: "var(--text)",
     letterSpacing: "-0.01em",
     margin: 0,
   },
   loadingSub: {
     fontSize: 14,
-    color: "#6b7280",
+    color: "var(--text-muted)",
     margin: 0,
   },
   progressTrack: {
     width: "100%",
     maxWidth: 320,
     height: 6,
-    background: "#e5e7eb",
+    background: "var(--border-light)",
     borderRadius: 999,
     overflow: "hidden",
   },
   progressFill: {
     height: "100%",
-    background: "#2563eb",
+    background: "#0071e3",
     borderRadius: 999,
     transition: "width 0.3s ease",
   },
   progressText: {
     fontSize: 13,
-    color: "#6b7280",
+    color: "var(--text-muted)",
     margin: 0,
   },
   toolArea: {
@@ -259,15 +284,15 @@ const s = {
     gap: 16,
   },
   previewCard: {
-    border: "1px solid #e5e7eb",
+    border: "1px solid var(--border-light)",
     borderRadius: 14,
     padding: 16,
-    background: "#fafaf9",
+    background: "var(--surface-2)",
   },
   previewLabel: {
     fontSize: 13,
     fontWeight: 600,
-    color: "#6b7280",
+    color: "var(--text-muted)",
     marginBottom: 10,
     textTransform: "uppercase",
     letterSpacing: "0.05em",
@@ -327,7 +352,7 @@ const s = {
   privacyNote: {
     marginTop: 20,
     fontSize: 13,
-    color: "#6b7280",
+    color: "var(--text-muted)",
     textAlign: "center",
   },
 };

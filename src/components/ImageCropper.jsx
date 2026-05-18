@@ -7,6 +7,7 @@ export default function ImageCropper() {
   const [startY, setStartY] = useState(0);
   const [cropBox, setCropBox] = useState(null);
   const [isDragging, setIsDragging] = useState(false);
+  const [croppedUrl, setCroppedUrl] = useState(null);
   const canvasRef = useRef(null);
   const previewRef = useRef(null);
   const imgRef = useRef(null);
@@ -64,7 +65,7 @@ export default function ImageCropper() {
     setIsDragging(false);
   }
 
-  function crop() {
+  function doCrop() {
     if (!cropBox || cropBox.w < 5 || cropBox.h < 5) return;
     var img = imgRef.current;
     var container = containerRef.current;
@@ -75,30 +76,57 @@ export default function ImageCropper() {
     canvas.height = cropBox.h * scaleY;
     var ctx = canvas.getContext("2d");
     ctx.drawImage(img, cropBox.x * scaleX, cropBox.y * scaleY, cropBox.w * scaleX, cropBox.h * scaleY, 0, 0, canvas.width, canvas.height);
-    var link = document.createElement("a");
-    link.download = "cropped.jpg";
-    link.href = canvas.toDataURL("image/jpeg", 0.92);
-    link.click();
+    setCroppedUrl(canvas.toDataURL("image/jpeg", 0.92));
   }
 
+  function handleSave() {
+    if (!croppedUrl) return;
+    var a = document.createElement("a");
+    a.href = croppedUrl;
+    a.download = "cropped.jpg"; a.click();
+  }
+
+  async function handleSaveAs() {
+    if (!croppedUrl) return;
+    if (typeof window.showSaveFilePicker === "function") {
+      try {
+        var handle = await window.showSaveFilePicker({ suggestedName: "cropped.jpg", types: [{ description: "File", accept: { "image/jpeg": [".jpg"] } }] });
+        var blob = await fetch(croppedUrl).then(function(r) { return r.blob(); });
+        var writable = await handle.createWritable();
+        await writable.write(blob);
+        await writable.close();
+        return;
+      } catch(e) {
+        if (e.name === "AbortError") return;
+      }
+    }
+    handleSave();
+  }
+
+  function reset() { setImage(null); setCropBox(null); setCroppedUrl(null); }
+
+  var saveBtn = { background: "#0071e3", color: "white", border: "none", borderRadius: "99px", padding: "14px 28px", fontSize: "16px", fontWeight: "700", cursor: "pointer", minHeight: "44px", fontFamily: "inherit" };
+  var saveAsBtn = { background: "transparent", color: "#0071e3", border: "1.5px solid #0071e3", borderRadius: "99px", padding: "14px 28px", fontSize: "16px", fontWeight: "700", cursor: "pointer", minHeight: "44px", fontFamily: "inherit" };
+  var resetBtn = { background: "var(--surface-2)", color: "var(--text-muted)", border: "none", borderRadius: "99px", padding: "14px 28px", fontSize: "16px", fontWeight: "600", cursor: "pointer", minHeight: "44px", fontFamily: "inherit" };
+
   return (
-    <div style={{ fontFamily: "inherit" }}>
+    <div style={{ background: "var(--surface)", border: "1px solid var(--border-light)", borderRadius: 20, padding: 32 }}>
       {!image ? (
         <div
           onDrop={handleDrop}
           onDragOver={function(e) { e.preventDefault(); }}
-          style={{ border: "2px dashed #d2d2d7", borderRadius: "16px", padding: "48px 24px", textAlign: "center", cursor: "pointer", background: "#f5f5f7" }}
+          style={{ border: "2px dashed var(--border)", borderRadius: "16px", padding: "48px 24px", textAlign: "center", cursor: "pointer", background: "var(--surface-2)" }}
           onClick={function() { document.getElementById("crop-input").click(); }}
         >
-          <div style={{ fontSize: "48px", marginBottom: "16px" }}>✂️</div>
-          <p style={{ fontSize: "17px", fontWeight: "600", marginBottom: "8px" }}>Drop an image here</p>
-          <p style={{ fontSize: "14px", color: "#6e6e73", marginBottom: "20px" }}>or click to browse</p>
+          <div style={{ fontSize: "48px", marginBottom: "16px" }}><i className="ti ti-crop" style={{color:'#30A46C'}}></i></div>
+          <p style={{ fontSize: "17px", fontWeight: "600", marginBottom: "8px", color: "var(--text)" }}>Drop an image here</p>
+          <p style={{ fontSize: "14px", color: "var(--text-muted)", marginBottom: "20px" }}>or click to browse</p>
           <input id="crop-input" type="file" accept="image/*" onChange={handleFile} style={{ display: "none" }} />
-          <button style={{ background: "#0071e3", color: "white", border: "none", borderRadius: "10px", padding: "12px 24px", fontSize: "15px", fontWeight: "600", cursor: "pointer" }}>Choose Image</button>
+          <button style={{ background: "var(--upload-btn-bg)", color: "var(--upload-btn-color)", border: "none", borderRadius: "99px", padding: "12px 24px", fontSize: "15px", fontWeight: "600", cursor: "pointer", fontFamily: "inherit" }}>Choose Image</button>
         </div>
       ) : (
         <div>
-          <p style={{ fontSize: "14px", color: "#6e6e73", marginBottom: "12px", fontWeight: "500" }}>Draw a box on the image to select the crop area</p>
+          <p style={{ fontSize: "14px", color: "var(--text-muted)", marginBottom: "12px", fontWeight: "500" }}>Draw a box on the image to select the crop area</p>
           <div
             ref={containerRef}
             onMouseDown={onMouseDown}
@@ -126,12 +154,12 @@ export default function ImageCropper() {
           </div>
           <canvas ref={canvasRef} style={{ display: "none" }} />
           <div style={{ display: "flex", gap: "12px", marginTop: "16px", flexWrap: "wrap" }}>
-            <button onClick={crop} disabled={!cropBox || cropBox.w < 5} style={{ background: "#0071e3", color: "white", border: "none", borderRadius: "12px", padding: "14px 28px", fontSize: "16px", fontWeight: "700", cursor: "pointer", flex: "1" }}>
-              Download Cropped Image
+            <button onClick={doCrop} disabled={!cropBox || cropBox.w < 5} style={{ ...saveBtn, background: "#0071e3", opacity: (!cropBox || cropBox.w < 5) ? 0.5 : 1, cursor: (!cropBox || cropBox.w < 5) ? "not-allowed" : "pointer" }}>
+              Crop
             </button>
-            <button onClick={function() { setImage(null); setCropBox(null); }} style={{ background: "#f5f5f7", color: "#1d1d1f", border: "1px solid #e8e8ed", borderRadius: "12px", padding: "14px 20px", fontSize: "15px", fontWeight: "600", cursor: "pointer" }}>
-              New Image
-            </button>
+            <button onClick={handleSave} disabled={!croppedUrl} style={{ ...saveBtn, opacity: croppedUrl ? 1 : 0.5, cursor: croppedUrl ? "pointer" : "not-allowed" }}>Save</button>
+            <button onClick={handleSaveAs} disabled={!croppedUrl} style={{ ...saveAsBtn, opacity: croppedUrl ? 1 : 0.5, cursor: croppedUrl ? "pointer" : "not-allowed" }}>Save As...</button>
+            <button onClick={reset} style={resetBtn}>Reset</button>
           </div>
         </div>
       )}

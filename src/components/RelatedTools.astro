@@ -10,12 +10,14 @@ const tools = getRelatedTools(slugs);
 ---
 
 {tools.length > 0 && (
-  <section class="related-tools">
+  <section class="related-tools-section">
     <h2 class="related-title">People also use</h2>
     <div class="related-grid">
       {tools.map((tool) => (
         <a href={`/tools/${tool.slug}/`} class="related-card">
-          <span class="related-icon">{tool.icon}</span>
+          <div class="related-icon-box" data-icon-palette={tool.iconPalette}>
+            <i class={`ti ti-${tool.iconClass}`}></i>
+          </div>
           <div class="related-info">
             <span class="related-name">{tool.name}</span>
             <span class="related-desc">{tool.description}</span>
@@ -27,7 +29,7 @@ const tools = getRelatedTools(slugs);
 )}
 
 <style>
-  .related-tools {
+  .related-tools-section {
     margin-top: 48px;
     padding-top: 40px;
     border-top: 1px solid var(--border-light);
@@ -51,37 +53,40 @@ const tools = getRelatedTools(slugs);
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 14px 16px;
-    background: var(--surface-2);
-    border: 1px solid var(--border-light);
-    border-radius: var(--radius-sm);
+    padding: 14px;
+    background: var(--surface);
+    border: 0.5px solid var(--border-light);
+    border-radius: var(--radius-lg, 14px);
     text-decoration: none;
-    transition: background 0.15s, border-color 0.15s;
+    transition: border-color 0.15s, box-shadow 0.15s;
     min-height: 44px;
   }
 
   .related-card:hover {
-    background: var(--accent-light);
     border-color: var(--accent);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
   }
 
-  .related-icon {
-    font-size: 20px;
+  .related-icon-box {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
     flex-shrink: 0;
-    width: 28px;
-    text-align: center;
-    font-style: normal;
+  }
+
+  .related-icon-box i {
+    font-size: 20px;
   }
 
   .related-info {
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 3px;
     min-width: 0;
   }
 
   .related-name {
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 600;
     color: var(--text);
     white-space: nowrap;
@@ -90,7 +95,7 @@ const tools = getRelatedTools(slugs);
   }
 
   .related-desc {
-    font-size: 12px;
+    font-size: 11px;
     color: var(--text-muted);
     line-height: 1.4;
     display: -webkit-box;

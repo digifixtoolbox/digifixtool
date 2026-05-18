@@ -72,70 +72,92 @@ export default function ImageResizer() {
     ? originalFile.name.replace(/\.[^/.]+$/, "") + "-" + width + "x" + height + ".jpg"
     : "resized.jpg";
 
+  async function handleSaveAs(url, filename) {
+    if (typeof window.showSaveFilePicker === "function") {
+      try {
+        var ext = filename.split(".").pop().toLowerCase();
+        var mimeMap = { jpg: "image/jpeg", jpeg: "image/jpeg", png: "image/png", gif: "image/gif", pdf: "application/pdf", zip: "application/zip", webp: "image/webp" };
+        var mime = mimeMap[ext] || "application/octet-stream";
+        var handle = await window.showSaveFilePicker({ suggestedName: filename, types: [{ description: "File", accept: { [mime]: ["." + ext] } }] });
+        var blob = await fetch(url).then(function(r) { return r.blob(); });
+        var writable = await handle.createWritable();
+        await writable.write(blob);
+        await writable.close();
+        return;
+      } catch(e) {
+        if (e.name === "AbortError") return;
+      }
+    }
+    var a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    a.click();
+  }
+
+  var saveBtn = { background: "#0071e3", color: "white", border: "none", borderRadius: "99px", padding: "14px 28px", fontSize: "16px", fontWeight: "700", cursor: "pointer", minHeight: "44px", fontFamily: "inherit" };
+  var saveAsBtn = { background: "transparent", color: "#0071e3", border: "1.5px solid #0071e3", borderRadius: "99px", padding: "14px 28px", fontSize: "16px", fontWeight: "700", cursor: "pointer", minHeight: "44px", fontFamily: "inherit" };
+  var resetBtn = { background: "var(--surface-2)", color: "var(--text-muted)", border: "none", borderRadius: "99px", padding: "14px 28px", fontSize: "16px", fontWeight: "600", cursor: "pointer", minHeight: "44px", fontFamily: "inherit" };
+  var btnRow = { display: "flex", gap: "12px", flexWrap: "wrap", marginTop: "16px" };
+
   return (
-    <div style={{background:"#fff",border:"1px solid #e5e7eb",borderRadius:20,padding:32}}>
+    <div style={{background:"var(--surface)",border:"1px solid var(--border-light)",borderRadius:20,padding:32}}>
       {!originalFile ? (
         <div
-          style={{border:"2px dashed #d1d5db",borderRadius:16,padding:"56px 24px",textAlign:"center",cursor:"pointer",background:"#fafaf9"}}
+          style={{border:"2px dashed var(--border)",borderRadius:16,padding:"56px 24px",textAlign:"center",cursor:"pointer",background:"var(--surface-2)"}}
           onClick={() => fileInputRef.current.click()}
           onDrop={(e) => { e.preventDefault(); handleFile(e.dataTransfer.files[0]); }}
           onDragOver={(e) => e.preventDefault()}
         >
-          <div style={{fontSize:48,marginBottom:16}}>📐</div>
-          <h2 style={{fontSize:24,fontWeight:800,marginBottom:8,color:"#111827"}}>Drop your image here</h2>
-          <p style={{fontSize:15,color:"#6b7280",marginBottom:24}}>JPG, PNG or WebP. Resize to any dimension.</p>
-          <button style={{background:"#111827",color:"#fff",border:"none",borderRadius:999,padding:"14px 28px",fontWeight:700,fontSize:15,cursor:"pointer"}}>Choose Image</button>
+          <div style={{fontSize:48,marginBottom:16}}><i className="ti ti-resize" style={{color:'#0090FF'}}></i></div>
+          <h2 style={{fontSize:24,fontWeight:800,marginBottom:8,color:"var(--text)"}}>Drop your image here</h2>
+          <p style={{fontSize:15,color:"var(--text-muted)",marginBottom:24}}>JPG, PNG or WebP. Resize to any dimension.</p>
+          <button style={{background:"var(--upload-btn-bg)",color:"var(--upload-btn-color)",border:"none",borderRadius:999,padding:"14px 28px",fontWeight:600,fontSize:15,cursor:"pointer"}}>Choose Image</button>
           <input ref={fileInputRef} type="file" accept="image/*" style={{display:"none"}} onChange={(e) => handleFile(e.target.files[0])} />
         </div>
       ) : (
         <div style={{display:"flex",flexDirection:"column",gap:20}}>
           {originalDims && (
-            <p style={{fontSize:14,color:"#6b7280"}}>
+            <p style={{fontSize:14,color:"var(--text-muted)"}}>
               Original: <strong>{originalDims.w} x {originalDims.h}px</strong>
             </p>
           )}
           <div style={{display:"flex",alignItems:"flex-end",gap:16,flexWrap:"wrap"}}>
             <div style={{display:"flex",flexDirection:"column",gap:6,flex:1,minWidth:120}}>
-              <label style={{fontSize:13,fontWeight:600,color:"#374151"}}>Width (px)</label>
+              <label style={{fontSize:13,fontWeight:600,color:"var(--text)"}}>Width (px)</label>
               <input type="number" value={width} onChange={handleW} min="1"
-                style={{border:"1px solid #d1d5db",borderRadius:10,padding:"10px 14px",fontSize:16,fontWeight:600,outline:"none",width:"100%"}} />
+                style={{border:"1px solid var(--border-light)",borderRadius:10,padding:"10px 14px",fontSize:16,fontWeight:600,outline:"none",width:"100%",background:"var(--surface-2)",color:"var(--text)"}} />
             </div>
             <div style={{paddingBottom:8,fontSize:22,cursor:"pointer",color:keepAspect?"#2563eb":"#9ca3af"}}
               onClick={() => setKeepAspect(!keepAspect)}>
               {keepAspect ? "🔒" : "🔓"}
             </div>
             <div style={{display:"flex",flexDirection:"column",gap:6,flex:1,minWidth:120}}>
-              <label style={{fontSize:13,fontWeight:600,color:"#374151"}}>Height (px)</label>
+              <label style={{fontSize:13,fontWeight:600,color:"var(--text)"}}>Height (px)</label>
               <input type="number" value={height} onChange={handleH} min="1"
-                style={{border:"1px solid #d1d5db",borderRadius:10,padding:"10px 14px",fontSize:16,fontWeight:600,outline:"none",width:"100%"}} />
+                style={{border:"1px solid var(--border-light)",borderRadius:10,padding:"10px 14px",fontSize:16,fontWeight:600,outline:"none",width:"100%",background:"var(--surface-2)",color:"var(--text)"}} />
             </div>
           </div>
           <button onClick={resizeImage} disabled={isProcessing}
-            style={{background:"#2563eb",color:"#fff",border:"none",borderRadius:999,padding:"14px 28px",fontWeight:700,fontSize:15,cursor:"pointer",alignSelf:"flex-start"}}>
+            style={{background:"#0071e3",color:"#fff",border:"none",borderRadius:999,padding:"14px 28px",fontWeight:700,fontSize:15,cursor:"pointer",alignSelf:"flex-start"}}>
             {isProcessing ? "Resizing..." : "Resize Image"}
           </button>
           {resizedUrl && (
-            <div style={{display:"flex",gap:12,flexWrap:"wrap"}}>
-              <a href={resizedUrl} download={dlName}
-                style={{background:"#2563eb",color:"#fff",textDecoration:"none",padding:"14px 28px",borderRadius:999,fontWeight:700,fontSize:15}}>
-                Download {width}x{height}px
-              </a>
-              <button onClick={reset}
-                style={{background:"#fff",border:"1px solid #e5e7eb",padding:"14px 24px",borderRadius:999,fontWeight:600,fontSize:15,cursor:"pointer",color:"#374151"}}>
-                Start again
-              </button>
+            <div style={btnRow}>
+              <button onClick={() => { var a=document.createElement("a"); a.href=resizedUrl; a.download=dlName; a.click(); }} style={saveBtn}>Save</button>
+              <button onClick={() => handleSaveAs(resizedUrl, dlName)} style={saveAsBtn}>Save As...</button>
+              <button onClick={reset} style={resetBtn}>Reset</button>
             </div>
           )}
           {!resizedUrl && (
             <button onClick={reset}
-              style={{background:"#fff",border:"1px solid #e5e7eb",padding:"14px 24px",borderRadius:999,fontWeight:600,fontSize:15,cursor:"pointer",color:"#374151",alignSelf:"flex-start"}}>
+              style={{background:"var(--surface)",border:"1px solid var(--border-light)",padding:"14px 24px",borderRadius:999,fontWeight:600,fontSize:15,cursor:"pointer",color:"#374151",alignSelf:"flex-start"}}>
               Start again
             </button>
           )}
         </div>
       )}
-      <div style={{marginTop:20,fontSize:13,color:"#6b7280",textAlign:"center"}}>
-        🔒 Your files never leave your device.
+      <div style={{marginTop:20,fontSize:13,textAlign:"center"}}>
+        <a href="/report-bug" style={{color:"var(--text-muted)",textDecoration:"none"}}>🐞 Found an issue with this tool? Report a bug →</a>
       </div>
     </div>
   );
