@@ -323,34 +323,35 @@ img {
   color: var(--text-muted);
 }
 
-/* ── Tabler icon box palette ───────────────────────────────────────────── */
+/* ── Tabler icon box palette (Option F) ────────────────────────────────── */
 [data-icon-palette] {
-  border-radius: 14px;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
 }
-[data-icon-palette="purple"] { background: #E8E4FF; }
-[data-icon-palette="blue"]   { background: #E4F2FF; }
-[data-icon-palette="red"]    { background: #FFE8E4; }
-[data-icon-palette="green"]  { background: #E4F7EE; }
-[data-icon-palette="orange"] { background: #FFF3E4; }
-[data-icon-palette="pink"]   { background: #FFE8F4; }
 
-[data-icon-palette="purple"] i { color: #5B5BD6; }
-[data-icon-palette="blue"]   i { color: #0090FF; }
-[data-icon-palette="red"]    i { color: #E54D2E; }
-[data-icon-palette="green"]  i { color: #30A46C; }
-[data-icon-palette="orange"] i { color: #E07B10; }
-[data-icon-palette="pink"]   i { color: #D6409F; }
+[data-icon-palette="purple"] { background: rgba(83,74,183,0.05);  border: 1.5px solid #534AB7; }
+[data-icon-palette="blue"]   { background: rgba(24,95,165,0.05);  border: 1.5px solid #185FA5; }
+[data-icon-palette="coral"]  { background: rgba(153,60,29,0.05);  border: 1.5px solid #993C1D; }
+[data-icon-palette="green"]  { background: rgba(15,110,86,0.05);  border: 1.5px solid #0F6E56; }
+[data-icon-palette="amber"]  { background: rgba(133,79,11,0.05);  border: 1.5px solid #854F0B; }
+[data-icon-palette="pink"]   { background: rgba(153,53,86,0.05);  border: 1.5px solid #993556; }
 
-[data-theme="dark"] [data-icon-palette="purple"] { background: #1a1040; }
-[data-theme="dark"] [data-icon-palette="blue"]   { background: #001a3a; }
-[data-theme="dark"] [data-icon-palette="red"]    { background: #2d0a05; }
-[data-theme="dark"] [data-icon-palette="green"]  { background: #082d1a; }
-[data-theme="dark"] [data-icon-palette="orange"] { background: #2d1500; }
-[data-theme="dark"] [data-icon-palette="pink"]   { background: #2d0820; }
+[data-icon-palette="purple"] i { color: #534AB7; }
+[data-icon-palette="blue"]   i { color: #185FA5; }
+[data-icon-palette="coral"]  i { color: #993C1D; }
+[data-icon-palette="green"]  i { color: #0F6E56; }
+[data-icon-palette="amber"]  i { color: #854F0B; }
+[data-icon-palette="pink"]   i { color: #993556; }
+
+[data-theme="dark"] [data-icon-palette="purple"] { background: rgba(83,74,183,0.08); }
+[data-theme="dark"] [data-icon-palette="blue"]   { background: rgba(24,95,165,0.08); }
+[data-theme="dark"] [data-icon-palette="coral"]  { background: rgba(153,60,29,0.08); }
+[data-theme="dark"] [data-icon-palette="green"]  { background: rgba(15,110,86,0.08); }
+[data-theme="dark"] [data-icon-palette="amber"]  { background: rgba(133,79,11,0.08); }
+[data-theme="dark"] [data-icon-palette="pink"]   { background: rgba(153,53,86,0.08); }
 
 @media (max-width: 768px) {
   .ad-slot-horizontal {

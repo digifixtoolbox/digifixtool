@@ -14,7 +14,7 @@ export const TOOLS = [
     description: "Remove image backgrounds instantly using AI.",
     category: "image",
     iconClass: "wand",
-    iconPalette: "red",
+    iconPalette: "coral",
     related: ["image-cropper", "compress-image", "exif-remover"],
   },
   {
@@ -23,7 +23,7 @@ export const TOOLS = [
     description: "Create compliant passport photos for any country.",
     category: "image",
     iconClass: "id",
-    iconPalette: "orange",
+    iconPalette: "amber",
     related: ["background-remover", "image-cropper", "resize-image"],
   },
   {
@@ -32,7 +32,7 @@ export const TOOLS = [
     description: "Shrink PDF file size while maintaining quality.",
     category: "pdf",
     iconClass: "file-minus",
-    iconPalette: "red",
+    iconPalette: "coral",
     related: ["merge-pdfs", "pdf-to-jpg", "images-to-pdf"],
   },
   {
@@ -104,7 +104,7 @@ export const TOOLS = [
     description: "Combine multiple images into a single PDF document.",
     category: "pdf",
     iconClass: "file-import",
-    iconPalette: "red",
+    iconPalette: "coral",
     related: ["merge-pdfs", "pdf-to-jpg", "compress-image"],
   },
   {
@@ -113,7 +113,7 @@ export const TOOLS = [
     description: "Convert PDF pages to high-quality JPG images.",
     category: "pdf",
     iconClass: "file-export",
-    iconPalette: "red",
+    iconPalette: "coral",
     related: ["images-to-pdf", "merge-pdfs", "compress-image"],
   },
   {
@@ -122,7 +122,7 @@ export const TOOLS = [
     description: "Combine multiple PDF files into one document.",
     category: "pdf",
     iconClass: "files",
-    iconPalette: "red",
+    iconPalette: "coral",
     related: ["images-to-pdf", "pdf-to-jpg", "compress-image"],
   },
   {
@@ -130,7 +130,7 @@ export const TOOLS = [
     name: "Word Count",
     description: "Count words, characters, sentences, and reading time.",
     category: "text",
-    iconClass: "counter",
+    iconClass: "123",
     iconPalette: "green",
     related: ["text-diff", "case-converter", "lorem-ipsum"],
   },
@@ -148,8 +148,8 @@ export const TOOLS = [
     name: "Text Diff",
     description: "Compare two texts and highlight the differences.",
     category: "text",
-    iconClass: "git-diff",
-    iconPalette: "orange",
+    iconClass: "file-diff",
+    iconPalette: "green",
     related: ["word-count", "case-converter", "json-formatter"],
   },
   {
@@ -167,7 +167,7 @@ export const TOOLS = [
     description: "Format, validate, and minify JSON data online.",
     category: "utility",
     iconClass: "braces",
-    iconPalette: "orange",
+    iconPalette: "amber",
     related: ["base64", "text-diff", "word-count"],
   },
   {
@@ -176,7 +176,7 @@ export const TOOLS = [
     description: "Encode and decode Base64 strings instantly.",
     category: "utility",
     iconClass: "lock",
-    iconPalette: "orange",
+    iconPalette: "amber",
     related: ["json-formatter", "text-diff", "password-generator"],
   },
   {
@@ -194,7 +194,7 @@ export const TOOLS = [
     description: "Generate strong, random passwords with custom rules.",
     category: "utility",
     iconClass: "key",
-    iconPalette: "orange",
+    iconPalette: "amber",
     related: ["qr-code", "base64", "json-formatter"],
   },
   {
@@ -221,7 +221,7 @@ export const TOOLS = [
     description: "Extract text from any image using OCR technology.",
     category: "image",
     iconClass: "scan",
-    iconPalette: "red",
+    iconPalette: "coral",
     related: ["image-info", "compress-image", "exif-remover"],
   },
   {
