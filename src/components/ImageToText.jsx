@@ -64,7 +64,7 @@ export default function ImageToText() {
         onDragOver={function(e) { e.preventDefault(); setDragOver(true); }}
         onDragLeave={function() { setDragOver(false); }}
         onDrop={handleDrop}
-        style={{ border: "2px dashed " + (dragOver ? "#0071e3" : "var(--border)"), borderRadius: "16px", padding: "48px 24px", textAlign: "center", cursor: "pointer", background: dragOver ? "#f0f7ff" : "var(--surface-2)", transition: "border-color 0.15s, background 0.15s" }}
+        style={{ border: "2px dashed " + (dragOver ? "var(--upload-btn-bg)" : "var(--border)"), borderRadius: "16px", padding: "48px 24px", textAlign: "center", cursor: "pointer", background: dragOver ? "var(--accent-light)" : "var(--surface-2)", transition: "border-color 0.15s, background 0.15s" }}
       >
         <div style={{ fontSize: "48px", marginBottom: "16px" }}><i className="ti ti-scan" style={{color:'#E54D2E'}}></i></div>
         <p style={{ fontSize: "17px", fontWeight: "600", marginBottom: "8px", color: "var(--text)" }}>Drop an image here or click to browse</p>
@@ -82,7 +82,7 @@ export default function ImageToText() {
         <p style={{ fontSize: "17px", fontWeight: "600", marginBottom: "8px", color: "var(--text)" }}>Reading text from image...</p>
         <p style={{ fontSize: "14px", color: "var(--text-muted)", marginBottom: "20px" }}>{progLabel}</p>
         <div style={{ background: "var(--border-light)", borderRadius: "999px", height: "8px", overflow: "hidden" }}>
-          <div style={{ background: "#0071e3", borderRadius: "999px", height: "8px", width: progress + "%", transition: "width 0.3s ease" }} />
+          <div style={{ background: "var(--upload-btn-bg)", borderRadius: "999px", height: "8px", width: progress + "%", transition: "width 0.3s ease" }} />
         </div>
         <p style={{ fontSize: "13px", color: "var(--text-muted)", marginTop: "10px" }}>{progress}%</p>
       </div>
@@ -94,7 +94,7 @@ export default function ImageToText() {
       <div style={{ background: "var(--surface-2)", borderRadius: "16px", padding: "20px", marginBottom: "16px" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "12px", flexWrap: "wrap", gap: "8px" }}>
           <p style={{ fontSize: "15px", fontWeight: "600", margin: 0, color: "var(--text)" }}>Extracted Text</p>
-          <button onClick={copyText} style={{ background: "#0071e3", color: "white", border: "none", borderRadius: "99px", padding: "8px 18px", fontSize: "13px", fontWeight: "600", cursor: "pointer", fontFamily: "inherit" }}>
+          <button onClick={copyText} style={{ background: "var(--upload-btn-bg)", color: "var(--upload-btn-color)", border: "none", borderRadius: "99px", padding: "8px 18px", fontSize: "13px", fontWeight: "600", cursor: "pointer", fontFamily: "inherit" }}>
             {copied ? "Copied!" : "Copy Text"}
           </button>
         </div>

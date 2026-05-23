@@ -69,7 +69,7 @@ export default function Base64Tool() {
   }
 
   return (
-    <div style={{ fontFamily: "inherit" }}>
+    <div style={{ background: "var(--surface)", border: "1px solid var(--border-light)", borderRadius: 20, padding: 32, fontFamily: "inherit" }}>
       <div style={{ display: "flex", gap: "8px", marginBottom: "20px" }}>
         {["encode", "decode"].map(function (m) {
           const active = mode === m;
@@ -81,9 +81,9 @@ export default function Base64Tool() {
                 padding: "10px 24px",
                 borderRadius: "999px",
                 border: "1px solid",
-                borderColor: active ? "#0071e3" : "#e8e8ed",
-                background: active ? "#0071e3" : "#f5f5f7",
-                color: active ? "white" : "#1d1d1f",
+                borderColor: active ? "var(--upload-btn-bg)" : "var(--border-light)",
+                background: active ? "var(--upload-btn-bg)" : "var(--surface-2)",
+                color: active ? "white" : "var(--text)",
                 fontSize: "15px",
                 fontWeight: "600",
                 cursor: "pointer",
@@ -99,11 +99,11 @@ export default function Base64Tool() {
 
       <div style={{ marginBottom: "16px" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "8px" }}>
-          <label style={{ fontSize: "14px", fontWeight: "600", color: "#86868b" }}>
+          <label style={{ fontSize: "14px", fontWeight: "600", color: "var(--text-muted)" }}>
             {mode === "encode" ? "Plain text input" : "Base64 input"}
           </label>
           {input && (
-            <button onClick={clear} style={{ fontSize: "13px", color: "#86868b", background: "none", border: "none", cursor: "pointer", fontFamily: "inherit", padding: "0" }}>
+            <button onClick={clear} style={{ fontSize: "13px", color: "var(--text-muted)", background: "none", border: "none", cursor: "pointer", fontFamily: "inherit", padding: "0" }}>
               Clear
             </button>
           )}
@@ -116,7 +116,7 @@ export default function Base64Tool() {
             width: "100%",
             minHeight: "140px",
             borderRadius: "14px",
-            border: "1px solid #e8e8ed",
+            border: "1px solid var(--border-light)",
             padding: "16px",
             fontSize: "15px",
             fontFamily: mode === "decode" ? "monospace" : "inherit",
@@ -124,6 +124,8 @@ export default function Base64Tool() {
             outline: "none",
             boxSizing: "border-box",
             lineHeight: "1.6",
+            background: "var(--surface-2)",
+            color: "var(--text)",
           }}
         />
       </div>
@@ -135,30 +137,30 @@ export default function Base64Tool() {
       )}
 
       {output && (
-        <div style={{ background: "#f5f5f7", borderRadius: "14px", padding: "20px", marginBottom: "16px" }}>
+        <div style={{ background: "var(--surface-2)", borderRadius: "14px", padding: "20px", marginBottom: "16px" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "10px" }}>
-            <label style={{ fontSize: "14px", fontWeight: "600", color: "#86868b" }}>
+            <label style={{ fontSize: "14px", fontWeight: "600", color: "var(--text-muted)" }}>
               {mode === "encode" ? "Base64 output" : "Decoded text"}
             </label>
             <div style={{ display: "flex", gap: "8px" }}>
               <button
                 onClick={pasteOutput}
-                style={{ fontSize: "13px", color: "#0071e3", background: "none", border: "none", cursor: "pointer", fontFamily: "inherit", padding: "0", fontWeight: "600" }}
+                style={{ fontSize: "13px", color: "var(--upload-btn-bg)", background: "none", border: "none", cursor: "pointer", fontFamily: "inherit", padding: "0", fontWeight: "600" }}
               >
                 {mode === "encode" ? "→ Decode this" : "→ Re-encode"}
               </button>
             </div>
           </div>
-          <p style={{ fontSize: "15px", lineHeight: "1.65", wordBreak: "break-all", marginBottom: "14px", fontFamily: mode === "encode" ? "monospace" : "inherit", color: "#1d1d1f" }}>
+          <p style={{ fontSize: "15px", lineHeight: "1.65", wordBreak: "break-all", marginBottom: "14px", fontFamily: mode === "encode" ? "monospace" : "inherit", color: "var(--text)" }}>
             {output}
           </p>
           <button
             onClick={copy}
             style={{
-              background: copied ? "#16a34a" : "#0071e3",
-              color: "white",
+              background: copied ? "#16a34a" : "var(--upload-btn-bg)",
+              color: "var(--upload-btn-color)",
               border: "none",
-              borderRadius: "10px",
+              borderRadius: "99px",
               padding: "10px 20px",
               fontSize: "14px",
               fontWeight: "600",
@@ -173,7 +175,7 @@ export default function Base64Tool() {
       )}
 
       {input && !output && !error && (
-        <div style={{ background: "#f5f5f7", borderRadius: "14px", padding: "20px", color: "#86868b", fontSize: "15px", textAlign: "center" }}>
+        <div style={{ background: "var(--surface-2)", borderRadius: "14px", padding: "20px", color: "var(--text-muted)", fontSize: "15px", textAlign: "center" }}>
           Processing…
         </div>
       )}

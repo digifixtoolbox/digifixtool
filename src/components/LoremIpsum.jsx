@@ -57,11 +57,11 @@ export default function LoremIpsum() {
   const paragraphList = output ? output.split("\n\n") : [];
 
   return (
-    <div style={{ fontFamily: "inherit" }}>
-      <div style={{ background: "#f5f5f7", borderRadius: "16px", padding: "24px", marginBottom: "20px" }}>
+    <div style={{ background: "var(--surface)", border: "1px solid var(--border-light)", borderRadius: 20, padding: 32, fontFamily: "inherit" }}>
+      <div style={{ background: "var(--surface-2)", borderRadius: "16px", padding: "24px", marginBottom: "20px" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "12px" }}>
-          <label style={{ fontWeight: "600", fontSize: "15px" }}>Number of paragraphs</label>
-          <span style={{ fontWeight: "700", fontSize: "15px", color: "#0071e3" }}>{count}</span>
+          <label style={{ fontWeight: "600", fontSize: "15px", color: "var(--text)" }}>Number of paragraphs</label>
+          <span style={{ fontWeight: "700", fontSize: "15px", color: "var(--upload-btn-bg)" }}>{count}</span>
         </div>
         <input
           type="range"
@@ -69,32 +69,32 @@ export default function LoremIpsum() {
           max="10"
           value={count}
           onChange={function (e) { setCount(Number(e.target.value)); }}
-          style={{ width: "100%", accentColor: "#0071e3", marginBottom: "6px", cursor: "pointer" }}
+          style={{ width: "100%", accentColor: "var(--upload-btn-bg)", marginBottom: "6px", cursor: "pointer" }}
         />
-        <div style={{ display: "flex", justifyContent: "space-between", fontSize: "12px", color: "#86868b" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", fontSize: "12px", color: "var(--text-muted)" }}>
           <span>1</span><span>10</span>
         </div>
       </div>
 
       <button
         onClick={generate}
-        style={{ width: "100%", background: "#0071e3", color: "white", border: "none", borderRadius: "14px", padding: "18px", fontSize: "17px", fontWeight: "700", cursor: "pointer", marginBottom: "20px", minHeight: "56px" }}
+        style={{ width: "100%", background: "var(--upload-btn-bg)", color: "var(--upload-btn-color)", border: "none", borderRadius: "99px", padding: "18px", fontSize: "17px", fontWeight: "700", cursor: "pointer", marginBottom: "20px", minHeight: "56px", fontFamily: "inherit" }}
       >
         Generate Lorem Ipsum
       </button>
 
       {output && (
-        <div style={{ background: "#f5f5f7", borderRadius: "16px", padding: "24px" }}>
+        <div style={{ background: "var(--surface-2)", borderRadius: "16px", padding: "24px" }}>
           {paragraphList.map(function (para, i) {
             return (
-              <p key={i} style={{ fontSize: "15px", lineHeight: "1.75", color: "#1d1d1f", marginBottom: i < paragraphList.length - 1 ? "16px" : "0" }}>
+              <p key={i} style={{ fontSize: "15px", lineHeight: "1.75", color: "var(--text)", marginBottom: i < paragraphList.length - 1 ? "16px" : "0" }}>
                 {para}
               </p>
             );
           })}
           <button
             onClick={copy}
-            style={{ marginTop: "20px", background: copied ? "#16a34a" : "#0071e3", color: "white", border: "none", borderRadius: "10px", padding: "12px 20px", fontSize: "14px", fontWeight: "600", cursor: "pointer", minHeight: "44px", transition: "background 0.15s" }}
+            style={{ marginTop: "20px", background: copied ? "#16a34a" : "var(--upload-btn-bg)", color: "var(--upload-btn-color)", border: "none", borderRadius: "99px", padding: "12px 24px", fontSize: "14px", fontWeight: "600", cursor: "pointer", minHeight: "44px", transition: "background 0.15s", fontFamily: "inherit" }}
           >
             {copied ? "Copied!" : "Copy all text"}
           </button>

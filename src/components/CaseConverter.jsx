@@ -31,26 +31,26 @@ export default function CaseConverter() {
   }
 
   return (
-    <div style={{ fontFamily: "inherit" }}>
+    <div style={{ background: "var(--surface)", border: "1px solid var(--border-light)", borderRadius: 20, padding: 32 }}>
       <textarea
         value={input}
         onChange={function(e) { setInput(e.target.value); setOutput(""); setActive(""); }}
         placeholder="Type or paste your text here..."
-        style={{ width: "100%", minHeight: "140px", borderRadius: "14px", border: "1px solid #e8e8ed", padding: "16px", fontSize: "15px", fontFamily: "inherit", resize: "vertical", outline: "none", marginBottom: "16px", boxSizing: "border-box" }}
+        style={{ width: "100%", minHeight: "140px", borderRadius: "14px", border: "1px solid var(--border-light)", padding: "16px", fontSize: "15px", fontFamily: "inherit", resize: "vertical", outline: "none", marginBottom: "16px", boxSizing: "border-box", background: "var(--surface-2)", color: "var(--text)" }}
       />
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(140px, 1fr))", gap: "10px", marginBottom: "20px" }}>
         {cases.map(function(c) {
           return (
-            <button key={c.label} onClick={function() { convert(c); }} style={{ padding: "12px 16px", borderRadius: "12px", border: "1px solid", borderColor: active === c.label ? "#0071e3" : "#e8e8ed", background: active === c.label ? "#0071e3" : "#f5f5f7", color: active === c.label ? "white" : "#1d1d1f", fontSize: "14px", fontWeight: "600", cursor: "pointer", fontFamily: "inherit" }}>
+            <button key={c.label} onClick={function() { convert(c); }} style={{ padding: "12px 16px", borderRadius: "12px", border: "1px solid", borderColor: active === c.label ? "var(--upload-btn-bg)" : "var(--border-light)", background: active === c.label ? "var(--upload-btn-bg)" : "var(--surface-2)", color: active === c.label ? "var(--upload-btn-color)" : "var(--text)", fontSize: "14px", fontWeight: "600", cursor: "pointer", fontFamily: "inherit" }}>
               {c.label}
             </button>
           );
         })}
       </div>
       {output && (
-        <div style={{ background: "#f5f5f7", borderRadius: "14px", padding: "20px" }}>
-          <p style={{ fontSize: "15px", lineHeight: "1.6", wordBreak: "break-word", marginBottom: "12px" }}>{output}</p>
-          <button onClick={copy} style={{ background: copied ? "#16a34a" : "#0071e3", color: "white", border: "none", borderRadius: "10px", padding: "10px 20px", fontSize: "14px", fontWeight: "600", cursor: "pointer" }}>
+        <div style={{ background: "var(--surface-2)", borderRadius: "14px", padding: "20px" }}>
+          <p style={{ fontSize: "15px", lineHeight: "1.6", wordBreak: "break-word", marginBottom: "12px", color: "var(--text)" }}>{output}</p>
+          <button onClick={copy} style={{ background: copied ? "#16a34a" : "var(--upload-btn-bg)", color: "var(--upload-btn-color)", border: "none", borderRadius: "99px", padding: "10px 20px", fontSize: "14px", fontWeight: "600", cursor: "pointer", fontFamily: "inherit" }}>
             {copied ? "Copied!" : "Copy result"}
           </button>
         </div>

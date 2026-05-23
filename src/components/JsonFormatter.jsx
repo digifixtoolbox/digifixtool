@@ -40,7 +40,7 @@ export default function JsonFormatter() {
   }
 
   function validate() {
-    if (!input.trim()) { setError("Nothing to validate — paste some JSON first."); return; }
+    if (!input.trim()) { setError("Nothing to validate. Paste some JSON first."); return; }
     const result = parse(input);
     if (result.ok) {
       setError("");
@@ -76,13 +76,13 @@ export default function JsonFormatter() {
   const charCount = output ? output.length : 0;
 
   return (
-    <div style={{ fontFamily: "inherit" }}>
-      {/* Input */}
+    <div style={{ background: "var(--surface)", border: "1px solid var(--border-light)", borderRadius: 20, padding: 32, fontFamily: "inherit" }}>
+      <style>{`.json-input-area::placeholder { opacity: 0.38; }`}</style>
       <div style={{ marginBottom: "16px" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "8px" }}>
-          <label style={{ fontSize: "14px", fontWeight: "600", color: "#86868b" }}>JSON input</label>
+          <label style={{ fontSize: "14px", fontWeight: "600", color: "var(--text-muted)" }}>JSON input</label>
           {input && (
-            <button onClick={clear} style={{ fontSize: "13px", color: "#86868b", background: "none", border: "none", cursor: "pointer", fontFamily: "inherit", padding: "4px 0" }}>
+            <button onClick={clear} style={{ fontSize: "13px", color: "var(--text-muted)", background: "none", border: "none", cursor: "pointer", fontFamily: "inherit", padding: "4px 0" }}>
               Clear
             </button>
           )}
@@ -91,12 +91,13 @@ export default function JsonFormatter() {
           value={input}
           onChange={function (e) { setInput(e.target.value); setOutput(""); setError(""); setValid(null); setMode(""); }}
           placeholder={'{\n  "name": "example",\n  "value": 42\n}'}
+          className="json-input-area"
           spellCheck={false}
           style={{
             width: "100%",
             minHeight: "180px",
             borderRadius: "14px",
-            border: error ? "1.5px solid #fca5a5" : "1px solid #e8e8ed",
+            border: error ? "1.5px solid #fca5a5" : "1px solid var(--border-light)",
             padding: "14px 16px",
             fontSize: "13px",
             fontFamily: "ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, monospace",
@@ -104,14 +105,14 @@ export default function JsonFormatter() {
             outline: "none",
             boxSizing: "border-box",
             lineHeight: "1.65",
-            color: "#1d1d1f",
+            background: "var(--surface-2)",
+            color: "var(--text)",
           }}
         />
       </div>
 
-      {/* Indent selector */}
       <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "14px", flexWrap: "wrap" }}>
-        <span style={{ fontSize: "14px", fontWeight: "500", color: "#86868b" }}>Indent:</span>
+        <span style={{ fontSize: "14px", fontWeight: "500", color: "var(--text-muted)" }}>Indent:</span>
         {[2, 4].map(function (n) {
           const active = indent === n;
           return (
@@ -122,9 +123,9 @@ export default function JsonFormatter() {
                 padding: "6px 14px",
                 borderRadius: "8px",
                 border: "1px solid",
-                borderColor: active ? "#0071e3" : "#e8e8ed",
-                background: active ? "#0071e3" : "#f5f5f7",
-                color: active ? "white" : "#1d1d1f",
+                borderColor: active ? "var(--upload-btn-bg)" : "var(--border-light)",
+                background: active ? "var(--upload-btn-bg)" : "var(--surface-2)",
+                color: active ? "white" : "var(--text)",
                 fontSize: "13px",
                 fontWeight: "600",
                 cursor: "pointer",
@@ -138,7 +139,6 @@ export default function JsonFormatter() {
         })}
       </div>
 
-      {/* Action buttons */}
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "10px", marginBottom: "16px" }}>
         {[
           { label: "Format", fn: format, primary: true },
@@ -150,9 +150,9 @@ export default function JsonFormatter() {
               key={btn.label}
               onClick={btn.fn}
               style={{
-                background: btn.primary ? "#0071e3" : "#f5f5f7",
-                color: btn.primary ? "white" : "#1d1d1f",
-                border: btn.primary ? "none" : "1px solid #e8e8ed",
+                background: btn.primary ? "var(--upload-btn-bg)" : "var(--surface-2)",
+                color: btn.primary ? "var(--upload-btn-color)" : "var(--text)",
+                border: btn.primary ? "none" : "1px solid var(--border-light)",
                 borderRadius: "12px",
                 padding: "14px 10px",
                 fontSize: "15px",
@@ -169,33 +169,30 @@ export default function JsonFormatter() {
         })}
       </div>
 
-      {/* Error */}
       {error && (
         <div style={{ background: "#fff2f2", border: "1px solid #fecaca", borderRadius: "12px", padding: "12px 16px", marginBottom: "14px", color: "#dc2626", fontSize: "13px", fontWeight: "500", fontFamily: "ui-monospace, monospace" }}>
           ✗ {error}
         </div>
       )}
 
-      {/* Valid confirmation (validate mode only, no output) */}
       {valid === true && mode === "validate" && !output && (
         <div style={{ background: "#f0fdf4", border: "1px solid #bbf7d0", borderRadius: "12px", padding: "12px 16px", marginBottom: "14px", color: "#16a34a", fontSize: "14px", fontWeight: "700" }}>
           ✓ Valid JSON
         </div>
       )}
 
-      {/* Output */}
       {output && (
-        <div style={{ background: "#f5f5f7", borderRadius: "14px", padding: "20px" }}>
+        <div style={{ background: "var(--surface-2)", borderRadius: "14px", padding: "20px" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "10px", flexWrap: "wrap", gap: "6px" }}>
             <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-              <span style={{ fontSize: "14px", fontWeight: "600", color: "#86868b" }}>
+              <span style={{ fontSize: "14px", fontWeight: "600", color: "var(--text-muted)" }}>
                 {mode === "minify" ? "Minified output" : "Formatted output"}
               </span>
               <span style={{ background: "#d1fae5", color: "#065f46", fontSize: "12px", fontWeight: "700", padding: "2px 8px", borderRadius: "999px" }}>
                 ✓ Valid JSON
               </span>
             </div>
-            <span style={{ fontSize: "12px", color: "#86868b" }}>
+            <span style={{ fontSize: "12px", color: "var(--text-muted)" }}>
               {lineCount.toLocaleString()} lines · {charCount.toLocaleString()} chars
             </span>
           </div>
@@ -206,7 +203,7 @@ export default function JsonFormatter() {
               wordBreak: "break-all",
               whiteSpace: "pre-wrap",
               fontFamily: "ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, monospace",
-              color: "#1d1d1f",
+              color: "var(--text)",
               margin: 0,
               marginBottom: "14px",
               maxHeight: "400px",
@@ -218,10 +215,10 @@ export default function JsonFormatter() {
           <button
             onClick={copy}
             style={{
-              background: copied ? "#16a34a" : "#0071e3",
-              color: "white",
+              background: copied ? "#16a34a" : "var(--upload-btn-bg)",
+              color: "var(--upload-btn-color)",
               border: "none",
-              borderRadius: "10px",
+              borderRadius: "99px",
               padding: "10px 20px",
               fontSize: "14px",
               fontWeight: "600",

@@ -46,23 +46,23 @@ export default function ColorPicker() {
   }
 
   return (
-    <div style={{ fontFamily: "inherit" }}>
+    <div style={{ background: "var(--surface)", border: "1px solid var(--border-light)", borderRadius: 20, padding: 32 }}>
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "24px" }}>
         <div style={{ width: "100%", height: "200px", borderRadius: "20px", background: hex, boxShadow: "0 4px 20px rgba(0,0,0,0.12)" }} />
-        <div style={{ display: "flex", alignItems: "center", gap: "16px", background: "#f5f5f7", borderRadius: "14px", padding: "16px 20px", width: "100%", boxSizing: "border-box" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "16px", background: "var(--surface-2)", borderRadius: "14px", padding: "16px 20px", width: "100%", boxSizing: "border-box" }}>
           <input type="color" value={hex} onChange={function(e) { setHex(e.target.value); }} style={{ width: "56px", height: "56px", borderRadius: "12px", border: "none", cursor: "pointer", padding: "0" }} />
           <div>
-            <p style={{ fontSize: "13px", color: "#6e6e73", marginBottom: "4px", fontWeight: "500" }}>Selected color</p>
-            <p style={{ fontSize: "20px", fontWeight: "700", letterSpacing: "0.05em" }}>{hex.toUpperCase()}</p>
+            <p style={{ fontSize: "13px", color: "var(--text-muted)", marginBottom: "4px", fontWeight: "500" }}>Selected color</p>
+            <p style={{ fontSize: "20px", fontWeight: "700", letterSpacing: "0.05em", color: "var(--text)" }}>{hex.toUpperCase()}</p>
           </div>
         </div>
         <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: "10px" }}>
           {formats.map(function(f) {
             return (
-              <div key={f.label} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", background: "#f5f5f7", borderRadius: "12px", padding: "14px 16px", gap: "12px" }}>
-                <span style={{ fontSize: "13px", fontWeight: "700", color: "#6e6e73", minWidth: "36px" }}>{f.label}</span>
-                <span style={{ fontSize: "15px", fontWeight: "600", flex: "1" }}>{f.value}</span>
-                <button onClick={function() { copy(f.value); }} style={{ background: copied === f.value ? "#16a34a" : "#0071e3", color: "white", border: "none", borderRadius: "8px", padding: "8px 14px", fontSize: "13px", fontWeight: "600", cursor: "pointer", flexShrink: "0" }}>
+              <div key={f.label} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", background: "var(--surface-2)", borderRadius: "12px", padding: "14px 16px", gap: "12px" }}>
+                <span style={{ fontSize: "13px", fontWeight: "700", color: "var(--text-muted)", minWidth: "36px" }}>{f.label}</span>
+                <span style={{ fontSize: "15px", fontWeight: "600", flex: "1", color: "var(--text)" }}>{f.value}</span>
+                <button onClick={function() { copy(f.value); }} style={{ background: copied === f.value ? "#16a34a" : "var(--upload-btn-bg)", color: "var(--upload-btn-color)", border: "none", borderRadius: "8px", padding: "8px 14px", fontSize: "13px", fontWeight: "600", cursor: "pointer", flexShrink: "0" }}>
                   {copied === f.value ? "Copied!" : "Copy"}
                 </button>
               </div>
