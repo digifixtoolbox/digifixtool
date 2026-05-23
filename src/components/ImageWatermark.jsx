@@ -1,4 +1,10 @@
 import { useState, useRef, useEffect } from "react";
+import SaveAsDialog from "./SaveAsDialog";
+
+var supportsFileShare = (function() {
+  try { return typeof navigator !== 'undefined' && !!navigator.share && !!navigator.canShare && navigator.canShare({ files: [new File([], 't.jpg', { type: 'image/jpeg' })] }); }
+  catch(e) { return false; }
+})();
 
 export default function ImageWatermark() {
   const [imageUrl, setImageUrl] = useState(null);
@@ -8,6 +14,7 @@ export default function ImageWatermark() {
   const [color, setColor] = useState("#ffffff");
   const [position, setPosition] = useState("bottom-right");
   const [dragOver, setDragOver] = useState(false);
+  const [saveAsName, setSaveAsName] = useState(null);
   const canvasRef = useRef(null);
 
   var posKeys = ["top-left", "top-center", "top-right", "middle-left", "center", "middle-right", "bottom-left", "bottom-center", "bottom-right"];
@@ -72,28 +79,45 @@ export default function ImageWatermark() {
 
   async function handleSaveAs() {
     if (!canvasRef.current) return;
-    var url = canvasRef.current.toDataURL("image/jpeg", 0.92);
     var filename = "watermarked.jpg";
     if (typeof window.showSaveFilePicker === "function") {
       try {
-        var handle = await window.showSaveFilePicker({ suggestedName: filename, types: [{ description: "File", accept: { "image/jpeg": [".jpg"] } }] });
-        var blob = await fetch(url).then(function(r) { return r.blob(); });
+        var dataUrl = canvasRef.current.toDataURL("image/jpeg", 0.92);
+        var blob = await fetch(dataUrl).then(function(r) { return r.blob(); });
+        var handle = await window.showSaveFilePicker({ suggestedName: filename, types: [{ description: "JPEG Image", accept: { "image/jpeg": [".jpg"] } }] });
         var writable = await handle.createWritable();
         await writable.write(blob);
         await writable.close();
         return;
-      } catch(e) {
-        if (e.name === "AbortError") return;
-      }
+      } catch(e) { if (e.name === "AbortError") return; }
     }
-    handleSave();
+    setSaveAsName(filename);
+  }
+
+  function doSaveAs(filename) {
+    var a = document.createElement("a");
+    a.href = canvasRef.current.toDataURL("image/jpeg", 0.92);
+    a.download = filename; a.click();
+    setSaveAsName(null);
   }
 
   function resetAll() { setImageUrl(null); }
 
-  var saveBtn = { background: "#0071e3", color: "white", border: "none", borderRadius: "99px", padding: "14px 28px", fontSize: "16px", fontWeight: "700", cursor: "pointer", minHeight: "44px", fontFamily: "inherit" };
-  var saveAsBtn = { background: "transparent", color: "#0071e3", border: "1.5px solid #0071e3", borderRadius: "99px", padding: "14px 28px", fontSize: "16px", fontWeight: "700", cursor: "pointer", minHeight: "44px", fontFamily: "inherit" };
-  var resetBtn = { background: "var(--surface-2)", color: "var(--text-muted)", border: "none", borderRadius: "99px", padding: "14px 28px", fontSize: "16px", fontWeight: "600", cursor: "pointer", minHeight: "44px", fontFamily: "inherit" };
+  var saveBtn = { background: "var(--upload-btn-bg)", color: "var(--upload-btn-color)", border: "none", borderRadius: "24px", padding: "9px 24px", fontSize: "14px", fontWeight: "600", cursor: "pointer", fontFamily: "inherit" };
+  var saveAsBtn = { background: "transparent", color: "var(--outline-btn-color)", border: "1.5px solid var(--outline-btn-color)", borderRadius: "24px", padding: "9px 24px", fontSize: "14px", fontWeight: "600", cursor: "pointer", fontFamily: "inherit" };
+  var shareBtn = { background: "transparent", color: "var(--outline-btn-color)", border: "1.5px solid var(--outline-btn-color)", borderRadius: "24px", padding: "9px 24px", fontSize: "14px", fontWeight: "600", cursor: "pointer", fontFamily: "inherit" };
+  var resetBtn = { background: "transparent", color: "var(--reset-btn-text)", border: "1.5px solid var(--reset-btn-color)", borderRadius: "24px", padding: "9px 24px", fontSize: "14px", fontWeight: "600", cursor: "pointer", fontFamily: "inherit" };
+
+  async function handleShare() {
+    if (!canvasRef.current) return;
+    var dataUrl = canvasRef.current.toDataURL('image/jpeg', 0.92);
+    var blob = await fetch(dataUrl).then(function(r) { return r.blob(); });
+    var file = new File([blob], 'watermarked.jpg', { type: 'image/jpeg' });
+    if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+      try { await navigator.share({ files: [file], title: 'PixMidas' }); }
+      catch(err) { if (err.name !== 'AbortError') { handleSave(); } }
+    } else { handleSave(); }
+  }
 
   var cardStyle = { background: "var(--surface)", border: "1px solid var(--border-light)", borderRadius: 20, padding: 32 };
 
@@ -104,7 +128,7 @@ export default function ImageWatermark() {
         onDragOver={function(e) { e.preventDefault(); setDragOver(true); }}
         onDragLeave={function() { setDragOver(false); }}
         onDrop={handleDrop}
-        style={{ border: "2px dashed " + (dragOver ? "#0071e3" : "var(--border)"), borderRadius: "16px", padding: "48px 24px", textAlign: "center", cursor: "pointer", background: dragOver ? "#f0f7ff" : "var(--surface-2)", transition: "border-color 0.15s, background 0.15s" }}
+        style={{ border: "2px dashed " + (dragOver ? "var(--upload-btn-bg)" : "var(--border)"), borderRadius: "16px", padding: "48px 24px", textAlign: "center", cursor: "pointer", background: dragOver ? "var(--accent-light)" : "var(--surface-2)", transition: "border-color 0.15s, background 0.15s" }}
       >
         <div style={{ fontSize: "48px", marginBottom: "16px" }}><i className="ti ti-writing" style={{color:'#5B5BD6'}}></i></div>
         <p style={{ fontSize: "17px", fontWeight: "600", marginBottom: "8px", color: "var(--text)" }}>Drop an image here or click to browse</p>
@@ -130,7 +154,7 @@ export default function ImageWatermark() {
             </label>
             <input type="range" min="12" max="120" step="4" value={fontSize}
               onChange={function(e) { setFontSize(Number(e.target.value)); }}
-              style={{ width: "100%", accentColor: "#0071e3" }} />
+              style={{ width: "100%", accentColor: "var(--upload-btn-bg)" }} />
           </div>
           <div>
             <label style={{ fontSize: "13px", fontWeight: "600", display: "block", marginBottom: "8px", color: "var(--text)" }}>
@@ -138,7 +162,7 @@ export default function ImageWatermark() {
             </label>
             <input type="range" min="10" max="100" step="5" value={opacity}
               onChange={function(e) { setOpacity(Number(e.target.value)); }}
-              style={{ width: "100%", accentColor: "#0071e3" }} />
+              style={{ width: "100%", accentColor: "var(--upload-btn-bg)" }} />
           </div>
           <div>
             <label style={{ fontSize: "13px", fontWeight: "600", display: "block", marginBottom: "8px", color: "var(--text)" }}>Text Color</label>
@@ -154,7 +178,7 @@ export default function ImageWatermark() {
               {posKeys.map(function(pos) {
                 return (
                   <button key={pos} onClick={function() { setPosition(pos); }}
-                    style={{ padding: "10px", border: position === pos ? "2px solid #0071e3" : "1px solid var(--border-light)", borderRadius: "8px", background: position === pos ? "var(--accent-light)" : "var(--surface-2)", cursor: "pointer", fontSize: "18px" }}>
+                    style={{ padding: "10px", border: position === pos ? "2px solid var(--upload-btn-bg)" : "1px solid var(--border-light)", borderRadius: "8px", background: position === pos ? "var(--accent-light)" : "var(--surface-2)", cursor: "pointer", fontSize: "18px" }}>
                     {posIcons[pos]}
                   </button>
                 );
@@ -169,11 +193,13 @@ export default function ImageWatermark() {
         </div>
       </div>
 
-      <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", marginTop: "16px" }}>
+      <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", marginTop: "16px", justifyContent: "center" }}>
         <button onClick={handleSave} style={saveBtn}>Save</button>
         <button onClick={handleSaveAs} style={saveAsBtn}>Save As...</button>
+        {supportsFileShare && imageUrl && <button onClick={handleShare} style={shareBtn}><i className="ti ti-share" /> Share</button>}
         <button onClick={resetAll} style={resetBtn}>Reset</button>
       </div>
+      {saveAsName !== null && <SaveAsDialog defaultName={saveAsName} onSave={doSaveAs} onCancel={function() { setSaveAsName(null); }} />}
     </div>
   );
 }
