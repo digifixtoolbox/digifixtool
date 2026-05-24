@@ -42,7 +42,7 @@ const tools = [
   { slug: 'password-generator', name: 'Password Generator', description: 'Generate strong, secure passwords instantly.', iconClass: 'key', iconPalette: 'amber', category: 'Utility', tags: ['internet', 'web', 'online', 'network', 'security', 'random', 'strong password', 'secure', 'credentials', 'login', 'account', 'passphrase', 'secret', 'cybersecurity', 'safe', 'protection', 'authentication', 'privacy', 'pin', 'encryption', 'hack proof'] },
 ];
 
-const categories = ['All', 'Image', 'PDF', 'Text', 'Developer', 'Social', 'Utility'];
+const categories = ['All', 'Image', 'PDF', 'Text', 'Social', 'Developer', 'Utility'];
 ---
 
 <Layout
@@ -97,12 +97,14 @@ const categories = ['All', 'Image', 'PDF', 'Text', 'Developer', 'Social', 'Utili
   <section id="all-tools" class="tools-section">
     <div class="filter-bar-wrap">
       <div class="filter-bar">
-        {categories.map((cat) => (
-          <button class="filter-btn" data-category={cat} aria-pressed={cat === 'All' ? 'true' : 'false'}>
-            {cat}
-          </button>
-        ))}
+        <button class="filter-btn" data-category="All" aria-pressed="true">All</button>
         <button class="filter-btn" data-category="Popular" aria-pressed="false">Popular</button>
+        <button class="filter-btn" data-category="Image" aria-pressed="false">Image</button>
+        <button class="filter-btn" data-category="PDF" aria-pressed="false">PDF</button>
+        <button class="filter-btn" data-category="Text" aria-pressed="false">Text</button>
+        <button class="filter-btn" data-category="Social" aria-pressed="false">Social</button>
+        <button class="filter-btn" data-category="Developer" aria-pressed="false">Code</button>
+        <button class="filter-btn" data-category="Utility" aria-pressed="false">Tools</button>
         <button class="filter-btn filter-btn-new" data-category="New" aria-pressed="false">New</button>
       </div>
     </div>
@@ -1034,7 +1036,12 @@ const categories = ['All', 'Image', 'PDF', 'Text', 'Developer', 'Social', 'Utili
   }
 
   .badge-new {
-    background: #16a34a;
+    background: #22c55e;
+  }
+
+  :global([data-theme="dark"]) .badge-new {
+    background: #4ade80;
+    color: #000;
   }
 
   .tool-desc {
