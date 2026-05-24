@@ -1,5 +1,10 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.pixmidas.com/sitemap-index.xml
+# Block Cloudflare email protection script
+Disallow: /cdn-cgi/
+
+# Block search parameters from indexing
+Disallow: /*?q=
+
 Sitemap: https://www.pixmidas.com/sitemap.xml
