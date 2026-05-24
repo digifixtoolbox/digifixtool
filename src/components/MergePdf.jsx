@@ -1,14 +1,34 @@
 import { useState } from "react";
+import { PDFDocument } from "pdf-lib";
+import SaveAsDialog from "./SaveAsDialog";
+
+var supportsFileShare = (function() {
+  try { return typeof navigator !== 'undefined' && !!navigator.share && !!navigator.canShare && navigator.canShare({ files: [new File([], 't.pdf', { type: 'application/pdf' })] }); }
+  catch(e) { return false; }
+})();
 
 export default function MergePdf() {
   const [files, setFiles] = useState([]);
   const [merging, setMerging] = useState(false);
   const [done, setDone] = useState(false);
   const [error, setError] = useState("");
+  const [dragOver, setDragOver] = useState(false);
+  const [pdfUrl, setPdfUrl] = useState(null);
+  const [saveAsName, setSaveAsName] = useState(null);
 
   function handleFiles(e) {
     var selected = Array.from(e.target.files).filter(function(f) { return f.type === "application/pdf"; });
     setFiles(function(prev) { return prev.concat(selected); });
+    setDone(false);
+    setError("");
+  }
+
+  function handleDrop(e) {
+    e.preventDefault();
+    setDragOver(false);
+    var dropped = Array.from(e.dataTransfer.files).filter(function(f) { return f.type === "application/pdf"; });
+    if (!dropped.length) { setError("Please drop PDF files only."); return; }
+    setFiles(function(prev) { return prev.concat(dropped); });
     setDone(false);
     setError("");
   }
@@ -39,12 +59,6 @@ export default function MergePdf() {
     if (files.length < 2) { setError("Please add at least 2 PDF files."); return; }
     setMerging(true);
     setError("");
-    if (typeof window.PDFLib === "undefined") {
-      setError("PDF library not loaded. Please refresh.");
-      setMerging(false);
-      return;
-    }
-    var PDFLib = window.PDFLib;
     var readers = files.map(function(f) {
       return new Promise(function(resolve) {
         var r = new FileReader();
@@ -53,11 +67,11 @@ export default function MergePdf() {
       });
     });
     Promise.all(readers).then(function(buffers) {
-      return PDFLib.PDFDocument.create().then(function(merged) {
+      return PDFDocument.create().then(function(merged) {
         var chain = Promise.resolve();
         buffers.forEach(function(buf) {
           chain = chain.then(function() {
-            return PDFLib.PDFDocument.load(buf).then(function(doc) {
+            return PDFDocument.load(buf).then(function(doc) {
               return merged.copyPages(doc, doc.getPageIndices()).then(function(pages) {
                 pages.forEach(function(p) { merged.addPage(p); });
               });
@@ -69,11 +83,7 @@ export default function MergePdf() {
     }).then(function(bytes) {
       var blob = new Blob([bytes], { type: "application/pdf" });
       var url = URL.createObjectURL(blob);
-      var a = document.createElement("a");
-      a.href = url;
-      a.download = "merged.pdf";
-      a.click();
-      URL.revokeObjectURL(url);
+      setPdfUrl(url);
       setMerging(false);
       setDone(true);
     }).catch(function() {
@@ -82,11 +92,62 @@ export default function MergePdf() {
     });
   }
 
+  function handleSave() {
+    if (!pdfUrl) return;
+    var a = document.createElement("a");
+    a.href = pdfUrl;
+    a.download = "merged.pdf"; a.click();
+  }
+
+  async function handleSaveAs() {
+    if (!pdfUrl) return;
+    var filename = "merged.pdf";
+    if (typeof window.showSaveFilePicker === "function") {
+      try {
+        var blob = await fetch(pdfUrl).then(function(r) { return r.blob(); });
+        var handle = await window.showSaveFilePicker({ suggestedName: filename, types: [{ description: "PDF Document", accept: { "application/pdf": [".pdf"] } }] });
+        var writable = await handle.createWritable();
+        await writable.write(blob);
+        await writable.close();
+        return;
+      } catch(e) { if (e.name === "AbortError") return; }
+    }
+    setSaveAsName(filename);
+  }
+
+  function doSaveAs(filename) {
+    var a = document.createElement("a"); a.href = pdfUrl; a.download = filename; a.click();
+    setSaveAsName(null);
+  }
+
+  function reset() { setFiles([]); setDone(false); if (pdfUrl) URL.revokeObjectURL(pdfUrl); setPdfUrl(null); setError(""); }
+
+  var saveBtn = { background: "var(--upload-btn-bg)", color: "var(--upload-btn-color)", border: "none", borderRadius: "24px", padding: "9px 24px", fontSize: "14px", fontWeight: "600", cursor: "pointer", fontFamily: "inherit" };
+  var saveAsBtn = { background: "transparent", color: "var(--outline-btn-color)", border: "1.5px solid var(--outline-btn-color)", borderRadius: "24px", padding: "9px 24px", fontSize: "14px", fontWeight: "600", cursor: "pointer", fontFamily: "inherit" };
+  var shareBtn = { background: "transparent", color: "var(--outline-btn-color)", border: "1.5px solid var(--outline-btn-color)", borderRadius: "24px", padding: "9px 24px", fontSize: "14px", fontWeight: "600", cursor: "pointer", fontFamily: "inherit" };
+  var resetBtn = { background: "transparent", color: "var(--reset-btn-text)", border: "1.5px solid var(--reset-btn-color)", borderRadius: "24px", padding: "9px 24px", fontSize: "14px", fontWeight: "600", cursor: "pointer", fontFamily: "inherit" };
+
+  async function handleShare() {
+    if (!pdfUrl) return;
+    var blob = await fetch(pdfUrl).then(function(r) { return r.blob(); });
+    var file = new File([blob], 'merged.pdf', { type: 'application/pdf' });
+    if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+      try { await navigator.share({ files: [file], title: 'PixMidas' }); }
+      catch(err) { if (err.name !== 'AbortError') { handleSave(); } }
+    } else { handleSave(); }
+  }
+
   return (
-    <div style={{ fontFamily: "inherit" }}>
-      <div onClick={function() { document.getElementById("merge-input").click(); }} style={{ border: "2px dashed #d2d2d7", borderRadius: "16px", padding: "32px 24px", textAlign: "center", background: "#f5f5f7", marginBottom: "20px", cursor: "pointer" }}>
-        <p style={{ fontSize: "16px", fontWeight: "600", marginBottom: "8px" }}>Click to add PDF files</p>
-        <p style={{ fontSize: "13px", color: "#6e6e73" }}>Add multiple files and reorder before merging.</p>
+    <div style={{ background: "var(--surface)", border: "1px solid var(--border-light)", borderRadius: 20, padding: 32 }}>
+      <div
+        onClick={function() { document.getElementById("merge-input").click(); }}
+        onDragOver={function(e) { e.preventDefault(); setDragOver(true); }}
+        onDragLeave={function() { setDragOver(false); }}
+        onDrop={handleDrop}
+        style={{ border: "2px dashed " + (dragOver ? "var(--upload-btn-bg)" : "var(--border)"), borderRadius: "16px", padding: "32px 24px", textAlign: "center", background: dragOver ? "var(--accent-light)" : "var(--surface-2)", marginBottom: "20px", cursor: "pointer", transition: "border-color 0.15s, background 0.15s" }}
+      >
+        <p style={{ fontSize: "16px", fontWeight: "600", marginBottom: "8px", color: "var(--text)" }}>Drop PDFs here or click to browse</p>
+        <p style={{ fontSize: "13px", color: "var(--text-muted)" }}>Add multiple files and reorder before merging.</p>
         <input id="merge-input" type="file" accept="application/pdf" multiple onChange={handleFiles} style={{ display: "none" }} />
       </div>
 
@@ -94,12 +155,12 @@ export default function MergePdf() {
         <div style={{ display: "flex", flexDirection: "column", gap: "8px", marginBottom: "20px" }}>
           {files.map(function(f, i) {
             return (
-              <div key={i} style={{ display: "flex", alignItems: "center", gap: "10px", background: "#f5f5f7", borderRadius: "12px", padding: "12px 16px" }}>
-                <span style={{ fontSize: "13px", color: "#6e6e73", minWidth: "20px", fontWeight: "700" }}>{i+1}</span>
-                <span style={{ flex: "1", fontSize: "14px", fontWeight: "500", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{f.name}</span>
-                <button onClick={function() { moveUp(i); }} style={{ background: "white", border: "1px solid #e8e8ed", borderRadius: "8px", padding: "4px 10px", fontSize: "13px", cursor: "pointer" }}>up</button>
-                <button onClick={function() { moveDown(i); }} style={{ background: "white", border: "1px solid #e8e8ed", borderRadius: "8px", padding: "4px 10px", fontSize: "13px", cursor: "pointer" }}>dn</button>
-                <button onClick={function() { removeFile(i); }} style={{ background: "white", border: "1px solid #fca5a5", borderRadius: "8px", padding: "4px 10px", fontSize: "13px", cursor: "pointer", color: "#dc2626" }}>rm</button>
+              <div key={i} style={{ display: "flex", alignItems: "center", gap: "10px", background: "var(--surface-2)", borderRadius: "12px", padding: "12px 16px" }}>
+                <span style={{ fontSize: "13px", color: "var(--text-muted)", minWidth: "20px", fontWeight: "700" }}>{i+1}</span>
+                <span style={{ flex: "1", fontSize: "14px", fontWeight: "500", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", color: "var(--text)" }}>{f.name}</span>
+                <button onClick={function() { moveUp(i); }} style={{ background: "var(--surface)", border: "1px solid var(--border-light)", borderRadius: "8px", padding: "4px 10px", fontSize: "13px", cursor: "pointer", color: "var(--text)" }}>up</button>
+                <button onClick={function() { moveDown(i); }} style={{ background: "var(--surface)", border: "1px solid var(--border-light)", borderRadius: "8px", padding: "4px 10px", fontSize: "13px", cursor: "pointer", color: "var(--text)" }}>dn</button>
+                <button onClick={function() { removeFile(i); }} style={{ background: "var(--surface)", border: "1px solid #fca5a5", borderRadius: "8px", padding: "4px 10px", fontSize: "13px", cursor: "pointer", color: "#dc2626" }}>rm</button>
               </div>
             );
           })}
@@ -107,17 +168,33 @@ export default function MergePdf() {
       )}
 
       {error && <p style={{ color: "#dc2626", fontSize: "14px", marginBottom: "16px" }}>{error}</p>}
-      {done && <p style={{ color: "#16a34a", fontSize: "15px", fontWeight: "600", marginBottom: "16px" }}>Merged PDF downloaded successfully.</p>}
+      {done && pdfUrl && (
+        <div style={{ background: "#f0fdf4", border: "1px solid #bbf7d0", borderRadius: "12px", padding: "12px 16px", marginBottom: "16px" }}>
+          <p style={{ color: "#16a34a", fontWeight: "700", fontSize: "14px" }}>✓ PDF merged successfully.</p>
+        </div>
+      )}
 
-      <button onClick={merge} disabled={merging || files.length < 2} style={{ background: files.length >= 2 ? "#0071e3" : "#d2d2d7", color: "white", border: "none", borderRadius: "12px", padding: "16px 28px", fontSize: "16px", fontWeight: "700", cursor: files.length >= 2 ? "pointer" : "not-allowed", width: "100%", marginBottom: "10px" }}>
-        {merging ? "Merging..." : "Merge and Download PDF"}
-      </button>
+      {!done && (
+        <button onClick={merge} disabled={merging || files.length < 2} style={{ background: files.length >= 2 ? "var(--upload-btn-bg)" : "var(--surface-3)", color: files.length >= 2 ? "var(--upload-btn-color)" : "var(--text-muted)", border: "none", borderRadius: "99px", padding: "16px 28px", fontSize: "16px", fontWeight: "600", cursor: files.length >= 2 ? "pointer" : "not-allowed", width: "100%", marginBottom: "10px", minHeight: "44px", fontFamily: "inherit" }}>
+          {merging ? "Merging..." : "Merge PDF"}
+        </button>
+      )}
 
-      {files.length > 0 && (
-        <button onClick={function() { document.getElementById("merge-input").click(); }} style={{ background: "#f5f5f7", color: "#1d1d1f", border: "1px solid #e8e8ed", borderRadius: "12px", padding: "12px 20px", fontSize: "14px", fontWeight: "600", cursor: "pointer", width: "100%" }}>
+      {done && pdfUrl && (
+        <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", marginBottom: "10px", justifyContent: "center" }}>
+          <button onClick={handleSave} style={saveBtn}>Save</button>
+          <button onClick={handleSaveAs} style={saveAsBtn}>Save As...</button>
+          {supportsFileShare && <button onClick={handleShare} style={shareBtn}><i className="ti ti-share" /> Share</button>}
+          <button onClick={reset} style={resetBtn}>Reset</button>
+        </div>
+      )}
+
+      {files.length > 0 && !done && (
+        <button onClick={function() { document.getElementById("merge-input").click(); }} style={{ background: "var(--surface-2)", color: "var(--text)", border: "1px solid var(--border-light)", borderRadius: "99px", padding: "12px 20px", fontSize: "14px", fontWeight: "600", cursor: "pointer", width: "100%", fontFamily: "inherit", minHeight: "44px" }}>
           Add More Files
         </button>
       )}
+      {saveAsName !== null && <SaveAsDialog defaultName={saveAsName} onSave={doSaveAs} onCancel={function() { setSaveAsName(null); }} />}
     </div>
   );
 }

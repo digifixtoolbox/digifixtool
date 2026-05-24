@@ -55,7 +55,7 @@ export default function ImageInfo() {
     <div style={{background:"var(--surface)",border:"1px solid var(--border-light)",borderRadius:20,padding:32}}>
       {!info ? (
         <div
-          style={{border:"2px dashed",borderColor:isDragging?"#2563eb":"var(--border)",borderRadius:16,padding:"56px 24px",textAlign:"center",cursor:"pointer",background:isDragging?"#eff6ff":"var(--surface-2)",transition:"all 0.15s"}}
+          style={{border:"2px dashed",borderColor:isDragging?"var(--upload-btn-bg)":"var(--border)",borderRadius:16,padding:"56px 24px",textAlign:"center",cursor:"pointer",background:isDragging?"var(--accent-light)":"var(--surface-2)",transition:"all 0.15s"}}
           onClick={() => fileInputRef.current.click()}
           onDrop={(e) => { e.preventDefault(); setIsDragging(false); handleFile(e.dataTransfer.files[0]); }}
           onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
