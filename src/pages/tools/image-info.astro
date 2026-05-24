@@ -2,11 +2,13 @@
 import Layout from '../../layouts/Layout.astro';
 import ImageInfo from '../../components/ImageInfo.jsx';
 import RelatedTools from '../../components/RelatedTools.astro';
+import PromoBanner from '../../components/PromoBanner.jsx';
 ---
 
 <Layout
-  title="Check Image Size & Dimensions Online Free"
-  description="Instantly check any image's pixel dimensions, file size, format, aspect ratio and megapixel count. Free, no upload needed. Works in your browser."
+  title="Image Size & Dimensions Checker — Free Online | PixMidas"
+  description="Image Info Tool Free | Check Photo Size, Format, Dimensions - PixMidas"
+  canonical="https://www.pixmidas.com/tools/image-info/"
 >
   <div class="tool-page">
     <div class="tool-header">
@@ -15,36 +17,64 @@ import RelatedTools from '../../components/RelatedTools.astro';
       <p class="tool-subtitle">Upload any image to instantly see its width, height, file size, format, aspect ratio and megapixel count.</p>
     </div>
 
-    <div class="ad-slot ad-slot-horizontal">
-      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
-      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    </div>
-
     <ImageInfo client:load />
 
-    <div class="ad-slot ad-slot-horizontal" style="margin-top: 32px;">
-      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="0987654321" data-ad-format="auto" data-full-width-responsive="true"></ins>
-      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+
+    <div class="promo-wrap">
+      <PromoBanner client:load excludeSlug="image-info" />
     </div>
-
     <section class="seo-content">
-      <h2>How to check image dimensions and file size</h2>
-      <p>Upload your image and all metadata appears instantly — no button clicks needed. You'll see the exact pixel width and height, the file size in KB or MB, the image format, the aspect ratio and the total megapixel count. Results appear in under a second, all locally in your browser.</p>
+      <h2>How to use</h2>
+      <ol>
+        <li>Upload or drop any image onto the tool — results appear instantly without pressing any button.</li>
+        <li>Review the width, height, file size, format, aspect ratio and megapixel count.</li>
+        <li>Use the information to decide whether to resize, compress or convert the image before using it.</li>
+      </ol>
 
-      <h2>What information does the checker show?</h2>
-      <p>Width and height in pixels, file size (raw and formatted), image format (JPG, PNG, WebP, GIF etc.), aspect ratio expressed as a simplified fraction (e.g. 16:9), and megapixels. This is all the information you need to decide whether an image meets the requirements for a website, social media platform, print job or email attachment.</p>
+      <h2>Tips for best results</h2>
+      <ul>
+        <li><strong>Check dimensions before uploading to any platform.</strong> Most platforms have strict size requirements — knowing your image's exact pixel dimensions prevents rejection or silent auto-cropping. Compare the aspect ratio to the platform's required ratio and use the <a href="/tools/resize-image/" class="tool-suggestion">image resizer</a> to adjust it before uploading.</li>
+        <li><strong>Use file size to decide whether compression is needed.</strong> If the checker reports a file size above 200 KB for a web image, it is worth compressing before publishing. Run the image through the <a href="/tools/compress-image/" class="tool-suggestion">image compressor</a> to reduce file size without visible quality loss.</li>
+        <li><strong>Check for metadata before sharing publicly.</strong> Images taken on a smartphone often contain GPS coordinates, device model and timestamps. Verify the file format here, then strip the embedded data with the <a href="/tools/exif-remover/" class="tool-suggestion">EXIF remover</a> before posting publicly.</li>
+        <li><strong>Estimate print size from pixel dimensions.</strong> To find the print size at 300 DPI, divide each pixel dimension by 300. A 3000×2100 image prints at 10×7 inches — use the megapixel count shown here to quickly assess whether an image has sufficient resolution for your target print dimensions.</li>
+      </ul>
 
-      <h2>Why do image dimensions matter?</h2>
-      <p>Every platform has specific image requirements. Social networks crop or reject images that are the wrong aspect ratio. Website templates require images within certain file size limits for performance. Print shops need images above a minimum pixel density (typically 300 DPI) to avoid blurry output. Knowing your image's exact dimensions lets you make informed decisions before uploading or submitting.</p>
+      <h2>Why use PixMidas</h2>
+      <ul>
+        <li><strong>Instant results.</strong> Metadata is extracted in under a second using browser APIs — no wait time.</li>
+        <li><strong>100% private.</strong> The image is read locally — nothing is uploaded to any server.</li>
+        <li><strong>No account needed.</strong> Free with unlimited use.</li>
+      </ul>
 
-      <h2>What is an aspect ratio?</h2>
-      <p>Aspect ratio is the proportional relationship between an image's width and height, expressed as two numbers (e.g. 16:9, 4:3, 1:1). A 1920×1080 image has a 16:9 ratio. A 1080×1080 image has a 1:1 ratio (square). Understanding aspect ratio helps you choose the right crop and avoid distortion when placing images into fixed-ratio containers.</p>
+      <h2>Frequently asked questions</h2>
 
-      <h2>Is my image safe?</h2>
-      <p>Yes. Your image is read locally by the browser — it is never uploaded to any server. All metadata is extracted using browser APIs without any network requests.</p>
+      <h3>What information is shown?</h3>
+      <p>Width and height in pixels, file size in KB or MB, image format (JPG, PNG, WebP, GIF etc.), aspect ratio as a simplified fraction (e.g. 16:9, 4:3, 1:1), and total megapixel count — everything you need to know before uploading to a platform or sending to a print shop. Knowing the aspect ratio upfront prevents unexpected crops when the image lands in a fixed-ratio container on a website or social platform.</p>
+
+      <h3>What is a megapixel?</h3>
+      <p>One megapixel equals one million pixels. A 4000×3000 image contains 12 megapixels (12 MP). Megapixels indicate the total pixel count and are a rough guide for print size — for a sharp 8×10 inch print at 300 DPI, you need a minimum of about 7.2 megapixels. High-megapixel images from modern cameras are often unnecessarily large for web use and benefit from resizing before upload — the <a href="/tools/resize-image/" class="tool-suggestion">image resizer</a> can reduce them to web-appropriate dimensions without losing visible quality.</p>
+
+      <h3>How does aspect ratio affect my use case?</h3>
+      <p>Aspect ratio is the proportional relationship between width and height. Knowing the ratio tells you immediately whether an image fits a specific container (16:9 video frame, 4:5 Instagram post, 1:1 profile picture) without distortion. The wrong aspect ratio results in cropping or letterboxing on most platforms. When the aspect ratio doesn't match what a platform requires, resize and crop the image first — letting the platform auto-crop often produces unexpected results that aren't visible until after publishing.</p>
+
+      <h3>Can this tool read EXIF metadata?</h3>
+      <p>The Image Info tool shows pixel dimensions and file-level properties. For detailed EXIF metadata like GPS location, device model and camera settings, use the <a href="/tools/exif-remover/" class="tool-suggestion">EXIF Data Remover</a> — it shows a full breakdown of all embedded metadata before stripping it. EXIF data is particularly important to check before sharing images publicly, as smartphone photos routinely include precise GPS coordinates that reveal the exact location where the photo was taken.</p>
+
+      <h3>Is my image uploaded anywhere?</h3>
+      <p>No. Your image is read entirely by the browser using the File API and Image object. It is never uploaded to any server and no network request is made at any point. This makes the tool safe for checking dimensions on confidential product images, client work or any file you need to keep private — the metadata extraction happens on your device, not on a remote server.</p>
+
+      <div class="related-tools">
+        <p>Related tools</p>
+        <div class="related-tools-links">
+          <a href="/tools/exif-remover/">EXIF Data Remover</a>
+          <a href="/tools/compress-image/">Image Compressor</a>
+          <a href="/tools/resize-image/">Image Resizer</a>
+        </div>
+      </div>
     </section>
 
-    <RelatedTools slugs={["exif-remover", "compress-image", "convert-image"]} />
+    <RelatedTools slugs={["resize-image", "compress-image", "exif-remover"]} />
   </div>
 </Layout>
 
@@ -54,11 +84,12 @@ import RelatedTools from '../../components/RelatedTools.astro';
   "@type": "WebApplication",
   "name": "Image Info Checker",
   "url": "https://www.pixmidas.com/tools/image-info/",
-  "applicationCategory": "UtilitiesApplication",
+  "applicationCategory": "MultimediaApplication",
   "operatingSystem": "Any",
   "browserRequirements": "Requires JavaScript",
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-  "description": "Check any image's pixel dimensions, file size, format and aspect ratio instantly. Free, no upload needed."
+  "description": "Check pixel dimensions, file size, format and aspect ratio of any image instantly. Free, no upload needed.",
+  "provider": { "@type": "Organization", "name": "PixMidas", "url": "https://www.pixmidas.com" }
 }
 </script>
 
@@ -70,7 +101,7 @@ import RelatedTools from '../../components/RelatedTools.astro';
     {
       "@type": "Question",
       "name": "How do I check image dimensions and file size online?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Upload your image and all metadata appears instantly — width, height, file size, format, aspect ratio and megapixel count. All processed locally in your browser with no server uploads." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Upload your image and all metadata appears instantly: width, height, file size, format, aspect ratio and megapixel count. All processed locally in your browser with no server uploads." }
     },
     {
       "@type": "Question",

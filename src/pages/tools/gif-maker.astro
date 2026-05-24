@@ -1,0 +1,140 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import GifMaker from '../../components/GifMaker.jsx';
+import RelatedTools from '../../components/RelatedTools.astro';
+import PromoBanner from '../../components/PromoBanner.jsx';
+---
+
+<Layout
+  title="GIF Maker — Create Animated GIFs from Images Free | PixMidas"
+  description="GIF Maker Online Free | Create Animated GIFs from Images - PixMidas"
+  canonical="https://www.pixmidas.com/tools/gif-maker/"
+>
+  <div class="tool-page">
+    <div class="tool-header">
+      <a href="/categories/image-tools/" class="back-link">← Image Tools</a>
+      <h1 class="tool-title">GIF Maker</h1>
+      <p class="tool-subtitle">Create animated GIFs from multiple images. Set frame delay and loop count, then download instantly.</p>
+    </div>
+
+    <GifMaker client:load />
+
+
+    <div class="promo-wrap">
+      <PromoBanner client:load excludeSlug="gif-maker" />
+    </div>
+
+    <section class="seo-content">
+      <p>Animated GIFs remain one of the most universally supported animation formats on the web. Unlike video files, GIFs autoplay in virtually every email client, forum, chat app, CMS, and web browser without any codec or embed requirement. Creating an animated GIF from a sequence of images is the standard way to add looping animations, product demonstration sequences, progress indicators, or reaction images to platforms that don't support video autoplay. This tool assembles your images into an animated GIF entirely in your browser using gif.js — no upload, no server, instant download.</p>
+
+      <h2>How to use</h2>
+      <ol>
+        <li><strong>Upload your frames.</strong> Select the images that will become individual frames of the GIF. JPG, PNG, and WebP files are all accepted. Upload them in the order you want them to appear in the animation, or reorder them using the drag handles.</li>
+        <li><strong>Adjust the frame delay.</strong> The frame delay (in milliseconds) controls how long each frame is displayed before advancing to the next. 100ms produces smooth 10 FPS animation. 500ms creates a slower slideshow effect. Adjust based on the pacing your animation needs.</li>
+        <li><strong>Set the loop count.</strong> Choose how many times the GIF loops before stopping. Set to 0 for infinite looping (the most common choice for web use) or a specific number for GIFs that should play a set number of times and freeze on the last frame.</li>
+        <li><strong>Generate and download.</strong> Click Create GIF to encode the animation. Processing time depends on the number of frames and image resolution. Download the result and verify playback in a browser tab or image viewer before deploying it.</li>
+      </ol>
+
+      <h2>Tips for best results</h2>
+      <ul>
+        <li><strong>Keep frames small.</strong> GIF file sizes grow quickly with frame count and resolution. GIFs larger than 5–10 MB cause noticeable page load delays. Resize your source images to the smallest dimensions that still look good before creating the GIF, using the <a href="/tools/resize-image/" class="tool-suggestion">image resizer</a>.</li>
+        <li><strong>Use consistent frame sizes.</strong> All frames in a GIF should be the same dimensions. If your source images are different sizes, the GIF encoder will pad smaller frames to match the largest. Resize all frames to identical dimensions first for clean results.</li>
+        <li><strong>Reduce colors for smaller files.</strong> GIF supports a maximum of 256 colors per palette. Images with large flat-color areas (illustrations, screenshots, diagrams) compress much better than photographs. Photos with complex color gradients produce large GIF files with visible dithering artifacts.</li>
+        <li><strong>Test loop timing.</strong> 100ms per frame (10 FPS) works well for smooth product demos and subtle animations. 200–500ms works for step-by-step instructional sequences. Very fast frame rates (below 50ms) may not render consistently across all platforms.</li>
+      </ul>
+
+      <h2>Why use PixMidas</h2>
+      <ul>
+        <li><strong>100% private.</strong> GIF encoding uses gif.js running entirely in your browser. Your source images are never uploaded to any server during any part of the creation process.</li>
+        <li><strong>Drag-to-reorder frames.</strong> The frame list supports drag-and-drop reordering before encoding, so you can set the exact sequence without restarting your upload.</li>
+        <li><strong>No account needed.</strong> Free, instant, no frame count limits. Create as many GIFs as you need.</li>
+      </ul>
+
+      <h2>Frequently asked questions</h2>
+
+      <h3>What is the maximum number of frames supported?</h3>
+      <p>There's no hard frame limit enforced by the tool. GIF as a format supports any number of frames. Practically, performance and file size become the limiting factors. A GIF with 30 full-screen frames at high resolution can be 20–30 MB, which is too large for most web use cases. Keep your frame count and frame size in balance to produce GIFs that are usable in the real world.</p>
+
+      <h3>Why does my GIF look blurry or washed out?</h3>
+      <p>GIF is limited to 256 colors per palette. When your source images contain more colors than this (which photographs always do), the encoder uses dithering — a pattern of colored pixels to simulate the missing colors. This dithering creates a grainy or blurry appearance, especially in smooth gradients like sky and skin tones. For photographic content, consider using a short video clip or a WebP animation instead of GIF for higher visual quality.</p>
+
+      <h3>What frame delay should I use?</h3>
+      <p>For smooth animations: 50–100ms (20–10 FPS). For product feature walkthroughs: 200–300ms per frame. For presentation-style slideshows where each frame is a slide: 1000–3000ms. GIF players on some older browsers don't reliably handle delays below 20ms and default to a minimum of 20ms regardless of the value specified. Test in multiple browsers before finalizing.</p>
+
+      <h3>Can I create a GIF from a video?</h3>
+      <p>This tool creates GIFs from still image frames. To create a GIF from a video, you would first need to extract individual frames from the video as separate image files (using a tool like FFmpeg or VLC), then upload those frames here to assemble into a GIF.</p>
+
+      <h3>How do I make the GIF loop forever?</h3>
+      <p>Set the loop count to 0. In GIF format, a loop count of 0 in the Netscape Application Block extension means infinite looping. This is the standard for web GIFs — the animation plays continuously until the user navigates away or the GIF is paused.</p>
+
+      <h3>What is the difference between GIF and WebP animation?</h3>
+      <p>Animated WebP supports more than 256 colors, produces smaller file sizes than GIF at the same quality, and handles photographic content much better. However, GIF has near-universal compatibility — it works in every email client, CMS, forum, and chat app. Animated WebP has growing but not universal support. Use GIF for maximum compatibility; use animated WebP when you have control over the viewing environment and need better quality.</p>
+
+      <div class="related-tools">
+        <p>Related tools</p>
+        <div class="related-tools-links">
+          <a href="/tools/resize-image/">Resize Image</a>
+          <a href="/tools/compress-image/">Compress Image</a>
+          <a href="/tools/convert-image/">Convert Image</a>
+          <a href="/tools/social-sizes/">Social Media Sizes</a>
+        </div>
+      </div>
+    </section>
+
+    <RelatedTools slugs={["resize-image", "compress-image", "convert-image"]} />
+  </div>
+</Layout>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "GIF Maker",
+  "url": "https://www.pixmidas.com/tools/gif-maker/",
+  "applicationCategory": "MultimediaApplication",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Create animated GIFs from multiple images. Control frame delay and loop settings. Free, private, no upload required.",
+  "provider": { "@type": "Organization", "name": "PixMidas", "url": "https://www.pixmidas.com" }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the maximum number of frames supported?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No hard frame limit is enforced. GIF supports any number of frames. Practically, file size and performance become limiting — a GIF with 30 full-screen frames can be 20–30 MB. Keep frame count and resolution balanced for usable web output." }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does my GIF look blurry or washed out?",
+      "acceptedAnswer": { "@type": "Answer", "text": "GIF is limited to 256 colors. When source images have more colors, dithering creates a grainy appearance. This especially affects photographs with smooth gradients. For photographic content, consider WebP animation for better visual quality." }
+    },
+    {
+      "@type": "Question",
+      "name": "What frame delay should I use?",
+      "acceptedAnswer": { "@type": "Answer", "text": "For smooth animations: 50–100ms (20–10 FPS). For product walkthroughs: 200–300ms. For slideshows: 1000–3000ms. GIF players may not reliably handle delays below 20ms. Test in multiple browsers before finalizing." }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I make the GIF loop forever?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Set the loop count to 0. In GIF format, a loop count of 0 means infinite looping. This is the standard for web GIFs — the animation plays continuously until the user navigates away." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I create a GIF from a video?",
+      "acceptedAnswer": { "@type": "Answer", "text": "This tool creates GIFs from still image frames. To create a GIF from a video, first extract individual frames as separate image files using a tool like FFmpeg, then upload those frames here." }
+    },
+    {
+      "@type": "Question",
+      "name": "Are my images uploaded to a server?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Never. GIF encoding uses gif.js running entirely in your browser. Your source images are never uploaded to any server during any part of the creation process." }
+    }
+  ]
+}
+</script>

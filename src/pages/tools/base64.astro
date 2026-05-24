@@ -2,11 +2,13 @@
 import Layout from '../../layouts/Layout.astro';
 import Base64Tool from '../../components/Base64Tool.jsx';
 import RelatedTools from '../../components/RelatedTools.astro';
+import PromoBanner from '../../components/PromoBanner.jsx';
 ---
 
 <Layout
-  title="Base64 Encoder & Decoder – Free Online Tool"
-  description="Encode plain text to Base64 or decode Base64 strings back to readable text. Instant, free, runs in your browser. No login, no upload, completely private."
+  title="Base64 Encode & Decode — Free Online Tool | PixMidas"
+  description="Base64 Encoder Decoder Free | Encode and Decode Text Online - PixMidas"
+  canonical="https://www.pixmidas.com/tools/base64/"
 >
   <div class="tool-page">
     <div class="tool-header">
@@ -15,33 +17,61 @@ import RelatedTools from '../../components/RelatedTools.astro';
       <p class="tool-subtitle">Encode text to Base64 or decode Base64 strings back to plain text. Instant results, nothing leaves your browser.</p>
     </div>
 
-    <div class="ad-slot ad-slot-horizontal">
-      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
-      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    </div>
-
     <Base64Tool client:load />
 
-    <div class="ad-slot ad-slot-horizontal" style="margin-top: 32px;">
-      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="0987654321" data-ad-format="auto" data-full-width-responsive="true"></ins>
-      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+
+    <div class="promo-wrap">
+      <PromoBanner client:load excludeSlug="base64" />
     </div>
-
     <section class="seo-content">
-      <h2>What is Base64 encoding?</h2>
-      <p>Base64 is a binary-to-text encoding scheme that converts arbitrary data into a string of 64 printable ASCII characters (A–Z, a–z, 0–9, + and /). It is named for the 64-character alphabet it uses. Every 3 bytes of input data produce 4 Base64 characters, making the encoded output approximately 33% larger than the original. The encoded string is safe to transmit over any system that handles text, including HTTP headers, JSON, XML and email.</p>
+      <h2>How to use</h2>
+      <ol>
+        <li>Select Encode or Decode mode from the toggle.</li>
+        <li>Paste your text (to encode) or your Base64 string (to decode) into the input field.</li>
+        <li>The output appears instantly. Click Copy to copy the result to your clipboard.</li>
+      </ol>
 
-      <h2>When is Base64 used?</h2>
-      <p>Embedding images directly in HTML or CSS as data URIs (e.g. <code>src="data:image/png;base64,..."</code>). Encoding binary attachments in email via MIME. Transmitting binary data in JSON API payloads. Storing credentials and tokens in configuration files and environment variables. Encoding font files in CSS. Passing data through URL parameters without breaking URL parsing.</p>
+      <h2>Tips for best results</h2>
+      <ul>
+        <li><strong>Decode before formatting JSON payloads.</strong> Many API responses use Base64-encoded JSON inside a wrapper object. Decode the Base64 value first, then paste the result into the <a href="/tools/json-formatter/" class="tool-suggestion">JSON formatter</a> to read the nested structure clearly.</li>
+        <li><strong>Check for URL-safe variants.</strong> If you're decoding a JWT or URL parameter and the result is garbled, try switching to URL-safe mode — JWTs use - and _ instead of + and / in their Base64 payload sections, and that single character difference breaks standard decoding.</li>
+        <li><strong>Generate strong secrets first, then encode.</strong> If you need to create an API key or token to Base64-encode, use the <a href="/tools/password-generator/" class="tool-suggestion">password generator</a> to create a high-entropy random string before encoding it.</li>
+        <li><strong>Encode data URIs for small inline assets.</strong> You can encode a small icon or logo and embed it directly in CSS or HTML as a data URI — useful for eliminating a network request for frequently-used assets. The <a href="/tools/qr-code/" class="tool-suggestion">QR code generator</a> uses Base64-encoded data internally when exporting images for embedding.</li>
+      </ul>
 
-      <h2>How to decode a Base64 string</h2>
-      <p>Switch to Decode mode, paste your Base64 string into the input field, and the decoded plain text appears instantly. If the string is not valid Base64, an error message will explain the issue. Common reasons a Base64 string fails to decode: missing padding characters (=), incorrect character set, or content that was encoded multiple times.</p>
+      <h2>Why use PixMidas</h2>
+      <ul>
+        <li><strong>Both directions in one tool.</strong> Encode and decode with a single toggle — no switching between separate tools.</li>
+        <li><strong>100% private.</strong> Processing uses JavaScript's native btoa() and atob() — nothing is sent to any server.</li>
+        <li><strong>No account needed.</strong> Free, instant, no character limits.</li>
+      </ul>
 
-      <h2>Base64 vs Base64URL — what's the difference?</h2>
-      <p>Standard Base64 uses + and / characters that have special meaning in URLs, which can break URL parsing if the encoded string appears in a query parameter or path. Base64URL is a variant that replaces + with - and / with _ to make the output URL-safe without additional percent-encoding. JWT (JSON Web Tokens) use Base64URL encoding for their header and payload sections.</p>
+      <h2>Frequently asked questions</h2>
 
-      <h2>Is this tool private?</h2>
-      <p>Yes. All encoding and decoding happens locally inside your browser using JavaScript's built-in btoa() and atob() functions. Nothing you type is ever sent to any server or logged anywhere.</p>
+      <h3>What is Base64 encoding?</h3>
+      <p>Base64 converts binary data into a string of 64 printable ASCII characters (A–Z, a–z, 0–9, + and /). Every 3 bytes of input produce 4 Base64 characters, making the output about 33% larger. This encoding makes binary data safe to transmit through text-only channels like HTTP headers, JSON payloads, XML and email. It is not a compression algorithm — the encoded output is always larger than the original input, so it's purely a format-safety mechanism, not a size reduction technique.</p>
+
+      <h3>Is Base64 the same as encryption?</h3>
+      <p>No. Base64 is encoding, not encryption. Anyone can decode a Base64 string instantly without any key or password — it provides no security or privacy whatsoever. Its only purpose is to make binary data safe to transmit as text in systems that only accept printable characters. Never use Base64 to hide or protect sensitive information; use proper encryption algorithms like AES for anything requiring confidentiality.</p>
+
+      <h3>What is Base64 used for in web development?</h3>
+      <p>Embedding small images directly in HTML or CSS as data URIs (src="data:image/png;base64,..."). Encoding binary attachments in email via MIME. Transmitting binary data in <a href="/tools/json-formatter/" class="tool-suggestion">JSON API payloads</a> where binary fields must be represented as strings. Storing API keys in environment variables. JWT (JSON Web Tokens) use a variant called Base64URL for their header and payload sections — decoding the payload exposes the claims without needing any secret key.</p>
+
+      <h3>Why does my Base64 string fail to decode?</h3>
+      <p>Common causes: missing padding characters (= or ==) at the end, characters outside the Base64 alphabet (most often from a URL-safe variant using - and _ instead of + and /), or the string was encoded multiple times. If decoding produces garbled output, the original data was likely binary (an image or file) rather than plain text. You can verify padding requirements by checking whether the string length is a multiple of four — valid Base64 strings always are.</p>
+
+      <h3>What is Base64URL and how is it different?</h3>
+      <p>Base64URL replaces + with - and / with _ so the encoded string can appear safely in URLs and JSON Web Tokens without percent-encoding. If you're working with JWTs, use Base64URL decoding rather than standard Base64 to avoid character set errors. The padding character = is also often omitted in Base64URL contexts, which is why some JWT decoders require you to add padding manually before parsing. Most authentication libraries handle this conversion automatically, but when inspecting JWT payloads manually this distinction matters.</p>
+
+      <div class="related-tools">
+        <p>Related tools</p>
+        <div class="related-tools-links">
+          <a href="/tools/json-formatter/">JSON Formatter</a>
+          <a href="/tools/password-generator/">Password Generator</a>
+          <a href="/tools/qr-code/">QR Code Generator</a>
+        </div>
+      </div>
     </section>
 
     <RelatedTools slugs={["json-formatter", "text-diff", "password-generator"]} />
@@ -54,11 +84,12 @@ import RelatedTools from '../../components/RelatedTools.astro';
   "@type": "WebApplication",
   "name": "Base64 Encoder / Decoder",
   "url": "https://www.pixmidas.com/tools/base64/",
-  "applicationCategory": "UtilitiesApplication",
+  "applicationCategory": "DeveloperApplication",
   "operatingSystem": "Any",
   "browserRequirements": "Requires JavaScript",
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-  "description": "Encode text to Base64 or decode Base64 strings back to plain text. Free, instant, runs in your browser."
+  "description": "Encode text to Base64 or decode Base64 strings instantly. Free, no login, runs entirely in your browser.",
+  "provider": { "@type": "Organization", "name": "PixMidas", "url": "https://www.pixmidas.com" }
 }
 </script>
 

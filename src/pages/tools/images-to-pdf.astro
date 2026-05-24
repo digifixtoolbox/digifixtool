@@ -2,49 +2,86 @@
 import Layout from '../../layouts/Layout.astro';
 import ImagesToPDF from '../../components/ImagesToPDF.jsx';
 import RelatedTools from '../../components/RelatedTools.astro';
+import PromoBanner from '../../components/PromoBanner.jsx';
 ---
 
 <Layout
-  title="Convert Images to PDF Free – JPG PNG WebP to PDF"
-  description="Combine multiple JPG, PNG or WebP images into a single PDF file online for free. Reorder images before merging. No upload, no login, runs in your browser."
+  title="Images to PDF — Convert JPG, PNG to PDF Free | PixMidas"
+  description="Images to PDF Converter Free | Convert Photos to PDF Online - PixMidas"
+  canonical="https://www.pixmidas.com/tools/images-to-pdf/"
 >
   <div class="tool-page">
     <div class="tool-header">
       <a href="/categories/pdf-tools/" class="back-link">← PDF Tools</a>
-      <h1 class="tool-title">Images to PDF Converter</h1>
-      <p class="tool-subtitle">Upload multiple photos and combine them into a single PDF document. Reorder pages, then download.</p>
-    </div>
-
-    <div class="ad-slot ad-slot-horizontal">
-      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
-      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      <h1 class="tool-title">Images to PDF</h1>
+      <p class="tool-subtitle">Combine multiple JPG or PNG images into a single PDF document. Drag to reorder pages before converting.</p>
     </div>
 
     <ImagesToPDF client:load />
 
-    <div class="ad-slot ad-slot-horizontal" style="margin-top: 32px;">
-      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="0987654321" data-ad-format="auto" data-full-width-responsive="true"></ins>
-      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+    <div class="promo-wrap">
+      <PromoBanner client:load excludeSlug="images-to-pdf" />
     </div>
 
     <section class="seo-content">
-      <h2>How to convert images to PDF online</h2>
-      <p>Upload your JPG, PNG or WebP images, reorder them by dragging if needed, then click Convert to PDF. The resulting PDF downloads directly to your device. Each image becomes one page in the PDF, sized to fit the page cleanly.</p>
+      <p>Converting images to PDF is a common need for document submission — government portals that require scanned documents, job applications that need attachments in PDF format, invoice and receipt collections that must be submitted as a single file, and photo archives that need a print-ready format. Rather than using desktop software or printing-then-scanning, this tool combines your JPG and PNG files into a PDF directly in your browser using pdf-lib, with no upload and no account required.</p>
 
-      <h2>What image formats are supported?</h2>
-      <p>The converter accepts JPG, JPEG, PNG and WebP images. You can mix different formats in the same PDF — for example, combine a PNG logo with several JPG photographs in one document.</p>
+      <h2>How to use</h2>
+      <ol>
+        <li><strong>Upload your images.</strong> Drag multiple JPG or PNG files onto the drop zone or click to browse. Each image appears as a card in the file list with a thumbnail preview. You can add additional images after the initial upload without losing your current selection.</li>
+        <li><strong>Reorder the pages.</strong> Drag the image cards to set the order they'll appear in the PDF. The first card becomes page 1, the second becomes page 2, and so on. Take time to get the order right — reordering after conversion means starting over.</li>
+        <li><strong>Convert to PDF.</strong> Click Create PDF to assemble all images into a single PDF document. Each image is placed on its own page, sized to fit the page dimensions. Processing runs locally and completes quickly for typical document sets.</li>
+        <li><strong>Download your PDF.</strong> The generated PDF downloads immediately. Open it in any PDF viewer to confirm the page order and image quality before submitting or sharing.</li>
+      </ol>
 
-      <h2>Common uses for Images to PDF</h2>
-      <p>Send multiple photos as a single professional attachment instead of a ZIP file. Create a portable photo album or lookbook. Compile scanned document pages into one PDF. Submit multiple screenshots or images as a single file for a job application, report or presentation. PDFs are universally readable on all devices without any special software.</p>
+      <h2>Tips for best results</h2>
+      <ul>
+        <li><strong>Ensure images are the same orientation.</strong> Mixing portrait and landscape images creates a PDF where pages alternate orientation, which can look inconsistent. Rotate landscape images to portrait (or vice versa) using a photo editor before uploading for a consistent document layout.</li>
+        <li><strong>Compress images before converting.</strong> Large image files produce large PDFs. If file size is important — many submission portals have a maximum file size limit — use the <a href="/tools/compress-image/" class="tool-suggestion">image compressor</a> to reduce each image first, then convert to PDF.</li>
+        <li><strong>Consider merging PDFs after converting.</strong> If you already have some pages as PDFs and others as images, convert the images to PDF first, then use the <a href="/tools/merge-pdfs/" class="tool-suggestion">PDF merger</a> to combine everything into a single document.</li>
+        <li><strong>Check the final PDF page count.</strong> Before submitting, open the downloaded PDF and verify the page count matches your expected number. Scroll through all pages to confirm no images are missing or out of order.</li>
+      </ul>
 
-      <h2>How many images can I combine?</h2>
-      <p>There is no hard limit. You can combine as many images as your browser memory allows. For very large batches of high-resolution photos, consider compressing the images first using the Image Compressor tool to keep the final PDF file size manageable.</p>
+      <h2>Why use PixMidas</h2>
+      <ul>
+        <li><strong>100% private.</strong> PDF assembly uses pdf-lib running entirely in your browser. Your images are never uploaded to any server — important for sensitive documents like identification, financial records, and medical images.</li>
+        <li><strong>Drag-to-reorder pages.</strong> Set the exact page sequence before converting with the drag-and-drop file list.</li>
+        <li><strong>No account needed.</strong> Free, instant, no page limits, no file count restrictions.</li>
+      </ul>
 
-      <h2>Is my data safe?</h2>
-      <p>Yes. Your images never leave your device. The PDF is assembled entirely inside your browser. Nothing is uploaded, and no copies are kept anywhere.</p>
+      <h2>Frequently asked questions</h2>
+
+      <h3>Is there a limit on the number of images I can convert?</h3>
+      <p>No enforced limit. You can convert as many images as needed in a single session. Practical limits come from your browser's available memory — very large batches (50+ high-resolution images) may slow down processing but will complete. For extremely large collections, consider splitting into multiple PDFs and then using the <a href="/tools/merge-pdfs/" class="tool-suggestion">PDF merger</a> to combine them.</p>
+
+      <h3>What image formats are accepted?</h3>
+      <p>JPG and PNG files are accepted as input. WebP, HEIC, and other formats should be converted to JPG or PNG first using the <a href="/tools/convert-image/" class="tool-suggestion">image converter</a> before creating the PDF. For HEIC files specifically (iPhone photos), use the <a href="/tools/heic-to-jpg/" class="tool-suggestion">HEIC to JPG converter</a> first.</p>
+
+      <h3>Why is my PDF so large?</h3>
+      <p>Each image is embedded in the PDF at its full original resolution. A collection of ten 3 MB smartphone photos produces a PDF of approximately 30 MB. To reduce the PDF size, compress the images before converting — use the <a href="/tools/compress-image/" class="tool-suggestion">image compressor</a> to bring each image down to a reasonable size (100–300 KB is often sufficient for document purposes) before creating the PDF.</p>
+
+      <h3>Can I add text or annotations to the PDF?</h3>
+      <p>This tool creates a simple PDF from images — each image becomes a full-page element in the document without additional text or annotation capability. For PDFs that need typed text, form fields, or annotations, a full-featured PDF editor (Adobe Acrobat, LibreOffice Draw, or a cloud PDF editor) would be required.</p>
+
+      <h3>What page size does the PDF use?</h3>
+      <p>Each page in the generated PDF is sized to match the dimensions of the corresponding image. If your images are different sizes, the PDF pages will have different dimensions. For a consistent page size (A4 or Letter), you would need to resize all images to the same dimensions before converting, using the <a href="/tools/resize-image/" class="tool-suggestion">image resizer</a> to standardize dimensions first.</p>
+
+      <h3>Can the resulting PDF be opened in any PDF reader?</h3>
+      <p>Yes. The generated PDF follows the standard PDF format specification and can be opened in Adobe Acrobat, Preview on Mac, any browser's built-in PDF viewer, iOS and Android PDF apps, and any other standard PDF reader. No special software or plugins are required.</p>
+
+      <div class="related-tools">
+        <p>Related tools</p>
+        <div class="related-tools-links">
+          <a href="/tools/merge-pdfs/">Merge PDFs</a>
+          <a href="/tools/compress-pdf/">Compress PDF</a>
+          <a href="/tools/pdf-to-jpg/">PDF to JPG</a>
+          <a href="/tools/compress-image/">Compress Image</a>
+        </div>
+      </div>
     </section>
 
-    <RelatedTools slugs={["merge-pdfs", "pdf-to-jpg", "compress-image"]} />
+    <RelatedTools slugs={["merge-pdfs", "compress-pdf", "pdf-to-jpg"]} />
   </div>
 </Layout>
 
@@ -52,13 +89,14 @@ import RelatedTools from '../../components/RelatedTools.astro';
 {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  "name": "Images to PDF Converter",
+  "name": "Images to PDF",
   "url": "https://www.pixmidas.com/tools/images-to-pdf/",
   "applicationCategory": "UtilitiesApplication",
   "operatingSystem": "Any",
   "browserRequirements": "Requires JavaScript",
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-  "description": "Convert multiple JPG, PNG or WebP images into a single PDF file. Free, no upload needed, runs in your browser."
+  "description": "Combine multiple JPG or PNG images into a single PDF. Drag to reorder pages. Free, private, no server uploads.",
+  "provider": { "@type": "Organization", "name": "PixMidas", "url": "https://www.pixmidas.com" }
 }
 </script>
 
@@ -69,23 +107,33 @@ import RelatedTools from '../../components/RelatedTools.astro';
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "How do I convert images to a PDF online for free?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Upload your JPG, PNG or WebP images, reorder them by dragging if needed, then click Convert to PDF. The resulting PDF downloads directly to your device. Each image becomes one page in the PDF." }
+      "name": "Is there a limit on the number of images I can convert?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No enforced limit. Practical limits come from browser memory — very large batches may slow processing but complete. For extremely large collections, convert in batches and merge the resulting PDFs." }
     },
     {
       "@type": "Question",
-      "name": "How many images can I combine into one PDF?",
-      "acceptedAnswer": { "@type": "Answer", "text": "There is no hard limit. You can combine as many images as your browser memory allows. For large batches of high-resolution photos, compress them first using the Image Compressor to keep the final PDF size manageable." }
+      "name": "What image formats are accepted?",
+      "acceptedAnswer": { "@type": "Answer", "text": "JPG and PNG files are accepted. WebP, HEIC, and other formats should be converted to JPG or PNG first. Use the HEIC to JPG converter for iPhone photos before creating the PDF." }
     },
     {
       "@type": "Question",
-      "name": "What image formats can I convert to PDF?",
-      "acceptedAnswer": { "@type": "Answer", "text": "The converter accepts JPG, JPEG, PNG and WebP images. You can mix different formats in the same PDF — for example, combine a PNG logo with several JPG photographs in one document." }
+      "name": "Why is my PDF so large?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Each image is embedded at full original resolution. Ten 3 MB photos produce a ~30 MB PDF. Compress images before converting — 100–300 KB per image is often sufficient for document purposes." }
     },
     {
       "@type": "Question",
-      "name": "Is my data safe when converting images to PDF?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Your images never leave your device. The PDF is assembled entirely inside your browser. Nothing is uploaded, and no copies are kept anywhere." }
+      "name": "What page size does the PDF use?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Each page is sized to match the corresponding image dimensions. For consistent A4 or Letter page sizes, resize all images to the same dimensions before converting using the image resizer." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I add text or annotations to the PDF?",
+      "acceptedAnswer": { "@type": "Answer", "text": "This tool creates a simple PDF from images without text or annotation capability. For PDFs needing typed text, form fields, or annotations, use a full-featured PDF editor like Adobe Acrobat or LibreOffice." }
+    },
+    {
+      "@type": "Question",
+      "name": "Are my images uploaded to a server?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Never. PDF assembly uses pdf-lib running entirely in your browser. Your images are never uploaded to any server — important for sensitive documents like identification, financial records, and medical images." }
     }
   ]
 }

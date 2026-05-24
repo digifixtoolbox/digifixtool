@@ -1,0 +1,140 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import FaviconGenerator from '../../components/FaviconGenerator.jsx';
+import RelatedTools from '../../components/RelatedTools.astro';
+import PromoBanner from '../../components/PromoBanner.jsx';
+---
+
+<Layout
+  title="Favicon Generator — Free .ico & PNG Icons | PixMidas"
+  description="Favicon Generator Online Free | Create Website Favicons - PixMidas"
+  canonical="https://www.pixmidas.com/tools/favicon-generator/"
+>
+  <div class="tool-page">
+    <div class="tool-header">
+      <a href="/categories/image-tools/" class="back-link">← Image Tools</a>
+      <h1 class="tool-title">Favicon Generator</h1>
+      <p class="tool-subtitle">Upload any image and generate a complete set of favicons — .ico, PNG sizes, and Apple Touch Icon — ready to add to your website.</p>
+    </div>
+
+    <FaviconGenerator client:load />
+
+
+    <div class="promo-wrap">
+      <PromoBanner client:load excludeSlug="favicon-generator" />
+    </div>
+
+    <section class="seo-content">
+      <p>A favicon is the small icon that appears in browser tabs, bookmarks, browser history, and home screen shortcuts. While a 16×16 favicon seems trivial, it appears in hundreds of contexts across every visitor's browsing session — and missing or generic favicons make a site look unfinished. Modern websites need multiple favicon sizes: 16×16 and 32×32 for browser tabs, 180×180 for Apple Touch Icons (iPhone home screen shortcuts), 192×192 and 512×512 for Android PWA manifests, and a multi-resolution .ico file for the root domain. This tool generates all required sizes from a single source image entirely in your browser.</p>
+
+      <h2>How to use</h2>
+      <ol>
+        <li><strong>Upload your source image.</strong> Start with a square image (equal width and height) at least 512×512 pixels. Your company logo, app icon, or a simple symbol or letter works best. The source image is scaled down to each favicon size, so start with the largest, highest-quality version available.</li>
+        <li><strong>Preview all sizes.</strong> The tool renders previews of each size (16×16, 32×32, 48×48, 180×180, 192×192, 512×512) so you can see how your image looks at small sizes before downloading. Small details visible at 512×512 often become invisible or cluttered at 16×16.</li>
+        <li><strong>Download the favicon package.</strong> Click Download All to get a ZIP file containing all generated favicon files plus the recommended HTML <code>&lt;link&gt;</code> tags to add to your website's <code>&lt;head&gt;</code> section.</li>
+        <li><strong>Add to your website.</strong> Place the favicon files in your site's root directory (or the path specified in the link tags) and add the provided HTML snippet to your <code>&lt;head&gt;</code> section. Test in multiple browsers to confirm the favicon appears correctly.</li>
+      </ol>
+
+      <h2>Tips for best results</h2>
+      <ul>
+        <li><strong>Start with an SVG or high-resolution image.</strong> The favicon generator scales your source down to tiny sizes. Start with an SVG (which is resolution-independent) or at least a 512×512 PNG for sharp results at all output sizes. For SVGs, use the <a href="/tools/svg-to-png/" class="tool-suggestion">SVG to PNG converter</a> to rasterize at 512×512 first if needed.</li>
+        <li><strong>Keep it simple at small sizes.</strong> Complex logos with fine details, thin lines, or small text look muddy at 16×16 pixels. Consider creating a simplified version of your logo — just the icon mark or a single letter — for use as a favicon rather than the full wordmark.</li>
+        <li><strong>Test in dark mode.</strong> Browsers display favicons in both light and dark tab bars depending on the system theme. A dark icon on a dark tab bar becomes invisible. Test your favicon against both light and dark backgrounds, and consider a version with a contrasting background if needed.</li>
+        <li><strong>Update your manifest.json for PWA.</strong> If your site is a Progressive Web App, the 192×192 and 512×512 PNG files need to be referenced in your <code>manifest.json</code> alongside the icon sizes and purposes specified in the Web App Manifest spec.</li>
+      </ul>
+
+      <h2>Why use PixMidas</h2>
+      <ul>
+        <li><strong>All sizes in one download.</strong> Get every required favicon size — .ico, 16×16, 32×32, 48×48, 180×180, 192×192, and 512×512 — in a single ZIP download rather than manually resizing one at a time.</li>
+        <li><strong>100% private.</strong> All favicon generation runs in your browser using the Canvas API. Your logo or icon file is never uploaded to any server.</li>
+        <li><strong>No account needed.</strong> Free, instant, no usage limits. Generate favicon packages for as many sites as you need.</li>
+      </ul>
+
+      <h2>Frequently asked questions</h2>
+
+      <h3>What favicon sizes do I actually need?</h3>
+      <p>The minimum set for full compatibility is: <code>favicon.ico</code> (contains 16×16 and 32×32 layers) for the root domain, <code>apple-touch-icon.png</code> at 180×180 for iPhone/iPad home screen shortcuts, and 192×192 and 512×512 PNG files for Android PWA manifest. Including 48×48 improves display in Windows taskbar and browser extensions. The 512×512 PNG is also used as a splash screen icon in some PWA contexts.</p>
+
+      <h3>What is the .ico format?</h3>
+      <p>.ICO is a Windows icon format that can contain multiple image sizes within a single file — unlike PNG which stores one resolution. The root domain favicon.ico is fetched automatically by browsers and many services (RSS readers, password managers, link unfurlers) even before you add any link tags, so including it is important for fallback coverage. This generator creates an .ico file that contains both 16×16 and 32×32 layers.</p>
+
+      <h3>Why does my favicon look blurry at small sizes?</h3>
+      <p>Downscaling a complex image to 16×16 pixels uses 256 pixels to represent something originally rendered at 262,144 pixels (512×512). Fine details, thin lines, gradients, and text all become unrecognizable at this scale. The solution is to design or use a simplified version of your icon — a single letter, a simple symbol, or a solid-background icon mark — that reads clearly at tiny sizes. Think of how Apple, Google, and Twitter all use simplified icon marks as their favicons rather than their full logos.</p>
+
+      <h3>Do I need to put favicon files in the root directory?</h3>
+      <p>Browsers look for favicon.ico at the root of the domain by default — so <code>https://yourdomain.com/favicon.ico</code> is fetched automatically without any link tags. For all other favicon formats and sizes, the location is specified in the <code>&lt;link&gt;</code> tags in your HTML head. You can store them anywhere your web server can serve them. The HTML snippet included with the download specifies the correct paths.</p>
+
+      <h3>What is an Apple Touch Icon?</h3>
+      <p>The Apple Touch Icon (180×180 px) is used by iOS and iPadOS when a user adds your website to their iPhone or iPad home screen. It becomes the app icon for the web shortcut. Without it, iOS uses a screenshot of the page instead, which looks poor as a home screen icon. Android uses the 192×192 PWA manifest icon for the same purpose.</p>
+
+      <h3>Should my favicon have a transparent or solid background?</h3>
+      <p>It depends on the design. Transparent backgrounds work well for icon marks that need to adapt to different browser tab colors in both light and dark mode. Solid colored backgrounds ensure the icon looks intentional and identical regardless of the tab color. For brand logos, a solid background matching your primary brand color is typically the cleanest approach and looks the most like a native app icon on home screens.</p>
+
+      <div class="related-tools">
+        <p>Related tools</p>
+        <div class="related-tools-links">
+          <a href="/tools/svg-to-png/">SVG to PNG</a>
+          <a href="/tools/image-cropper/">Image Cropper</a>
+          <a href="/tools/compress-image/">Compress Image</a>
+          <a href="/tools/convert-image/">Convert Image</a>
+        </div>
+      </div>
+    </section>
+
+    <RelatedTools slugs={["svg-to-png", "image-cropper", "convert-image"]} />
+  </div>
+</Layout>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Favicon Generator",
+  "url": "https://www.pixmidas.com/tools/favicon-generator/",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Generate favicons in all required sizes from any image. Get .ico, PNG sizes, and Apple Touch Icon. Free, private, runs in your browser.",
+  "provider": { "@type": "Organization", "name": "PixMidas", "url": "https://www.pixmidas.com" }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What favicon sizes do I actually need?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Minimum set: favicon.ico (16x16 and 32x32) for the root domain, apple-touch-icon.png at 180x180 for iPhone/iPad, and 192x192 and 512x512 PNG for Android PWA manifest. Including 48x48 improves Windows taskbar display." }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the .ico format?",
+      "acceptedAnswer": { "@type": "Answer", "text": ".ICO is a Windows icon format containing multiple image sizes in one file. The root favicon.ico is fetched automatically by browsers even without link tags, making it important for fallback coverage. This generator creates an .ico with 16x16 and 32x32 layers." }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does my favicon look blurry at small sizes?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Downscaling to 16x16 pixels means complex logos lose all fine detail. Use a simplified version — a single letter, simple symbol, or solid-background icon mark — that reads clearly at tiny sizes. Full wordmarks are not suitable as favicons." }
+    },
+    {
+      "@type": "Question",
+      "name": "What is an Apple Touch Icon?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The Apple Touch Icon (180x180 px) is used by iOS when a user adds your website to their home screen. Without it, iOS uses a screenshot of the page instead, which looks poor as a home screen icon." }
+    },
+    {
+      "@type": "Question",
+      "name": "Should my favicon have a transparent or solid background?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Transparent backgrounds adapt to browser tab colors in light/dark mode. Solid backgrounds ensure the icon looks identical everywhere. For brand logos, a solid background matching your primary brand color typically looks cleanest as a home screen icon." }
+    },
+    {
+      "@type": "Question",
+      "name": "Are my images uploaded to a server?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Never. All favicon generation runs in your browser using the Canvas API. Your logo or icon file is never uploaded to any server." }
+    }
+  ]
+}
+</script>

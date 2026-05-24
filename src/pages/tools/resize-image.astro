@@ -2,46 +2,84 @@
 import Layout from '../../layouts/Layout.astro';
 import ImageResizer from '../../components/ImageResizer.jsx';
 import RelatedTools from '../../components/RelatedTools.astro';
+import PromoBanner from '../../components/PromoBanner.jsx';
 ---
 
 <Layout
-  title="Resize Image Free – Change Photo Dimensions Instantly"
-  description="Resize any image to exact pixel dimensions online for free. Set custom width and height, lock aspect ratio, and download instantly. No upload needed."
+  title="Resize Image Online — Free, No Upload Required | PixMidas"
+  description="Image Resizer Online Free | Resize Photos to Exact Dimensions - PixMidas"
+  canonical="https://www.pixmidas.com/tools/resize-image/"
 >
   <div class="tool-page">
     <div class="tool-header">
       <a href="/categories/image-tools/" class="back-link">← Image Tools</a>
       <h1 class="tool-title">Image Resizer</h1>
-      <p class="tool-subtitle">Resize any photo to exact pixel dimensions. Lock aspect ratio or set width and height freely.</p>
-    </div>
-
-    <div class="ad-slot ad-slot-horizontal">
-      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
-      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      <p class="tool-subtitle">Resize any image to exact pixel dimensions or by percentage. Aspect ratio lock keeps proportions correct automatically.</p>
     </div>
 
     <ImageResizer client:load />
 
-    <div class="ad-slot ad-slot-horizontal" style="margin-top: 32px;">
-      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="0987654321" data-ad-format="auto" data-full-width-responsive="true"></ins>
-      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+    <div class="promo-wrap">
+      <PromoBanner client:load excludeSlug="resize-image" />
     </div>
 
     <section class="seo-content">
-      <h2>How to resize an image online</h2>
-      <p>Upload your image, enter the target width and/or height in pixels, then click Resize and Download. If aspect ratio lock is enabled, adjusting one dimension automatically recalculates the other so your image never appears stretched or distorted.</p>
+      <p>Resizing images is a fundamental task for web publishing, social media, email templates, app development, and print preparation. Whether you need to scale a photograph down to fit a CMS upload limit, prepare a banner to exact platform dimensions, or create assets for a responsive design system, getting the pixel dimensions right is essential. This tool lets you resize JPG, PNG, and WebP images directly in your browser — nothing is uploaded to any server, and the result downloads instantly to your device.</p>
 
-      <h2>Should I lock the aspect ratio?</h2>
-      <p>For most use cases, yes. Locking the aspect ratio preserves the original proportions of your image, preventing distortion. Only disable it when you need exact dimensions for a specific slot — such as a profile picture or banner — where cropping isn't an option and slight distortion is acceptable.</p>
+      <h2>How to use</h2>
+      <ol>
+        <li><strong>Upload your image.</strong> Drag a file onto the drop zone or click to browse. The original dimensions are shown immediately so you know exactly what you're starting with before any changes are made.</li>
+        <li><strong>Set your target dimensions.</strong> Enter a new width and height in pixels, or choose a percentage to scale proportionally. The aspect ratio lock is on by default — changing the width automatically updates the height to keep proportions correct. Unlock it if you need non-proportional stretching.</li>
+        <li><strong>Preview the result.</strong> A preview of the resized image loads instantly in the browser. Check the new dimensions shown in the output panel before downloading to confirm everything looks correct.</li>
+        <li><strong>Download.</strong> Click Download to save the resized image to your device. The output preserves the same format as the input for maximum compatibility.</li>
+      </ol>
 
-      <h2>Common image sizes for web and social media</h2>
-      <p>Some frequently used dimensions: HD wallpaper (1920×1080), standard thumbnail (1280×720), social media square post (1080×1080), Twitter/X header (1500×500), Facebook cover (820×312), LinkedIn banner (1584×396). Use the resize tool to hit any of these targets instantly.</p>
+      <h2>Tips for best results</h2>
+      <ul>
+        <li><strong>Always scale down, not up.</strong> Enlarging a small image adds pixel data the original doesn't have, resulting in a blurry or blocky appearance. Start with the largest version of your image available and resize down to the target dimensions.</li>
+        <li><strong>Use percentage mode for proportional scaling.</strong> If you need to halve or quarter an image, 50% or 25% is faster than calculating exact pixel values. The result is mathematically precise and fully proportional.</li>
+        <li><strong>Check platform requirements first.</strong> Social media platforms, app stores, and CMS systems have specific dimension requirements. Use the <a href="/tools/social-sizes/" class="tool-suggestion">social media sizes</a> reference to look up the correct dimensions before resizing.</li>
+        <li><strong>Resize before compressing.</strong> If you also need to <a href="/tools/compress-image/" class="tool-suggestion">compress the image</a>, resize first — a smaller image has fewer pixels to compress, giving better quality at a lower file size.</li>
+      </ul>
 
-      <h2>Will resizing reduce image quality?</h2>
-      <p>Scaling an image down (making it smaller) has minimal quality impact. Scaling an image up (making it larger) will reduce sharpness because the browser must interpolate new pixels from existing data. For best results, always start from a higher-resolution original and resize downward.</p>
+      <h2>Why use PixMidas</h2>
+      <ul>
+        <li><strong>100% private.</strong> Resizing uses the browser's Canvas API. No file is ever uploaded — your image stays on your device throughout the entire process.</li>
+        <li><strong>Aspect ratio lock.</strong> The lock toggle keeps width and height in proportion automatically. Disable it only when you intentionally need to distort or stretch an image to non-proportional dimensions.</li>
+        <li><strong>No account needed.</strong> Free and instant — open the tool, upload your image, resize, download. No signup, no watermark, no usage limits.</li>
+      </ul>
 
-      <h2>Is my photo safe?</h2>
-      <p>Yes. Everything runs locally in your browser. Your image is never uploaded to any server, and no data is collected or stored. The resize operation uses the HTML5 Canvas API entirely on your device.</p>
+      <h2>Frequently asked questions</h2>
+
+      <h3>What is the difference between resizing and cropping?</h3>
+      <p>Resizing changes the overall dimensions of an image while keeping all content visible — it's like scaling the entire canvas up or down. Cropping removes portions of the image to change its aspect ratio or focus on a specific area. If you want to remove edges or zoom in on a subject, use the <a href="/tools/image-cropper/" class="tool-suggestion">image cropper</a>. If you want the whole image at a different size, use this resizer.</p>
+
+      <h3>Does resizing reduce image quality?</h3>
+      <p>Scaling down generally produces clean results because multiple source pixels are averaged together to create each output pixel. Scaling up introduces softness or pixelation because the tool must invent pixel values that weren't in the original. For best results, always start from the largest available source image. Professional AI-based upscaling tools produce better results than canvas-based enlargement for cases where you genuinely need to increase dimensions.</p>
+
+      <h3>What formats are supported?</h3>
+      <p>JPG, PNG, and WebP images are supported as input. The output preserves the original format. If you need to change the format at the same time, use the <a href="/tools/convert-image/" class="tool-suggestion">image converter</a> which supports both format conversion and custom output dimensions in a single step.</p>
+
+      <h3>What does aspect ratio lock do?</h3>
+      <p>When aspect ratio lock is enabled, changing the width automatically recalculates the height (and vice versa) to keep the image's original proportions. This prevents unintentional distortion. For example, a 1920×1080 image with lock enabled — change the width to 960 and the height updates to 540 automatically. Disable the lock only when you specifically want to change the shape of the image.</p>
+
+      <h3>Is there a maximum image size?</h3>
+      <p>There's no enforced limit on file size or pixel dimensions. Very large images above 20 megapixels may take a second or two to process due to the amount of pixel data involved, but they complete successfully. The limiting factor is your browser's available memory rather than any server-side restriction.</p>
+
+      <h3>Can I resize to exact social media dimensions?</h3>
+      <p>Yes. Check the recommended dimensions for each platform using the <a href="/tools/social-sizes/" class="tool-suggestion">social media image sizes</a> reference, then enter those exact pixel values in the width and height fields. Common targets include 1200×630 for Open Graph images, 1080×1080 for Instagram posts, 1080×1920 for Stories, and 1500×500 for Twitter headers.</p>
+
+      <div class="related-tools">
+        <p>Related tools</p>
+        <div class="related-tools-links">
+          <a href="/tools/compress-image/">Compress Image</a>
+          <a href="/tools/image-cropper/">Image Cropper</a>
+          <a href="/tools/convert-image/">Convert Image</a>
+          <a href="/tools/social-sizes/">Social Media Sizes</a>
+          <a href="/tools/image-info/">Image Info</a>
+        </div>
+      </div>
     </section>
 
     <RelatedTools slugs={["compress-image", "image-cropper", "convert-image"]} />
@@ -54,11 +92,12 @@ import RelatedTools from '../../components/RelatedTools.astro';
   "@type": "WebApplication",
   "name": "Image Resizer",
   "url": "https://www.pixmidas.com/tools/resize-image/",
-  "applicationCategory": "UtilitiesApplication",
+  "applicationCategory": "MultimediaApplication",
   "operatingSystem": "Any",
   "browserRequirements": "Requires JavaScript",
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-  "description": "Resize any image to exact pixel dimensions online for free. Lock aspect ratio or set custom dimensions. Runs in your browser."
+  "description": "Resize JPG, PNG and WebP images by pixel dimensions or percentage. Maintain aspect ratio or set custom size. Free, private, runs in your browser.",
+  "provider": { "@type": "Organization", "name": "PixMidas", "url": "https://www.pixmidas.com" }
 }
 </script>
 
@@ -69,23 +108,33 @@ import RelatedTools from '../../components/RelatedTools.astro';
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "How do I resize an image online for free?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Upload your image, enter the target width and/or height in pixels, then click Resize and Download. If aspect ratio lock is enabled, adjusting one dimension automatically recalculates the other so your image never appears stretched or distorted." }
+      "name": "What is the difference between resizing and cropping?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Resizing changes the overall dimensions while keeping all content visible. Cropping removes portions of the image to change aspect ratio or focus on a specific area. Use the image cropper if you want to cut edges; use the resizer if you want the whole image at different dimensions." }
     },
     {
       "@type": "Question",
-      "name": "Should I lock the aspect ratio when resizing?",
-      "acceptedAnswer": { "@type": "Answer", "text": "For most use cases, yes. Locking the aspect ratio preserves the original proportions of your image, preventing distortion. Only disable it when you need exact dimensions for a specific slot where slight distortion is acceptable." }
+      "name": "Does resizing reduce image quality?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Scaling down generally produces clean results as multiple source pixels are averaged together. Scaling up introduces softness or pixelation because pixel values must be invented. Always start with the largest available source image for best results." }
     },
     {
       "@type": "Question",
-      "name": "Will resizing reduce image quality?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Scaling an image down has minimal quality impact. Scaling an image up will reduce sharpness because the browser must interpolate new pixels. For best results, always start from a higher-resolution original and resize downward." }
+      "name": "What image formats are supported?",
+      "acceptedAnswer": { "@type": "Answer", "text": "JPG, PNG, and WebP are supported as input. The output preserves the original format. Use the image converter tool if you also need to change the format at the same time." }
     },
     {
       "@type": "Question",
-      "name": "Is my photo safe when using the image resizer?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Everything runs locally in your browser using the HTML5 Canvas API. Your image is never uploaded to any server, and no data is collected or stored." }
+      "name": "What does aspect ratio lock do?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Aspect ratio lock automatically recalculates height when you change width to keep original proportions. A 1920x1080 image with lock on — change width to 960 and height updates to 540 automatically." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there a maximum image size?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No enforced limit. Very large images above 20 megapixels may take a moment to process. The limiting factor is your browser's available memory, not a server-side restriction." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I resize to exact social media dimensions?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Common targets include 1200x630 for Open Graph images, 1080x1080 for Instagram posts, 1080x1920 for Stories, and 1500x500 for Twitter headers. Check the social media sizes reference tool for a complete list." }
     }
   ]
 }

@@ -2,49 +2,86 @@
 import Layout from '../../layouts/Layout.astro';
 import ImageCropper from '../../components/ImageCropper.jsx';
 import RelatedTools from '../../components/RelatedTools.astro';
+import PromoBanner from '../../components/PromoBanner.jsx';
 ---
 
 <Layout
-  title="Crop Image Free Online – Trim & Cut Photos Instantly"
-  description="Crop any image online for free. Draw a selection area and download the cropped result in seconds. No upload to servers, no login, works in your browser."
+  title="Image Cropper Online — Free, No Upload | PixMidas"
+  description="Image Cropper Online Free | Crop Images Instantly, No Download - PixMidas"
+  canonical="https://www.pixmidas.com/tools/image-cropper/"
 >
   <div class="tool-page">
     <div class="tool-header">
       <a href="/categories/image-tools/" class="back-link">← Image Tools</a>
       <h1 class="tool-title">Image Cropper</h1>
-      <p class="tool-subtitle">Draw a selection on any photo and download the cropped result instantly. Free, private, no account needed.</p>
-    </div>
-
-    <div class="ad-slot ad-slot-horizontal">
-      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
-      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      <p class="tool-subtitle">Crop any image with a draggable selection. Set exact pixel dimensions or choose a fixed aspect ratio for precise results.</p>
     </div>
 
     <ImageCropper client:load />
 
-    <div class="ad-slot ad-slot-horizontal" style="margin-top: 32px;">
-      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="0987654321" data-ad-format="auto" data-full-width-responsive="true"></ins>
-      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+    <div class="promo-wrap">
+      <PromoBanner client:load excludeSlug="image-cropper" />
     </div>
 
     <section class="seo-content">
-      <h2>How to crop an image online</h2>
-      <p>Upload your image, then click and drag to draw a selection box over the area you want to keep. You can reposition and resize the selection before clicking Download to save the cropped image. The whole process takes seconds and requires no software installation.</p>
+      <p>Cropping removes unwanted areas from an image to focus on the subject, change the aspect ratio, or meet specific platform dimension requirements. It's one of the most common image editing tasks — trimming a photo to a square for Instagram, removing a distracting background edge, cutting a wide panoramic into a 16:9 banner, or extracting a specific region from a screenshot. This tool gives you a visual drag-to-crop interface that runs entirely in your browser with no upload required and instant download after you make your selection.</p>
 
-      <h2>Cropping vs resizing — what's the difference?</h2>
-      <p>Resizing changes the dimensions of the entire image while keeping all content visible (scaled). Cropping removes the parts of the image outside your selection, so the subject fills the frame more tightly. Crop when you want to remove distracting backgrounds, reframe a subject, or hit a specific aspect ratio like 1:1 for a profile photo.</p>
+      <h2>How to use</h2>
+      <ol>
+        <li><strong>Upload your image.</strong> Drop a JPG, PNG, or WebP file onto the tool or click to browse. The image loads in the crop interface immediately.</li>
+        <li><strong>Select the crop area.</strong> Drag the crop handles to define the region you want to keep. You can drag any corner or edge handle to resize the selection, or drag the center of the selection to reposition it over the image.</li>
+        <li><strong>Lock an aspect ratio if needed.</strong> Select a preset ratio (1:1, 4:3, 16:9, etc.) to constrain the crop to a specific shape — useful for social media crops where exact ratios are required. Or leave it free to crop to any custom shape.</li>
+        <li><strong>Download the crop.</strong> Click Crop and Download to save only the selected region. The cropped output matches the pixel dimensions of your selection area at the original image resolution.</li>
+      </ol>
 
-      <h2>What image formats are supported?</h2>
-      <p>The cropper accepts JPG, JPEG, PNG, WebP and most other common image formats supported by your browser. The downloaded result is saved as a JPG file, which is compatible with all devices and platforms.</p>
+      <h2>Tips for best results</h2>
+      <ul>
+        <li><strong>Use aspect ratio lock for social media.</strong> Instagram posts are 1:1 (square) or 4:5 (portrait), Stories are 9:16, and Twitter/X headers are approximately 3:1. Lock the ratio before dragging to ensure your crop fits the platform perfectly without manual calculation.</li>
+        <li><strong>Crop then compress.</strong> After cropping to the region you need, run the image through the <a href="/tools/compress-image/" class="tool-suggestion">image compressor</a> to reduce file size. Compressing a cropped image is more efficient than compressing the full-size original.</li>
+        <li><strong>Crop then resize for exact output dimensions.</strong> The cropper outputs at the original image resolution for the selected area. If you need a specific pixel dimension (like exactly 1200×630 for Open Graph), crop first to get the right proportions, then <a href="/tools/resize-image/" class="tool-suggestion">resize</a> to the exact pixel size needed.</li>
+        <li><strong>Check the crop preview before downloading.</strong> The preview shows you exactly what the downloaded file will look like. Take an extra moment to verify edges and composition before clicking Crop and Download.</li>
+      </ul>
 
-      <h2>Tips for better crops</h2>
-      <p>Apply the rule of thirds — place your subject at one of the four intersection points of an imaginary 3×3 grid for a more visually dynamic result. For profile pictures, crop tightly around the subject's face with a small amount of space above their head. For product photos, leave equal padding on all sides for a clean, professional look.</p>
+      <h2>Why use PixMidas</h2>
+      <ul>
+        <li><strong>100% private.</strong> All cropping uses the Canvas API locally in your browser. No image is ever uploaded or transmitted to any server.</li>
+        <li><strong>Aspect ratio presets.</strong> Common ratios for social media, printing, and web use are available as one-click presets. Free crop mode gives you unlimited flexibility for custom shapes.</li>
+        <li><strong>No account needed.</strong> Free, instant, no file size limits. Crop as many images as you need in a single session.</li>
+      </ul>
 
-      <h2>Is my image safe?</h2>
-      <p>Yes. Your image never leaves your device. The crop is performed using the HTML5 Canvas API entirely inside your browser. Nothing is uploaded, stored or shared.</p>
+      <h2>Frequently asked questions</h2>
+
+      <h3>What is the difference between cropping and resizing?</h3>
+      <p>Cropping removes parts of the image — it selects a region and discards everything outside it. Resizing scales the entire image up or down without removing any content. Cropping changes what's visible; resizing changes the overall scale. For changing platform dimensions, you often need to do both: crop to the correct ratio, then resize to the exact pixel dimensions with the <a href="/tools/resize-image/" class="tool-suggestion">image resizer</a>.</p>
+
+      <h3>What aspect ratio should I use for Instagram?</h3>
+      <p>Instagram supports three aspect ratios: square posts at 1:1 (1080×1080 px), portrait posts at 4:5 (1080×1350 px), and landscape posts at 1.91:1 (1080×566 px). For Instagram Stories and Reels, use 9:16 (1080×1920 px). Locking the aspect ratio in the cropper to one of these ratios ensures your image will display correctly without Instagram applying its own crop.</p>
+
+      <h3>Does cropping reduce image quality?</h3>
+      <p>Cropping itself does not reduce quality — it simply removes pixels outside the selected region. The remaining pixels are unchanged. Quality reduction occurs when the output is then resized up (adding pixels the original doesn't have) or when a lossy format like JPG applies a second round of compression. Cropping and saving to PNG preserves perfect quality for the cropped region.</p>
+
+      <h3>Can I crop to an exact pixel dimension?</h3>
+      <p>The cropper outputs the selected region at the original image resolution. To get an exact output size in pixels, crop to the correct aspect ratio first, then use the <a href="/tools/resize-image/" class="tool-suggestion">image resizer</a> to scale the cropped result to your exact target dimensions. This two-step process gives precise control over both composition and output size.</p>
+
+      <h3>What formats are supported?</h3>
+      <p>JPG, PNG, and WebP are accepted as input. The output format matches the input — a PNG crop produces a PNG output, preserving any transparency. If you need to change the format after cropping, use the <a href="/tools/convert-image/" class="tool-suggestion">image converter</a> on the cropped result.</p>
+
+      <h3>Can I crop multiple images at once?</h3>
+      <p>The cropper is designed for one image at a time since each crop requires an individual visual selection. For batch-cropping multiple images to the same dimensions, the most efficient approach is to process them one at a time here, or to use image editing software like Photoshop's batch processing or ImageMagick for automated bulk operations.</p>
+
+      <div class="related-tools">
+        <p>Related tools</p>
+        <div class="related-tools-links">
+          <a href="/tools/resize-image/">Resize Image</a>
+          <a href="/tools/compress-image/">Compress Image</a>
+          <a href="/tools/social-sizes/">Social Media Sizes</a>
+          <a href="/tools/passport-photo-maker/">Passport Photo Maker</a>
+        </div>
+      </div>
     </section>
 
-    <RelatedTools slugs={["resize-image", "compress-image", "convert-image"]} />
+    <RelatedTools slugs={["resize-image", "compress-image", "social-sizes"]} />
   </div>
 </Layout>
 
@@ -54,11 +91,12 @@ import RelatedTools from '../../components/RelatedTools.astro';
   "@type": "WebApplication",
   "name": "Image Cropper",
   "url": "https://www.pixmidas.com/tools/image-cropper/",
-  "applicationCategory": "UtilitiesApplication",
+  "applicationCategory": "MultimediaApplication",
   "operatingSystem": "Any",
   "browserRequirements": "Requires JavaScript",
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-  "description": "Crop any image online for free. Draw a selection and download the cropped result instantly. Runs in your browser."
+  "description": "Crop images to any size or aspect ratio. Set exact dimensions or drag to select. Free, private, runs in your browser.",
+  "provider": { "@type": "Organization", "name": "PixMidas", "url": "https://www.pixmidas.com" }
 }
 </script>
 
@@ -69,23 +107,33 @@ import RelatedTools from '../../components/RelatedTools.astro';
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "How do I crop an image online?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Upload your image, then click and drag to draw a selection box over the area you want to keep. You can reposition and resize the selection before clicking Download to save the cropped image." }
-    },
-    {
-      "@type": "Question",
       "name": "What is the difference between cropping and resizing?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Resizing changes the dimensions of the entire image while keeping all content visible. Cropping removes the parts of the image outside your selection, so the subject fills the frame more tightly." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Cropping removes parts of the image — selecting a region and discarding everything outside it. Resizing scales the entire image without removing content. For platform dimensions, you often need to crop to the correct ratio, then resize to exact pixel dimensions." }
     },
     {
       "@type": "Question",
-      "name": "What image formats does the cropper support?",
-      "acceptedAnswer": { "@type": "Answer", "text": "The cropper accepts JPG, JPEG, PNG, WebP and most other common image formats supported by your browser. The downloaded result is saved as a JPG file." }
+      "name": "What aspect ratio should I use for Instagram?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Instagram supports: square posts 1:1 (1080×1080), portrait posts 4:5 (1080×1350), landscape 1.91:1 (1080×566), and Stories/Reels 9:16 (1080×1920). Lock the aspect ratio in the cropper to ensure correct display." }
     },
     {
       "@type": "Question",
-      "name": "Is my image safe when using the online cropper?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Your image never leaves your device. The crop is performed using the HTML5 Canvas API entirely inside your browser. Nothing is uploaded, stored or shared." }
+      "name": "Does cropping reduce image quality?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Cropping itself does not reduce quality — it simply removes pixels outside the selected region. The remaining pixels are unchanged. Quality reduction occurs only if the output is then resized up or compressed with a lossy format." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I crop to an exact pixel dimension?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Crop to the correct aspect ratio first, then use the image resizer to scale the cropped result to your exact target pixel dimensions. This two-step process gives precise control over both composition and output size." }
+    },
+    {
+      "@type": "Question",
+      "name": "What formats are supported?",
+      "acceptedAnswer": { "@type": "Answer", "text": "JPG, PNG, and WebP are accepted as input. The output format matches the input — a PNG crop preserves any transparency. Use the image converter on the cropped result if you need to change the format." }
+    },
+    {
+      "@type": "Question",
+      "name": "Are my images uploaded to a server?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Never. All cropping uses the Canvas API locally in your browser. No image is ever uploaded or transmitted to any server." }
     }
   ]
 }

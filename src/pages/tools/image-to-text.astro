@@ -1,0 +1,140 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ImageToText from '../../components/ImageToText.jsx';
+import RelatedTools from '../../components/RelatedTools.astro';
+import PromoBanner from '../../components/PromoBanner.jsx';
+---
+
+<Layout
+  title="Image to Text — OCR Online Free, No Upload | PixMidas"
+  description="Image to Text Converter Free | Extract Text from Photos Online - PixMidas"
+  canonical="https://www.pixmidas.com/tools/image-to-text/"
+>
+  <div class="tool-page">
+    <div class="tool-header">
+      <a href="/categories/image-tools/" class="back-link">← Image Tools</a>
+      <h1 class="tool-title">Image to Text (OCR)</h1>
+      <p class="tool-subtitle">Extract editable text from photos, screenshots, and scanned documents using optical character recognition. Runs entirely in your browser.</p>
+    </div>
+
+    <ImageToText client:load />
+
+
+    <div class="promo-wrap">
+      <PromoBanner client:load excludeSlug="image-to-text" />
+    </div>
+
+    <section class="seo-content">
+      <p>Optical Character Recognition (OCR) converts raster images of text into actual, selectable, copyable text characters. This technology is essential for anyone who receives documents as photos or scans, needs to extract data from screenshots, or wants to make image-based text searchable. This tool uses Tesseract.js — a WebAssembly port of Google's Tesseract OCR engine — running entirely in your browser. The OCR processing happens locally on your device; no image is ever sent to a server.</p>
+
+      <h2>How to use</h2>
+      <ol>
+        <li><strong>Upload your image.</strong> Drop a JPG, PNG, WebP, or other image file containing text onto the tool. Screenshots, scanned documents, photos of signs or whiteboards, and images of printed forms all work. The higher the image quality and resolution, the better the accuracy.</li>
+        <li><strong>Wait for OCR processing.</strong> Tesseract.js loads its language model on first use. After that initial load (a few seconds), recognition runs quickly. The progress indicator shows extraction status.</li>
+        <li><strong>Review the extracted text.</strong> The recognized text appears in the output panel. OCR accuracy depends heavily on image quality — clear, well-lit, high-contrast text on a plain background produces near-perfect results.</li>
+        <li><strong>Copy the text.</strong> Click Copy to copy all extracted text to your clipboard. From there, paste it into any document, spreadsheet, or form.</li>
+      </ol>
+
+      <h2>Tips for best results</h2>
+      <ul>
+        <li><strong>Use high-resolution images.</strong> OCR accuracy improves significantly with higher resolution. Aim for at least 300 DPI for scanned documents. Low-resolution screenshots (below 96 DPI effective resolution) will produce more errors.</li>
+        <li><strong>Ensure good contrast.</strong> Black text on a white background is ideal. Low-contrast text, colored backgrounds, or watermarks over text reduce accuracy significantly. If your image has poor contrast, increasing it in a photo editor before OCR improves results.</li>
+        <li><strong>Straighten tilted images.</strong> Significantly tilted or rotated text produces worse results than horizontal text. Correct the orientation before processing for best accuracy. The tool handles minor skew automatically, but extreme angles will degrade results.</li>
+        <li><strong>Use the JSON formatter after extraction.</strong> If the extracted text is structured data like JSON or code, paste it into the <a href="/tools/json-formatter/" class="tool-suggestion">JSON formatter</a> to clean it up and make it readable.</li>
+      </ul>
+
+      <h2>Why use PixMidas</h2>
+      <ul>
+        <li><strong>100% private.</strong> OCR runs via Tesseract.js in your browser using WebAssembly. Your images are never transmitted to any server. This is critical when extracting text from sensitive documents like contracts, medical records, or financial statements.</li>
+        <li><strong>Powered by Tesseract.</strong> Tesseract is Google's open-source OCR engine used in Google Drive, Google Lens, and enterprise document processing. The same engine runs locally in your browser without any API key or account.</li>
+        <li><strong>No account needed.</strong> Free, instant, no usage limits. Extract text from as many images as you need.</li>
+      </ul>
+
+      <h2>Frequently asked questions</h2>
+
+      <h3>What languages does the OCR support?</h3>
+      <p>By default, the tool recognizes English text. Tesseract supports over 100 languages, but loading multiple language models increases the initial download size. For non-English documents, a dedicated multi-language OCR workflow using the Tesseract CLI or a cloud OCR API would provide better results and broader language support.</p>
+
+      <h3>How accurate is the OCR?</h3>
+      <p>For high-quality scans of printed text at 300 DPI or higher, Tesseract typically achieves 98–99% character accuracy. Accuracy drops significantly with: handwritten text (often unreliable), low-resolution images below 150 DPI, complex backgrounds or textures, unusual fonts, and heavily stylized text. Screenshot text from modern UI apps generally OCRs very well because it's already high-resolution and high-contrast.</p>
+
+      <h3>Can it recognize handwriting?</h3>
+      <p>Tesseract is trained on printed fonts and does not perform well on handwriting. Recognition of handwritten text produces many errors and is not reliable enough for practical use. Cloud-based OCR services with dedicated handwriting recognition models (such as Google Cloud Vision or Microsoft Azure Computer Vision) produce much better results for handwritten documents.</p>
+
+      <h3>Why does it take a moment to start?</h3>
+      <p>Tesseract.js downloads its trained language model (approximately 4–8 MB) on first use. This data is cached in your browser after the first load, so subsequent sessions start immediately without another download. The recognition itself runs quickly once the model is loaded — typically 1–5 seconds per image depending on image size and text density.</p>
+
+      <h3>What image formats are supported?</h3>
+      <p>JPG, PNG, WebP, BMP, and TIFF images are all accepted. For PDFs, use the <a href="/tools/pdf-to-jpg/" class="tool-suggestion">PDF to JPG converter</a> first to extract each page as an image, then run OCR on the individual page images.</p>
+
+      <h3>Can I extract text from a PDF directly?</h3>
+      <p>This tool processes image files rather than PDFs directly. If your PDF is a scanned document (where all content is images), convert the pages to JPG using the <a href="/tools/pdf-to-jpg/" class="tool-suggestion">PDF to JPG tool</a> and then run each page image through the OCR tool. If your PDF is a text-based document (not scanned), you can select and copy text directly in any PDF viewer without OCR.</p>
+
+      <div class="related-tools">
+        <p>Related tools</p>
+        <div class="related-tools-links">
+          <a href="/tools/pdf-to-jpg/">PDF to JPG</a>
+          <a href="/tools/image-info/">Image Info</a>
+          <a href="/tools/json-formatter/">JSON Formatter</a>
+          <a href="/tools/compress-image/">Compress Image</a>
+        </div>
+      </div>
+    </section>
+
+    <RelatedTools slugs={["pdf-to-jpg", "image-info", "json-formatter"]} />
+  </div>
+</Layout>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Image to Text (OCR)",
+  "url": "https://www.pixmidas.com/tools/image-to-text/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Extract text from images using OCR. Convert photos, screenshots and scans to editable text. Free, private, runs in your browser.",
+  "provider": { "@type": "Organization", "name": "PixMidas", "url": "https://www.pixmidas.com" }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What languages does the OCR support?",
+      "acceptedAnswer": { "@type": "Answer", "text": "By default the tool recognizes English text. Tesseract supports over 100 languages, but loading multiple language models increases download size. For non-English documents, a dedicated multi-language OCR tool or cloud API would give better results." }
+    },
+    {
+      "@type": "Question",
+      "name": "How accurate is the OCR?",
+      "acceptedAnswer": { "@type": "Answer", "text": "For high-quality scans at 300 DPI or higher, Tesseract achieves 98–99% character accuracy. Accuracy drops with handwritten text, low-resolution images, complex backgrounds, unusual fonts, and heavily stylized text." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can it recognize handwriting?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Tesseract is trained on printed fonts and does not perform well on handwriting. For handwritten documents, cloud-based OCR services with dedicated handwriting models produce much better results." }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does it take a moment to start?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Tesseract.js downloads its trained language model (4–8 MB) on first use. This is cached in your browser after the first load. Recognition itself runs in 1–5 seconds per image once the model is loaded." }
+    },
+    {
+      "@type": "Question",
+      "name": "What image formats are supported?",
+      "acceptedAnswer": { "@type": "Answer", "text": "JPG, PNG, WebP, BMP, and TIFF images are accepted. For PDFs, use the PDF to JPG converter first to extract each page as an image, then run OCR on the individual page images." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I extract text from a PDF directly?",
+      "acceptedAnswer": { "@type": "Answer", "text": "This tool processes image files. For scanned PDFs, convert pages to JPG first using the PDF to JPG tool, then run each page image through OCR. Text-based PDFs can be copied directly in any PDF viewer without OCR." }
+    }
+  ]
+}
+</script>

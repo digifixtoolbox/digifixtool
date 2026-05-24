@@ -2,49 +2,86 @@
 import Layout from '../../layouts/Layout.astro';
 import SocialSizes from '../../components/SocialSizes.jsx';
 import RelatedTools from '../../components/RelatedTools.astro';
+import PromoBanner from '../../components/PromoBanner.jsx';
 ---
 
 <Layout
-  title="Social Media Image Sizes 2025 – Every Platform Guide"
-  description="Find the exact image dimensions for Instagram, YouTube, TikTok, Facebook, LinkedIn, Twitter and Pinterest in 2025. Download blank canvas templates at the right size."
+  title="Social Media Image Sizes 2026 — All Platforms | PixMidas"
+  description="Social Media Sizes Guide Free | Image Dimensions for All Platforms - PixMidas"
+  canonical="https://www.pixmidas.com/tools/social-sizes/"
 >
-  <div class="tool-page" style="max-width: 960px;">
+  <div class="tool-page">
     <div class="tool-header">
-      <a href="/categories/image-tools/" class="back-link">← Image Tools</a>
-      <h1 class="tool-title">Social Media Image Sizes 2025</h1>
-      <p class="tool-subtitle">Find the correct image dimensions for every platform and content type. Download a blank canvas template at the exact size instantly.</p>
-    </div>
-
-    <div class="ad-slot ad-slot-horizontal">
-      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
-      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      <a href="/#all-tools" class="back-link">← All Tools</a>
+      <h1 class="tool-title">Social Media Image Sizes</h1>
+      <p class="tool-subtitle">Current image dimensions for every major social media platform and content type — posts, headers, thumbnails, and ads.</p>
     </div>
 
     <SocialSizes client:load />
 
-    <div class="ad-slot ad-slot-horizontal" style="margin-top: 32px;">
-      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="0987654321" data-ad-format="auto" data-full-width-responsive="true"></ins>
-      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+    <div class="promo-wrap">
+      <PromoBanner client:load excludeSlug="social-sizes" />
     </div>
 
     <section class="seo-content">
-      <h2>Why do social media image sizes matter?</h2>
-      <p>Each platform has its own display format and will automatically crop, compress or scale images that don't match the expected dimensions. Using the wrong size means your carefully designed graphic might be cut off, blurry or distorted in feeds and notifications. Getting the right dimensions from the start prevents wasted design time and poor engagement caused by bad cropping.</p>
+      <p>Every social media platform has specific image dimension requirements for each content type. Use the wrong size and your image gets cropped, stretched, or pillarboxed in ways you didn't intend. Profile pictures get circular-cropped — if your logo or face isn't centered, the edges will be cut. Cover photos have different display proportions on desktop and mobile. Post images are displayed at different sizes in feed, search, and notifications. Knowing the correct dimensions before you design saves you from repeated exports, surprise cropping, and looking unprofessional. This reference tool keeps all dimensions organized and filterable in one place.</p>
 
-      <h2>Instagram image sizes 2025</h2>
-      <p>Square post: 1080×1080px (1:1). Portrait post: 1080×1350px (4:5). Landscape post: 1080×566px (1.91:1). Stories and Reels: 1080×1920px (9:16). Profile picture: 320×320px (displayed as a circle). Using the maximum 1080px width ensures your images stay sharp on high-density screens.</p>
+      <h2>How to use</h2>
+      <ol>
+        <li><strong>Browse by platform.</strong> Use the platform filter to narrow the list to the social network you're working on. The tool covers Instagram, Facebook, Twitter/X, LinkedIn, YouTube, TikTok, Pinterest, Snapchat, and more.</li>
+        <li><strong>Find your content type.</strong> Each platform has multiple content types — profile picture, cover photo, post image, Story, Reel, ad formats, and video thumbnails. The table shows the recommended dimensions and aspect ratio for each.</li>
+        <li><strong>Note the file size limits.</strong> Many platforms have maximum file size requirements alongside dimension requirements. The table includes both where relevant.</li>
+        <li><strong>Use the dimensions directly.</strong> Once you have the correct pixel dimensions, resize your image using the <a href="/tools/resize-image/" class="tool-suggestion">image resizer</a> or crop to the correct aspect ratio using the <a href="/tools/image-cropper/" class="tool-suggestion">image cropper</a> before uploading.</li>
+      </ol>
 
-      <h2>YouTube image sizes 2025</h2>
-      <p>Thumbnail: 1280×720px (16:9, minimum 2MB recommended). Channel banner: 2560×1440px (safe zone 1546×423px for display across all devices). Profile picture: 800×800px. Shorts thumbnail: 1080×1920px (9:16). YouTube thumbnails are one of the most important factors for click-through rate — use bold text, high contrast and a face when possible.</p>
+      <h2>Tips for best results</h2>
+      <ul>
+        <li><strong>Design at 2× for retina displays.</strong> All the dimensions listed are the minimum display sizes. For sharp rendering on retina and high-DPI screens (iPhone, modern Macs, many Android devices), design and export at 2× the dimensions shown — a 1080×1080 Instagram post should be designed as 2160×2160 and let the platform downscale it.</li>
+        <li><strong>Use safe zones for profile pictures.</strong> Profile photos are displayed in circles or rounded squares depending on the platform. Any content near the edges of a square profile image may be cropped. Keep the main subject (face, logo) centered and within the central 80% of the frame.</li>
+        <li><strong>Cover photo safe zones differ on mobile and desktop.</strong> Platform cover photos are cropped differently on mobile and desktop views. Keep important content (text, logos, faces) in the central portion of the image to ensure they're visible in both contexts.</li>
+        <li><strong>Check platform-specific ad specs separately.</strong> Ad sizes change more frequently than organic content sizes as platforms add and retire ad formats. The dimensions here cover organic content; verify ad specs in the platform's official Ads Manager documentation for the current version before creating ad creatives.</li>
+      </ul>
 
-      <h2>LinkedIn image sizes 2025</h2>
-      <p>Profile photo: 400×400px minimum. Cover photo: 1584×396px. Post image: 1200×627px (1.91:1). Company logo: 300×300px. Article cover image: 1920×1080px. LinkedIn posts with images get significantly higher engagement than text-only posts, so using the correct dimensions is especially important for professional reach.</p>
+      <h2>Why use PixMidas</h2>
+      <ul>
+        <li><strong>All platforms in one place.</strong> Rather than searching each platform's help documentation separately, all dimensions are organized in a single filterable reference. Find what you need in seconds.</li>
+        <li><strong>Current dimensions.</strong> Platform image specs change when platforms redesign their interfaces. This reference is updated to reflect current specifications rather than outdated guides from years ago.</li>
+        <li><strong>No account needed.</strong> Free, instant access. No signup, no newsletter, no paywall.</li>
+      </ul>
 
-      <h2>What is the blank canvas download?</h2>
-      <p>A blank white JPG file at exactly the right pixel dimensions for your chosen platform and content type. Open it in Canva, Figma, Photoshop, or any design tool and you'll be starting at the correct size without any setup. It eliminates guesswork and the risk of building a design at the wrong aspect ratio.</p>
+      <h2>Frequently asked questions</h2>
+
+      <h3>What are the correct Instagram image sizes?</h3>
+      <p>Instagram supports three post aspect ratios: square at 1:1 (minimum 1080×1080 px), portrait at 4:5 (minimum 1080×1350 px), and landscape at 1.91:1 (minimum 1080×566 px). Instagram Stories and Reels use 9:16 (minimum 1080×1920 px). Profile pictures are displayed at 110×110 px on mobile but should be uploaded at at least 320×320 px. Instagram applies quality reduction on images; upload at higher resolution to ensure the final result looks sharp.</p>
+
+      <h3>What size should a Facebook cover photo be?</h3>
+      <p>Facebook cover photos display at 820×312 px on desktop and 640×360 px on mobile. The recommended upload size is 820×462 px — this size ensures important content is visible on both desktop and mobile without being cropped. Keep key elements (text, logos) away from the left portion of the image since the profile picture overlaps that area on some views.</p>
+
+      <h3>What is the best size for a Twitter/X header image?</h3>
+      <p>Twitter/X profile headers display at 1500×500 px at a 3:1 aspect ratio. The profile picture overlaps the left-center portion at the bottom of the header. Keep important content away from the left 20% of the header and the bottom edge to avoid overlap. The minimum upload size accepted is 1500×500 px; higher resolutions are down-scaled by the platform.</p>
+
+      <h3>What size should a YouTube thumbnail be?</h3>
+      <p>YouTube thumbnails should be 1280×720 px (16:9 aspect ratio) at a maximum file size of 2 MB. The minimum is 640×360 px but 1280×720 provides sharp rendering on desktop and mobile. Thumbnails must be under 2 MB in file size — use the <a href="/tools/compress-image/" class="tool-suggestion">image compressor</a> if your thumbnail exceeds this limit.</p>
+
+      <h3>Do image requirements change frequently?</h3>
+      <p>Platform requirements change when platforms redesign their interfaces or add new content types. Profile picture and cover photo dimensions are relatively stable. Ad format specifications and newer content types (Reels, Stories) change more frequently. Always verify the latest specs in the platform's official creator or advertiser documentation when preparing materials for a campaign or product launch.</p>
+
+      <h3>Why does my uploaded image look different than what I designed?</h3>
+      <p>Platforms apply their own compression and cropping after upload. Most compress images — sometimes aggressively — which reduces quality and can shift colors slightly. Uploading at higher resolution gives platforms more to work with before compression. Some platforms also enforce aspect ratios by cropping rather than stretching, so if your image doesn't match the expected ratio, edges may be removed. Always use the exact required aspect ratio and test a preview before publishing.</p>
+
+      <div class="related-tools">
+        <p>Related tools</p>
+        <div class="related-tools-links">
+          <a href="/tools/image-cropper/">Image Cropper</a>
+          <a href="/tools/resize-image/">Resize Image</a>
+          <a href="/tools/compress-image/">Compress Image</a>
+          <a href="/tools/image-watermark/">Image Watermark</a>
+        </div>
+      </div>
     </section>
 
-    <RelatedTools slugs={["color-picker", "image-cropper", "compress-image"]} />
+    <RelatedTools slugs={["image-cropper", "resize-image", "compress-image"]} />
   </div>
 </Layout>
 
@@ -52,13 +89,14 @@ import RelatedTools from '../../components/RelatedTools.astro';
 {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  "name": "Social Media Image Sizes Guide",
+  "name": "Social Media Image Sizes",
   "url": "https://www.pixmidas.com/tools/social-sizes/",
   "applicationCategory": "UtilitiesApplication",
   "operatingSystem": "Any",
   "browserRequirements": "Requires JavaScript",
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-  "description": "Find the exact image dimensions for every social media platform in 2025. Download blank canvas templates at the right size."
+  "description": "Current image dimensions for Instagram, Facebook, Twitter/X, LinkedIn, YouTube, TikTok and more. Filter by platform and content type.",
+  "provider": { "@type": "Organization", "name": "PixMidas", "url": "https://www.pixmidas.com" }
 }
 </script>
 
@@ -69,23 +107,33 @@ import RelatedTools from '../../components/RelatedTools.astro';
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What are the correct social media image sizes in 2025?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Instagram square post: 1080×1080px. Stories/Reels: 1080×1920px. YouTube thumbnail: 1280×720px. LinkedIn post: 1200×627px. Each platform has specific requirements — using the wrong size causes cropping and distortion." }
+      "name": "What are the correct Instagram image sizes?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Instagram post ratios: square 1:1 (1080x1080), portrait 4:5 (1080x1350), landscape 1.91:1 (1080x566). Stories and Reels: 9:16 (1080x1920). Profile pictures: upload at least 320x320 px. Upload at higher resolution for best quality." }
     },
     {
       "@type": "Question",
-      "name": "What are the Instagram image sizes for 2025?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Square post: 1080×1080px (1:1). Portrait post: 1080×1350px (4:5). Landscape post: 1080×566px. Stories and Reels: 1080×1920px (9:16). Profile picture: 320×320px." }
+      "name": "What size should a Facebook cover photo be?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Facebook cover photos display at 820x312 on desktop and 640x360 on mobile. Recommended upload size is 820x462 px to ensure visibility on both. Keep key elements away from the left portion where the profile picture overlaps." }
     },
     {
       "@type": "Question",
-      "name": "What is the YouTube thumbnail size?",
-      "acceptedAnswer": { "@type": "Answer", "text": "YouTube thumbnails should be 1280×720px (16:9 aspect ratio). Use bold text, high contrast and a face when possible, as thumbnails are one of the most important factors for click-through rate." }
+      "name": "What is the best size for a Twitter/X header image?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Twitter/X headers display at 1500x500 px (3:1 ratio). Keep important content away from the left 20% and bottom edge to avoid profile picture overlap. Minimum accepted upload size is 1500x500 px." }
     },
     {
       "@type": "Question",
-      "name": "What is the blank canvas download?",
-      "acceptedAnswer": { "@type": "Answer", "text": "A blank white JPG file at exactly the right pixel dimensions for your chosen platform. Open it in Canva, Figma or Photoshop to start designing at the correct size immediately." }
+      "name": "What size should a YouTube thumbnail be?",
+      "acceptedAnswer": { "@type": "Answer", "text": "YouTube thumbnails should be 1280x720 px (16:9) at maximum 2 MB file size. Minimum is 640x360 but 1280x720 provides sharp rendering on all screens. Compress if your file exceeds 2 MB." }
+    },
+    {
+      "@type": "Question",
+      "name": "Do social media image requirements change frequently?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Profile and cover photo dimensions are relatively stable. Ad formats and newer content types like Reels change more frequently. Always verify the latest specs in official platform documentation before preparing campaign materials." }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does my uploaded image look different than what I designed?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Platforms apply compression and cropping after upload. Most compress images which reduces quality. Some enforce aspect ratios by cropping rather than stretching. Always use the exact required aspect ratio and test a preview before publishing." }
     }
   ]
 }

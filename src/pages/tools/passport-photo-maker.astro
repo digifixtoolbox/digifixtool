@@ -1,0 +1,140 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PassportPhotoTool from '../../components/PassportPhotoTool.jsx';
+import RelatedTools from '../../components/RelatedTools.astro';
+import PromoBanner from '../../components/PromoBanner.jsx';
+---
+
+<Layout
+  title="Passport Photo Maker — Free Online, No Upload | PixMidas"
+  description="Passport Photo Maker Online Free | Create Official Passport Photos - PixMidas"
+  canonical="https://www.pixmidas.com/tools/passport-photo-maker/"
+>
+  <div class="tool-page">
+    <div class="tool-header">
+      <a href="/categories/image-tools/" class="back-link">← Image Tools</a>
+      <h1 class="tool-title">Passport Photo Maker</h1>
+      <p class="tool-subtitle">Create passport and ID photos to official dimensions. Crop, adjust, and download a compliant photo for your application.</p>
+    </div>
+
+    <PassportPhotoTool client:load />
+
+
+    <div class="promo-wrap">
+      <PromoBanner client:load excludeSlug="passport-photo-maker" />
+    </div>
+
+    <section class="seo-content">
+      <p>Passport and official ID photos have strict requirements: specific pixel dimensions, specific print sizes, face-to-photo ratio constraints, and plain white backgrounds. Getting these wrong means a rejected application, wasted time, and additional fees. Professional photo studios charge per shot, and many post offices and pharmacies that offer passport photo services require an in-person visit. This tool lets you prepare a compliant passport photo from any recent portrait photo on your device — crop to the correct dimensions, adjust the framing, and download a print-ready file at the standard required size.</p>
+
+      <h2>How to use</h2>
+      <ol>
+        <li><strong>Upload your portrait photo.</strong> Use a recent photo with a plain white or off-white background. The subject should be looking directly at the camera with a neutral expression. Most passport offices accept digital submissions today, so a high-quality smartphone photo is sufficient source material.</li>
+        <li><strong>Select the photo standard.</strong> Choose the country or document type — US Passport (2×2 inch), UK Passport (35×45 mm), EU Passport (35×45 mm), or other common ID formats. The tool sets the correct crop ratio and output dimensions for each standard automatically.</li>
+        <li><strong>Adjust the crop.</strong> Drag and resize the crop frame to center the face correctly. For most passport standards, the face should occupy 70–80% of the frame height. Eyes should be roughly centered vertically within the photo.</li>
+        <li><strong>Download your photo.</strong> The tool outputs the photo at the correct pixel dimensions for the selected standard. Download the file and use it for digital application upload or for printing at a local photo printer at the specified print size.</li>
+      </ol>
+
+      <h2>Tips for best results</h2>
+      <ul>
+        <li><strong>Use a plain white background.</strong> Most passport standards require a plain white or off-white background with no patterns, shadows, or objects visible. If your source photo has a colored background, position yourself against a white wall or use the <a href="/tools/background-remover/" class="tool-suggestion">background remover</a> first, then place the subject on a white background in a design tool.</li>
+        <li><strong>Take the photo in good lighting.</strong> Avoid harsh shadows on the face or background. Natural light from a window works well. Avoid strong overhead lighting that creates shadows under the eyes and nose.</li>
+        <li><strong>Check the face-to-frame ratio.</strong> Passport requirements are specific: for US passports, the head should be 1–1⅜ inches (25–35 mm) within a 2×2 inch photo. The crop handles let you adjust until the face fills the required proportion.</li>
+        <li><strong>Compress after exporting.</strong> If uploading digitally, some government portals have a file size limit. Use the <a href="/tools/compress-image/" class="tool-suggestion">image compressor</a> to meet any KB limit without reducing the pixel dimensions.</li>
+      </ul>
+
+      <h2>Why use PixMidas</h2>
+      <ul>
+        <li><strong>100% private.</strong> All photo processing happens in your browser using the Canvas API. Your personal portrait is never uploaded to any server — an important consideration for ID documents.</li>
+        <li><strong>Multiple passport standards.</strong> US, UK, EU, and other common national ID photo dimensions are all supported. The output dimensions and crop ratios are set automatically for each standard.</li>
+        <li><strong>No account needed.</strong> Free, instant, no printing required. Download the file and submit it digitally or take the file to a print service.</li>
+      </ul>
+
+      <h2>Frequently asked questions</h2>
+
+      <h3>What are the US passport photo requirements?</h3>
+      <p>US passport photos must be 2×2 inches (51×51 mm). The face must be between 1 and 1⅜ inches (25–35 mm) from chin to top of head. The background must be plain white or off-white. The subject must face the camera directly with eyes open, visible, and looking straight ahead. No glasses are permitted. The photo must have been taken within the last 6 months and must be in color.</p>
+
+      <h3>What are UK passport photo requirements?</h3>
+      <p>UK passport photos must be 35×45 mm. The face should take up 70–80% of the frame. The background must be plain light grey or cream (not pure white). The head should be centered and straight. For UK photos specifically, no shadows should be visible on the face or background, and both edges of the face must be clearly visible. Expression must be neutral with the mouth closed.</p>
+
+      <h3>Can I use this for visa photos?</h3>
+      <p>Yes, provided you select the correct dimensions for your target country. Visa requirements vary by country and consulate, and some have unique dimension or background requirements. Always verify the specific requirements for the exact visa type and issuing authority before submitting. The tool produces photos at the specified dimensions — it's your responsibility to verify those dimensions match the current official requirements.</p>
+
+      <h3>What if my background isn't white?</h3>
+      <p>Most passport standards require a white or near-white plain background. If your source photo has a colored or patterned background, use the <a href="/tools/background-remover/" class="tool-suggestion">background remover</a> tool to isolate the subject as a transparent PNG, then compose the subject onto a white background in a design tool like Canva or Figma before using the passport photo maker.</p>
+
+      <h3>What pixel resolution should my source photo be?</h3>
+      <p>For the best print quality, start with the highest resolution photo available. A 2×2 inch photo printed at 300 DPI requires at least 600×600 pixels. Most smartphone cameras today produce photos well above this — a 12 MP smartphone photo is more than adequate. For digital-only submissions to government portals, the exact file size and resolution requirements vary by country and portal.</p>
+
+      <h3>Can I print the output at a pharmacy or post office?</h3>
+      <p>Yes. The downloaded photo is at the correct pixel dimensions for the selected standard. Print it at the specified print size — 2×2 inches for US passports, 35×45 mm for UK and EU passports. Most photo printing services at pharmacies and supermarkets accept digital files and can print to these exact sizes on request.</p>
+
+      <div class="related-tools">
+        <p>Related tools</p>
+        <div class="related-tools-links">
+          <a href="/tools/image-cropper/">Image Cropper</a>
+          <a href="/tools/resize-image/">Resize Image</a>
+          <a href="/tools/background-remover/">Background Remover</a>
+          <a href="/tools/compress-image/">Compress Image</a>
+        </div>
+      </div>
+    </section>
+
+    <RelatedTools slugs={["image-cropper", "resize-image", "background-remover"]} />
+  </div>
+</Layout>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Passport Photo Maker",
+  "url": "https://www.pixmidas.com/tools/passport-photo-maker/",
+  "applicationCategory": "MultimediaApplication",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Crop and resize photos to passport and ID dimensions. US, UK, EU standards supported. Free, private, runs in your browser.",
+  "provider": { "@type": "Organization", "name": "PixMidas", "url": "https://www.pixmidas.com" }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What are the US passport photo requirements?",
+      "acceptedAnswer": { "@type": "Answer", "text": "US passport photos must be 2x2 inches (51x51 mm). The face must be 1 to 1⅜ inches from chin to top of head. Background must be plain white or off-white. No glasses. Subject must face the camera directly. Photo must be taken within the last 6 months and be in color." }
+    },
+    {
+      "@type": "Question",
+      "name": "What are UK passport photo requirements?",
+      "acceptedAnswer": { "@type": "Answer", "text": "UK passport photos must be 35x45 mm. The face should take up 70–80% of the frame. Background must be plain light grey or cream. Head must be centered and straight. No shadows on face or background. Neutral expression with mouth closed." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use this for visa photos?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes, if you select the correct dimensions for your target country. Visa requirements vary by country and consulate. Always verify the specific requirements for the exact visa type and issuing authority before submitting." }
+    },
+    {
+      "@type": "Question",
+      "name": "What if my background isn't white?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Use the background remover tool to isolate the subject as a transparent PNG, then compose onto a white background in a design tool like Canva or Figma before using the passport photo maker." }
+    },
+    {
+      "@type": "Question",
+      "name": "What pixel resolution should my source photo be?",
+      "acceptedAnswer": { "@type": "Answer", "text": "A 2x2 inch photo at 300 DPI requires at least 600x600 pixels. Most smartphone cameras produce photos well above this. For digital government portal submissions, exact requirements vary by country." }
+    },
+    {
+      "@type": "Question",
+      "name": "Are my photos uploaded to a server?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Never. All photo processing happens in your browser using the Canvas API. Your personal portrait is never uploaded to any server — an important consideration for identity documents." }
+    }
+  ]
+}
+</script>

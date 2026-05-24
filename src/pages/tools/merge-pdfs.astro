@@ -2,50 +2,85 @@
 import Layout from '../../layouts/Layout.astro';
 import MergePdf from '../../components/MergePdf.jsx';
 import RelatedTools from '../../components/RelatedTools.astro';
+import PromoBanner from '../../components/PromoBanner.jsx';
 ---
 
 <Layout
-  title="Merge PDF Files Free – Combine Multiple PDFs Online"
-  description="Combine multiple PDF files into one document online for free. Reorder pages before merging. No upload to servers, no login required. Works in your browser."
+  title="Merge PDFs Online — Free, No Upload, No Account | PixMidas"
+  description="Merge PDF Online Free | Combine Multiple PDFs Instantly - PixMidas"
+  canonical="https://www.pixmidas.com/tools/merge-pdfs/"
 >
   <div class="tool-page">
     <div class="tool-header">
       <a href="/categories/pdf-tools/" class="back-link">← PDF Tools</a>
-      <h1 class="tool-title">Merge PDF Files</h1>
-      <p class="tool-subtitle">Combine multiple PDFs into one document. Reorder files before merging, then download instantly.</p>
+      <h1 class="tool-title">Merge PDFs</h1>
+      <p class="tool-subtitle">Combine multiple PDF files into a single document. Drag to reorder, then merge and download instantly.</p>
     </div>
 
-    <div class="ad-slot ad-slot-horizontal">
-      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
-      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js" is:inline></script>
     <MergePdf client:load />
 
-    <div class="ad-slot ad-slot-horizontal" style="margin-top: 32px;">
-      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="0987654321" data-ad-format="auto" data-full-width-responsive="true"></ins>
-      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+    <div class="promo-wrap">
+      <PromoBanner client:load excludeSlug="merge-pdfs" />
     </div>
 
     <section class="seo-content">
-      <h2>How to merge PDF files online</h2>
-      <p>Add your PDF files using the upload button, reorder them with the arrow buttons if needed, then click Merge. The combined PDF downloads automatically to your device. All pages from every file are included in the order you set.</p>
+      <p>Merging PDF files is a common task for anyone working with documents — combining chapters into a complete report, assembling invoices into a monthly statement, joining form submissions, or consolidating scanned pages into a single archive. Most PDF merge tools require either paid desktop software or uploading your documents to an external server, raising obvious privacy concerns for contracts, invoices, and personal documents. This tool assembles multiple PDFs into a single file entirely in your browser using pdf-lib, with no upload and no server involvement whatsoever.</p>
 
-      <h2>How many PDFs can I combine?</h2>
-      <p>There is no set limit on the number of files. You can merge as many PDFs as your browser memory allows. For practical use, merging 5–20 files of typical document size (a few MB each) works smoothly on any modern device.</p>
+      <h2>How to use</h2>
+      <ol>
+        <li><strong>Upload your PDF files.</strong> Drag multiple PDFs onto the drop zone or click to select files from your device. You can add as many files as needed — each appears as a card in the file list with its page count shown.</li>
+        <li><strong>Reorder the files.</strong> Drag the cards to arrange the files in the order you want them to appear in the merged output. The final document will contain all pages from each PDF in the order shown.</li>
+        <li><strong>Click Merge.</strong> The tool assembles all PDFs into a single document using pdf-lib running in your browser. Processing is fast for typical document sizes and completes without any network request.</li>
+        <li><strong>Download the result.</strong> The merged PDF downloads immediately after processing. The output file contains all pages from all input files in the exact order you specified.</li>
+      </ol>
 
-      <h2>Common uses for merging PDFs</h2>
-      <p>Combine chapters of a report into one document for easy sharing. Merge multiple scanned pages into a single PDF. Join invoices or receipts into one file for accounting. Combine a cover letter and resume into a single PDF for job applications. Merge multiple contracts or agreements into one archive file.</p>
+      <h2>Tips for best results</h2>
+      <ul>
+        <li><strong>Check page order before merging.</strong> Once merged, the output is a single file. If the order is wrong, you'll need to re-merge. Take an extra second to confirm the card order before clicking Merge.</li>
+        <li><strong>Merge before compressing.</strong> If you need a smaller merged PDF, merge first and then use the <a href="/tools/compress-pdf/" class="tool-suggestion">PDF compressor</a> on the combined file — it's more efficient than compressing individual files separately.</li>
+        <li><strong>Convert images to PDF first.</strong> If you need to include JPG or PNG images in the merged document, convert them first with the <a href="/tools/images-to-pdf/" class="tool-suggestion">Images to PDF</a> tool, then add the resulting PDF to the merge queue.</li>
+        <li><strong>Large scanned PDFs may be slow.</strong> PDFs containing many high-resolution scanned pages can be tens of megabytes each. The browser will handle them, but processing may take longer than with text-based PDFs. Consider <a href="/tools/compress-pdf/" class="tool-suggestion">compressing large PDFs</a> before merging to speed things up.</li>
+      </ul>
 
-      <h2>Will the quality of my PDFs be affected?</h2>
-      <p>No. The merger uses pdf-lib to copy pages from each source PDF into the combined output without re-rendering or recompressing any content. Text, images and formatting in the original files are preserved exactly.</p>
+      <h2>Why use PixMidas</h2>
+      <ul>
+        <li><strong>100% private.</strong> PDF assembly uses pdf-lib running entirely in your browser. Your documents never leave your device — no upload, no cloud processing, no third-party server access.</li>
+        <li><strong>Drag-to-reorder.</strong> The file list supports drag-and-drop reordering before merging, so you can set the exact page sequence without needing to restart.</li>
+        <li><strong>No account needed.</strong> Free, instant, no page limits, no file count restrictions. Merge as many PDFs as you need in a single session.</li>
+      </ul>
 
-      <h2>Is my data safe?</h2>
-      <p>Yes. Your PDF files never leave your device. All merging is performed entirely inside your browser using pdf-lib, an open-source JavaScript library. Nothing is uploaded to any server.</p>
+      <h2>Frequently asked questions</h2>
+
+      <h3>Is there a page limit for merged PDFs?</h3>
+      <p>There's no enforced page limit. The tool can handle PDFs with hundreds or thousands of pages as long as your browser has sufficient memory to hold all the document data. For very large merges (50+ MB of total input), processing may take several seconds but will complete successfully. If memory is a concern, merge in smaller batches and combine the results.</p>
+
+      <h3>Does merging affect the PDF content or quality?</h3>
+      <p>No. pdf-lib performs a structural assembly of the PDF pages rather than rendering and re-encoding them. The content of each page — text, images, vectors, fonts — is transferred to the output file unchanged. There is no quality loss and no re-rendering of any kind during the merge process.</p>
+
+      <h3>Can I merge password-protected PDFs?</h3>
+      <p>No. Password-protected PDFs cannot be read by pdf-lib without the decryption key. You'll need to remove the password protection from each PDF using Acrobat or a similar tool before merging. Once the protection is removed, the files merge normally.</p>
+
+      <h3>What happens to form fields and annotations in merged PDFs?</h3>
+      <p>Form fields, annotations, and other interactive elements are included in the merge. However, field names from different PDFs may conflict if they share the same name — some PDF readers flatten or rename duplicate fields. For PDFs with complex interactive forms, test the merged output in your target PDF reader to confirm the interactive elements behave as expected.</p>
+
+      <h3>Can I extract or remove specific pages instead of merging?</h3>
+      <p>This tool specifically merges files together. If you need to extract certain pages or split a PDF into separate files, that functionality is not currently included in the merge tool. To convert individual pages to images, use the <a href="/tools/pdf-to-jpg/" class="tool-suggestion">PDF to JPG</a> converter which renders each page as a separate image file.</p>
+
+      <h3>Why is my merged PDF larger than expected?</h3>
+      <p>Each input PDF contributes its full content — including embedded fonts, images at their original resolution, and any embedded media — to the merged output. No compression is applied during the merge step. If you need a smaller output file, run the merged PDF through the <a href="/tools/compress-pdf/" class="tool-suggestion">PDF compressor</a> after merging to reduce the file size.</p>
+
+      <div class="related-tools">
+        <p>Related tools</p>
+        <div class="related-tools-links">
+          <a href="/tools/compress-pdf/">Compress PDF</a>
+          <a href="/tools/pdf-to-jpg/">PDF to JPG</a>
+          <a href="/tools/images-to-pdf/">Images to PDF</a>
+        </div>
+      </div>
     </section>
 
-    <RelatedTools slugs={["images-to-pdf", "pdf-to-jpg", "compress-image"]} />
+    <RelatedTools slugs={["compress-pdf", "pdf-to-jpg", "images-to-pdf"]} />
   </div>
 </Layout>
 
@@ -53,13 +88,14 @@ import RelatedTools from '../../components/RelatedTools.astro';
 {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  "name": "PDF Merger",
+  "name": "Merge PDFs",
   "url": "https://www.pixmidas.com/tools/merge-pdfs/",
   "applicationCategory": "UtilitiesApplication",
   "operatingSystem": "Any",
   "browserRequirements": "Requires JavaScript",
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-  "description": "Merge multiple PDF files into one document online for free. Reorder pages before merging. Runs in your browser."
+  "description": "Combine multiple PDF files into one document. Drag to reorder pages before merging. Free, private, runs in your browser.",
+  "provider": { "@type": "Organization", "name": "PixMidas", "url": "https://www.pixmidas.com" }
 }
 </script>
 
@@ -70,23 +106,33 @@ import RelatedTools from '../../components/RelatedTools.astro';
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "How do I merge PDF files online for free?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Add your PDF files using the upload button, reorder them with the arrow buttons if needed, then click Merge. The combined PDF downloads automatically to your device with all pages in the order you set." }
+      "name": "Is there a page limit for merged PDFs?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No enforced page limit. The tool handles PDFs with hundreds of pages as long as your browser has sufficient memory. For very large merges, processing may take several seconds but completes successfully." }
     },
     {
       "@type": "Question",
-      "name": "How many PDF files can I merge at once?",
-      "acceptedAnswer": { "@type": "Answer", "text": "There is no set limit. You can merge as many PDFs as your browser memory allows. Merging 5–20 files of typical document size works smoothly on any modern device." }
+      "name": "Does merging affect PDF content or quality?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. pdf-lib performs a structural assembly without rendering or re-encoding pages. Text, images, vectors, and fonts are transferred unchanged. There is no quality loss during the merge process." }
     },
     {
       "@type": "Question",
-      "name": "Will merging PDFs affect their quality?",
-      "acceptedAnswer": { "@type": "Answer", "text": "No. The merger copies pages from each source PDF without re-rendering or recompressing any content. Text, images and formatting in the original files are preserved exactly." }
+      "name": "Can I merge password-protected PDFs?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. Password-protected PDFs cannot be read without the decryption key. Remove password protection using Acrobat or a similar tool first, then merge normally." }
     },
     {
       "@type": "Question",
-      "name": "Is my data safe when merging PDFs online?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Your PDF files never leave your device. All merging is performed entirely inside your browser using pdf-lib, an open-source JavaScript library. Nothing is uploaded to any server." }
+      "name": "What happens to form fields in merged PDFs?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Form fields and annotations are included in the merge. However, field names from different PDFs may conflict if they share the same name. Test interactive forms in the merged output to confirm they behave as expected." }
+    },
+    {
+      "@type": "Question",
+      "name": "Why is my merged PDF larger than expected?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Each input PDF contributes its full content including embedded fonts and images. No compression is applied during the merge. Run the merged PDF through the PDF compressor afterward to reduce file size." }
+    },
+    {
+      "@type": "Question",
+      "name": "Are my PDFs uploaded to a server?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Never. PDF assembly uses pdf-lib running entirely in your browser. Your documents never leave your device — no upload, no cloud processing, no third-party server access of any kind." }
     }
   ]
 }

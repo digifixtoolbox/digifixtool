@@ -2,49 +2,86 @@
 import Layout from '../../layouts/Layout.astro';
 import QRGenerator from '../../components/QRGenerator.jsx';
 import RelatedTools from '../../components/RelatedTools.astro';
+import PromoBanner from '../../components/PromoBanner.jsx';
 ---
 
 <Layout
-  title="QR Code Generator Free – Create QR Codes Instantly"
-  description="Generate QR codes for any URL, text, email or phone number. Download as PNG. No watermark, no login, completely free. Works in your browser."
+  title="QR Code Generator — Free, Instant, No Account | PixMidas"
+  description="QR Code Generator Free | Create QR Codes for Links and Text - PixMidas"
+  canonical="https://www.pixmidas.com/tools/qr-code/"
 >
   <div class="tool-page">
     <div class="tool-header">
-      <a href="/categories/developer-tools/" class="back-link">← Developer Tools</a>
+      <a href="/categories/image-tools/" class="back-link">← Image Tools</a>
       <h1 class="tool-title">QR Code Generator</h1>
-      <p class="tool-subtitle">Generate a QR code for any URL, text, email, phone number or Wi-Fi password. Download instantly as PNG.</p>
-    </div>
-
-    <div class="ad-slot ad-slot-horizontal">
-      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
-      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      <p class="tool-subtitle">Create QR codes for URLs, text, Wi-Fi credentials, email addresses and phone numbers. Download as PNG or SVG instantly.</p>
     </div>
 
     <QRGenerator client:load />
 
-    <div class="ad-slot ad-slot-horizontal" style="margin-top: 32px;">
-      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="0987654321" data-ad-format="auto" data-full-width-responsive="true"></ins>
-      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+    <div class="promo-wrap">
+      <PromoBanner client:load excludeSlug="qr-code" />
     </div>
 
     <section class="seo-content">
-      <h2>How to create a QR code</h2>
-      <p>Type or paste any URL, text, email address or phone number into the input field. Your QR code generates instantly as you type. Customize the size and foreground color, then download the QR code as a PNG image file — ready to use in print, digital or social media.</p>
+      <p>QR codes have become a universal bridge between physical objects and digital content — restaurant menus, business cards, product packaging, event posters, and retail displays all use them to connect a printed surface to a URL, contact card, Wi-Fi network, or any other digital payload. Generating a QR code should take seconds, not minutes, and the resulting code should be high-resolution enough to print at any size. This tool creates QR codes entirely in your browser, supports multiple content types, and exports them as PNG or vector SVG files suitable for both screen and print.</p>
 
-      <h2>What can I encode in a QR code?</h2>
-      <p>QR codes can encode any text string: website URLs, plain text messages, email addresses (prefix with "mailto:"), phone numbers (prefix with "tel:"), SMS messages, vCard contact information and Wi-Fi credentials. The most common use is encoding a URL so that scanning the QR code opens a website directly in the camera app.</p>
+      <h2>How to use</h2>
+      <ol>
+        <li><strong>Choose your content type.</strong> Select from URL, plain text, email address, phone number, SMS, or Wi-Fi network. Each type formats the encoded data correctly so scanners on all platforms interpret it consistently.</li>
+        <li><strong>Enter your content.</strong> Type or paste the URL, text, or other information you want to encode. The QR code preview updates in real time as you type, so you can see the result immediately without clicking a button.</li>
+        <li><strong>Customize if needed.</strong> Adjust the size and error correction level. Higher error correction allows the code to remain scannable even if up to 30% of it is obscured or damaged — useful for printed codes that may get scratched or partially covered.</li>
+        <li><strong>Download.</strong> Save as PNG for digital use or screen display. Download as SVG for print materials — SVG scales to any size without pixelation, making it ideal for signage, packaging, and large-format printing.</li>
+      </ol>
 
-      <h2>Where are QR codes used?</h2>
-      <p>Business cards linking to a LinkedIn profile or portfolio. Restaurant menus accessed by scanning a table code. Event tickets and boarding passes. Product packaging linking to instructions or promotional content. Marketing materials and posters linking to landing pages. Store windows allowing contactless access to an online shop. Museum exhibits linking to audio guides or extended information.</p>
+      <h2>Tips for best results</h2>
+      <ul>
+        <li><strong>Use short URLs.</strong> More data means a denser QR code with smaller modules that are harder to scan reliably. Use a URL shortener before encoding long URLs to make the QR code simpler and more scannable at smaller print sizes.</li>
+        <li><strong>Increase error correction for print.</strong> Set error correction to H (High) for codes that will appear on physical materials that might get dirty, wet, or partially damaged. The code will scan correctly even with 30% obscuration.</li>
+        <li><strong>Test before printing.</strong> Scan the generated code with your phone before committing to a print run. Test with multiple scanner apps and in different lighting conditions, especially if the code will be printed at a small size.</li>
+        <li><strong>Use SVG for large print.</strong> PNG pixels become visible when printed large. The SVG download is resolution-independent and prints cleanly at any size from business card to billboard.</li>
+      </ul>
 
-      <h2>How large should a QR code be for print?</h2>
-      <p>A good rule of thumb is that the QR code should be at least 2 cm × 2 cm (about 0.8 inches square) for reliable scanning at typical reading distances. For billboards or large-format printing, scale up proportionally. The scanning distance should not exceed 10× the size of the QR code — a 3 cm code is readable from up to 30 cm away.</p>
+      <h2>Why use PixMidas</h2>
+      <ul>
+        <li><strong>100% private.</strong> QR generation uses a client-side JavaScript library. The content you encode is never transmitted to any server — it stays in your browser the entire time.</li>
+        <li><strong>Multiple content types.</strong> URL, text, email, phone, SMS, and Wi-Fi are all supported with correct formatting for each type, ensuring your QR code works consistently across all scanner apps.</li>
+        <li><strong>No account needed.</strong> Free, instant, no usage limits. Generate and download as many QR codes as you need.</li>
+      </ul>
 
-      <h2>Is the QR code free with no watermark?</h2>
-      <p>Yes. Completely free, no watermark, no account, no usage limits. Generate as many QR codes as you need.</p>
+      <h2>Frequently asked questions</h2>
+
+      <h3>What types of content can I encode in a QR code?</h3>
+      <p>This tool supports URLs (web links), plain text, email addresses (including subject and body pre-fill), phone numbers (which open the dialer on mobile), SMS messages (which open the messaging app), and Wi-Fi network credentials (which allow one-tap Wi-Fi connection on Android and iOS). Each type uses a specific formatting convention recognized by all standard QR scanner apps.</p>
+
+      <h3>What is error correction and which level should I use?</h3>
+      <p>Error correction allows a QR code to remain readable even when part of it is damaged or obscured. There are four levels: L (7% recovery), M (15%), Q (25%), and H (30%). Use L or M for digital-only codes that will always be viewed cleanly on screen. Use Q or H for printed codes on physical materials that might get scratched, wet, or partially covered. Higher error correction produces a denser code with smaller modules, which requires a larger print size to scan reliably.</p>
+
+      <h3>What is the difference between PNG and SVG export?</h3>
+      <p>PNG is a pixel-based image suitable for digital use — websites, apps, emails, and presentations. It looks sharp at screen resolution but becomes pixelated when printed large. SVG is a vector format that scales to any size without quality loss. For anything printed — business cards, posters, packaging, signage — always use the SVG export for the sharpest possible result.</p>
+
+      <h3>Do QR codes expire?</h3>
+      <p>Static QR codes like the ones this tool generates do not expire. The encoded data is baked into the pattern itself. As long as the destination URL or content remains valid, the code will work indefinitely. Dynamic QR codes (offered by some paid services) redirect through a server, which is what allows them to be edited after printing — but they stop working if the service shuts down.</p>
+
+      <h3>How small can I print a QR code and still have it scan?</h3>
+      <p>A general rule of thumb is a minimum of 2 × 2 cm (about 0.8 inches square) for standard scanning distance. For high error correction codes with dense patterns, go larger. The critical factor is the module size (individual squares) — they need to be at least 0.3 mm to scan reliably. Use the SVG format and test a printed sample before committing to a print run.</p>
+
+      <h3>Can I add a logo to my QR code?</h3>
+      <p>The QR code generator currently produces standard codes without an embedded logo. If you need a logo-in-the-center QR code, you can download the SVG and overlay a logo in Figma, Illustrator, or any vector editor. Place the logo in the center no larger than about 20–30% of the code area, and set error correction to H to ensure the code remains scannable with the logo present.</p>
+
+      <div class="related-tools">
+        <p>Related tools</p>
+        <div class="related-tools-links">
+          <a href="/tools/color-picker/">Color Picker</a>
+          <a href="/tools/password-generator/">Password Generator</a>
+          <a href="/tools/social-sizes/">Social Media Sizes</a>
+          <a href="/tools/image-info/">Image Info</a>
+        </div>
+      </div>
     </section>
 
-    <RelatedTools slugs={["password-generator", "base64", "color-picker"]} />
+    <RelatedTools slugs={["color-picker", "password-generator", "social-sizes"]} />
   </div>
 </Layout>
 
@@ -58,7 +95,8 @@ import RelatedTools from '../../components/RelatedTools.astro';
   "operatingSystem": "Any",
   "browserRequirements": "Requires JavaScript",
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-  "description": "Free QR code generator. Create QR codes for any URL, text, email or phone number. Download as PNG, no watermark."
+  "description": "Generate QR codes for URLs, text, email, phone and Wi-Fi. Download as PNG or SVG. Free, private, no account required.",
+  "provider": { "@type": "Organization", "name": "PixMidas", "url": "https://www.pixmidas.com" }
 }
 </script>
 
@@ -69,23 +107,33 @@ import RelatedTools from '../../components/RelatedTools.astro';
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "How do I create a QR code for free?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Type or paste any URL, text, email address or phone number into the input field. Your QR code generates instantly as you type. Customize the size and color, then download as a PNG image." }
+      "name": "What types of content can I encode in a QR code?",
+      "acceptedAnswer": { "@type": "Answer", "text": "This tool supports URLs, plain text, email addresses, phone numbers, SMS messages, and Wi-Fi network credentials. Each type uses a specific formatting convention recognized by all standard QR scanner apps." }
     },
     {
       "@type": "Question",
-      "name": "What can I encode in a QR code?",
-      "acceptedAnswer": { "@type": "Answer", "text": "QR codes can encode website URLs, plain text, email addresses (mailto:), phone numbers (tel:), SMS messages, vCard contact info, and Wi-Fi credentials. The most common use is encoding a URL to open a website directly from a camera scan." }
+      "name": "What is error correction and which level should I use?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Error correction allows a QR code to remain readable when partially damaged. Levels: L (7%), M (15%), Q (25%), H (30% recovery). Use L/M for digital display. Use Q/H for physical printed materials that may get scratched or partially covered." }
     },
     {
       "@type": "Question",
-      "name": "How large should a QR code be for printing?",
-      "acceptedAnswer": { "@type": "Answer", "text": "At least 2 cm × 2 cm (about 0.8 inches square) for reliable scanning at typical reading distances. A 3 cm code is readable from up to 30 cm away. Scale up proportionally for billboards or large-format printing." }
+      "name": "What is the difference between PNG and SVG export?",
+      "acceptedAnswer": { "@type": "Answer", "text": "PNG is pixel-based and suitable for digital use. SVG is vector-based and scales to any size without quality loss. For printed materials — business cards, posters, packaging — always use SVG for the sharpest result." }
     },
     {
       "@type": "Question",
-      "name": "Is the QR code generator free with no watermark?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Completely free, no watermark, no account required, no usage limits. Generate as many QR codes as you need." }
+      "name": "Do QR codes expire?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Static QR codes do not expire. The encoded data is baked into the pattern itself. As long as the destination URL remains valid, the code works indefinitely without any service dependency." }
+    },
+    {
+      "@type": "Question",
+      "name": "How small can I print a QR code?",
+      "acceptedAnswer": { "@type": "Answer", "text": "A minimum of 2×2 cm (0.8 inches square) for standard scanning distance. Use the SVG format for print and test a printed sample first. Individual modules must be at least 0.3 mm for reliable scanning." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I add a logo to my QR code?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The tool generates standard codes without embedded logos. Download the SVG and overlay a logo in Figma or Illustrator. Keep the logo under 20–30% of the code area and use H error correction to ensure the code remains scannable." }
     }
   ]
 }

@@ -2,49 +2,87 @@
 import Layout from '../../layouts/Layout.astro';
 import ImageConverter from '../../components/ImageConverter.jsx';
 import RelatedTools from '../../components/RelatedTools.astro';
+import PromoBanner from '../../components/PromoBanner.jsx';
 ---
 
 <Layout
-  title="Convert Image Online Free – PNG to JPG, JPG to PNG"
-  description="Convert PNG to JPG, JPG to PNG, or WebP to JPG instantly online for free. No upload to servers, no login. Fast browser-based image format converter."
+  title="Image Converter — JPG, PNG, WebP, AVIF Free | PixMidas"
+  description="Image Converter Online Free | Convert PNG to JPG, JPG to PNG - PixMidas"
+  canonical="https://www.pixmidas.com/tools/convert-image/"
 >
   <div class="tool-page">
     <div class="tool-header">
       <a href="/categories/image-tools/" class="back-link">← Image Tools</a>
-      <h1 class="tool-title">Image Converter</h1>
-      <p class="tool-subtitle">Convert between PNG, JPG and WebP formats in one click. Free, instant, completely private.</p>
-    </div>
-
-    <div class="ad-slot ad-slot-horizontal">
-      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
-      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      <h1 class="tool-title">Image Format Converter</h1>
+      <p class="tool-subtitle">Convert images between JPG, PNG, WebP, AVIF and more. Batch conversion supported. No uploads, instant results.</p>
     </div>
 
     <ImageConverter client:load />
 
-    <div class="ad-slot ad-slot-horizontal" style="margin-top: 32px;">
-      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="0987654321" data-ad-format="auto" data-full-width-responsive="true"></ins>
-      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+    <div class="promo-wrap">
+      <PromoBanner client:load excludeSlug="convert-image" />
     </div>
 
     <section class="seo-content">
-      <h2>How to convert an image format online</h2>
-      <p>Select your desired conversion direction (e.g. PNG to JPG), upload your image, and click Convert. Your converted file downloads instantly. No account, no waiting, no file size limits imposed by the browser.</p>
+      <p>Every image format has a purpose: JPG excels at compressing photographs with natural colors and gradients; PNG preserves transparency and is lossless for graphics; WebP delivers superior compression for web-delivered images; AVIF offers the best modern compression but has limited tooling support; SVG is infinitely scalable as a vector format but only works for illustrations. Choosing the wrong format wastes storage, breaks compatibility, or loses transparency. This converter handles the most common format conversions directly in your browser — no cloud service required, and your images never leave your device.</p>
 
-      <h2>PNG to JPG — when and why</h2>
-      <p>JPG is a lossy compressed format optimized for photographs. Converting a PNG to JPG typically reduces file size by 50–80%, making images much faster to load on websites and easier to share. The trade-off is that JPG does not support transparency. If your PNG has a transparent background, the converted JPG will replace it with white.</p>
+      <h2>How to use</h2>
+      <ol>
+        <li><strong>Upload your images.</strong> Drag one or more image files onto the drop zone or click to browse. Most common formats are accepted as input including JPG, PNG, WebP, AVIF, GIF, BMP, and TIFF.</li>
+        <li><strong>Choose the output format.</strong> Select your target format from the dropdown. JPG and WebP offer lossy compression; PNG offers lossless compression. Choose based on your use case and the downstream platform's requirements.</li>
+        <li><strong>Adjust quality if needed.</strong> For lossy formats (JPG, WebP), a quality slider lets you control the size-quality trade-off. For lossless formats (PNG), this setting has no effect.</li>
+        <li><strong>Convert and download.</strong> Click Convert to process all uploaded files. Download them individually or use the Download All button to get all conversions in one step.</li>
+      </ol>
 
-      <h2>JPG to PNG — when and why</h2>
-      <p>PNG uses lossless compression and supports transparent backgrounds, making it ideal for logos, icons, graphics and screenshots. Converting JPG to PNG won't recover lost quality (JPG is lossy), but it gives you a lossless container for further editing without adding more compression artifacts.</p>
+      <h2>Tips for best results</h2>
+      <ul>
+        <li><strong>Use WebP for websites.</strong> If you're preparing images for a modern website, WebP produces 25–35% smaller files than JPG at the same quality. All major browsers support WebP. Use the <a href="/tools/compress-image/" class="tool-suggestion">image compressor</a> for fine-tuned size control within a specific format.</li>
+        <li><strong>Use PNG for transparency.</strong> Any image that needs a transparent background must use PNG (or WebP with alpha). Converting such an image to JPG fills the transparent areas with white. Check whether your source image has transparency using the <a href="/tools/image-info/" class="tool-suggestion">image info tool</a> before converting.</li>
+        <li><strong>Convert SVG to PNG for web embeds.</strong> SVG is a vector format that can't be processed by raster image tools. Use the dedicated <a href="/tools/svg-to-png/" class="tool-suggestion">SVG to PNG converter</a> to rasterize SVGs at a specific pixel size when you need a raster output.</li>
+        <li><strong>Convert HEIC before sharing.</strong> For iPhone photos in HEIC format, use the dedicated <a href="/tools/heic-to-jpg/" class="tool-suggestion">HEIC to JPG converter</a> for reliable conversion — it uses a specialized decoder for the HEVC-based HEIC format.</li>
+      </ul>
 
-      <h2>WebP — what is it and should I convert?</h2>
-      <p>WebP is Google's modern image format designed for the web. It achieves roughly 25–35% smaller file sizes than JPG at equivalent quality. However, WebP isn't universally supported by older software and some platforms still require JPG. Convert WebP to JPG when you need maximum compatibility.</p>
+      <h2>Why use PixMidas</h2>
+      <ul>
+        <li><strong>100% private.</strong> All conversion happens in your browser using the Canvas API. No image file is ever uploaded to any server — this is especially important when converting personal, medical, or confidential images.</li>
+        <li><strong>Multiple output formats.</strong> JPG, PNG, WebP, AVIF, and BMP are all supported as output targets. Select the format that best matches your platform's requirements and your size-quality goals.</li>
+        <li><strong>No account needed.</strong> Free, instant, batch conversion with no file count or size limits.</li>
+      </ul>
 
-      <h2>Is my image safe?</h2>
-      <p>Your image never leaves your device. The conversion uses the browser's native Canvas API — no uploads, no servers, no third-party processing of any kind.</p>
+      <h2>Frequently asked questions</h2>
+
+      <h3>Which format should I use for web images?</h3>
+      <p>For photographs on modern websites, WebP is the best choice — smaller file sizes than JPG at the same visual quality, with native support in all major browsers since 2020. For older browser compatibility, JPG remains the universal fallback. For graphics with transparency (logos, icons, overlays), use WebP with alpha or PNG. For maximum next-generation compression where tooling support isn't a concern, AVIF offers the best results.</p>
+
+      <h3>What happens to transparency when converting to JPG?</h3>
+      <p>JPG does not support transparency. Any transparent pixels in the source image are filled with white (or the color the browser assigns as the background) during conversion. If your image needs to remain transparent — for placement over colored backgrounds or in design tools — convert to PNG or WebP instead, both of which support full alpha-channel transparency.</p>
+
+      <h3>Is there any quality difference between PNG inputs and PNG outputs?</h3>
+      <p>Converting between lossless formats (PNG to PNG) is lossless — no quality is lost. Converting a lossy format (JPG) to PNG produces a PNG that looks identical to the JPG, but the PNG cannot recover quality that was already lost when the JPG was originally encoded. Converting JPG to PNG does not "undegrade" the image — it simply changes the container without adding back any detail.</p>
+
+      <h3>What is AVIF and should I use it?</h3>
+      <p>AVIF (AV1 Image File Format) is the newest widely-supported image format. It offers the best compression of any standard format — typically 50% smaller than JPG and 20% smaller than WebP at comparable quality. It's supported in Chrome, Firefox, and Safari. The limitation is limited tooling support outside of browsers — many image editors, email clients, and desktop apps cannot display AVIF. Use it for web delivery where browser rendering is the only requirement.</p>
+
+      <h3>Can I convert multiple images at once?</h3>
+      <p>Yes. The converter supports batch uploads — drop multiple files at once and they are all converted to the same output format. Each converted file is available for individual download, or use Download All to save everything at once. All files are processed locally with no file count restriction.</p>
+
+      <h3>Can I resize at the same time as converting?</h3>
+      <p>The converter focuses on format conversion. If you also need to change dimensions, use the <a href="/tools/resize-image/" class="tool-suggestion">image resizer</a> either before or after conversion. For most workflows, convert the format first, then resize — but the order doesn't affect final quality meaningfully for standard use cases.</p>
+
+      <div class="related-tools">
+        <p>Related tools</p>
+        <div class="related-tools-links">
+          <a href="/tools/compress-image/">Compress Image</a>
+          <a href="/tools/resize-image/">Resize Image</a>
+          <a href="/tools/webp-to-jpg/">WebP to JPG</a>
+          <a href="/tools/heic-to-jpg/">HEIC to JPG</a>
+          <a href="/tools/svg-to-png/">SVG to PNG</a>
+        </div>
+      </div>
     </section>
 
-    <RelatedTools slugs={["compress-image", "webp-to-jpg", "resize-image"]} />
+    <RelatedTools slugs={["compress-image", "resize-image", "webp-to-jpg"]} />
   </div>
 </Layout>
 
@@ -52,13 +90,14 @@ import RelatedTools from '../../components/RelatedTools.astro';
 {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  "name": "Image Converter",
+  "name": "Image Format Converter",
   "url": "https://www.pixmidas.com/tools/convert-image/",
-  "applicationCategory": "UtilitiesApplication",
+  "applicationCategory": "MultimediaApplication",
   "operatingSystem": "Any",
   "browserRequirements": "Requires JavaScript",
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-  "description": "Convert PNG to JPG, JPG to PNG, or WebP to JPG online for free. Browser-based, no uploads, instant conversion."
+  "description": "Convert images between JPG, PNG, WebP, AVIF and more. Batch conversion supported. Free, private, no server uploads.",
+  "provider": { "@type": "Organization", "name": "PixMidas", "url": "https://www.pixmidas.com" }
 }
 </script>
 
@@ -69,23 +108,33 @@ import RelatedTools from '../../components/RelatedTools.astro';
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "How do I convert an image format online for free?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Select your desired conversion direction (e.g. PNG to JPG), upload your image, and click Convert. Your converted file downloads instantly. No account, no waiting." }
+      "name": "Which format should I use for web images?",
+      "acceptedAnswer": { "@type": "Answer", "text": "For photographs on modern websites, WebP is best — smaller than JPG at the same quality, natively supported in all major browsers. For transparency, use PNG or WebP with alpha. For maximum compression, AVIF offers the best results for browser-rendered images." }
     },
     {
       "@type": "Question",
-      "name": "When should I convert PNG to JPG?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Convert PNG to JPG when you need to reduce file size by 50–80% for websites or sharing. Note that JPG does not support transparency — transparent PNG backgrounds will become white." }
+      "name": "What happens to transparency when converting to JPG?",
+      "acceptedAnswer": { "@type": "Answer", "text": "JPG does not support transparency. Transparent pixels are filled with white during conversion. If your image needs to remain transparent, convert to PNG or WebP instead — both support full alpha-channel transparency." }
     },
     {
       "@type": "Question",
-      "name": "What is WebP and should I convert it?",
-      "acceptedAnswer": { "@type": "Answer", "text": "WebP is Google's modern image format that achieves 25–35% smaller file sizes than JPG. Convert WebP to JPG when you need maximum compatibility with older software or platforms." }
+      "name": "Is there any quality difference between PNG inputs and PNG outputs?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Converting between lossless formats is lossless — no quality is lost. Converting lossy JPG to PNG produces a PNG that looks identical to the JPG but cannot recover quality already lost during original JPG encoding." }
     },
     {
       "@type": "Question",
-      "name": "Is my image safe when converting formats?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Your image never leaves your device. The conversion uses the browser's native Canvas API — no uploads, no servers, no third-party processing of any kind." }
+      "name": "What is AVIF and should I use it?",
+      "acceptedAnswer": { "@type": "Answer", "text": "AVIF is the newest format offering the best compression — 50% smaller than JPG and 20% smaller than WebP at comparable quality. Supported in Chrome, Firefox, and Safari. Limitation: limited tooling support outside browsers." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I convert multiple images at once?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. The converter supports batch uploads — drop multiple files and they are all converted to the same output format. Download individually or all at once. No file count restriction." }
+    },
+    {
+      "@type": "Question",
+      "name": "Are my images uploaded to a server?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Never. All conversion happens in your browser using the Canvas API. No image file is ever uploaded to any server." }
     }
   ]
 }
