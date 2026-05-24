@@ -1,4 +1,10 @@
 import { useRef, useState } from "react";
+import SaveAsDialog from "./SaveAsDialog";
+
+var supportsFileShare = (function() {
+  try { return typeof navigator !== 'undefined' && !!navigator.share && !!navigator.canShare && navigator.canShare({ files: [new File([], 't.jpg', { type: 'image/jpeg' })] }); }
+  catch(e) { return false; }
+})();
 
 export default function ImageCompressor() {
   const fileInputRef = useRef(null);
@@ -16,6 +22,7 @@ export default function ImageCompressor() {
   const [targetMsgType, setTargetMsgType] = useState("info"); // "info" | "warning"
   const [showOverlay, setShowOverlay] = useState(false);
   const [targetAlreadyOk, setTargetAlreadyOk] = useState(false);
+  const [saveAsName, setSaveAsName] = useState(null);
 
   const formatBytes = (bytes) => {
     if (!bytes) return "0 KB";
@@ -179,22 +186,22 @@ export default function ImageCompressor() {
 
   const handleSaveAs = async () => {
     if (!compressedUrl) return;
-    if (typeof window.showSaveFilePicker !== "function") {
-      handleSave();
-      return;
+    if (typeof window.showSaveFilePicker === "function") {
+      try {
+        var blob = await fetch(compressedUrl).then(function(r) { return r.blob(); });
+        var handle = await window.showSaveFilePicker({ suggestedName: downloadName, types: [{ description: "Image", accept: { [blob.type]: [] } }] });
+        var writable = await handle.createWritable();
+        await writable.write(blob);
+        await writable.close();
+        return;
+      } catch(e) { if (e.name === "AbortError") return; }
     }
-    try {
-      const blob = await fetch(compressedUrl).then((r) => r.blob());
-      const handle = await window.showSaveFilePicker({
-        suggestedName: downloadName,
-        types: [{ description: "JPEG Image", accept: { "image/jpeg": [".jpg", ".jpeg"] } }],
-      });
-      const writable = await handle.createWritable();
-      await writable.write(blob);
-      await writable.close();
-    } catch {
-      // User cancelled or unsupported — do nothing
-    }
+    setSaveAsName(downloadName);
+  };
+
+  const doSaveAs = (filename) => {
+    const a = document.createElement("a"); a.href = compressedUrl; a.download = filename; a.click();
+    setSaveAsName(null);
   };
 
   const reset = () => {
@@ -215,6 +222,16 @@ export default function ImageCompressor() {
   const handleOpenToSave = () => {
     if (!compressedUrl) return;
     setShowOverlay(true);
+  };
+
+  const handleShare = async () => {
+    if (!compressedUrl) return;
+    const blob = await fetch(compressedUrl).then(r => r.blob());
+    const file = new File([blob], downloadName, { type: blob.type });
+    if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+      try { await navigator.share({ files: [file], title: 'PixMidas' }); }
+      catch(err) { if (err.name !== 'AbortError') { handleSave(); } }
+    } else { handleSave(); }
   };
 
   const downloadName = originalFile
@@ -392,9 +409,12 @@ export default function ImageCompressor() {
           <div style={s.actions}>
             {compressedUrl && !isProcessing && (
               isIOS ? (
-                <button onClick={handleOpenToSave} style={s.downloadBtn} type="button">
-                  ↗ Open to Save
-                </button>
+                <>
+                  <button onClick={handleOpenToSave} style={s.downloadBtn} type="button">
+                    ↗ Open to Save
+                  </button>
+                  {supportsFileShare && <button onClick={handleShare} style={s.saveAsBtn} type="button"><i className="ti ti-share" /> Share</button>}
+                </>
               ) : (
                 <>
                   <button onClick={handleSave} style={s.downloadBtn} type="button">
@@ -403,6 +423,7 @@ export default function ImageCompressor() {
                   <button onClick={handleSaveAs} style={s.saveAsBtn} type="button">
                     ⬇ Save As…
                   </button>
+                  {supportsFileShare && <button onClick={handleShare} style={s.saveAsBtn} type="button"><i className="ti ti-share" /> Share</button>}
                 </>
               )
             )}
@@ -419,6 +440,7 @@ export default function ImageCompressor() {
       </div>
 
     </div>
+    {saveAsName !== null && <SaveAsDialog defaultName={saveAsName} onSave={doSaveAs} onCancel={function() { setSaveAsName(null); }} />}
     </>
   );
 }
@@ -648,36 +670,35 @@ const s = {
     display: "flex",
     gap: 12,
     flexWrap: "wrap",
+    justifyContent: "center",
   },
   downloadBtn: {
-    background: "#0071e3",
-    color: "#fff",
+    background: "var(--upload-btn-bg)",
+    color: "var(--upload-btn-color)",
     border: "none",
-    padding: "14px 28px",
-    borderRadius: 999,
-    fontWeight: 700,
-    fontSize: 16,
+    padding: "9px 24px",
+    borderRadius: 24,
+    fontWeight: 600,
+    fontSize: 14,
     cursor: "pointer",
     fontFamily: "inherit",
     display: "inline-flex",
     alignItems: "center",
     gap: 8,
-    minHeight: 44,
   },
   saveAsBtn: {
     background: "transparent",
-    color: "#0071e3",
-    border: "1.5px solid #0071e3",
-    padding: "14px 28px",
-    borderRadius: 999,
-    fontWeight: 700,
-    fontSize: 16,
+    color: "var(--outline-btn-color)",
+    border: "1.5px solid var(--outline-btn-color)",
+    padding: "9px 24px",
+    borderRadius: 24,
+    fontWeight: 600,
+    fontSize: 14,
     cursor: "pointer",
     fontFamily: "inherit",
     display: "inline-flex",
     alignItems: "center",
     gap: 8,
-    minHeight: 44,
   },
   overlay: {
     position: "fixed",
@@ -721,16 +742,15 @@ const s = {
     padding: "0 8px",
   },
   resetBtn: {
-    background: "#f5f5f7",
-    border: "none",
-    padding: "14px 28px",
-    borderRadius: 999,
+    background: "transparent",
+    border: "1.5px solid var(--reset-btn-color)",
+    padding: "9px 24px",
+    borderRadius: 24,
     fontWeight: 600,
-    fontSize: 16,
+    fontSize: 14,
     cursor: "pointer",
     fontFamily: "inherit",
-    color: "#86868b",
-    minHeight: 44,
+    color: "var(--reset-btn-text)",
   },
   privacyNote: {
     marginTop: 20,

@@ -49,9 +49,9 @@ export default function PromoBanner({ excludeSlug }) {
     >
       <div
         data-icon-palette={tool.iconPalette}
-        style={{ width: "48px", height: "48px", borderRadius: "12px", flexShrink: "0", display: "flex", alignItems: "center", justifyContent: "center" }}
+        style={{ width: "48px", height: "48px", borderRadius: "12px", flexShrink: "0", display: "flex", alignItems: "center", justifyContent: "center", background: "transparent" }}
       >
-        <i className={"ti ti-" + tool.iconClass} style={{ fontSize: "24px" }}></i>
+        <i className={"ti ti-" + tool.iconClass} style={{ fontSize: "28px" }}></i>
       </div>
       <span style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
         <span className="promo-hook">{tool.hook}</span>

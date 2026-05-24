@@ -1,4 +1,10 @@
 import { useState, useRef, useEffect } from "react";
+import SaveAsDialog from "./SaveAsDialog";
+
+var supportsFileShare = (function() {
+  try { return typeof navigator !== 'undefined' && !!navigator.share && !!navigator.canShare && navigator.canShare({ files: [new File([], 't.jpg', { type: 'image/jpeg' })] }); }
+  catch(e) { return false; }
+})();
 
 export default function ImageCropper() {
   const [image, setImage] = useState(null);
@@ -12,6 +18,7 @@ export default function ImageCropper() {
   const previewRef = useRef(null);
   const imgRef = useRef(null);
   const containerRef = useRef(null);
+  const [saveAsName, setSaveAsName] = useState(null);
 
   function handleFile(e) {
     var file = e.target.files[0];
@@ -88,26 +95,41 @@ export default function ImageCropper() {
 
   async function handleSaveAs() {
     if (!croppedUrl) return;
+    var filename = "cropped.jpg";
     if (typeof window.showSaveFilePicker === "function") {
       try {
-        var handle = await window.showSaveFilePicker({ suggestedName: "cropped.jpg", types: [{ description: "File", accept: { "image/jpeg": [".jpg"] } }] });
         var blob = await fetch(croppedUrl).then(function(r) { return r.blob(); });
+        var handle = await window.showSaveFilePicker({ suggestedName: filename, types: [{ description: "JPEG Image", accept: { "image/jpeg": [".jpg"] } }] });
         var writable = await handle.createWritable();
         await writable.write(blob);
         await writable.close();
         return;
-      } catch(e) {
-        if (e.name === "AbortError") return;
-      }
+      } catch(e) { if (e.name === "AbortError") return; }
     }
-    handleSave();
+    setSaveAsName(filename);
+  }
+
+  function doSaveAs(filename) {
+    var a = document.createElement("a"); a.href = croppedUrl; a.download = filename; a.click();
+    setSaveAsName(null);
   }
 
   function reset() { setImage(null); setCropBox(null); setCroppedUrl(null); }
 
-  var saveBtn = { background: "#0071e3", color: "white", border: "none", borderRadius: "99px", padding: "14px 28px", fontSize: "16px", fontWeight: "700", cursor: "pointer", minHeight: "44px", fontFamily: "inherit" };
-  var saveAsBtn = { background: "transparent", color: "#0071e3", border: "1.5px solid #0071e3", borderRadius: "99px", padding: "14px 28px", fontSize: "16px", fontWeight: "700", cursor: "pointer", minHeight: "44px", fontFamily: "inherit" };
-  var resetBtn = { background: "var(--surface-2)", color: "var(--text-muted)", border: "none", borderRadius: "99px", padding: "14px 28px", fontSize: "16px", fontWeight: "600", cursor: "pointer", minHeight: "44px", fontFamily: "inherit" };
+  var saveBtn = { background: "var(--upload-btn-bg)", color: "var(--upload-btn-color)", border: "none", borderRadius: "24px", padding: "9px 24px", fontSize: "14px", fontWeight: "600", cursor: "pointer", fontFamily: "inherit" };
+  var saveAsBtn = { background: "transparent", color: "var(--outline-btn-color)", border: "1.5px solid var(--outline-btn-color)", borderRadius: "24px", padding: "9px 24px", fontSize: "14px", fontWeight: "600", cursor: "pointer", fontFamily: "inherit" };
+  var shareBtn = { background: "transparent", color: "var(--outline-btn-color)", border: "1.5px solid var(--outline-btn-color)", borderRadius: "24px", padding: "9px 24px", fontSize: "14px", fontWeight: "600", cursor: "pointer", fontFamily: "inherit" };
+  var resetBtn = { background: "transparent", color: "var(--reset-btn-text)", border: "1.5px solid var(--reset-btn-color)", borderRadius: "24px", padding: "9px 24px", fontSize: "14px", fontWeight: "600", cursor: "pointer", fontFamily: "inherit" };
+
+  async function handleShare() {
+    if (!croppedUrl) return;
+    var blob = await fetch(croppedUrl).then(function(r) { return r.blob(); });
+    var file = new File([blob], 'cropped.jpg', { type: 'image/jpeg' });
+    if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+      try { await navigator.share({ files: [file], title: 'PixMidas' }); }
+      catch(err) { if (err.name !== 'AbortError') { handleSave(); } }
+    } else { handleSave(); }
+  }
 
   return (
     <div style={{ background: "var(--surface)", border: "1px solid var(--border-light)", borderRadius: 20, padding: 32 }}>
@@ -153,16 +175,18 @@ export default function ImageCropper() {
             )}
           </div>
           <canvas ref={canvasRef} style={{ display: "none" }} />
-          <div style={{ display: "flex", gap: "12px", marginTop: "16px", flexWrap: "wrap" }}>
-            <button onClick={doCrop} disabled={!cropBox || cropBox.w < 5} style={{ ...saveBtn, background: "#0071e3", opacity: (!cropBox || cropBox.w < 5) ? 0.5 : 1, cursor: (!cropBox || cropBox.w < 5) ? "not-allowed" : "pointer" }}>
+          <div style={{ display: "flex", gap: "12px", marginTop: "16px", flexWrap: "wrap", justifyContent: "center" }}>
+            <button onClick={doCrop} disabled={!cropBox || cropBox.w < 5} style={{ ...saveBtn, opacity: (!cropBox || cropBox.w < 5) ? 0.5 : 1, cursor: (!cropBox || cropBox.w < 5) ? "not-allowed" : "pointer" }}>
               Crop
             </button>
             <button onClick={handleSave} disabled={!croppedUrl} style={{ ...saveBtn, opacity: croppedUrl ? 1 : 0.5, cursor: croppedUrl ? "pointer" : "not-allowed" }}>Save</button>
             <button onClick={handleSaveAs} disabled={!croppedUrl} style={{ ...saveAsBtn, opacity: croppedUrl ? 1 : 0.5, cursor: croppedUrl ? "pointer" : "not-allowed" }}>Save As...</button>
+            {supportsFileShare && croppedUrl && <button onClick={handleShare} style={shareBtn}><i className="ti ti-share" /> Share</button>}
             <button onClick={reset} style={resetBtn}>Reset</button>
           </div>
         </div>
       )}
+      {saveAsName !== null && <SaveAsDialog defaultName={saveAsName} onSave={doSaveAs} onCancel={function() { setSaveAsName(null); }} />}
     </div>
   );
 }

@@ -166,7 +166,7 @@ export const TOOLS = [
     name: "JSON Formatter",
     description: "Format, validate, and minify JSON data online.",
     category: "utility",
-    iconClass: "braces",
+    iconClass: "code",
     iconPalette: "amber",
     related: ["base64", "text-diff", "word-count"],
   },

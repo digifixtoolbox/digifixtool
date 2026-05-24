@@ -27,7 +27,7 @@ export const BANNER_TOOLS = [
   { slug: "case-converter",       name: "Case Converter",            iconClass: "letter-case",     iconPalette: "green",  category: "Text",      hook: "Need to change text case?" },
   { slug: "text-diff",            name: "Text Difference Checker",   iconClass: "file-diff",       iconPalette: "green",  category: "Text",      hook: "Need to compare two texts?" },
   // Developer tools
-  { slug: "json-formatter",       name: "JSON Formatter",            iconClass: "braces",          iconPalette: "amber",  category: "Developer", hook: "Need to format or validate JSON?" },
+  { slug: "json-formatter",       name: "JSON Formatter",            iconClass: "code",            iconPalette: "amber",  category: "Developer", hook: "Need to format or validate JSON?" },
   { slug: "base64",               name: "Base64 Encoder / Decoder",  iconClass: "lock",            iconPalette: "amber",  category: "Developer", hook: "Need to encode or decode Base64?" },
   // Social tools
   { slug: "social-sizes",         name: "Social Media Sizes",        iconClass: "device-mobile",   iconPalette: "purple", category: "Social",    hook: "What size is an Instagram post?" },

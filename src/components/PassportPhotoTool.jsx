@@ -1,4 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
+import SaveAsDialog from './SaveAsDialog';
+
+var supportsFileShare = (function() {
+  try { return typeof navigator !== 'undefined' && !!navigator.share && !!navigator.canShare && navigator.canShare({ files: [new File([], 't.jpg', { type: 'image/jpeg' })] }); }
+  catch(e) { return false; }
+})();
 
 const STANDARDS = {
   us:  { name: 'USA',          region: 'Americas',           width: 2,  height: 2,  unit: 'in', pxW: 600, pxH: 600 },
@@ -37,6 +43,7 @@ export default function PassportPhotoTool() {
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const [userScale, setUserScale] = useState(1.0);
   const [sheetDataUrl, setSheetDataUrl] = useState(null);
+  const [saveAsName, setSaveAsName] = useState(null);
 
   const frameRef = useRef(null);
   // Refs mirror state so native event handlers always read latest values
@@ -222,7 +229,7 @@ export default function PassportPhotoTool() {
     const filename = `passport-${standard}-sheet.jpg`;
     if (typeof window.showSaveFilePicker === 'function') {
       try {
-        const handle = await window.showSaveFilePicker({ suggestedName: filename, types: [{ description: 'File', accept: { 'image/jpeg': ['.jpg'] } }] });
+        const handle = await window.showSaveFilePicker({ suggestedName: filename, types: [{ description: 'JPEG Image', accept: { 'image/jpeg': ['.jpg'] } }] });
         const blob = await fetch(sheetDataUrl).then(r => r.blob());
         const writable = await handle.createWritable();
         await writable.write(blob);
@@ -232,12 +239,30 @@ export default function PassportPhotoTool() {
         if (e.name === 'AbortError') return;
       }
     }
-    handleSave();
+    setSaveAsName(filename);
   };
 
-  const saveBtn = { background: '#0071e3', color: 'white', border: 'none', borderRadius: '99px', padding: '14px 28px', fontSize: '16px', fontWeight: '700', cursor: 'pointer', minHeight: '44px', fontFamily: 'inherit' };
-  const saveAsBtn = { background: 'transparent', color: '#0071e3', border: '1.5px solid #0071e3', borderRadius: '99px', padding: '14px 28px', fontSize: '16px', fontWeight: '700', cursor: 'pointer', minHeight: '44px', fontFamily: 'inherit' };
-  const resetBtn = { background: 'var(--surface-2)', color: 'var(--text-muted)', border: 'none', borderRadius: '99px', padding: '14px 28px', fontSize: '16px', fontWeight: '600', cursor: 'pointer', minHeight: '44px', fontFamily: 'inherit' };
+  const doSaveAs = (filename) => {
+    const a = document.createElement('a');
+    a.href = sheetDataUrl;
+    a.download = filename; a.click();
+    setSaveAsName(null);
+  };
+
+  const handleShare = async () => {
+    if (!sheetDataUrl) return;
+    const blob = await fetch(sheetDataUrl).then(r => r.blob());
+    const file = new File([blob], `passport-${standard}-sheet.jpg`, { type: 'image/jpeg' });
+    if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+      try { await navigator.share({ files: [file], title: 'PixMidas' }); }
+      catch(err) { if (err.name !== 'AbortError') { handleSave(); } }
+    } else { handleSave(); }
+  };
+
+  const saveBtn = { background: 'var(--upload-btn-bg)', color: 'var(--upload-btn-color)', border: 'none', borderRadius: '24px', padding: '9px 24px', fontSize: '14px', fontWeight: '600', cursor: 'pointer', fontFamily: 'inherit' };
+  const saveAsBtn = { background: 'transparent', color: 'var(--outline-btn-color)', border: '1.5px solid var(--outline-btn-color)', borderRadius: '24px', padding: '9px 24px', fontSize: '14px', fontWeight: '600', cursor: 'pointer', fontFamily: 'inherit' };
+  const shareBtn = { background: 'transparent', color: 'var(--outline-btn-color)', border: '1.5px solid var(--outline-btn-color)', borderRadius: '24px', padding: '9px 24px', fontSize: '14px', fontWeight: '600', cursor: 'pointer', fontFamily: 'inherit' };
+  const resetBtn = { background: 'transparent', color: 'var(--reset-btn-text)', border: '1.5px solid var(--reset-btn-color)', borderRadius: '24px', padding: '9px 24px', fontSize: '14px', fontWeight: '600', cursor: 'pointer', fontFamily: 'inherit' };
 
   const resetAll = () => {
     setImageEl(null);
@@ -394,7 +419,7 @@ export default function PassportPhotoTool() {
 
         <button
           onClick={applyAndGenerate}
-          style={{ padding: '15px', background: '#0071e3', color: 'white', border: 'none', borderRadius: '99px', fontWeight: '700', fontSize: 15, cursor: 'pointer', width: '100%' }}
+          style={{ padding: '15px', background: 'var(--upload-btn-bg)', color: 'var(--upload-btn-color)', border: 'none', borderRadius: '99px', fontWeight: '700', fontSize: 15, cursor: 'pointer', width: '100%' }}
         >
           Apply &amp; Generate Sheet
         </button>
@@ -425,6 +450,7 @@ export default function PassportPhotoTool() {
       <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', justifyContent: 'center' }}>
         <button onClick={handleSave} style={saveBtn}>Save</button>
         <button onClick={handleSaveAs} style={saveAsBtn}>Save As...</button>
+        {supportsFileShare && <button onClick={handleShare} style={shareBtn}><i className="ti ti-share" /> Share</button>}
         <button onClick={resetAll} style={resetBtn}>Reset</button>
       </div>
       <button
@@ -433,6 +459,7 @@ export default function PassportPhotoTool() {
       >
         ← Edit position
       </button>
+      {saveAsName !== null && <SaveAsDialog defaultName={saveAsName} onSave={doSaveAs} onCancel={function() { setSaveAsName(null); }} />}
     </div>
   );
 }

@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import ShareSection from '../components/ShareSection.astro';
+import { CATEGORIES } from '../data/categories.js';
 
 interface Props {
   title: string;
@@ -10,22 +11,36 @@ interface Props {
 }
 
 const { title, description, canonical, image } = Astro.props;
-const fullTitle = `${title} | PixMidas`;
+const fullTitle = title;
 const canonicalUrl = canonical || Astro.url.href;
-const ogImage = image || 'https://www.pixmidas.com/og-default.png';
-const ogImageAlt = `${title} – PixMidas`;
+const ogImage = image || 'https://www.pixmidas.com/og-image.png';
+const ogImageAlt = "PixMidas, Free Online Tools";
 const isToolPage = Astro.url.pathname.startsWith('/tools/');
 const showShare = isToolPage;
 const FONT_URL = 'https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap';
 
+let toolCategory = null;
+if (isToolPage) {
+  const toolSlug = Astro.url.pathname.replace(/^\/tools\//, '').replace(/\/$/, '');
+  toolCategory = CATEGORIES.find(c => c.toolSlugs.includes(toolSlug)) ?? null;
+}
+
+const breadcrumbItems: Array<{ "@type": string; position: number; name: string; item: string }> = [
+  { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.pixmidas.com/" },
+];
+if (isToolPage) {
+  if (toolCategory) {
+    breadcrumbItems.push({ "@type": "ListItem", "position": 2, "name": toolCategory.name, "item": `https://www.pixmidas.com/categories/${toolCategory.slug}/` });
+    breadcrumbItems.push({ "@type": "ListItem", "position": 3, "name": title, "item": canonicalUrl });
+  } else {
+    breadcrumbItems.push({ "@type": "ListItem", "position": 2, "name": title, "item": canonicalUrl });
+  }
+}
+
 const breadcrumbSchema = isToolPage ? JSON.stringify({
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
-  "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.pixmidas.com/" },
-    { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://www.pixmidas.com/#all-tools" },
-    { "@type": "ListItem", "position": 3, "name": title, "item": canonicalUrl }
-  ]
+  "itemListElement": breadcrumbItems
 }) : null;
 ---
 
@@ -33,13 +48,28 @@ const breadcrumbSchema = isToolPage ? JSON.stringify({
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <script is:inline>
+    (function(){try{var t=localStorage.getItem('theme')||'system';var d=t==='system'?(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'):t;document.documentElement.setAttribute('data-theme',d);}catch(e){}})();
+  </script>
+  <script is:inline>
+    let deferredPrompt;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      window._pwaPrompt = e;
+    });
+    window.addEventListener('appinstalled', () => {
+      localStorage.setItem('pwa-installed', 'true');
+    });
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{fullTitle}</title>
   <meta name="description" content={description} />
   <meta name="robots" content="index, follow" />
+  <meta name="author" content="PixMidas" />
   <link rel="canonical" href={canonicalUrl} />
 
-  <!-- Preconnect for performance -->
+  <!-- Preconnect / DNS prefetch for performance -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preconnect" href="https://www.googletagmanager.com" />
@@ -48,6 +78,7 @@ const breadcrumbSchema = isToolPage ? JSON.stringify({
   <link rel="preload" as="style" href={FONT_URL} />
   <link rel="stylesheet" href={FONT_URL} media="print" onload="this.media='all'" />
   <noscript><link rel="stylesheet" href={FONT_URL} /></noscript>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.44.0/dist/tabler-icons.min.css" />
 
   <!-- Open Graph -->
   <meta property="og:title" content={fullTitle} />
@@ -70,14 +101,22 @@ const breadcrumbSchema = isToolPage ? JSON.stringify({
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#F5A623" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="PixMidas" />
+  <link rel="apple-touch-icon" href="/icon-192.png" />
+
   <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9S0NG8RV4Z"></script>
-  <script>
+  <script is:inline>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-9S0NG8RV4Z');
   </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9S0NG8RV4Z"></script>
 
   <!--
     Google AdSense – replace ca-pub-XXXXXXXXXXXXXXXX with your publisher ID once approved.
@@ -94,32 +133,50 @@ const breadcrumbSchema = isToolPage ? JSON.stringify({
   <header class="site-header">
     <div class="header-inner">
       <nav class="nav-left">
-        <a href="/#all-tools">Tools</a>
+        <div class="lang-selector" id="lang-selector">
+          <button class="lang-btn" id="lang-btn" type="button" aria-haspopup="true" aria-expanded="false">
+            <span class="lang-code">En</span><span class="lang-chev">▾</span>
+          </button>
+          <div class="lang-drop" id="lang-drop" role="menu">
+            <button class="lang-opt lang-opt-active" type="button" disabled>English</button>
+            <button class="lang-opt" type="button" data-soon="Brevemente">Português</button>
+            <button class="lang-opt" type="button" data-soon="Próximamente">Español</button>
+            <span class="lang-soon" id="lang-soon"></span>
+          </div>
+        </div>
       </nav>
 
       <a href="/" class="logo">
-        <span class="logo-icon">⚡</span>
-        <span class="logo-text">PixMidas</span>
+        <div style="display: flex; align-items: center; gap: 6px;">
+          <i class="ti ti-bolt" style="font-size: 20px; color: #F5A623;"></i>
+          <span style="font-size: 18px; font-weight: 800; letter-spacing: -0.5px; line-height: 1;">
+            <span style="color: #F5A623;">Pix</span><span style="color: inherit;">Midas</span>
+          </span>
+        </div>
       </a>
 
       <nav class="nav-right">
-        <a href="/about/">About</a>
+        <div class="theme-selector" id="theme-selector">
+          <button class="theme-btn" id="theme-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Switch theme">
+            <span id="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="1"/><path d="M7 20h10M9 16v4M15 16v4"/></svg></span><span class="lang-chev">▾</span>
+          </button>
+          <div class="theme-drop" id="theme-drop" role="menu">
+            <button class="theme-opt" type="button" data-theme-val="system">🖥️ System</button>
+            <button class="theme-opt" type="button" data-theme-val="light">☀️ Light</button>
+            <button class="theme-opt" type="button" data-theme-val="dark">🌙 Dark</button>
+          </div>
+        </div>
       </nav>
     </div>
   </header>
 
-  {isToolPage && (
-    <div class="trust-bar">
-      <span>Runs in your browser</span>
-      <span class="trust-sep">·</span>
-      <span>No files uploaded</span>
-      <span class="trust-sep">·</span>
-      <span>No account needed</span>
-    </div>
-  )}
-
   <main class="main-content">
     <slot />
+    {isToolPage && (
+      <p class="bug-link">
+        <a href="/report-bug/">Found an issue with this tool? Report a bug →</a>
+      </p>
+    )}
     {showShare && <ShareSection pageUrl={canonicalUrl} />}
   </main>
 
@@ -130,14 +187,34 @@ const breadcrumbSchema = isToolPage ? JSON.stringify({
       <div class="footer-tools">
         <a href="/tools/compress-image/">Compress Image</a>
         <a href="/tools/resize-image/">Resize Image</a>
-        <a href="/tools/convert-image/">Convert Image</a>
+        <a href="/tools/heic-to-jpg/">HEIC to JPG</a>
+        <a href="/tools/background-remover/">Background Remover</a>
         <a href="/tools/image-cropper/">Crop Image</a>
-        <a href="/tools/pdf-to-jpg/">PDF to JPG</a>
+        <a href="/tools/convert-image/">Convert Image</a>
+        <a href="/tools/webp-to-jpg/">WebP to JPG</a>
+        <a href="/tools/passport-photo-maker/">Passport Photo</a>
+        <a href="/tools/exif-remover/">EXIF Remover</a>
+        <a href="/tools/image-info/">Image Info</a>
+        <a href="/tools/compress-pdf/">Compress PDF</a>
         <a href="/tools/merge-pdfs/">Merge PDFs</a>
-        <a href="/tools/qr-code/">QR Code</a>
-        <a href="/tools/word-count/">Word Count</a>
+        <a href="/tools/pdf-to-jpg/">PDF to JPG</a>
+        <a href="/tools/images-to-pdf/">Images to PDF</a>
+        <a href="/tools/word-count/">Word Counter</a>
+        <a href="/tools/lorem-ipsum/">Lorem Ipsum</a>
+        <a href="/tools/case-converter/">Case Converter</a>
+        <a href="/tools/text-diff/">Text Diff</a>
         <a href="/tools/json-formatter/">JSON Formatter</a>
+        <a href="/tools/base64/">Base64 Encoder</a>
+        <a href="/tools/social-sizes/">Social Media Sizes</a>
+        <a href="/tools/qr-code/">QR Code Generator</a>
+        <a href="/tools/color-picker/">Color Picker</a>
         <a href="/tools/password-generator/">Password Generator</a>
+        <a href="/tools/image-to-text/">Image to Text</a>
+        <a href="/tools/gif-maker/">GIF Maker</a>
+        <a href="/tools/image-watermark/">Image Watermark</a>
+        <a href="/tools/color-palette/">Color Palette</a>
+        <a href="/tools/svg-to-png/">SVG to PNG</a>
+        <a href="/tools/favicon-generator/">Favicon Generator</a>
       </div>
       <div class="footer-links">
         <a href="/about/">About</a>
@@ -147,18 +224,160 @@ const breadcrumbSchema = isToolPage ? JSON.stringify({
       <p class="footer-legal">© 2026 PixMidas. All rights reserved.</p>
     </div>
   </footer>
+
+  <script is:inline>
+    // ── Language selector ──────────────────────────────────────────
+    (function () {
+      var btn  = document.getElementById('lang-btn');
+      var drop = document.getElementById('lang-drop');
+      var soon = document.getElementById('lang-soon');
+      var timer;
+      if (!btn || !drop) return;
+
+      btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var isOpen = drop.classList.contains('open');
+        drop.classList.toggle('open', !isOpen);
+        btn.setAttribute('aria-expanded', String(!isOpen));
+        // close theme drop if open
+        var tDrop = document.getElementById('theme-drop');
+        var tBtn  = document.getElementById('theme-btn');
+        if (tDrop) tDrop.classList.remove('open');
+        if (tBtn)  tBtn.setAttribute('aria-expanded', 'false');
+      });
+
+      drop.querySelectorAll('.lang-opt[data-soon]').forEach(function (opt) {
+        opt.addEventListener('click', function (e) {
+          e.stopPropagation();
+          clearTimeout(timer);
+          soon.textContent = opt.getAttribute('data-soon');
+          soon.classList.add('visible');
+          timer = setTimeout(function () { soon.classList.remove('visible'); }, 2500);
+        });
+      });
+
+      drop.addEventListener('click', function (e) { e.stopPropagation(); });
+
+      document.addEventListener('click', function () {
+        drop.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+      });
+    })();
+
+    // ── Theme selector ─────────────────────────────────────────────
+    (function () {
+      var S = 'xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"';
+      var ICONS = {
+        system: '<svg ' + S + '><rect x="3" y="4" width="18" height="12" rx="1"/><path d="M7 20h10M9 16v4M15 16v4"/></svg>',
+        light:  '<svg ' + S + '><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>',
+        dark:   '<svg ' + S + '><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg>',
+      };
+      var tBtn  = document.getElementById('theme-btn');
+      var tDrop = document.getElementById('theme-drop');
+      var tIcon = document.getElementById('theme-icon');
+      var mq    = window.matchMedia('(prefers-color-scheme: dark)');
+      if (!tBtn || !tDrop || !tIcon) return;
+
+      function effectiveTheme(pref) {
+        return pref === 'system' ? (mq.matches ? 'dark' : 'light') : pref;
+      }
+
+      function applyTheme(pref) {
+        document.documentElement.setAttribute('data-theme', effectiveTheme(pref));
+        tIcon.innerHTML = ICONS[pref] || ICONS.system;
+        tDrop.querySelectorAll('.theme-opt').forEach(function (opt) {
+          opt.classList.toggle('theme-opt-active', opt.getAttribute('data-theme-val') === pref);
+        });
+      }
+
+      // Initialise from saved preference
+      applyTheme(localStorage.getItem('theme') || 'system');
+
+      tBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var isOpen = tDrop.classList.contains('open');
+        tDrop.classList.toggle('open', !isOpen);
+        tBtn.setAttribute('aria-expanded', String(!isOpen));
+        // close lang drop if open
+        var lDrop = document.getElementById('lang-drop');
+        var lBtn  = document.getElementById('lang-btn');
+        if (lDrop) lDrop.classList.remove('open');
+        if (lBtn)  lBtn.setAttribute('aria-expanded', 'false');
+      });
+
+      tDrop.addEventListener('click', function (e) { e.stopPropagation(); });
+
+      tDrop.querySelectorAll('.theme-opt').forEach(function (opt) {
+        opt.addEventListener('click', function () {
+          var val = opt.getAttribute('data-theme-val');
+          localStorage.setItem('theme', val);
+          applyTheme(val);
+          tDrop.classList.remove('open');
+          tBtn.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      // React to OS preference changes while System is selected
+      mq.addEventListener('change', function () {
+        if ((localStorage.getItem('theme') || 'system') === 'system') applyTheme('system');
+      });
+
+      document.addEventListener('click', function () {
+        tDrop.classList.remove('open');
+        tBtn.setAttribute('aria-expanded', 'false');
+      });
+    })();
+
+    // ── Cookie consent banner ──────────────────────────────────────
+    document.addEventListener('DOMContentLoaded', function () {
+      if (localStorage.getItem('pixmidas_consent') === 'accepted') return;
+      var banner = document.getElementById('cookie-banner');
+      if (!banner) return;
+      banner.style.display = 'block';
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          banner.classList.add('cookie-banner--visible');
+        });
+      });
+      document.getElementById('cookie-accept').addEventListener('click', function () {
+        localStorage.setItem('pixmidas_consent', 'accepted');
+        banner.classList.remove('cookie-banner--visible');
+        banner.addEventListener('transitionend', function () { banner.remove(); }, { once: true });
+      });
+    });
+  </script>
+
+  <script is:inline>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js');
+    }
+  </script>
+
+  <div id="cookie-banner" class="cookie-banner" role="region" aria-label="Cookie consent" style="display:none">
+    <div class="cookie-banner__inner">
+      <div class="cookie-banner__text">
+        <p class="cookie-banner__title">Privacy Note &amp; Disclaimer</p>
+        <p class="cookie-banner__body">PixMidas is designed to process files directly in your browser whenever possible, and we do not intentionally store or inspect your files. However, no online service can guarantee absolute security, so please avoid highly sensitive data. By using PixMidas, you acknowledge that files are processed at your own discretion and risk.</p>
+      </div>
+      <div class="cookie-banner__actions">
+        <a href="/privacy/" class="cookie-banner__link">Learn more</a>
+        <button id="cookie-accept" class="cookie-banner__btn" type="button">Got it</button>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
 
 <style>
   .site-header {
-    background: rgba(255, 255, 255, 0.85);
+    background: var(--header-bg);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border-light);
     position: sticky;
     top: 0;
     z-index: 100;
+    transition: background-color 0.25s ease, border-color 0.25s ease;
   }
 
   .header-inner {
@@ -175,10 +394,6 @@ const breadcrumbSchema = isToolPage ? JSON.stringify({
   .logo {
     display: flex;
     align-items: center;
-    gap: 8px;
-    font-weight: 700;
-    font-size: 20px;
-    letter-spacing: -0.03em;
     color: var(--text);
     text-decoration: none;
     position: absolute;
@@ -186,32 +401,204 @@ const breadcrumbSchema = isToolPage ? JSON.stringify({
     transform: translateX(-50%);
   }
 
-  .logo-icon {
-    font-size: 22px;
-  }
-
   .nav-left,
   .nav-right {
     display: flex;
-    gap: 24px;
+    gap: 20px;
+    align-items: center;
     z-index: 1;
   }
 
-  .nav-left a,
-  .nav-right a {
+  /* ── Language selector ─────────────────────────────────── */
+  .lang-selector {
+    position: relative;
+  }
+
+  .lang-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
     font-size: 15px;
     font-weight: 500;
     color: var(--text-muted);
-    transition: color 0.15s;
-    text-decoration: none;
+    padding: 0;
     min-height: 44px;
+    font-family: inherit;
+    transition: color 0.15s;
+  }
+
+  .lang-btn:hover {
+    color: var(--text);
+  }
+
+  .lang-code {
+    margin-left: 2px;
+  }
+
+  .lang-chev {
+    font-size: 10px;
+    margin-left: 1px;
+    color: var(--text-light);
+    transition: transform 0.15s;
+    display: inline-block;
+  }
+
+  .lang-btn[aria-expanded="true"] .lang-chev {
+    transform: rotate(180deg);
+  }
+
+  .lang-drop {
+    display: none;
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: auto;
+    background: var(--surface);
+    border: 1px solid var(--border-light);
+    border-radius: 12px;
+    padding: 6px;
+    min-width: 156px;
+    box-shadow: var(--shadow-dropdown);
+    z-index: 200;
+  }
+
+  .lang-drop.open {
+    display: block;
+  }
+
+  .lang-opt {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    padding: 10px 12px;
+    border-radius: 8px;
+    text-align: left;
+    font-family: inherit;
+    transition: background 0.1s;
+    min-height: 44px;
+  }
+
+  .lang-opt:hover:not(:disabled) {
+    background: var(--surface-2);
+  }
+
+  .lang-opt-active {
+    color: var(--accent);
+  }
+
+  .lang-soon {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-align: center;
+    padding: 0 12px;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.2s, max-height 0.25s;
+  }
+
+  .lang-soon.visible {
+    opacity: 1;
+    max-height: 28px;
+    padding: 2px 12px 8px;
+  }
+
+  /* ── Theme selector ─────────────────────────────────── */
+  .theme-selector {
+    position: relative;
+  }
+
+  .theme-btn {
     display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-muted);
+    padding: 0;
+    min-height: 44px;
+    min-width: 36px;
+    font-family: inherit;
+    transition: color 0.15s;
+    line-height: 1;
+  }
+
+  #theme-icon {
+    display: flex;
     align-items: center;
   }
 
-  .nav-left a:hover,
-  .nav-right a:hover {
+  #theme-icon svg {
+    width: 20px;
+    height: 20px;
+    display: block;
+    flex-shrink: 0;
+  }
+
+
+  .theme-btn:hover {
     color: var(--text);
+  }
+
+  .theme-drop {
+    display: none;
+    position: absolute;
+    top: calc(100% + 4px);
+    right: 0;
+    left: auto;
+    background: var(--surface);
+    border: 1px solid var(--border-light);
+    border-radius: 12px;
+    padding: 6px;
+    min-width: 140px;
+    box-shadow: var(--shadow-dropdown);
+    z-index: 200;
+  }
+
+  .theme-drop.open {
+    display: block;
+  }
+
+  .theme-opt {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    padding: 10px 12px;
+    border-radius: 8px;
+    text-align: left;
+    font-family: inherit;
+    transition: background 0.1s;
+    min-height: 44px;
+  }
+
+  .theme-opt:hover {
+    background: var(--surface-2);
+  }
+
+  .theme-opt-active {
+    color: var(--accent);
   }
 
   .trust-bar {
@@ -316,18 +703,112 @@ const breadcrumbSchema = isToolPage ? JSON.stringify({
     margin-top: 8px;
   }
 
+  /* ── Cookie consent banner ─────────────────────────────── */
+  .cookie-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    background: var(--surface);
+    border-top: 1px solid var(--border-light);
+    box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.08);
+    transform: translateY(100%);
+    transition: transform 0.35s cubic-bezier(0.34, 1.15, 0.64, 1);
+  }
+
+  .cookie-banner--visible {
+    transform: translateY(0);
+  }
+
+  .cookie-banner__inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .cookie-banner__text {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .cookie-banner__title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    margin: 0 0 4px;
+    letter-spacing: -0.01em;
+  }
+
+  .cookie-banner__body {
+    font-size: 9px;
+    color: var(--text-muted);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .cookie-banner__actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+
+  .cookie-banner__link {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-decoration: none;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    transition: color 0.15s;
+  }
+
+  .cookie-banner__link:hover {
+    color: var(--text);
+  }
+
+  .cookie-banner__btn {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: inherit;
+    padding: 10px 20px;
+    cursor: pointer;
+    min-height: 44px;
+    white-space: nowrap;
+    transition: opacity 0.15s;
+  }
+
+  .cookie-banner__btn:hover {
+    opacity: 0.85;
+  }
+
+  @media (max-width: 768px) {
+    .cookie-banner__inner {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 16px 20px;
+    }
+
+    .cookie-banner__actions {
+      width: 100%;
+      justify-content: flex-end;
+    }
+  }
+
   @media (max-width: 768px) {
     .header-inner {
       padding: 0 20px;
       height: 56px;
-    }
-
-    .logo {
-      font-size: 17px;
-    }
-
-    .logo-icon {
-      font-size: 18px;
     }
 
     .nav-left,
@@ -335,8 +816,7 @@ const breadcrumbSchema = isToolPage ? JSON.stringify({
       gap: 16px;
     }
 
-    .nav-left a,
-    .nav-right a {
+    .lang-btn {
       font-size: 14px;
     }
 
@@ -361,5 +841,21 @@ const breadcrumbSchema = isToolPage ? JSON.stringify({
     .footer-links {
       gap: 16px;
     }
+  }
+
+  .bug-link {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 13px;
+  }
+
+  .bug-link a {
+    color: var(--text-light);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .bug-link a:hover {
+    color: var(--accent);
   }
 </style>

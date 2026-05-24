@@ -1,4 +1,10 @@
 import { useRef, useState } from "react";
+import SaveAsDialog from "./SaveAsDialog";
+
+var supportsFileShare = (function() {
+  try { return typeof navigator !== 'undefined' && !!navigator.share && !!navigator.canShare && navigator.canShare({ files: [new File([], 't.jpg', { type: 'image/jpeg' })] }); }
+  catch(e) { return false; }
+})();
 
 export default function BackgroundRemover() {
   const fileInputRef = useRef(null);
@@ -10,6 +16,7 @@ export default function BackgroundRemover() {
   const [resultUrl, setResultUrl] = useState(null);
   const [downloadName, setDownloadName] = useState("bg-removed.png");
   const [errorMsg, setErrorMsg] = useState("");
+  const [saveAsName, setSaveAsName] = useState(null);
 
   const processFile = async (file) => {
     if (!file || !file.type.startsWith("image/")) return;
@@ -78,24 +85,42 @@ export default function BackgroundRemover() {
   }
 
   async function handleSaveAs() {
+    if (!resultUrl) return;
     if (typeof window.showSaveFilePicker === "function") {
       try {
-        var handle = await window.showSaveFilePicker({ suggestedName: downloadName, types: [{ description: "File", accept: { "image/png": [".png"] } }] });
         var blob = await fetch(resultUrl).then(function(r) { return r.blob(); });
+        var handle = await window.showSaveFilePicker({ suggestedName: downloadName, types: [{ description: "PNG Image", accept: { "image/png": [".png"] } }] });
         var writable = await handle.createWritable();
         await writable.write(blob);
         await writable.close();
         return;
-      } catch(e) {
-        if (e.name === "AbortError") return;
-      }
+      } catch(e) { if (e.name === "AbortError") return; }
     }
-    handleSave();
+    setSaveAsName(downloadName);
   }
 
-  var saveBtn = { background: "#0071e3", color: "white", border: "none", borderRadius: "99px", padding: "14px 28px", fontSize: "16px", fontWeight: "700", cursor: "pointer", minHeight: "44px", fontFamily: "inherit" };
-  var saveAsBtn = { background: "transparent", color: "#0071e3", border: "1.5px solid #0071e3", borderRadius: "99px", padding: "14px 28px", fontSize: "16px", fontWeight: "700", cursor: "pointer", minHeight: "44px", fontFamily: "inherit" };
-  var resetBtn = { background: "var(--surface-2)", color: "var(--text-muted)", border: "none", borderRadius: "99px", padding: "14px 28px", fontSize: "16px", fontWeight: "600", cursor: "pointer", minHeight: "44px", fontFamily: "inherit" };
+  function doSaveAs(filename) {
+    var a = document.createElement("a");
+    a.href = resultUrl;
+    a.download = filename;
+    a.click();
+    setSaveAsName(null);
+  }
+
+  var saveBtn = { background: "var(--upload-btn-bg)", color: "var(--upload-btn-color)", border: "none", borderRadius: "24px", padding: "9px 24px", fontSize: "14px", fontWeight: "600", cursor: "pointer", fontFamily: "inherit" };
+  var saveAsBtn = { background: "transparent", color: "var(--outline-btn-color)", border: "1.5px solid var(--outline-btn-color)", borderRadius: "24px", padding: "9px 24px", fontSize: "14px", fontWeight: "600", cursor: "pointer", fontFamily: "inherit" };
+  var shareBtn = { background: "transparent", color: "var(--outline-btn-color)", border: "1.5px solid var(--outline-btn-color)", borderRadius: "24px", padding: "9px 24px", fontSize: "14px", fontWeight: "600", cursor: "pointer", fontFamily: "inherit" };
+  var resetBtn = { background: "transparent", color: "var(--reset-btn-text)", border: "1.5px solid var(--reset-btn-color)", borderRadius: "24px", padding: "9px 24px", fontSize: "14px", fontWeight: "600", cursor: "pointer", fontFamily: "inherit" };
+
+  async function handleShare() {
+    if (!resultUrl) return;
+    var blob = await fetch(resultUrl).then(function(r) { return r.blob(); });
+    var file = new File([blob], downloadName, { type: blob.type });
+    if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+      try { await navigator.share({ files: [file], title: 'PixMidas' }); }
+      catch(err) { if (err.name !== 'AbortError') { handleSave(); } }
+    } else { handleSave(); }
+  }
 
   return (
     <div style={s.wrapper}>
@@ -170,6 +195,7 @@ export default function BackgroundRemover() {
               <>
                 <button onClick={handleSave} style={saveBtn} type="button">Save</button>
                 <button onClick={handleSaveAs} style={saveAsBtn} type="button">Save As...</button>
+                {supportsFileShare && <button onClick={handleShare} style={shareBtn} type="button"><i className="ti ti-share" /> Share</button>}
               </>
             )}
             <button onClick={reset} style={resetBtn} type="button">Reset</button>
@@ -180,6 +206,7 @@ export default function BackgroundRemover() {
       <div style={s.privacyNote}>
         <a href="/report-bug" style={{ color: 'var(--text-muted)', textDecoration: 'none' }}>🐞 Found an issue with this tool? Report a bug →</a>
       </div>
+      {saveAsName !== null && <SaveAsDialog defaultName={saveAsName} onSave={doSaveAs} onCancel={function() { setSaveAsName(null); }} />}
     </div>
   );
 }
@@ -325,6 +352,7 @@ const s = {
     display: "flex",
     gap: 12,
     flexWrap: "wrap",
+    justifyContent: "center",
   },
   downloadBtn: {
     background: "#2563eb",

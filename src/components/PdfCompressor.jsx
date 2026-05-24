@@ -1,5 +1,29 @@
 import { useState, useRef, useCallback } from "react";
 import { PDFDocument } from "pdf-lib";
+import SaveAsDialog from "./SaveAsDialog";
+
+var _pdfjsPromise = null;
+function loadPdfJs() {
+  if (typeof window !== "undefined" && window.pdfjsLib) return Promise.resolve(window.pdfjsLib);
+  if (_pdfjsPromise) return _pdfjsPromise;
+  _pdfjsPromise = new Promise(function(resolve, reject) {
+    var script = document.createElement("script");
+    script.src = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js";
+    script.onload = function() {
+      window.pdfjsLib.GlobalWorkerOptions.workerSrc =
+        "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+      resolve(window.pdfjsLib);
+    };
+    script.onerror = function() { _pdfjsPromise = null; reject(new Error("Could not load PDF.js")); };
+    document.head.appendChild(script);
+  });
+  return _pdfjsPromise;
+}
+
+var supportsFileShare = (function() {
+  try { return typeof navigator !== 'undefined' && !!navigator.share && !!navigator.canShare && navigator.canShare({ files: [new File([], 't.pdf', { type: 'application/pdf' })] }); }
+  catch(e) { return false; }
+})();
 
 export default function PdfCompressor() {
   var [file, setFile]               = useState(null);
@@ -10,6 +34,7 @@ export default function PdfCompressor() {
   var [result, setResult]           = useState(null); // { origSize, newSize, blob }
   var [error, setError]             = useState("");
   var [dragOver, setDragOver]       = useState(false);
+  var [saveAsName, setSaveAsName]   = useState(null);
   var inputRef = useRef(null);
 
   function fmt(bytes) {
@@ -52,14 +77,16 @@ export default function PdfCompressor() {
   async function compress() {
     if (!file) return;
 
-    var pdfjsLib = window.pdfjsLib;
-    if (!pdfjsLib) {
-      setError("PDF library not loaded. Please refresh the page.");
+    var pdfjsLib;
+    try {
+      pdfjsLib = await loadPdfJs();
+    } catch (e) {
+      setError("Could not load PDF library. Please check your connection and try again.");
       return;
     }
 
-    var scale   = level === "high" ? 1.5 : 2.0;
-    var quality = level === "high" ? 0.65 : 0.85;
+    var scale   = level === "low" ? 0.78 : level === "recommended" ? 0.75 : 0.55;
+    var quality = level === "low" ? 0.82 : level === "recommended" ? 0.68 : 0.50;
 
     setStatus("compressing");
     setProgress(0);
@@ -132,7 +159,10 @@ export default function PdfCompressor() {
     var filename = "compressed_" + file.name;
     if (typeof window.showSaveFilePicker === "function") {
       try {
-        var handle = await window.showSaveFilePicker({ suggestedName: filename, types: [{ description: "File", accept: { "application/pdf": [".pdf"] } }] });
+        var handle = await window.showSaveFilePicker({
+          suggestedName: filename,
+          types: [{ description: "PDF Document", accept: { "application/pdf": [".pdf"] } }],
+        });
         var writable = await handle.createWritable();
         await writable.write(result.blob);
         await writable.close();
@@ -141,12 +171,30 @@ export default function PdfCompressor() {
         if (e.name === "AbortError") return;
       }
     }
-    handleSave();
+    setSaveAsName(filename);
   }
 
-  var saveBtn = { background: "#0071e3", color: "white", border: "none", borderRadius: "99px", padding: "14px 28px", fontSize: "16px", fontWeight: "700", cursor: "pointer", minHeight: "44px", fontFamily: "inherit" };
-  var saveAsBtn = { background: "transparent", color: "#0071e3", border: "1.5px solid #0071e3", borderRadius: "99px", padding: "14px 28px", fontSize: "16px", fontWeight: "700", cursor: "pointer", minHeight: "44px", fontFamily: "inherit" };
-  var resetBtn = { background: "var(--surface-2)", color: "var(--text-muted)", border: "none", borderRadius: "99px", padding: "14px 28px", fontSize: "16px", fontWeight: "600", cursor: "pointer", minHeight: "44px", fontFamily: "inherit" };
+  function doSaveAs(filename) {
+    var url = URL.createObjectURL(result.blob);
+    var a = document.createElement("a"); a.href = url; a.download = filename; a.click();
+    URL.revokeObjectURL(url);
+    setSaveAsName(null);
+  }
+
+  var saveBtn = { background: "var(--upload-btn-bg)", color: "var(--upload-btn-color)", border: "none", borderRadius: "24px", padding: "9px 24px", fontSize: "14px", fontWeight: "600", cursor: "pointer", fontFamily: "inherit" };
+  var saveAsBtn = { background: "transparent", color: "var(--outline-btn-color)", border: "1.5px solid var(--outline-btn-color)", borderRadius: "24px", padding: "9px 24px", fontSize: "14px", fontWeight: "600", cursor: "pointer", fontFamily: "inherit" };
+  var shareBtn = { background: "transparent", color: "var(--outline-btn-color)", border: "1.5px solid var(--outline-btn-color)", borderRadius: "24px", padding: "9px 24px", fontSize: "14px", fontWeight: "600", cursor: "pointer", fontFamily: "inherit" };
+  var resetBtn = { background: "transparent", color: "var(--pdf-reset-color)", border: "1.5px solid var(--pdf-reset-border)", borderRadius: "24px", padding: "9px 24px", fontSize: "14px", fontWeight: "600", cursor: "pointer", fontFamily: "inherit" };
+
+  async function handleShare() {
+    if (!result) return;
+    var filename = "compressed_" + file.name;
+    var shareFile = new File([result.blob], filename, { type: 'application/pdf' });
+    if (navigator.share && navigator.canShare && navigator.canShare({ files: [shareFile] })) {
+      try { await navigator.share({ files: [shareFile], title: 'PixMidas' }); }
+      catch(err) { if (err.name !== 'AbortError') { handleSave(); } }
+    } else { handleSave(); }
+  }
 
   function reset() {
     setFile(null);
@@ -162,8 +210,8 @@ export default function PdfCompressor() {
   var primaryBtn = {
     display: "block", width: "100%",
     padding: "17px 24px", borderRadius: "99px",
-    background: "#0071e3", color: "#fff", border: "none",
-    fontSize: "17px", fontWeight: "700", cursor: "pointer",
+    background: "var(--upload-btn-bg)", color: "var(--upload-btn-color)", border: "none",
+    fontSize: "17px", fontWeight: "600", cursor: "pointer",
     fontFamily: "inherit", transition: "background 0.15s",
   };
   var secondaryBtn = {
@@ -241,23 +289,22 @@ export default function PdfCompressor() {
 
         {file && (
           <div style={{ marginTop: "20px" }}>
-            <label style={{ display: "block", fontSize: "15px", fontWeight: "600", marginBottom: "8px", color: "var(--text)" }}>
+            <label style={{ display: "block", fontSize: "15px", fontWeight: "600", marginBottom: "10px", color: "var(--text)" }}>
               Compression Level
             </label>
             <select
               value={level}
               onChange={function(e) { setLevel(e.target.value); }}
               style={{
-                display: "block", width: "100%",
-                padding: "12px 16px", borderRadius: "12px",
-                border: "1px solid var(--border-light)", fontSize: "15px",
-                background: "var(--surface-2)", color: "var(--text)",
-                appearance: "none", cursor: "pointer",
-                fontFamily: "inherit", marginBottom: "16px",
+                width: "100%", padding: "10px 12px", marginBottom: "16px",
+                border: "1px solid var(--border)", borderRadius: "10px",
+                fontSize: "14px", fontFamily: "inherit", cursor: "pointer",
+                background: "var(--surface)", color: "var(--text)", outline: "none",
               }}
             >
-              <option value="recommended">Recommended — sharp output, good size reduction</option>
-              <option value="high">High compression — smaller file, slightly softer</option>
+              <option value="low">Low Compression — Soft compression, minimal quality loss</option>
+              <option value="recommended">Recommended — Balanced quality and file size</option>
+              <option value="high">High Compression — Aggressive compression, noticeable quality loss</option>
             </select>
             <p style={{ fontSize: "12px", color: "var(--text-muted)", marginBottom: "12px", lineHeight: "1.5" }}>
               Pages are re-rendered as high-quality images. Works best on scanned documents and image-heavy PDFs. Text-only PDFs may not compress much.
@@ -339,11 +386,13 @@ export default function PdfCompressor() {
           </div>
         )}
 
-        <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", marginBottom: "10px" }}>
+        <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", justifyContent: "center", marginBottom: "10px" }}>
           <button onClick={handleSave} style={saveBtn}>Save</button>
           <button onClick={handleSaveAs} style={saveAsBtn}>Save As...</button>
+          {supportsFileShare && <button onClick={handleShare} style={shareBtn}><i className="ti ti-share" /> Share</button>}
           <button onClick={reset} style={resetBtn}>Reset</button>
         </div>
+        {saveAsName !== null && <SaveAsDialog defaultName={saveAsName} onSave={doSaveAs} onCancel={function() { setSaveAsName(null); }} />}
       </div>
     );
   }

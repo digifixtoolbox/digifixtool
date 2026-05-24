@@ -1,10 +1,17 @@
 import { useState, useRef } from "react";
+import SaveAsDialog from "./SaveAsDialog";
+
+var supportsFileShare = (function() {
+  try { return typeof navigator !== 'undefined' && !!navigator.share && !!navigator.canShare && navigator.canShare({ files: [new File([], 't.png', { type: 'image/png' })] }); }
+  catch(e) { return false; }
+})();
 
 export default function ColorPalette() {
   const [palette, setPalette] = useState([]);
   const [imageUrl, setImageUrl] = useState(null);
   const [dragOver, setDragOver] = useState(false);
   const [copied, setCopied] = useState(null);
+  const [saveAsName, setSaveAsName] = useState(null);
   const canvasRef = useRef(null);
 
   function rgbToHex(r, g, b) {
@@ -104,25 +111,43 @@ export default function ColorPalette() {
 
   async function handleSaveAs() {
     if (!palette.length) return;
+    var filename = "color-palette.png";
     var url = buildPaletteDataUrl();
     if (typeof window.showSaveFilePicker === "function") {
       try {
-        var handle = await window.showSaveFilePicker({ suggestedName: "color-palette.png", types: [{ description: "File", accept: { "image/png": [".png"] } }] });
         var blob = await fetch(url).then(function(r) { return r.blob(); });
+        var handle = await window.showSaveFilePicker({ suggestedName: filename, types: [{ description: "PNG Image", accept: { "image/png": [".png"] } }] });
         var writable = await handle.createWritable();
         await writable.write(blob);
         await writable.close();
         return;
-      } catch(e) {
-        if (e.name === "AbortError") return;
-      }
+      } catch(e) { if (e.name === "AbortError") return; }
     }
-    handleSave();
+    setSaveAsName(filename);
   }
 
-  var saveBtn = { background: "#0071e3", color: "white", border: "none", borderRadius: "99px", padding: "14px 28px", fontSize: "16px", fontWeight: "700", cursor: "pointer", minHeight: "44px", fontFamily: "inherit" };
-  var saveAsBtn = { background: "transparent", color: "#0071e3", border: "1.5px solid #0071e3", borderRadius: "99px", padding: "14px 28px", fontSize: "16px", fontWeight: "700", cursor: "pointer", minHeight: "44px", fontFamily: "inherit" };
-  var resetBtn = { background: "var(--surface-2)", color: "var(--text-muted)", border: "none", borderRadius: "99px", padding: "14px 28px", fontSize: "16px", fontWeight: "600", cursor: "pointer", minHeight: "44px", fontFamily: "inherit" };
+  function doSaveAs(filename) {
+    var a = document.createElement("a");
+    a.href = buildPaletteDataUrl();
+    a.download = filename; a.click();
+    setSaveAsName(null);
+  }
+
+  async function handleShare() {
+    if (!palette.length) return;
+    var url = buildPaletteDataUrl();
+    var blob = await fetch(url).then(function(r) { return r.blob(); });
+    var file = new File([blob], "color-palette.png", { type: "image/png" });
+    if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+      try { await navigator.share({ files: [file], title: "PixMidas" }); }
+      catch(err) { if (err.name !== "AbortError") { handleSave(); } }
+    } else { handleSave(); }
+  }
+
+  var saveBtn = { background: "var(--upload-btn-bg)", color: "var(--upload-btn-color)", border: "none", borderRadius: "24px", padding: "9px 24px", fontSize: "14px", fontWeight: "600", cursor: "pointer", fontFamily: "inherit" };
+  var saveAsBtn = { background: "transparent", color: "var(--outline-btn-color)", border: "1.5px solid var(--outline-btn-color)", borderRadius: "24px", padding: "9px 24px", fontSize: "14px", fontWeight: "600", cursor: "pointer", fontFamily: "inherit" };
+  var shareBtn = { background: "transparent", color: "var(--outline-btn-color)", border: "1.5px solid var(--outline-btn-color)", borderRadius: "24px", padding: "9px 24px", fontSize: "14px", fontWeight: "600", cursor: "pointer", fontFamily: "inherit" };
+  var resetBtn = { background: "transparent", color: "var(--reset-btn-text)", border: "1.5px solid var(--reset-btn-color)", borderRadius: "24px", padding: "9px 24px", fontSize: "14px", fontWeight: "600", cursor: "pointer", fontFamily: "inherit" };
 
   return (
     <div style={{ background: "var(--surface)", border: "1px solid var(--border-light)", borderRadius: 20, padding: 32 }}>
@@ -172,13 +197,15 @@ export default function ColorPalette() {
             })}
           </div>
 
-          <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", marginTop: "16px" }}>
+          <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", marginTop: "16px", justifyContent: "center" }}>
             <button onClick={handleSave} style={saveBtn}>Save</button>
             <button onClick={handleSaveAs} style={saveAsBtn}>Save As...</button>
+            {supportsFileShare && <button onClick={handleShare} style={shareBtn}><i className="ti ti-share" /> Share</button>}
             <button onClick={function() { setImageUrl(null); setPalette([]); }} style={resetBtn}>Reset</button>
           </div>
         </div>
       )}
+      {saveAsName !== null && <SaveAsDialog defaultName={saveAsName} onSave={doSaveAs} onCancel={function() { setSaveAsName(null); }} />}
     </div>
   );
 }

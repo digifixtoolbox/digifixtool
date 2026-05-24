@@ -1,5 +1,11 @@
 import { useState, useRef, useCallback } from "react";
+import SaveAsDialog from "./SaveAsDialog";
 import { PDFDocument } from "pdf-lib";
+
+var supportsFileShare = (function() {
+  try { return typeof navigator !== 'undefined' && !!navigator.share && !!navigator.canShare && navigator.canShare({ files: [new File([], 't.pdf', { type: 'application/pdf' })] }); }
+  catch(e) { return false; }
+})();
 
 export default function ImagesToPDF() {
   const [images, setImages] = useState([]);
@@ -8,6 +14,7 @@ export default function ImagesToPDF() {
   const [error, setError] = useState("");
   const [dragOver, setDragOver] = useState(false);
   const [pdfUrl, setPdfUrl] = useState(null);
+  const [saveAsName, setSaveAsName] = useState(null);
   const inputRef = useRef(null);
   const nextId = useRef(0);
 
@@ -129,30 +136,45 @@ export default function ImagesToPDF() {
 
   async function handleSaveAs() {
     if (!pdfUrl) return;
+    var filename = "images.pdf";
     if (typeof window.showSaveFilePicker === "function") {
       try {
-        var handle = await window.showSaveFilePicker({ suggestedName: "images.pdf", types: [{ description: "File", accept: { "application/pdf": [".pdf"] } }] });
         var blob = await fetch(pdfUrl).then(function(r) { return r.blob(); });
+        var handle = await window.showSaveFilePicker({ suggestedName: filename, types: [{ description: "PDF Document", accept: { "application/pdf": [".pdf"] } }] });
         var writable = await handle.createWritable();
         await writable.write(blob);
         await writable.close();
         return;
-      } catch(e) {
-        if (e.name === "AbortError") return;
-      }
+      } catch(e) { if (e.name === "AbortError") return; }
     }
-    handleSave();
+    setSaveAsName(filename);
   }
 
-  var saveBtn = { background: "#0071e3", color: "white", border: "none", borderRadius: "99px", padding: "14px 28px", fontSize: "16px", fontWeight: "700", cursor: "pointer", minHeight: "44px", fontFamily: "inherit" };
-  var saveAsBtn = { background: "transparent", color: "#0071e3", border: "1.5px solid #0071e3", borderRadius: "99px", padding: "14px 28px", fontSize: "16px", fontWeight: "700", cursor: "pointer", minHeight: "44px", fontFamily: "inherit" };
-  var resetBtn = { background: "var(--surface-2)", color: "var(--text-muted)", border: "none", borderRadius: "99px", padding: "14px 28px", fontSize: "16px", fontWeight: "600", cursor: "pointer", minHeight: "44px", fontFamily: "inherit" };
+  function doSaveAs(filename) {
+    var a = document.createElement("a"); a.href = pdfUrl; a.download = filename; a.click();
+    setSaveAsName(null);
+  }
+
+  var saveBtn = { background: "var(--upload-btn-bg)", color: "var(--upload-btn-color)", border: "none", borderRadius: "24px", padding: "9px 24px", fontSize: "14px", fontWeight: "600", cursor: "pointer", fontFamily: "inherit" };
+  var saveAsBtn = { background: "transparent", color: "var(--outline-btn-color)", border: "1.5px solid var(--outline-btn-color)", borderRadius: "24px", padding: "9px 24px", fontSize: "14px", fontWeight: "600", cursor: "pointer", fontFamily: "inherit" };
+  var shareBtn = { background: "transparent", color: "var(--outline-btn-color)", border: "1.5px solid var(--outline-btn-color)", borderRadius: "24px", padding: "9px 24px", fontSize: "14px", fontWeight: "600", cursor: "pointer", fontFamily: "inherit" };
+  var resetBtn = { background: "transparent", color: "var(--reset-btn-text)", border: "1.5px solid var(--reset-btn-color)", borderRadius: "24px", padding: "9px 24px", fontSize: "14px", fontWeight: "600", cursor: "pointer", fontFamily: "inherit" };
+
+  async function handleShare() {
+    if (!pdfUrl) return;
+    var blob = await fetch(pdfUrl).then(function(r) { return r.blob(); });
+    var file = new File([blob], 'images.pdf', { type: 'application/pdf' });
+    if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+      try { await navigator.share({ files: [file], title: 'PixMidas' }); }
+      catch(err) { if (err.name !== 'AbortError') { handleSave(); } }
+    } else { handleSave(); }
+  }
 
   var primaryBtn = {
     display: "block", width: "100%",
     padding: "17px 24px", borderRadius: "99px",
-    background: "#0071e3", color: "#fff", border: "none",
-    fontSize: "17px", fontWeight: "700", cursor: "pointer",
+    background: "var(--upload-btn-bg)", color: "var(--upload-btn-color)", border: "none",
+    fontSize: "17px", fontWeight: "600", cursor: "pointer",
     fontFamily: "inherit", transition: "opacity 0.15s",
   };
   var secondaryBtn = {
@@ -170,11 +192,11 @@ export default function ImagesToPDF() {
         role="button"
         tabIndex={0}
         style={{
-          border: "2px dashed " + (dragOver ? "#0071e3" : "#d2d2d7"),
+          border: "2px dashed " + (dragOver ? "var(--upload-btn-bg)" : "var(--border)"),
           borderRadius: "20px",
           padding: images.length ? "20px 24px" : "56px 24px",
           textAlign: "center",
-          background: dragOver ? "#f0f7ff" : "var(--surface-2)",
+          background: dragOver ? "var(--accent-light)" : "var(--surface-2)",
           cursor: "pointer",
           transition: "border-color 0.18s, background 0.18s",
           marginBottom: "20px",
@@ -202,7 +224,7 @@ export default function ImagesToPDF() {
           <div>
             <div style={{ fontSize: "40px", marginBottom: "12px" }}><i className="ti ti-file-import" style={{color:'#E54D2E'}}></i></div>
             <p style={{ fontSize: "17px", fontWeight: "600", color: "#1d1d1f", marginBottom: "6px" }}>
-              Drop images here or <span style={{ color: "#0071e3" }}>browse</span>
+              Drop images here or <span style={{ color: "var(--upload-btn-bg)" }}>browse</span>
             </p>
             <p style={{ fontSize: "13px", color: "#6e6e73", marginBottom: "16px" }}>
               JPG, PNG, WebP. Select multiple files at once
@@ -210,7 +232,7 @@ export default function ImagesToPDF() {
             <div style={{textAlign:"center",marginTop:"4px"}}><a href="/report-bug" style={{color:"var(--text-muted)",textDecoration:"none",fontSize:"13px"}}>🐞 Found an issue with this tool? Report a bug →</a></div>
           </div>
         ) : (
-          <p style={{ fontSize: "14px", color: "#0071e3", fontWeight: "600" }}>+ Add more images</p>
+          <p style={{ fontSize: "14px", color: "var(--upload-btn-bg)", fontWeight: "600" }}>+ Add more images</p>
         )}
       </div>
 
@@ -272,15 +294,17 @@ export default function ImagesToPDF() {
               : "Convert " + images.length + " Image" + (images.length !== 1 ? "s" : "") + " to PDF"}
           </button>
           {done && pdfUrl && (
-            <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", marginTop: "10px" }}>
+            <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", marginTop: "10px", justifyContent: "center" }}>
               <button onClick={handleSave} style={saveBtn}>Save</button>
               <button onClick={handleSaveAs} style={saveAsBtn}>Save As...</button>
+              {supportsFileShare && <button onClick={handleShare} style={shareBtn}><i className="ti ti-share" /> Share</button>}
               <button onClick={reset} style={resetBtn}>Reset</button>
             </div>
           )}
           {!done && <button onClick={reset} style={secondaryBtn}>Clear All</button>}
         </div>
       )}
+      {saveAsName !== null && <SaveAsDialog defaultName={saveAsName} onSave={doSaveAs} onCancel={function() { setSaveAsName(null); }} />}
     </div>
   );
 }

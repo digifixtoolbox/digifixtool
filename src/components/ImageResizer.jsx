@@ -1,4 +1,10 @@
 import { useRef, useState } from "react";
+import SaveAsDialog from "./SaveAsDialog";
+
+var supportsFileShare = (function() {
+  try { return typeof navigator !== 'undefined' && !!navigator.share && !!navigator.canShare && navigator.canShare({ files: [new File([], 't.jpg', { type: 'image/jpeg' })] }); }
+  catch(e) { return false; }
+})();
 
 export default function ImageResizer() {
   const fileInputRef = useRef(null);
@@ -11,6 +17,7 @@ export default function ImageResizer() {
   const [resizedUrl, setResizedUrl] = useState(null);
   const [resizedSize, setResizedSize] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [saveAsName, setSaveAsName] = useState(null);
 
   const fmt = (b) => b < 1048576 ? (b/1024).toFixed(1)+" KB" : (b/1048576).toFixed(2)+" MB";
 
@@ -75,29 +82,37 @@ export default function ImageResizer() {
   async function handleSaveAs(url, filename) {
     if (typeof window.showSaveFilePicker === "function") {
       try {
-        var ext = filename.split(".").pop().toLowerCase();
-        var mimeMap = { jpg: "image/jpeg", jpeg: "image/jpeg", png: "image/png", gif: "image/gif", pdf: "application/pdf", zip: "application/zip", webp: "image/webp" };
-        var mime = mimeMap[ext] || "application/octet-stream";
-        var handle = await window.showSaveFilePicker({ suggestedName: filename, types: [{ description: "File", accept: { [mime]: ["." + ext] } }] });
         var blob = await fetch(url).then(function(r) { return r.blob(); });
+        var handle = await window.showSaveFilePicker({ suggestedName: filename, types: [{ description: "Image", accept: { [blob.type]: [] } }] });
         var writable = await handle.createWritable();
         await writable.write(blob);
         await writable.close();
         return;
-      } catch(e) {
-        if (e.name === "AbortError") return;
-      }
+      } catch(e) { if (e.name === "AbortError") return; }
     }
-    var a = document.createElement("a");
-    a.href = url;
-    a.download = filename;
-    a.click();
+    setSaveAsName(filename);
   }
 
-  var saveBtn = { background: "#0071e3", color: "white", border: "none", borderRadius: "99px", padding: "14px 28px", fontSize: "16px", fontWeight: "700", cursor: "pointer", minHeight: "44px", fontFamily: "inherit" };
-  var saveAsBtn = { background: "transparent", color: "#0071e3", border: "1.5px solid #0071e3", borderRadius: "99px", padding: "14px 28px", fontSize: "16px", fontWeight: "700", cursor: "pointer", minHeight: "44px", fontFamily: "inherit" };
-  var resetBtn = { background: "var(--surface-2)", color: "var(--text-muted)", border: "none", borderRadius: "99px", padding: "14px 28px", fontSize: "16px", fontWeight: "600", cursor: "pointer", minHeight: "44px", fontFamily: "inherit" };
-  var btnRow = { display: "flex", gap: "12px", flexWrap: "wrap", marginTop: "16px" };
+  function doSaveAs(filename) {
+    var a = document.createElement("a"); a.href = resizedUrl; a.download = filename; a.click();
+    setSaveAsName(null);
+  }
+
+  var saveBtn = { background: "var(--upload-btn-bg)", color: "var(--upload-btn-color)", border: "none", borderRadius: "24px", padding: "9px 24px", fontSize: "14px", fontWeight: "600", cursor: "pointer", fontFamily: "inherit" };
+  var saveAsBtn = { background: "transparent", color: "var(--outline-btn-color)", border: "1.5px solid var(--outline-btn-color)", borderRadius: "24px", padding: "9px 24px", fontSize: "14px", fontWeight: "600", cursor: "pointer", fontFamily: "inherit" };
+  var shareBtn = { background: "transparent", color: "var(--outline-btn-color)", border: "1.5px solid var(--outline-btn-color)", borderRadius: "24px", padding: "9px 24px", fontSize: "14px", fontWeight: "600", cursor: "pointer", fontFamily: "inherit" };
+  var resetBtn = { background: "transparent", color: "var(--reset-btn-text)", border: "1.5px solid var(--reset-btn-color)", borderRadius: "24px", padding: "9px 24px", fontSize: "14px", fontWeight: "600", cursor: "pointer", fontFamily: "inherit" };
+  var btnRow = { display: "flex", gap: "12px", flexWrap: "wrap", marginTop: "16px", justifyContent: "center" };
+
+  async function handleShare() {
+    if (!resizedUrl) return;
+    var blob = await fetch(resizedUrl).then(function(r) { return r.blob(); });
+    var file = new File([blob], dlName, { type: blob.type });
+    if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+      try { await navigator.share({ files: [file], title: 'PixMidas' }); }
+      catch(err) { if (err.name !== 'AbortError') { var a=document.createElement('a'); a.href=resizedUrl; a.download=dlName; a.click(); } }
+    } else { var a=document.createElement('a'); a.href=resizedUrl; a.download=dlName; a.click(); }
+  }
 
   return (
     <div style={{background:"var(--surface)",border:"1px solid var(--border-light)",borderRadius:20,padding:32}}>
@@ -138,19 +153,20 @@ export default function ImageResizer() {
             </div>
           </div>
           <button onClick={resizeImage} disabled={isProcessing}
-            style={{background:"#0071e3",color:"#fff",border:"none",borderRadius:999,padding:"14px 28px",fontWeight:700,fontSize:15,cursor:"pointer",alignSelf:"flex-start"}}>
+            style={{background:"var(--upload-btn-bg)",color:"var(--upload-btn-color)",border:"none",borderRadius:999,padding:"14px 28px",fontWeight:600,fontSize:15,cursor:"pointer",alignSelf:"center"}}>
             {isProcessing ? "Resizing..." : "Resize Image"}
           </button>
           {resizedUrl && (
             <div style={btnRow}>
               <button onClick={() => { var a=document.createElement("a"); a.href=resizedUrl; a.download=dlName; a.click(); }} style={saveBtn}>Save</button>
               <button onClick={() => handleSaveAs(resizedUrl, dlName)} style={saveAsBtn}>Save As...</button>
+              {supportsFileShare && <button onClick={handleShare} style={shareBtn}><i className="ti ti-share" /> Share</button>}
               <button onClick={reset} style={resetBtn}>Reset</button>
             </div>
           )}
           {!resizedUrl && (
             <button onClick={reset}
-              style={{background:"var(--surface)",border:"1px solid var(--border-light)",padding:"14px 24px",borderRadius:999,fontWeight:600,fontSize:15,cursor:"pointer",color:"#374151",alignSelf:"flex-start"}}>
+              style={{background:"transparent",border:"1.5px solid var(--reset-btn-color)",padding:"14px 24px",borderRadius:999,fontWeight:600,fontSize:15,cursor:"pointer",color:"var(--reset-btn-text)",alignSelf:"center"}}>
               Start again
             </button>
           )}
@@ -159,6 +175,7 @@ export default function ImageResizer() {
       <div style={{marginTop:20,fontSize:13,textAlign:"center"}}>
         <a href="/report-bug" style={{color:"var(--text-muted)",textDecoration:"none"}}>🐞 Found an issue with this tool? Report a bug →</a>
       </div>
+      {saveAsName !== null && <SaveAsDialog defaultName={saveAsName} onSave={doSaveAs} onCancel={function() { setSaveAsName(null); }} />}
     </div>
   );
 }

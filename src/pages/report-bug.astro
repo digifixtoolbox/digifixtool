@@ -1,0 +1,323 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Report a Bug - PixMidas"
+  description="Report a bug or issue with any PixMidas free online tool."
+  canonical="https://www.pixmidas.com/report-bug/"
+>
+  <div class="bug-page">
+    <h1 class="bug-title">Report a Bug</h1>
+    <p class="bug-intro">
+      Found a bug? Help us fix it! Since we are 100% private, we don't track your actions, so your detailed report is the only way we can improve.
+    </p>
+
+    <form id="bug-form" class="bug-form">
+      <div class="field">
+        <label for="tool" class="field-label">Which tool is affected?</label>
+        <select id="tool" name="tool" required class="field-input">
+          <option value="" disabled selected>Select a tool...</option>
+          <option value="General/Homepage">🏠 General / Homepage</option>
+          <option value="Background Remover">🪄 Background Remover</option>
+          <option value="Base64 Encoder/Decoder">💻 Base64 Encoder / Decoder</option>
+          <option value="Case Converter">🔡 Case Converter</option>
+          <option value="Color Palette Generator">🎨 Color Palette Generator</option>
+          <option value="Color Picker">🎨 Color Picker</option>
+          <option value="EXIF Data Remover">🛡️ EXIF Data Remover</option>
+          <option value="Favicon Generator">🌐 Favicon Generator</option>
+          <option value="GIF Maker">🎞️ GIF Maker</option>
+          <option value="HEIC to JPG">🍏 HEIC to JPG</option>
+          <option value="Image Compressor">🗜️ Image Compressor</option>
+          <option value="Image Converter">🔄 Image Converter</option>
+          <option value="Image Cropper">✂️ Image Cropper</option>
+          <option value="Image Info">🔍 Image Info</option>
+          <option value="Image Resizer">📐 Image Resizer</option>
+          <option value="Image to Text (OCR)">🔡 Image to Text (OCR)</option>
+          <option value="Image Watermark">🖊️ Image Watermark</option>
+          <option value="Images to PDF">📄 Images to PDF</option>
+          <option value="JSON Formatter">📋 JSON Formatter</option>
+          <option value="Lorem Ipsum Generator">📃 Lorem Ipsum Generator</option>
+          <option value="Merge PDFs">📑 Merge PDFs</option>
+          <option value="Passport Photo Maker">🪪 Passport Photo Maker</option>
+          <option value="Password Generator">🔐 Password Generator</option>
+          <option value="PDF Compressor">📉 PDF Compressor</option>
+          <option value="PDF to JPG">📸 PDF to JPG</option>
+          <option value="QR Code Generator">🔳 QR Code Generator</option>
+          <option value="Social Media Sizes">📱 Social Media Sizes Guide</option>
+          <option value="SVG to PNG">✏️ SVG to PNG</option>
+          <option value="Text Difference Checker">🔎 Text Difference Checker</option>
+          <option value="WebP to JPG">🖼️ WebP to JPG</option>
+          <option value="Word Counter">📝 Word Counter</option>
+          <option value="Other">❓ Other / Not listed</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="description" class="field-label">What happened?</label>
+        <textarea
+          id="description"
+          name="description"
+          rows="5"
+          placeholder="Please describe exactly what happened..."
+          required
+          class="field-input"
+        ></textarea>
+      </div>
+
+      <div class="field">
+        <label for="email" class="field-label">
+          Your email <span class="field-optional">(Optional)</span>
+        </label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="If you'd like us to follow up"
+          class="field-input"
+        />
+      </div>
+
+      <div class="note-box">
+        <strong>💡 Note:</strong> To include a screenshot, please attach it manually to the email in the next step.
+      </div>
+
+      <button type="submit" class="submit-btn">
+        Generate Email Report
+      </button>
+    </form>
+
+    <div id="success-state" class="success-state">
+      <div class="success-icon">✅</div>
+      <h2 class="success-title">One last click!</h2>
+      <p class="success-body">Your email app should have opened with the report ready. Click <strong>Send</strong> to finish.</p>
+      <p class="success-fallback">Didn't open? Send your report manually to<br><strong>hello@pixmidas.com</strong></p>
+      <button id="btn-reset" type="button" class="reset-btn">Back to form</button>
+    </div>
+  </div>
+</Layout>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', function () {
+    var form         = document.getElementById('bug-form');
+    var successState = document.getElementById('success-state');
+    var btnReset     = document.getElementById('btn-reset');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      var tool        = document.getElementById('tool').value;
+      var description = document.getElementById('description').value;
+      var userEmail   = document.getElementById('email').value || 'Not provided';
+
+      var subject = 'Bug Report: ' + tool;
+
+      var bodyText =
+        'SYSTEM REPORT\n' +
+        '-------------\n' +
+        'Tool: ' + tool + '\n' +
+        'User Email: ' + userEmail + '\n\n' +
+        'ISSUE DESCRIPTION\n' +
+        '-----------------\n' +
+        description + '\n\n' +
+        'Sent via PixMidas Bug Reporter';
+
+      var mailtoUrl = 'mailto:hello@pixmidas.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(bodyText);
+      window.location.href = mailtoUrl;
+
+      form.style.display = 'none';
+      successState.style.display = 'block';
+    });
+
+    btnReset.addEventListener('click', function () {
+      form.reset();
+      form.style.display = 'flex';
+      successState.style.display = 'none';
+    });
+  });
+</script>
+
+<style>
+  .bug-page {
+    max-width: 600px;
+    margin: 60px auto;
+    padding: 0 20px;
+  }
+
+  .bug-title {
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    color: var(--text);
+  }
+
+  .bug-intro {
+    color: var(--text-muted);
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 40px;
+  }
+
+  .bug-form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .field-label {
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .field-optional {
+    font-weight: 400;
+    color: var(--text-light);
+    font-size: 14px;
+  }
+
+  .field-input {
+    padding: 14px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    font-size: 16px;
+    font-family: inherit;
+    background: var(--surface-2);
+    color: var(--text);
+    outline: none;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.15s;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .field-input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.1);
+  }
+
+  .field-input::placeholder {
+    color: var(--text-light);
+  }
+
+  textarea.field-input {
+    resize: vertical;
+    min-height: 120px;
+    cursor: auto;
+  }
+
+  select.field-input {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2386868b' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 40px;
+  }
+
+  .note-box {
+    padding: 14px 16px;
+    border-radius: 12px;
+    background: #fff8f1;
+    border: 1px solid #ffe7d3;
+    color: #8a5a2a;
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  :global([data-theme="dark"]) .note-box {
+    background: var(--surface-2);
+    border-color: var(--border);
+    color: var(--text-muted);
+  }
+
+  .submit-btn {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 18px;
+    border-radius: 99px;
+    font-weight: 700;
+    font-size: 17px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.15s;
+    min-height: 56px;
+  }
+
+  .submit-btn:hover {
+    background: var(--accent-hover);
+  }
+
+  .success-state {
+    display: none;
+    text-align: center;
+    padding: 60px 20px;
+    border: 1px solid var(--border-light);
+    border-radius: 24px;
+    background: var(--surface);
+  }
+
+  .success-icon {
+    font-size: 50px;
+    margin-bottom: 20px;
+  }
+
+  .success-title {
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 15px;
+    color: var(--text);
+  }
+
+  .success-body {
+    color: var(--text-muted);
+    margin-bottom: 10px;
+    line-height: 1.6;
+  }
+
+  .success-fallback {
+    color: var(--text-light);
+    font-size: 14px;
+    margin-top: 15px;
+    line-height: 1.6;
+  }
+
+  .reset-btn {
+    margin-top: 30px;
+    background: none;
+    border: 1px solid var(--border);
+    padding: 10px 24px;
+    border-radius: 99px;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--text-muted);
+    font-family: inherit;
+    min-height: 44px;
+    transition: border-color 0.15s, color 0.15s;
+  }
+
+  .reset-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  @media (max-width: 768px) {
+    .bug-page {
+      margin: 32px auto;
+    }
+
+    .bug-title {
+      font-size: 26px;
+    }
+
+    .bug-intro {
+      font-size: 16px;
+    }
+  }
+</style>
