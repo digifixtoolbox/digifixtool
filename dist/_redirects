@@ -1,4 +1,5 @@
-https://pixmidas.com/* https://www.pixmidas.com/:splat 301
+https://pixmidas.com/* https://www.pixmidas.com/:splat 301!
+http://pixmidas.com/* https://www.pixmidas.com/:splat 301!
 
 /tools/remove-background/ /tools/background-remover/ 301
 /tools/crop-image/ /tools/image-cropper/ 301
