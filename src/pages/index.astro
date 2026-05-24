@@ -98,7 +98,7 @@ const categories = ['All', 'Image', 'PDF', 'Text', 'Social', 'Developer', 'Utili
     <div class="filter-bar-wrap">
       <div class="filter-bar">
         <button class="filter-btn" data-category="All" aria-pressed="true">All</button>
-        <button class="filter-btn" data-category="Popular" aria-pressed="false">Popular</button>
+        <button class="filter-btn filter-btn-popular" data-category="Popular" aria-pressed="false">Popular</button>
         <button class="filter-btn" data-category="Image" aria-pressed="false">Image</button>
         <button class="filter-btn" data-category="PDF" aria-pressed="false">PDF</button>
         <button class="filter-btn" data-category="Text" aria-pressed="false">Text</button>
@@ -929,6 +929,18 @@ const categories = ['All', 'Image', 'PDF', 'Text', 'Social', 'Developer', 'Utili
     color: #fff;
   }
 
+  .filter-btn.filter-btn-popular[aria-pressed="true"] {
+    background: #0071e3;
+    border-color: #0071e3;
+    color: #fff;
+  }
+
+  :global([data-theme="dark"]) .filter-btn.filter-btn-popular[aria-pressed="true"] {
+    background: #60a5fa;
+    border-color: #60a5fa;
+    color: #000;
+  }
+
   .filter-btn-new {
     background: transparent;
     border: 1.5px solid #22c55e;
@@ -1036,12 +1048,11 @@ const categories = ['All', 'Image', 'PDF', 'Text', 'Social', 'Developer', 'Utili
   }
 
   .badge-new {
-    background: #22c55e;
+    background: #10b981;
   }
 
   :global([data-theme="dark"]) .badge-new {
-    background: #4ade80;
-    color: #000;
+    background: #059669;
   }
 
   .tool-desc {
