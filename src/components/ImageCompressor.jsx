@@ -443,9 +443,6 @@ export default function ImageCompressor() {
         </div>
       )}
 
-      <div style={s.privacyNote}>
-        <a href="/report-bug" style={{ color: 'var(--text-muted)', textDecoration: 'none' }}>🐞 Found an issue with this tool? Report a bug →</a>
-      </div>
 
     </div>
     {saveAsName !== null && <SaveAsDialog defaultName={saveAsName} onSave={doSaveAs} onCancel={function() { setSaveAsName(null); }} />}
@@ -759,11 +756,5 @@ const s = {
     cursor: "pointer",
     fontFamily: "inherit",
     color: "var(--reset-btn-text)",
-  },
-  privacyNote: {
-    marginTop: 20,
-    fontSize: 13,
-    color: "#6b7280",
-    textAlign: "center",
   },
 };

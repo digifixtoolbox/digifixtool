@@ -281,7 +281,6 @@ export default function PdfCompressor() {
                 Supports .pdf files
               </p>
               <p style={{ fontSize: "12px", color: "var(--text-muted)", marginBottom: "16px" }}>Maximum file size: 100MB</p>
-              <div style={{textAlign:"center",marginTop:"4px"}}><a href="/report-bug" style={{color:"var(--text-muted)",textDecoration:"none",fontSize:"13px"}}>🐞 Found an issue with this tool? Report a bug →</a></div>
             </div>
           )}
         </div>

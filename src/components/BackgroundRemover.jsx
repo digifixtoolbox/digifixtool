@@ -209,9 +209,6 @@ export default function BackgroundRemover() {
         </div>
       )}
 
-      <div style={s.privacyNote}>
-        <a href="/report-bug" style={{ color: 'var(--text-muted)', textDecoration: 'none' }}>🐞 Found an issue with this tool? Report a bug →</a>
-      </div>
       {saveAsName !== null && <SaveAsDialog defaultName={saveAsName} onSave={doSaveAs} onCancel={function() { setSaveAsName(null); }} />}
     </div>
   );
@@ -382,11 +379,5 @@ const s = {
     cursor: "pointer",
     fontFamily: "inherit",
     color: "#374151",
-  },
-  privacyNote: {
-    marginTop: 20,
-    fontSize: 13,
-    color: "var(--text-muted)",
-    textAlign: "center",
   },
 };

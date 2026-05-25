@@ -312,7 +312,6 @@ export default function PassportPhotoTool() {
           <p style={{ fontSize: '17px', fontWeight: 600, color: 'var(--text)', marginBottom: '8px' }}>Drop your portrait here or <strong>browse</strong></p>
           <p style={{ fontSize: '12px', color: 'var(--text-muted)', marginBottom: '8px' }}>Maximum file size: 50MB</p>
           {error && <p style={{ color: '#dc2626', fontSize: '14px', marginBottom: '8px' }}>{error}</p>}
-          <div style={{textAlign:'center',marginTop:'8px'}}><a href="/report-bug" style={{color:'var(--text-muted)',textDecoration:'none',fontSize:'13px'}}>🐞 Found an issue with this tool? Report a bug →</a></div>
         </div>
       </div>
       </div>

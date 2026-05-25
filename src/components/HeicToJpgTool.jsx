@@ -473,9 +473,6 @@ export default function HeicToJpgTool() {
             {fileInput}
           </div>
         </div>
-        <p style={{ textAlign: 'center', fontSize: 13, marginTop: 12 }}>
-          <a href="/report-bug" style={{ color: 'var(--text-muted)', textDecoration: 'none' }}>🐞 Found an issue with this tool? Report a bug →</a>
-        </p>
       </>
     );
   }

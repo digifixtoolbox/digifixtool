@@ -180,9 +180,6 @@ export default function ImageResizer() {
           )}
         </div>
       )}
-      <div style={{marginTop:20,fontSize:13,textAlign:"center"}}>
-        <a href="/report-bug" style={{color:"var(--text-muted)",textDecoration:"none"}}>🐞 Found an issue with this tool? Report a bug →</a>
-      </div>
       {saveAsName !== null && <SaveAsDialog defaultName={saveAsName} onSave={doSaveAs} onCancel={function() { setSaveAsName(null); }} />}
     </div>
   );

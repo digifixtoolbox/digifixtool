@@ -235,7 +235,6 @@ export default function ImagesToPDF() {
               JPG, PNG, WebP. Select multiple files at once
             </p>
             <p style={{ fontSize: "12px", color: "var(--text-muted)", marginBottom: "16px" }}>Maximum per image: 50MB</p>
-            <div style={{textAlign:"center",marginTop:"4px"}}><a href="/report-bug" style={{color:"var(--text-muted)",textDecoration:"none",fontSize:"13px"}}>🐞 Found an issue with this tool? Report a bug →</a></div>
           </div>
         ) : (
           <p style={{ fontSize: "14px", color: "var(--upload-btn-bg)", fontWeight: "600" }}>+ Add more images</p>
