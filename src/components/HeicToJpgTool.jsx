@@ -336,10 +336,14 @@ export default function HeicToJpgTool() {
     const newItems = Array.from(fileList).map(f => {
       const item = makeItem(f);
       urlsRef.current.push(item.previewUrl);
+      if (f.size > 25 * 1024 * 1024) {
+        return { ...item, status: 'error', error: `File too large (${(f.size / 1024 / 1024).toFixed(1)}MB). Maximum is 25MB. Pro version coming soon with higher limits.` };
+      }
       return item;
     });
     setItems(prev => [...prev, ...newItems]);
-    runConversions(newItems);
+    const toConvert = newItems.filter(it => it.status !== 'error');
+    if (toConvert.length) runConversions(toConvert);
   }, [runConversions]);
 
   const handleDrop = useCallback(e => { e.preventDefault(); handleFiles(e.dataTransfer.files); }, [handleFiles]);
@@ -449,9 +453,10 @@ export default function HeicToJpgTool() {
             <h2 style={{ fontSize: 24, fontWeight: 800, letterSpacing: '-0.02em', marginBottom: 8, color: 'var(--text)' }}>
               Drop HEIC files here
             </h2>
-            <p style={{ fontSize: 15, color: 'var(--text-muted)', marginBottom: 24 }}>
+            <p style={{ fontSize: 15, color: 'var(--text-muted)', marginBottom: 8 }}>
               or click to browse. Convert multiple files at once
             </p>
+            <p style={{ fontSize: 12, color: 'var(--text-muted)', marginBottom: 24 }}>Maximum per file: 25MB</p>
             <button style={{
               background: 'var(--upload-btn-bg)',
               color: 'var(--upload-btn-color)',

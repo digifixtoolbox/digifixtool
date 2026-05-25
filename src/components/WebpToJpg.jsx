@@ -28,9 +28,13 @@ export default function WebpToJpg() {
   const [saveAsName, setSaveAsName] = useState(null);
   const [bulkSaveAsBlob, setBulkSaveAsBlob] = useState(null);
   const canvasRef = useRef(null);
+  const [error, setError] = useState("");
 
   function handleFiles(e) {
     var files = Array.from(e.target.files);
+    var oversized = files.find(function(f) { return f.size > 50 * 1024 * 1024; });
+    if (oversized) { setError(`${oversized.name} is too large (${(oversized.size / 1024 / 1024).toFixed(1)}MB). Maximum per file is 50MB. Pro version coming soon with higher limits.`); return; }
+    setError("");
     setImages(files);
     setConverted([]);
   }
@@ -38,6 +42,9 @@ export default function WebpToJpg() {
   function handleDrop(e) {
     e.preventDefault();
     var files = Array.from(e.dataTransfer.files).filter(function(f) { return f.type.startsWith("image/"); });
+    var oversized = files.find(function(f) { return f.size > 50 * 1024 * 1024; });
+    if (oversized) { setError(`${oversized.name} is too large (${(oversized.size / 1024 / 1024).toFixed(1)}MB). Maximum per file is 50MB. Pro version coming soon with higher limits.`); return; }
+    setError("");
     setImages(files);
     setConverted([]);
   }
@@ -175,9 +182,11 @@ export default function WebpToJpg() {
         >
           <div style={{ fontSize: "48px", marginBottom: "16px" }}><i className="ti ti-photo" style={{color:'#0090FF'}}></i></div>
           <p style={{ fontSize: "17px", fontWeight: "600", marginBottom: "8px", color: "var(--text)" }}>Drop WebP images here</p>
-          <p style={{ fontSize: "14px", color: "var(--text-muted)", marginBottom: "20px" }}>or click to browse. Multiple files supported.</p>
+          <p style={{ fontSize: "14px", color: "var(--text-muted)", marginBottom: "8px" }}>or click to browse. Multiple files supported.</p>
+          <p style={{ fontSize: "12px", color: "var(--text-muted)", marginBottom: "20px" }}>Maximum per file: 50MB</p>
           <input id="webp-input" type="file" accept="image/*" multiple onChange={handleFiles} style={{ display: "none" }} />
           <button style={{ background: "var(--upload-btn-bg)", color: "var(--upload-btn-color)", border: "none", borderRadius: "99px", padding: "12px 24px", fontSize: "15px", fontWeight: "600", cursor: "pointer", fontFamily: "inherit" }}>Choose Images</button>
+          {error && <p style={{ color: "#dc2626", marginTop: "16px", fontSize: "14px" }}>{error}</p>}
         </div>
       ) : (
         <div>

@@ -31,6 +31,11 @@ export default function Base64Tool() {
   function handleInput(e) {
     const val = e.target.value;
     setInput(val);
+    if (new Blob([val]).size > 10 * 1024 * 1024) {
+      setError("Input too large. Maximum is 10MB. Pro version coming soon with higher limits.");
+      setOutput("");
+      return;
+    }
     process(val, mode);
   }
 

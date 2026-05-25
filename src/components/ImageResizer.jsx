@@ -18,11 +18,17 @@ export default function ImageResizer() {
   const [resizedSize, setResizedSize] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [saveAsName, setSaveAsName] = useState(null);
+  const [error, setError] = useState("");
 
   const fmt = (b) => b < 1048576 ? (b/1024).toFixed(1)+" KB" : (b/1048576).toFixed(2)+" MB";
 
   const handleFile = (file) => {
     if (!file || !file.type.startsWith("image/")) return;
+    if (file.size > 50 * 1024 * 1024) {
+      setError(`File too large (${(file.size / 1024 / 1024).toFixed(1)}MB). Maximum is 50MB. Pro version coming soon with higher limits.`);
+      return;
+    }
+    setError("");
     setOriginalFile(file);
     setResizedUrl(null);
     const preview = URL.createObjectURL(file);
@@ -125,7 +131,9 @@ export default function ImageResizer() {
         >
           <div style={{fontSize:48,marginBottom:16}}><i className="ti ti-resize" style={{color:'#0090FF'}}></i></div>
           <h2 style={{fontSize:24,fontWeight:800,marginBottom:8,color:"var(--text)"}}>Drop your image here</h2>
-          <p style={{fontSize:15,color:"var(--text-muted)",marginBottom:24}}>JPG, PNG or WebP. Resize to any dimension.</p>
+          <p style={{fontSize:15,color:"var(--text-muted)",marginBottom:8}}>JPG, PNG or WebP. Resize to any dimension.</p>
+          <p style={{fontSize:12,color:"var(--text-muted)",marginBottom:24}}>Maximum file size: 50MB</p>
+          {error && <p style={{color:"#dc2626",fontSize:"14px",marginBottom:"16px"}}>{error}</p>}
           <button style={{background:"var(--upload-btn-bg)",color:"var(--upload-btn-color)",border:"none",borderRadius:999,padding:"14px 28px",fontWeight:600,fontSize:15,cursor:"pointer"}}>Choose Image</button>
           <input ref={fileInputRef} type="file" accept="image/*" style={{display:"none"}} onChange={(e) => handleFile(e.target.files[0])} />
         </div>

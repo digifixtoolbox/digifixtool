@@ -19,10 +19,13 @@ export default function ImageCropper() {
   const imgRef = useRef(null);
   const containerRef = useRef(null);
   const [saveAsName, setSaveAsName] = useState(null);
+  const [error, setError] = useState("");
 
   function handleFile(e) {
     var file = e.target.files[0];
     if (!file) return;
+    if (file.size > 50 * 1024 * 1024) { setError(`File too large (${(file.size / 1024 / 1024).toFixed(1)}MB). Maximum is 50MB. Pro version coming soon with higher limits.`); return; }
+    setError("");
     var reader = new FileReader();
     reader.onload = function(ev) { setImage(ev.target.result); setCropBox(null); };
     reader.readAsDataURL(file);
@@ -32,6 +35,8 @@ export default function ImageCropper() {
     e.preventDefault();
     var file = e.dataTransfer.files[0];
     if (!file) return;
+    if (file.size > 50 * 1024 * 1024) { setError(`File too large (${(file.size / 1024 / 1024).toFixed(1)}MB). Maximum is 50MB. Pro version coming soon with higher limits.`); return; }
+    setError("");
     var reader = new FileReader();
     reader.onload = function(ev) { setImage(ev.target.result); setCropBox(null); };
     reader.readAsDataURL(file);
@@ -142,9 +147,11 @@ export default function ImageCropper() {
         >
           <div style={{ fontSize: "48px", marginBottom: "16px" }}><i className="ti ti-crop" style={{color:'#30A46C'}}></i></div>
           <p style={{ fontSize: "17px", fontWeight: "600", marginBottom: "8px", color: "var(--text)" }}>Drop an image here</p>
-          <p style={{ fontSize: "14px", color: "var(--text-muted)", marginBottom: "20px" }}>or click to browse</p>
+          <p style={{ fontSize: "14px", color: "var(--text-muted)", marginBottom: "8px" }}>or click to browse</p>
+          <p style={{ fontSize: "12px", color: "var(--text-muted)", marginBottom: "20px" }}>Maximum file size: 50MB</p>
           <input id="crop-input" type="file" accept="image/*" onChange={handleFile} style={{ display: "none" }} />
           <button style={{ background: "var(--upload-btn-bg)", color: "var(--upload-btn-color)", border: "none", borderRadius: "99px", padding: "12px 24px", fontSize: "15px", fontWeight: "600", cursor: "pointer", fontFamily: "inherit" }}>Choose Image</button>
+          {error && <p style={{ color: "#dc2626", marginTop: "16px", fontSize: "14px" }}>{error}</p>}
         </div>
       ) : (
         <div>

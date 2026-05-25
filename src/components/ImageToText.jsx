@@ -12,6 +12,7 @@ export default function ImageToText() {
   function processFile(file) {
     if (!file) return;
     if (!file.type.startsWith("image/")) { setError("Please upload an image file."); return; }
+    if (file.size > 20 * 1024 * 1024) { setError(`File too large (${(file.size / 1024 / 1024).toFixed(1)}MB). Maximum is 20MB. Pro version coming soon with higher limits.`); return; }
     setError(""); setText(""); setStatus("loading"); setProgress(0); setProgLabel("Starting...");
     if (typeof window.Tesseract === "undefined") {
       setError("OCR library not loaded. Please refresh the page."); setStatus("idle"); return;
@@ -68,7 +69,8 @@ export default function ImageToText() {
       >
         <div style={{ fontSize: "48px", marginBottom: "16px" }}><i className="ti ti-scan" style={{color:'#E54D2E'}}></i></div>
         <p style={{ fontSize: "17px", fontWeight: "600", marginBottom: "8px", color: "var(--text)" }}>Drop an image here or click to browse</p>
-        <p style={{ fontSize: "14px", color: "var(--text-muted)", marginBottom: "20px" }}>Supports JPG, PNG, WebP, GIF, BMP</p>
+        <p style={{ fontSize: "14px", color: "var(--text-muted)", marginBottom: "8px" }}>Supports JPG, PNG, WebP, GIF, BMP</p>
+        <p style={{ fontSize: "12px", color: "var(--text-muted)", marginBottom: "20px" }}>Maximum file size: 20MB</p>
         <input id="ocr-input" type="file" accept="image/*" onChange={handleFile} style={{ display: "none" }} />
         <span style={{ background: "var(--upload-btn-bg)", color: "var(--upload-btn-color)", border: "none", borderRadius: "99px", padding: "12px 24px", fontSize: "15px", fontWeight: "600", cursor: "pointer" }}>Choose Image</span>
         {error && <p style={{ color: "#dc2626", marginTop: "16px", fontSize: "14px" }}>{error}</p>}

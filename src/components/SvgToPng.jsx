@@ -22,6 +22,9 @@ export default function SvgToPng() {
     if (!file.type.includes("svg") && !file.name.toLowerCase().endsWith(".svg")) {
       setError("Please upload an SVG file."); return;
     }
+    if (file.size > 50 * 1024 * 1024) {
+      setError(`File too large (${(file.size / 1024 / 1024).toFixed(1)}MB). Maximum is 50MB. Pro version coming soon with higher limits.`); return;
+    }
     setError("");
     var url = URL.createObjectURL(file);
     var img = new Image();
@@ -118,7 +121,8 @@ export default function SvgToPng() {
       >
         <div style={{ fontSize: "48px", marginBottom: "16px" }}><i className="ti ti-vector" style={{color:'#0090FF'}}></i></div>
         <p style={{ fontSize: "17px", fontWeight: "600", marginBottom: "8px", color: "var(--text)" }}>Drop an SVG here or click to browse</p>
-        <p style={{ fontSize: "14px", color: "var(--text-muted)", marginBottom: "20px" }}>Convert any SVG vector to a high-resolution PNG</p>
+        <p style={{ fontSize: "14px", color: "var(--text-muted)", marginBottom: "8px" }}>Convert any SVG vector to a high-resolution PNG</p>
+        <p style={{ fontSize: "12px", color: "var(--text-muted)", marginBottom: "20px" }}>Maximum file size: 50MB</p>
         <input id="svg-input" type="file" accept="image/svg+xml,.svg" onChange={handleFile} style={{ display: "none" }} />
         <span style={{ background: "var(--upload-btn-bg)", color: "var(--upload-btn-color)", border: "none", borderRadius: "99px", padding: "12px 24px", fontSize: "15px", fontWeight: "600", cursor: "pointer" }}>Choose SVG</span>
         {error && <p style={{ color: "#dc2626", marginTop: "16px", fontSize: "14px" }}>{error}</p>}

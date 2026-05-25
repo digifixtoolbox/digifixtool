@@ -20,10 +20,16 @@ export default function ExifRemover() {
   const [loading, setLoading] = useState(false);
   const [dragging, setDragging] = useState(false);
   const [saveAsName, setSaveAsName] = useState(null);
+  const [error, setError] = useState("");
   const inputRef = useRef(null);
 
   function loadFile(f) {
     if (!f || !f.type.startsWith("image/")) return;
+    if (f.size > 50 * 1024 * 1024) {
+      setError(`File too large (${(f.size / 1024 / 1024).toFixed(1)}MB). Maximum is 50MB. Pro version coming soon with higher limits.`);
+      return;
+    }
+    setError("");
     setFile(f);
     setStripped(null);
     setLoading(false);
@@ -161,9 +167,11 @@ export default function ExifRemover() {
           <p style={{ fontSize: "18px", fontWeight: "700", marginBottom: "6px", color: "var(--text)" }}>
             Drop a photo here
           </p>
-          <p style={{ fontSize: "14px", color: "var(--text-muted)" }}>
+          <p style={{ fontSize: "14px", color: "var(--text-muted)", marginBottom: "4px" }}>
             or click to choose. JPG, PNG and WebP supported
           </p>
+          <p style={{ fontSize: "12px", color: "var(--text-muted)" }}>Maximum file size: 50MB</p>
+          {error && <p style={{ color: "#dc2626", marginTop: "12px", fontSize: "14px" }}>{error}</p>}
         </div>
       ) : (
         <div>

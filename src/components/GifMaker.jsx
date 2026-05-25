@@ -21,6 +21,11 @@ export default function GifMaker() {
   function addFiles(fileList) {
     var valid = Array.from(fileList).filter(function(f) { return f.type.startsWith("image/"); });
     if (!valid.length) { setError("Please add image files (JPG, PNG, WebP)."); return; }
+    var existingTotal = frames.reduce(function(sum, fr) { return sum + fr.file.size; }, 0);
+    var newTotal = valid.reduce(function(sum, f) { return sum + f.size; }, 0);
+    if (existingTotal + newTotal > 40 * 1024 * 1024) {
+      setError(`Total file size too large (${((existingTotal + newTotal) / 1024 / 1024).toFixed(1)}MB). Maximum combined size is 40MB. Pro version coming soon with higher limits.`); return;
+    }
     setError("");
     var newFrames = valid.map(function(f) {
       var id = idRef.current++;
@@ -164,7 +169,8 @@ export default function GifMaker() {
         style={{ border: "2px dashed " + (dragOver ? "var(--upload-btn-bg)" : "var(--border)"), borderRadius: "16px", padding: "32px 24px", textAlign: "center", background: dragOver ? "var(--accent-light)" : "var(--surface-2)", marginBottom: "20px", cursor: "pointer", transition: "border-color 0.15s, background 0.15s" }}
       >
         <p style={{ fontSize: "16px", fontWeight: "600", marginBottom: "8px", color: "var(--text)" }}>Drop images here or click to browse</p>
-        <p style={{ fontSize: "13px", color: "var(--text-muted)" }}>Add multiple images in order. Each becomes one frame.</p>
+        <p style={{ fontSize: "13px", color: "var(--text-muted)", marginBottom: "4px" }}>Add multiple images in order. Each becomes one frame.</p>
+        <p style={{ fontSize: "12px", color: "var(--text-muted)" }}>Maximum combined size: 40MB</p>
         <input id="gif-input" type="file" accept="image/*" multiple onChange={handleFiles} style={{ display: "none" }} />
       </div>
 

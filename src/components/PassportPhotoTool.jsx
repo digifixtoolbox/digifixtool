@@ -44,6 +44,7 @@ export default function PassportPhotoTool() {
   const [userScale, setUserScale] = useState(1.0);
   const [sheetDataUrl, setSheetDataUrl] = useState(null);
   const [saveAsName, setSaveAsName] = useState(null);
+  const [error, setError] = useState("");
 
   const frameRef = useRef(null);
   // Refs mirror state so native event handlers always read latest values
@@ -137,7 +138,9 @@ export default function PassportPhotoTool() {
   }, [phase]);
 
   const processFile = (file) => {
-    if (!file || !file.type.startsWith('image/')) { alert('Please upload a valid image file.'); return; }
+    if (!file || !file.type.startsWith('image/')) { setError('Please upload a valid image file.'); return; }
+    if (file.size > 50 * 1024 * 1024) { setError(`File too large (${(file.size / 1024 / 1024).toFixed(1)}MB). Maximum is 50MB. Pro version coming soon with higher limits.`); return; }
+    setError("");
     const reader = new FileReader();
     reader.onload = (e) => {
       const img = new Image();
@@ -307,6 +310,8 @@ export default function PassportPhotoTool() {
         <div>
           <span style={{ fontSize: '48px', display: 'block', marginBottom: '10px' }}><i className="ti ti-id" style={{color:'#E07B10'}}></i></span>
           <p style={{ fontSize: '17px', fontWeight: 600, color: 'var(--text)', marginBottom: '8px' }}>Drop your portrait here or <strong>browse</strong></p>
+          <p style={{ fontSize: '12px', color: 'var(--text-muted)', marginBottom: '8px' }}>Maximum file size: 50MB</p>
+          {error && <p style={{ color: '#dc2626', fontSize: '14px', marginBottom: '8px' }}>{error}</p>}
           <div style={{textAlign:'center',marginTop:'8px'}}><a href="/report-bug" style={{color:'var(--text-muted)',textDecoration:'none',fontSize:'13px'}}>🐞 Found an issue with this tool? Report a bug →</a></div>
         </div>
       </div>

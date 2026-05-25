@@ -32,6 +32,11 @@ export default function ImagesToPDF() {
       setError("Please select JPG, PNG, or WebP images.");
       return;
     }
+    const oversized = valid.filter(f => f.size > 50 * 1024 * 1024);
+    if (oversized.length) {
+      setError(`${oversized[0].name} is too large (${(oversized[0].size / 1024 / 1024).toFixed(1)}MB). Maximum per image is 50MB. Pro version coming soon with higher limits.`);
+      return;
+    }
     setError("");
     setDone(false);
     const newItems = valid.map(f => ({
@@ -226,9 +231,10 @@ export default function ImagesToPDF() {
             <p style={{ fontSize: "17px", fontWeight: "600", color: "#1d1d1f", marginBottom: "6px" }}>
               Drop images here or <span style={{ color: "var(--upload-btn-bg)" }}>browse</span>
             </p>
-            <p style={{ fontSize: "13px", color: "#6e6e73", marginBottom: "16px" }}>
+            <p style={{ fontSize: "13px", color: "#6e6e73", marginBottom: "8px" }}>
               JPG, PNG, WebP. Select multiple files at once
             </p>
+            <p style={{ fontSize: "12px", color: "var(--text-muted)", marginBottom: "16px" }}>Maximum per image: 50MB</p>
             <div style={{textAlign:"center",marginTop:"4px"}}><a href="/report-bug" style={{color:"var(--text-muted)",textDecoration:"none",fontSize:"13px"}}>🐞 Found an issue with this tool? Report a bug →</a></div>
           </div>
         ) : (

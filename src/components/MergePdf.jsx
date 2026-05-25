@@ -18,6 +18,12 @@ export default function MergePdf() {
 
   function handleFiles(e) {
     var selected = Array.from(e.target.files).filter(function(f) { return f.type === "application/pdf"; });
+    var existingTotal = files.reduce(function(sum, f) { return sum + f.size; }, 0);
+    var newTotal = selected.reduce(function(sum, f) { return sum + f.size; }, 0);
+    if (existingTotal + newTotal > 100 * 1024 * 1024) {
+      setError("Total file size too large (" + ((existingTotal + newTotal) / 1024 / 1024).toFixed(1) + "MB). Maximum combined size is 100MB. Pro version coming soon with higher limits.");
+      return;
+    }
     setFiles(function(prev) { return prev.concat(selected); });
     setDone(false);
     setError("");
@@ -28,6 +34,12 @@ export default function MergePdf() {
     setDragOver(false);
     var dropped = Array.from(e.dataTransfer.files).filter(function(f) { return f.type === "application/pdf"; });
     if (!dropped.length) { setError("Please drop PDF files only."); return; }
+    var existingTotal = files.reduce(function(sum, f) { return sum + f.size; }, 0);
+    var newTotal = dropped.reduce(function(sum, f) { return sum + f.size; }, 0);
+    if (existingTotal + newTotal > 100 * 1024 * 1024) {
+      setError("Total file size too large (" + ((existingTotal + newTotal) / 1024 / 1024).toFixed(1) + "MB). Maximum combined size is 100MB. Pro version coming soon with higher limits.");
+      return;
+    }
     setFiles(function(prev) { return prev.concat(dropped); });
     setDone(false);
     setError("");
@@ -147,7 +159,8 @@ export default function MergePdf() {
         style={{ border: "2px dashed " + (dragOver ? "var(--upload-btn-bg)" : "var(--border)"), borderRadius: "16px", padding: "32px 24px", textAlign: "center", background: dragOver ? "var(--accent-light)" : "var(--surface-2)", marginBottom: "20px", cursor: "pointer", transition: "border-color 0.15s, background 0.15s" }}
       >
         <p style={{ fontSize: "16px", fontWeight: "600", marginBottom: "8px", color: "var(--text)" }}>Drop PDFs here or click to browse</p>
-        <p style={{ fontSize: "13px", color: "var(--text-muted)" }}>Add multiple files and reorder before merging.</p>
+        <p style={{ fontSize: "13px", color: "var(--text-muted)", marginBottom: "4px" }}>Add multiple files and reorder before merging.</p>
+        <p style={{ fontSize: "12px", color: "var(--text-muted)" }}>Maximum combined size: 100MB</p>
         <input id="merge-input" type="file" accept="application/pdf" multiple onChange={handleFiles} style={{ display: "none" }} />
       </div>
 

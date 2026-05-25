@@ -5,6 +5,7 @@ export default function ImageInfo() {
   const [info, setInfo] = useState(null);
   const [preview, setPreview] = useState(null);
   const [isDragging, setIsDragging] = useState(false);
+  const [error, setError] = useState("");
 
   const fmt = (b) => b < 1048576 ? (b/1024).toFixed(1)+" KB" : (b/1048576).toFixed(2)+" MB";
 
@@ -17,6 +18,11 @@ export default function ImageInfo() {
 
   const handleFile = (file) => {
     if (!file || !file.type.startsWith("image/")) return;
+    if (file.size > 50 * 1024 * 1024) {
+      setError(`File too large (${(file.size / 1024 / 1024).toFixed(1)}MB). Maximum is 50MB. Pro version coming soon with higher limits.`);
+      return;
+    }
+    setError("");
     const url = URL.createObjectURL(file);
     setPreview(url);
     const img = new Image();
@@ -63,11 +69,13 @@ export default function ImageInfo() {
         >
           <div style={{fontSize:48,marginBottom:16}}><i className="ti ti-info-circle" style={{color:'#5B5BD6'}}></i></div>
           <h2 style={{fontSize:24,fontWeight:800,marginBottom:8,color:"var(--text)"}}>Drop your image here</h2>
-          <p style={{fontSize:15,color:"var(--text-muted)",marginBottom:24}}>Upload any image to see its dimensions and details.</p>
+          <p style={{fontSize:15,color:"var(--text-muted)",marginBottom:8}}>Upload any image to see its dimensions and details.</p>
+          <p style={{fontSize:12,color:"var(--text-muted)",marginBottom:24}}>Maximum file size: 50MB</p>
           <button style={{background:"var(--upload-btn-bg)",color:"var(--upload-btn-color)",border:"none",borderRadius:999,padding:"14px 28px",fontWeight:600,fontSize:15,cursor:"pointer",fontFamily:"inherit"}}>
             Choose Image
           </button>
           <input ref={fileInputRef} type="file" accept="image/*" style={{display:"none"}} onChange={(e) => handleFile(e.target.files[0])} />
+          {error && <p style={{color:"#dc2626",marginTop:"16px",fontSize:"14px"}}>{error}</p>}
         </div>
       ) : (
         <div style={{display:"flex",flexDirection:"column",gap:24}}>

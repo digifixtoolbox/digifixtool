@@ -20,6 +20,11 @@ export default function BackgroundRemover() {
 
   const processFile = async (file) => {
     if (!file || !file.type.startsWith("image/")) return;
+    if (file.size > 20 * 1024 * 1024) {
+      setErrorMsg(`File too large (${(file.size / 1024 / 1024).toFixed(1)}MB). Maximum is 20MB. Pro version coming soon with higher limits.`);
+      setStatus("error");
+      return;
+    }
 
     const base = file.name.replace(/\.[^/.]+$/, "");
     setDownloadName(base + "-bg-removed.png");
@@ -140,6 +145,7 @@ export default function BackgroundRemover() {
           <div style={s.uploadIcon}><i className="ti ti-wand" style={{color:'#E54D2E'}}></i></div>
           <h2 style={s.dropTitle}>Drop your image here</h2>
           <p style={s.dropText}>JPG, PNG or WebP. AI removes the background in your browser.</p>
+          <p style={{fontSize:12,color:"#6b7280",marginBottom:16}}>Maximum file size: 20MB</p>
           <button style={s.btn} type="button">Choose Image</button>
           <input
             ref={fileInputRef}

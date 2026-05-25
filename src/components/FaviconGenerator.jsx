@@ -22,6 +22,9 @@ export default function FaviconGenerator() {
     if (!allowed.includes(file.type) && !file.name.toLowerCase().endsWith(".svg")) {
       setError("Please upload a JPG, PNG, WebP, or SVG image."); return;
     }
+    if (file.size > 50 * 1024 * 1024) {
+      setError(`File too large (${(file.size / 1024 / 1024).toFixed(1)}MB). Maximum is 50MB. Pro version coming soon with higher limits.`); return;
+    }
     setError("");
     setImageUrl(URL.createObjectURL(file));
   }
@@ -144,7 +147,8 @@ export default function FaviconGenerator() {
       >
         <div style={{ fontSize: "48px", marginBottom: "16px" }}><i className="ti ti-browser" style={{color:'#30A46C'}}></i></div>
         <p style={{ fontSize: "17px", fontWeight: "600", marginBottom: "8px", color: "var(--text)" }}>Drop an image here or click to browse</p>
-        <p style={{ fontSize: "14px", color: "var(--text-muted)", marginBottom: "20px" }}>JPG, PNG, WebP, or SVG. Square images work best</p>
+        <p style={{ fontSize: "14px", color: "var(--text-muted)", marginBottom: "8px" }}>JPG, PNG, WebP, or SVG. Square images work best</p>
+        <p style={{ fontSize: "12px", color: "var(--text-muted)", marginBottom: "20px" }}>Maximum file size: 50MB</p>
         <input id="fav-input" type="file" accept="image/*,.svg" onChange={handleFile} style={{ display: "none" }} />
         <span style={{ background: "var(--upload-btn-bg)", color: "var(--upload-btn-color)", border: "none", borderRadius: "99px", padding: "12px 24px", fontSize: "15px", fontWeight: "600", cursor: "pointer" }}>Choose Image</span>
         {error && <p style={{ color: "#dc2626", marginTop: "16px", fontSize: "14px" }}>{error}</p>}

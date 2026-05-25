@@ -23,6 +23,7 @@ export default function ImageCompressor() {
   const [showOverlay, setShowOverlay] = useState(false);
   const [targetAlreadyOk, setTargetAlreadyOk] = useState(false);
   const [saveAsName, setSaveAsName] = useState(null);
+  const [sizeError, setSizeError] = useState("");
 
   const formatBytes = (bytes) => {
     if (!bytes) return "0 KB";
@@ -146,6 +147,11 @@ export default function ImageCompressor() {
 
   const handleFile = async (file) => {
     if (!file || !file.type.startsWith("image/")) return;
+    if (file.size > 50 * 1024 * 1024) {
+      setSizeError(`File too large (${(file.size / 1024 / 1024).toFixed(1)}MB). Maximum is 50MB. Pro version coming soon with higher limits.`);
+      return;
+    }
+    setSizeError("");
     setOriginalFile(file);
     setOriginalPreview(URL.createObjectURL(file));
     setTargetMessage("");
@@ -279,6 +285,8 @@ export default function ImageCompressor() {
           <div style={s.uploadIcon}><i className="ti ti-file-zip" style={{color:'#5B5BD6'}}></i></div>
           <h2 style={s.dropTitle}>Drop your image here</h2>
           <p style={s.dropText}>JPG, PNG or WebP. Runs entirely in your browser.</p>
+          <p style={{fontSize:12,color:"#6b7280",marginBottom:16}}>Maximum file size: 50MB</p>
+          {sizeError && <p style={{color:"#dc2626",fontSize:"14px",marginBottom:"8px"}}>{sizeError}</p>}
           <button style={s.btn}>Choose Image</button>
           <input
             ref={fileInputRef}

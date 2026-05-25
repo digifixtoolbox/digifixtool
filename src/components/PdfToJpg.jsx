@@ -59,6 +59,10 @@ export default function PdfToJpg() {
   }
 
   async function processFile(file) {
+    if (file.size > 100 * 1024 * 1024) {
+      setError(`File too large (${(file.size / 1024 / 1024).toFixed(1)}MB). Maximum is 100MB. Pro version coming soon with higher limits.`);
+      return;
+    }
     setError(""); setImages([]); setStatus("loading");
     var pdfjsLib;
     try {
@@ -193,7 +197,8 @@ export default function PdfToJpg() {
       >
         <div style={{ fontSize: "48px", marginBottom: "16px" }}><i className="ti ti-file-export" style={{color:'#E54D2E'}}></i></div>
         <p style={{ fontSize: "17px", fontWeight: "600", marginBottom: "8px", color: "var(--text)" }}>Drop a PDF here or click to browse</p>
-        <p style={{ fontSize: "14px", color: "var(--text-muted)", marginBottom: "20px" }}>Each page will be converted to JPG</p>
+        <p style={{ fontSize: "14px", color: "var(--text-muted)", marginBottom: "8px" }}>Each page will be converted to JPG</p>
+        <p style={{ fontSize: "12px", color: "var(--text-muted)", marginBottom: "20px" }}>Maximum file size: 100MB</p>
         <input id="pdf-input" type="file" accept="application/pdf" onChange={handleFile} style={{ display: "none" }} />
         <span style={{ background: "var(--upload-btn-bg)", color: "var(--upload-btn-color)", border: "none", borderRadius: "99px", padding: "12px 24px", fontSize: "15px", fontWeight: "600", cursor: "pointer" }}>Choose PDF</span>
         {error && <p style={{ color: "#dc2626", marginTop: "16px", fontSize: "14px" }}>{error}</p>}

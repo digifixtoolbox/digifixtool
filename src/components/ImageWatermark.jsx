@@ -15,6 +15,7 @@ export default function ImageWatermark() {
   const [position, setPosition] = useState("bottom-right");
   const [dragOver, setDragOver] = useState(false);
   const [saveAsName, setSaveAsName] = useState(null);
+  const [error, setError] = useState("");
   const canvasRef = useRef(null);
 
   var posKeys = ["top-left", "top-center", "top-right", "middle-left", "center", "middle-right", "bottom-left", "bottom-center", "bottom-right"];
@@ -60,6 +61,11 @@ export default function ImageWatermark() {
 
   function processFile(file) {
     if (!file || !file.type.startsWith("image/")) return;
+    if (file.size > 50 * 1024 * 1024) {
+      setError(`File too large (${(file.size / 1024 / 1024).toFixed(1)}MB). Maximum is 50MB. Pro version coming soon with higher limits.`);
+      return;
+    }
+    setError("");
     setImageUrl(URL.createObjectURL(file));
   }
 
@@ -132,9 +138,11 @@ export default function ImageWatermark() {
       >
         <div style={{ fontSize: "48px", marginBottom: "16px" }}><i className="ti ti-writing" style={{color:'#5B5BD6'}}></i></div>
         <p style={{ fontSize: "17px", fontWeight: "600", marginBottom: "8px", color: "var(--text)" }}>Drop an image here or click to browse</p>
-        <p style={{ fontSize: "14px", color: "var(--text-muted)", marginBottom: "20px" }}>Supports JPG, PNG, WebP</p>
+        <p style={{ fontSize: "14px", color: "var(--text-muted)", marginBottom: "8px" }}>Supports JPG, PNG, WebP</p>
+        <p style={{ fontSize: "12px", color: "var(--text-muted)", marginBottom: "20px" }}>Maximum file size: 50MB</p>
         <input id="wm-input" type="file" accept="image/*" onChange={handleFile} style={{ display: "none" }} />
         <span style={{ background: "var(--upload-btn-bg)", color: "var(--upload-btn-color)", border: "none", borderRadius: "99px", padding: "12px 24px", fontSize: "15px", fontWeight: "600", cursor: "pointer" }}>Choose Image</span>
+        {error && <p style={{ color: "#dc2626", marginTop: "16px", fontSize: "14px" }}>{error}</p>}
       </div>
     </div>
   );

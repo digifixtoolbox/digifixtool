@@ -49,6 +49,10 @@ export default function PdfCompressor() {
       setError("Please select a PDF file (.pdf).");
       return;
     }
+    if (f.size > 100 * 1024 * 1024) {
+      setError(`File too large (${(f.size / 1024 / 1024).toFixed(1)}MB). Maximum is 100MB. Pro version coming soon with higher limits.`);
+      return;
+    }
     setFile(f);
     setError("");
     setResult(null);
@@ -273,9 +277,10 @@ export default function PdfCompressor() {
                 Drop your PDF here or{" "}
                 <span style={{ color: "#0071e3" }}>browse</span>
               </p>
-              <p style={{ fontSize: "13px", color: "var(--text-muted)", marginBottom: "16px" }}>
+              <p style={{ fontSize: "13px", color: "var(--text-muted)", marginBottom: "4px" }}>
                 Supports .pdf files
               </p>
+              <p style={{ fontSize: "12px", color: "var(--text-muted)", marginBottom: "16px" }}>Maximum file size: 100MB</p>
               <div style={{textAlign:"center",marginTop:"4px"}}><a href="/report-bug" style={{color:"var(--text-muted)",textDecoration:"none",fontSize:"13px"}}>🐞 Found an issue with this tool? Report a bug →</a></div>
             </div>
           )}

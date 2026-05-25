@@ -16,11 +16,17 @@ export default function ImageConverter() {
   const [quality, setQuality] = useState(0.92);
   const [isProcessing, setIsProcessing] = useState(false);
   const [saveAsName, setSaveAsName] = useState(null);
+  const [error, setError] = useState("");
 
   const fmt = (b) => b < 1048576 ? (b/1024).toFixed(1)+" KB" : (b/1048576).toFixed(2)+" MB";
 
   const handleFile = (file) => {
     if (!file || !file.type.startsWith("image/")) return;
+    if (file.size > 50 * 1024 * 1024) {
+      setError(`File too large (${(file.size / 1024 / 1024).toFixed(1)}MB). Maximum is 50MB. Pro version coming soon with higher limits.`);
+      return;
+    }
+    setError("");
     setOriginalFile(file);
     setConvertedUrl(null);
     setOriginalPreview(URL.createObjectURL(file));
@@ -119,13 +125,15 @@ export default function ImageConverter() {
           onDragOver={(e) => e.preventDefault()}>
           <div style={{fontSize:48,marginBottom:16}}><i className="ti ti-arrows-exchange" style={{color:'#0090FF'}}></i></div>
           <h2 style={{fontSize:24,fontWeight:800,marginBottom:8,color:"var(--text)"}}>Drop your image here</h2>
-          <p style={{fontSize:15,color:"var(--text-muted)",marginBottom:24}}>
+          <p style={{fontSize:15,color:"var(--text-muted)",marginBottom:8}}>
             {mode === "to-jpg" ? "Upload a PNG or WebP to convert to JPG" : "Upload a JPG or WebP to convert to PNG"}
           </p>
+          <p style={{fontSize:12,color:"var(--text-muted)",marginBottom:24}}>Maximum file size: 50MB</p>
           <button style={{background:"var(--upload-btn-bg)",color:"var(--upload-btn-color)",border:"none",borderRadius:999,padding:"14px 28px",fontWeight:600,fontSize:15,cursor:"pointer"}}>
             Choose Image
           </button>
           <input ref={fileInputRef} type="file" accept="image/*" style={{display:"none"}} onChange={(e) => handleFile(e.target.files[0])} />
+          {error && <p style={{color:"#dc2626",marginTop:"16px",fontSize:"14px"}}>{error}</p>}
         </div>
       ) : (
         <div style={{display:"flex",flexDirection:"column",gap:20}}>
