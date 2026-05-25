@@ -6,7 +6,7 @@ export const TOOLS = [
     category: "image",
     iconClass: "refresh",
     iconPalette: "blue",
-    related: ["compress-image", "resize-image", "exif-remover"],
+    related: ["compress-image", "convert-image", "webp-to-jpg", "exif-remover"],
   },
   {
     slug: "background-remover",
@@ -15,7 +15,7 @@ export const TOOLS = [
     category: "image",
     iconClass: "wand",
     iconPalette: "coral",
-    related: ["image-cropper", "compress-image", "exif-remover"],
+    related: ["compress-image", "image-watermark", "passport-photo-maker", "image-cropper"],
   },
   {
     slug: "passport-photo-maker",
@@ -24,7 +24,7 @@ export const TOOLS = [
     category: "image",
     iconClass: "id",
     iconPalette: "amber",
-    related: ["background-remover", "image-cropper", "resize-image"],
+    related: ["image-cropper", "resize-image", "background-remover", "compress-image"],
   },
   {
     slug: "compress-pdf",
@@ -33,7 +33,7 @@ export const TOOLS = [
     category: "pdf",
     iconClass: "file-minus",
     iconPalette: "coral",
-    related: ["merge-pdfs", "pdf-to-jpg", "images-to-pdf"],
+    related: ["merge-pdfs", "pdf-to-jpg", "images-to-pdf", "compress-image"],
   },
   {
     slug: "compress-image",
@@ -42,7 +42,7 @@ export const TOOLS = [
     category: "image",
     iconClass: "file-zip",
     iconPalette: "purple",
-    related: ["resize-image", "convert-image", "exif-remover"],
+    related: ["resize-image", "webp-to-jpg", "compress-pdf", "images-to-pdf"],
   },
   {
     slug: "resize-image",
@@ -51,7 +51,7 @@ export const TOOLS = [
     category: "image",
     iconClass: "resize",
     iconPalette: "blue",
-    related: ["compress-image", "image-cropper", "convert-image"],
+    related: ["compress-image", "image-cropper", "convert-image", "favicon-generator"],
   },
   {
     slug: "image-cropper",
@@ -60,7 +60,7 @@ export const TOOLS = [
     category: "image",
     iconClass: "crop",
     iconPalette: "green",
-    related: ["resize-image", "compress-image", "convert-image"],
+    related: ["resize-image", "background-remover", "compress-image", "passport-photo-maker"],
   },
   {
     slug: "convert-image",
@@ -69,7 +69,7 @@ export const TOOLS = [
     category: "image",
     iconClass: "arrows-exchange",
     iconPalette: "blue",
-    related: ["compress-image", "webp-to-jpg", "resize-image"],
+    related: ["webp-to-jpg", "svg-to-png", "compress-image"],
   },
   {
     slug: "image-info",
@@ -78,7 +78,7 @@ export const TOOLS = [
     category: "image",
     iconClass: "info-circle",
     iconPalette: "purple",
-    related: ["exif-remover", "compress-image", "convert-image"],
+    related: ["compress-image", "exif-remover", "resize-image", "convert-image"],
   },
   {
     slug: "webp-to-jpg",
@@ -87,7 +87,7 @@ export const TOOLS = [
     category: "image",
     iconClass: "photo",
     iconPalette: "blue",
-    related: ["convert-image", "compress-image", "image-info"],
+    related: ["convert-image", "heic-to-jpg", "compress-image", "image-info"],
   },
   {
     slug: "exif-remover",
@@ -96,7 +96,7 @@ export const TOOLS = [
     category: "image",
     iconClass: "shield-off",
     iconPalette: "green",
-    related: ["image-info", "compress-image", "convert-image"],
+    related: ["compress-image", "image-info", "heic-to-jpg", "background-remover"],
   },
   {
     slug: "images-to-pdf",
@@ -105,7 +105,7 @@ export const TOOLS = [
     category: "pdf",
     iconClass: "file-import",
     iconPalette: "coral",
-    related: ["merge-pdfs", "pdf-to-jpg", "compress-image"],
+    related: ["compress-pdf", "merge-pdfs", "compress-image", "resize-image"],
   },
   {
     slug: "pdf-to-jpg",
@@ -114,7 +114,7 @@ export const TOOLS = [
     category: "pdf",
     iconClass: "file-export",
     iconPalette: "coral",
-    related: ["images-to-pdf", "merge-pdfs", "compress-image"],
+    related: ["compress-image", "merge-pdfs", "compress-pdf", "convert-image"],
   },
   {
     slug: "merge-pdfs",
@@ -123,7 +123,7 @@ export const TOOLS = [
     category: "pdf",
     iconClass: "files",
     iconPalette: "coral",
-    related: ["images-to-pdf", "pdf-to-jpg", "compress-image"],
+    related: ["compress-pdf", "pdf-to-jpg", "images-to-pdf", "image-to-text"],
   },
   {
     slug: "word-count",
@@ -132,7 +132,7 @@ export const TOOLS = [
     category: "text",
     iconClass: "123",
     iconPalette: "green",
-    related: ["text-diff", "case-converter", "lorem-ipsum"],
+    related: ["case-converter", "lorem-ipsum", "text-diff", "json-formatter"],
   },
   {
     slug: "case-converter",
@@ -141,7 +141,7 @@ export const TOOLS = [
     category: "text",
     iconClass: "letter-case",
     iconPalette: "green",
-    related: ["word-count", "text-diff", "lorem-ipsum"],
+    related: ["word-count", "text-diff", "lorem-ipsum", "base64"],
   },
   {
     slug: "text-diff",
@@ -150,7 +150,7 @@ export const TOOLS = [
     category: "text",
     iconClass: "file-diff",
     iconPalette: "green",
-    related: ["word-count", "case-converter", "json-formatter"],
+    related: ["word-count", "json-formatter", "case-converter", "base64"],
   },
   {
     slug: "lorem-ipsum",
@@ -159,7 +159,7 @@ export const TOOLS = [
     category: "text",
     iconClass: "text-size",
     iconPalette: "green",
-    related: ["word-count", "case-converter", "text-diff"],
+    related: ["word-count", "case-converter", "text-diff", "password-generator"],
   },
   {
     slug: "json-formatter",
@@ -168,7 +168,7 @@ export const TOOLS = [
     category: "utility",
     iconClass: "code",
     iconPalette: "amber",
-    related: ["base64", "text-diff", "word-count"],
+    related: ["base64", "text-diff", "word-count", "case-converter"],
   },
   {
     slug: "base64",
@@ -177,7 +177,7 @@ export const TOOLS = [
     category: "utility",
     iconClass: "lock",
     iconPalette: "amber",
-    related: ["json-formatter", "text-diff", "password-generator"],
+    related: ["json-formatter", "text-diff", "password-generator", "qr-code"],
   },
   {
     slug: "qr-code",
@@ -186,7 +186,7 @@ export const TOOLS = [
     category: "utility",
     iconClass: "qrcode",
     iconPalette: "purple",
-    related: ["password-generator", "base64", "color-picker"],
+    related: ["password-generator", "social-sizes", "color-picker", "base64"],
   },
   {
     slug: "password-generator",
@@ -195,7 +195,7 @@ export const TOOLS = [
     category: "utility",
     iconClass: "key",
     iconPalette: "amber",
-    related: ["qr-code", "base64", "json-formatter"],
+    related: ["qr-code", "base64", "word-count", "json-formatter"],
   },
   {
     slug: "color-picker",
@@ -204,7 +204,7 @@ export const TOOLS = [
     category: "utility",
     iconClass: "color-picker",
     iconPalette: "pink",
-    related: ["social-sizes", "image-info", "qr-code"],
+    related: ["color-palette", "qr-code", "social-sizes", "favicon-generator"],
   },
   {
     slug: "social-sizes",
@@ -213,7 +213,7 @@ export const TOOLS = [
     category: "social",
     iconClass: "device-mobile",
     iconPalette: "purple",
-    related: ["color-picker", "image-cropper", "compress-image"],
+    related: ["qr-code", "resize-image", "compress-image", "color-picker"],
   },
   {
     slug: "image-to-text",
@@ -222,7 +222,7 @@ export const TOOLS = [
     category: "image",
     iconClass: "scan",
     iconPalette: "coral",
-    related: ["image-info", "compress-image", "exif-remover"],
+    related: ["pdf-to-jpg", "json-formatter", "word-count", "case-converter"],
   },
   {
     slug: "gif-maker",
@@ -231,7 +231,7 @@ export const TOOLS = [
     category: "image",
     iconClass: "player-play",
     iconPalette: "blue",
-    related: ["convert-image", "compress-image", "image-cropper"],
+    related: ["compress-image", "resize-image", "convert-image", "color-palette"],
   },
   {
     slug: "image-watermark",
@@ -240,7 +240,7 @@ export const TOOLS = [
     category: "image",
     iconClass: "writing",
     iconPalette: "purple",
-    related: ["compress-image", "resize-image", "exif-remover"],
+    related: ["compress-image", "background-remover", "image-cropper", "exif-remover"],
   },
   {
     slug: "color-palette",
@@ -249,7 +249,7 @@ export const TOOLS = [
     category: "image",
     iconClass: "palette",
     iconPalette: "pink",
-    related: ["color-picker", "image-info", "compress-image"],
+    related: ["color-picker", "image-info", "compress-image", "svg-to-png"],
   },
   {
     slug: "svg-to-png",
@@ -258,7 +258,7 @@ export const TOOLS = [
     category: "image",
     iconClass: "vector",
     iconPalette: "blue",
-    related: ["convert-image", "favicon-generator", "compress-image"],
+    related: ["convert-image", "favicon-generator", "compress-image", "resize-image"],
   },
   {
     slug: "favicon-generator",
@@ -267,7 +267,7 @@ export const TOOLS = [
     category: "image",
     iconClass: "browser",
     iconPalette: "green",
-    related: ["svg-to-png", "resize-image", "image-cropper"],
+    related: ["svg-to-png", "resize-image", "convert-image", "compress-image"],
   },
 ];
 
