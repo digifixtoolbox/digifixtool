@@ -415,14 +415,15 @@ const categories = ['All', 'Image', 'PDF', 'Text', 'Social', 'Developer', 'Utili
 
       /* ── Random secondary CTA button ──────────────────────────────────── */
       var heroTryOptions = [
-        { label: 'Try Image Compressor', href: '/tools/compress-image/' },
-        { label: 'Try HEIC to JPG',       href: '/tools/heic-to-jpg/' },
-        { label: 'Try Background Remover', href: '/tools/background-remover/' },
-        { label: 'Try PDF Compressor',     href: '/tools/compress-pdf/' },
-        { label: 'Try QR Generator',       href: '/tools/qr-code/' },
-        { label: 'Try Favicon Generator',  href: '/tools/favicon-generator/' },
-        { label: 'Try Password Generator', href: '/tools/password-generator/' },
+        { label: 'Try Image Compressor',   href: '/tools/compress-image/' },
         { label: 'Try Image Resizer',      href: '/tools/resize-image/' },
+        { label: 'Try Background Remover', href: '/tools/background-remover/' },
+        { label: 'Try HEIC to JPG',        href: '/tools/heic-to-jpg/' },
+        { label: 'Try PDF Compressor',     href: '/tools/compress-pdf/' },
+        { label: 'Try Merge PDFs',         href: '/tools/merge-pdfs/' },
+        { label: 'Try QR Code Generator',  href: '/tools/qr-code/' },
+        { label: 'Try Password Generator', href: '/tools/password-generator/' },
+        { label: 'Try Word Counter',       href: '/tools/word-count/' },
       ];
       var pick = heroTryOptions[Math.floor(Math.random() * heroTryOptions.length)];
       var tryBtn = document.getElementById('hero-try-btn');
