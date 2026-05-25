@@ -3,22 +3,23 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout
-  title="Report a Bug - PixMidas"
-  description="Report a bug or issue with any PixMidas free online tool."
+  title="Share Feedback — PixMidas"
+  description="Share feedback, report an issue, or suggest a new tool for PixMidas."
   canonical="https://www.pixmidas.com/report-bug/"
 >
-  <div class="bug-page">
-    <h1 class="bug-title">Report a Bug</h1>
-    <p class="bug-intro">
-      Found a bug? Help us fix it! Since we are 100% private, we don't track your actions, so your detailed report is the only way we can improve.
+  <div class="fb-page">
+    <h1 class="fb-title">Share Feedback or an Idea</h1>
+    <p class="fb-intro">
+      Found something broken, or have a great idea for a new tool? We read everything.
     </p>
 
-    <form id="bug-form" class="bug-form">
+    <form id="fb-form" class="fb-form">
+
       <div class="field">
-        <label for="tool" class="field-label">Which tool is affected?</label>
+        <label for="tool" class="field-label">Which tool is this about?</label>
         <select id="tool" name="tool" required class="field-input">
           <option value="" disabled selected>Select a tool...</option>
-          <option value="General/Homepage">🏠 General / Homepage</option>
+          <option value="General feedback or suggestion">💬 General feedback or suggestion</option>
           <option value="Background Remover">🪄 Background Remover</option>
           <option value="Base64 Encoder/Decoder">💻 Base64 Encoder / Decoder</option>
           <option value="Case Converter">🔡 Case Converter</option>
@@ -54,12 +55,21 @@ import Layout from '../layouts/Layout.astro';
       </div>
 
       <div class="field">
-        <label for="description" class="field-label">What happened?</label>
+        <label class="field-label">What kind of feedback?</label>
+        <div class="pill-group">
+          <button type="button" class="pill" id="pill-issue" data-value="Something's not working">Something's not working</button>
+          <button type="button" class="pill" id="pill-idea" data-value="I have an idea or suggestion">I have an idea or suggestion</button>
+        </div>
+        <input type="hidden" id="feedback-type" name="feedback-type" value="" />
+      </div>
+
+      <div class="field">
+        <label for="description" class="field-label">Tell us more</label>
         <textarea
           id="description"
           name="description"
           rows="5"
-          placeholder="Please describe exactly what happened..."
+          placeholder="Describe what happened or share your idea. The more detail, the better."
           required
           class="field-input"
         ></textarea>
@@ -67,60 +77,76 @@ import Layout from '../layouts/Layout.astro';
 
       <div class="field">
         <label for="email" class="field-label">
-          Your email <span class="field-optional">(Optional)</span>
+          Your email <span class="field-optional">(Optional) We'll reply if you'd like a follow-up.</span>
         </label>
         <input
           type="email"
           id="email"
           name="email"
-          placeholder="If you'd like us to follow up"
+          placeholder="your@email.com"
           class="field-input"
         />
       </div>
 
-      <div class="note-box">
-        <strong>💡 Note:</strong> To include a screenshot, please attach it manually to the email in the next step.
-      </div>
-
-      <button type="submit" class="submit-btn">
-        Generate Email Report
-      </button>
+      <button type="submit" class="submit-btn">Send Feedback</button>
     </form>
 
     <div id="success-state" class="success-state">
       <div class="success-icon">✅</div>
-      <h2 class="success-title">One last click!</h2>
-      <p class="success-body">Your email app should have opened with the report ready. Click <strong>Send</strong> to finish.</p>
-      <p class="success-fallback">Didn't open? Send your report manually to<br><strong>hello@pixmidas.com</strong></p>
-      <button id="btn-reset" type="button" class="reset-btn">Back to form</button>
+      <h2 class="success-title">Thanks for your feedback!</h2>
+      <p class="success-body">We appreciate you taking the time to improve PixMidas.</p>
+      <button id="btn-reset" type="button" class="reset-btn">Send another</button>
     </div>
   </div>
 </Layout>
 
 <script is:inline>
   document.addEventListener('DOMContentLoaded', function () {
-    var form         = document.getElementById('bug-form');
+    var form        = document.getElementById('fb-form');
     var successState = document.getElementById('success-state');
-    var btnReset     = document.getElementById('btn-reset');
+    var btnReset    = document.getElementById('btn-reset');
+    var pillIssue   = document.getElementById('pill-issue');
+    var pillIdea    = document.getElementById('pill-idea');
+    var fbTypeInput = document.getElementById('feedback-type');
+
+    function selectPill(active, inactive) {
+      active.classList.add('pill-active');
+      inactive.classList.remove('pill-active');
+      fbTypeInput.value = active.dataset.value;
+    }
+
+    pillIssue.addEventListener('click', function () { selectPill(pillIssue, pillIdea); });
+    pillIdea.addEventListener('click',  function () { selectPill(pillIdea,  pillIssue); });
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
 
       var tool        = document.getElementById('tool').value;
+      var fbType      = fbTypeInput.value;
       var description = document.getElementById('description').value;
       var userEmail   = document.getElementById('email').value || 'Not provided';
 
-      var subject = 'Bug Report: ' + tool;
+      if (!fbType) {
+        pillIssue.style.borderColor = '#F5A623';
+        pillIdea.style.borderColor  = '#F5A623';
+        setTimeout(function () {
+          pillIssue.style.borderColor = '';
+          pillIdea.style.borderColor  = '';
+        }, 1500);
+        return;
+      }
 
+      var subject = 'Feedback: ' + tool;
       var bodyText =
-        'SYSTEM REPORT\n' +
-        '-------------\n' +
+        'FEEDBACK REPORT\n' +
+        '---------------\n' +
         'Tool: ' + tool + '\n' +
+        'Type: ' + fbType + '\n' +
         'User Email: ' + userEmail + '\n\n' +
-        'ISSUE DESCRIPTION\n' +
-        '-----------------\n' +
+        'MESSAGE\n' +
+        '-------\n' +
         description + '\n\n' +
-        'Sent via PixMidas Bug Reporter';
+        'Sent via PixMidas Feedback';
 
       var mailtoUrl = 'mailto:hello@pixmidas.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(bodyText);
       window.location.href = mailtoUrl;
@@ -131,6 +157,9 @@ import Layout from '../layouts/Layout.astro';
 
     btnReset.addEventListener('click', function () {
       form.reset();
+      fbTypeInput.value = '';
+      pillIssue.classList.remove('pill-active');
+      pillIdea.classList.remove('pill-active');
       form.style.display = 'flex';
       successState.style.display = 'none';
     });
@@ -138,27 +167,27 @@ import Layout from '../layouts/Layout.astro';
 </script>
 
 <style>
-  .bug-page {
+  .fb-page {
     max-width: 600px;
     margin: 60px auto;
     padding: 0 20px;
   }
 
-  .bug-title {
+  .fb-title {
     font-size: 32px;
     font-weight: 800;
     margin-bottom: 10px;
     color: var(--text);
   }
 
-  .bug-intro {
+  .fb-intro {
     color: var(--text-muted);
     font-size: 18px;
     line-height: 1.6;
     margin-bottom: 40px;
   }
 
-  .bug-form {
+  .fb-form {
     display: flex;
     flex-direction: column;
     gap: 24px;
@@ -177,7 +206,7 @@ import Layout from '../layouts/Layout.astro';
 
   .field-optional {
     font-weight: 400;
-    color: var(--text-light);
+    color: var(--text-muted);
     font-size: 14px;
   }
 
@@ -198,8 +227,8 @@ import Layout from '../layouts/Layout.astro';
   }
 
   .field-input:focus {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.1);
+    border-color: #F5A623;
+    box-shadow: 0 0 0 3px rgba(245, 166, 35, 0.12);
   }
 
   .field-input::placeholder {
@@ -220,38 +249,53 @@ import Layout from '../layouts/Layout.astro';
     padding-right: 40px;
   }
 
-  .note-box {
-    padding: 14px 16px;
-    border-radius: 12px;
-    background: #fff8f1;
-    border: 1px solid #ffe7d3;
-    color: #8a5a2a;
-    font-size: 14px;
-    line-height: 1.55;
+  .pill-group {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
   }
 
-  :global([data-theme="dark"]) .note-box {
-    background: var(--surface-2);
-    border-color: var(--border);
-    color: var(--text-muted);
+  .pill {
+    padding: 10px 20px;
+    border-radius: 999px;
+    border: 1.5px solid var(--border);
+    background: transparent;
+    color: var(--text);
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+    transition: border-color 0.15s, background 0.15s, color 0.15s;
+  }
+
+  .pill:hover {
+    border-color: #F5A623;
+  }
+
+  .pill-active {
+    background: #F5A623;
+    border-color: #F5A623;
+    color: #000;
+    font-weight: 600;
   }
 
   .submit-btn {
-    background: var(--accent);
-    color: white;
+    background: #F5A623;
+    color: #000;
     border: none;
     padding: 18px;
-    border-radius: 99px;
-    font-weight: 700;
+    border-radius: 24px;
+    font-weight: 600;
     font-size: 17px;
     cursor: pointer;
     font-family: inherit;
     transition: background 0.15s;
     min-height: 56px;
+    width: 100%;
   }
 
   .submit-btn:hover {
-    background: var(--accent-hover);
+    background: #e8961a;
   }
 
   .success-state {
@@ -271,25 +315,18 @@ import Layout from '../layouts/Layout.astro';
   .success-title {
     font-size: 24px;
     font-weight: 800;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
     color: var(--text);
   }
 
   .success-body {
     color: var(--text-muted);
-    margin-bottom: 10px;
     line-height: 1.6;
-  }
-
-  .success-fallback {
-    color: var(--text-light);
-    font-size: 14px;
-    margin-top: 15px;
-    line-height: 1.6;
+    font-size: 16px;
   }
 
   .reset-btn {
-    margin-top: 30px;
+    margin-top: 28px;
     background: none;
     border: 1px solid var(--border);
     padding: 10px 24px;
@@ -300,24 +337,40 @@ import Layout from '../layouts/Layout.astro';
     font-family: inherit;
     min-height: 44px;
     transition: border-color 0.15s, color 0.15s;
+    display: inline-block;
   }
 
   .reset-btn:hover {
-    border-color: var(--accent);
-    color: var(--accent);
+    border-color: #F5A623;
+    color: #F5A623;
+  }
+
+  :global([data-theme="dark"]) .pill {
+    border-color: rgba(255, 255, 255, 0.25);
+  }
+
+  :global([data-theme="dark"]) .pill-active {
+    background: #F5A623;
+    border-color: #F5A623;
+    color: #000;
   }
 
   @media (max-width: 768px) {
-    .bug-page {
+    .fb-page {
       margin: 32px auto;
     }
 
-    .bug-title {
+    .fb-title {
       font-size: 26px;
     }
 
-    .bug-intro {
+    .fb-intro {
       font-size: 16px;
+    }
+
+    .pill {
+      font-size: 14px;
+      padding: 9px 16px;
     }
   }
 </style>
