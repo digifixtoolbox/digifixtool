@@ -77,9 +77,7 @@ const faqSchema = category.faq ? JSON.stringify({
     </div>
 
     {category.seoContent && (
-      <section class="cat-seo-content">
-        <p>{category.seoContent}</p>
-      </section>
+      <section class="cat-seo-content" set:html={category.seoContent} />
     )}
 
     {category.faq && (
@@ -188,6 +186,29 @@ const faqSchema = category.faq ? JSON.stringify({
     font-size: 15px;
     color: var(--text-muted);
     line-height: 1.75;
+    margin-bottom: 16px;
+  }
+
+  .cat-seo-content h2 {
+    font-size: 19px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-top: 32px;
+    margin-bottom: 10px;
+  }
+
+  .cat-seo-content h2:first-child {
+    margin-top: 0;
+  }
+
+  .cat-seo-content a {
+    color: var(--upload-btn-bg);
+    text-decoration: none;
+  }
+
+  .cat-seo-content a:hover {
+    text-decoration: underline;
   }
 
   .cat-faq {
