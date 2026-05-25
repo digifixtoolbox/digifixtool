@@ -1,6 +1,11 @@
 import { useState, useRef, useCallback } from "react";
-import { PDFDocument } from "pdf-lib";
 import SaveAsDialog from "./SaveAsDialog";
+
+var _pdfLibPromise = null;
+function loadPdfLib() {
+  if (!_pdfLibPromise) _pdfLibPromise = import("pdf-lib");
+  return _pdfLibPromise;
+}
 
 var _pdfjsPromise = null;
 function loadPdfJs() {
@@ -81,9 +86,9 @@ export default function PdfCompressor() {
   async function compress() {
     if (!file) return;
 
-    var pdfjsLib;
+    var pdfjsLib, PDFDocument;
     try {
-      pdfjsLib = await loadPdfJs();
+      [pdfjsLib, { PDFDocument }] = await Promise.all([loadPdfJs(), loadPdfLib()]);
     } catch (e) {
       setError("Could not load PDF library. Please check your connection and try again.");
       return;

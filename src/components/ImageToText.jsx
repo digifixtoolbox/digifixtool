@@ -1,5 +1,20 @@
 import { useState } from "react";
 
+var _tesseractPromise = null;
+function loadTesseract() {
+  if (!_tesseractPromise) {
+    _tesseractPromise = new Promise(function(resolve, reject) {
+      if (typeof window.Tesseract !== "undefined") { resolve(window.Tesseract); return; }
+      var script = document.createElement("script");
+      script.src = "https://unpkg.com/tesseract.js@5/dist/tesseract.min.js";
+      script.onload = function() { resolve(window.Tesseract); };
+      script.onerror = function() { _tesseractPromise = null; reject(new Error("Could not load OCR library")); };
+      document.head.appendChild(script);
+    });
+  }
+  return _tesseractPromise;
+}
+
 export default function ImageToText() {
   const [status, setStatus] = useState("idle");
   const [text, setText] = useState("");
@@ -13,11 +28,10 @@ export default function ImageToText() {
     if (!file) return;
     if (!file.type.startsWith("image/")) { setError("Please upload an image file."); return; }
     if (file.size > 20 * 1024 * 1024) { setError(`File too large (${(file.size / 1024 / 1024).toFixed(1)}MB). Maximum is 20MB. Pro version coming soon with higher limits.`); return; }
-    setError(""); setText(""); setStatus("loading"); setProgress(0); setProgLabel("Starting...");
-    if (typeof window.Tesseract === "undefined") {
-      setError("OCR library not loaded. Please refresh the page."); setStatus("idle"); return;
-    }
-    window.Tesseract.recognize(file, "eng", {
+    setError(""); setText(""); setStatus("loading"); setProgress(0); setProgLabel("Loading OCR engine...");
+    loadTesseract().then(function(Tesseract) {
+    setProgLabel("Starting...");
+    Tesseract.recognize(file, "eng", {
       logger: function(m) {
         if (m.status === "recognizing text") {
           setProgress(Math.round(m.progress * 100)); setProgLabel("Recognizing text...");
@@ -36,6 +50,10 @@ export default function ImageToText() {
       setStatus("done");
     }).catch(function() {
       setError("OCR failed. Please try a clearer image with visible text.");
+      setStatus("idle");
+    });
+    }).catch(function() {
+      setError("OCR library failed to load. Please check your connection and try again.");
       setStatus("idle");
     });
   }

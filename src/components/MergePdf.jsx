@@ -1,6 +1,11 @@
 import { useState } from "react";
-import { PDFDocument } from "pdf-lib";
 import SaveAsDialog from "./SaveAsDialog";
+
+var _pdfLibPromise = null;
+function loadPdfLib() {
+  if (!_pdfLibPromise) _pdfLibPromise = import("pdf-lib");
+  return _pdfLibPromise;
+}
 
 var supportsFileShare = (function() {
   try { return typeof navigator !== 'undefined' && !!navigator.share && !!navigator.canShare && navigator.canShare({ files: [new File([], 't.pdf', { type: 'application/pdf' })] }); }
@@ -78,19 +83,22 @@ export default function MergePdf() {
         r.readAsArrayBuffer(f);
       });
     });
-    Promise.all(readers).then(function(buffers) {
-      return PDFDocument.create().then(function(merged) {
-        var chain = Promise.resolve();
-        buffers.forEach(function(buf) {
-          chain = chain.then(function() {
-            return PDFDocument.load(buf).then(function(doc) {
-              return merged.copyPages(doc, doc.getPageIndices()).then(function(pages) {
-                pages.forEach(function(p) { merged.addPage(p); });
+    loadPdfLib().then(function(pdfLib) {
+      var PDFDocument = pdfLib.PDFDocument;
+      return Promise.all(readers).then(function(buffers) {
+        return PDFDocument.create().then(function(merged) {
+          var chain = Promise.resolve();
+          buffers.forEach(function(buf) {
+            chain = chain.then(function() {
+              return PDFDocument.load(buf).then(function(doc) {
+                return merged.copyPages(doc, doc.getPageIndices()).then(function(pages) {
+                  pages.forEach(function(p) { merged.addPage(p); });
+                });
               });
             });
           });
+          return chain.then(function() { return merged.save(); });
         });
-        return chain.then(function() { return merged.save(); });
       });
     }).then(function(bytes) {
       var blob = new Blob([bytes], { type: "application/pdf" });
