@@ -111,7 +111,7 @@ export default function QRGenerator() {
             </label>
             <input type="range" min="128" max="512" step="64" value={size}
               onChange={(e) => setSize(Number(e.target.value))}
-              style={{ width: "100%", accentColor: "#0071e3" }} />
+              style={{ width: "100%", accentColor: "var(--upload-btn-bg)" }} />
           </div>
 
           <div style={{ display: "flex", gap: 16 }}>

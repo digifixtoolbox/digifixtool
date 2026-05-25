@@ -275,7 +275,7 @@ export default function PdfCompressor() {
             <div>
               <p style={{ fontSize: "17px", fontWeight: "600", color: "var(--text)", marginBottom: "6px" }}>
                 Drop your PDF here or{" "}
-                <span style={{ color: "#0071e3" }}>browse</span>
+                <span style={{ color: "var(--upload-btn-bg)" }}>browse</span>
               </p>
               <p style={{ fontSize: "13px", color: "var(--text-muted)", marginBottom: "4px" }}>
                 Supports .pdf files
