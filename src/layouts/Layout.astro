@@ -52,6 +52,9 @@ const breadcrumbSchema = isToolPage ? JSON.stringify({
     (function(){try{var t=localStorage.getItem('theme')||'system';var d=t==='system'?(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'):t;document.documentElement.setAttribute('data-theme',d);}catch(e){}})();
   </script>
   <script is:inline>
+    (function(){try{if(localStorage.getItem('pixmidas_visited')){document.documentElement.classList.add('returning-user');}}catch(e){}})();
+  </script>
+  <script is:inline>
     let deferredPrompt;
     window.addEventListener('beforeinstallprompt', (e) => {
       e.preventDefault();

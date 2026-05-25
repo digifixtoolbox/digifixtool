@@ -294,6 +294,7 @@ const categories = ['All', 'Image', 'PDF', 'Text', 'Social', 'Developer', 'Utili
 
   <script is:inline>
     document.addEventListener('DOMContentLoaded', function () {
+      localStorage.setItem('pixmidas_visited', 'true');
       /* ── PWA install prompt ────────────────────────────────────────────── */
       (function () {
         var pwaBtn     = document.getElementById('pwa-install-btn');
@@ -698,6 +699,13 @@ const categories = ['All', 'Image', 'PDF', 'Text', 'Social', 'Developer', 'Utili
 </Layout>
 
 <style>
+  :global(html.returning-user) .hero {
+    display: none;
+  }
+  :global(html.returning-user) .promo-wrap:not(.promo-bottom) {
+    display: none;
+  }
+
   .hero {
     text-align: center;
     padding: 72px 0 64px;
