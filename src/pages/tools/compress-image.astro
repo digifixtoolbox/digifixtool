@@ -17,11 +17,11 @@ import PromoBanner from '../../components/PromoBanner.jsx';
       <p class="tool-subtitle">Reduce image file size instantly. No quality loss, no uploads, no account needed.</p>
     </div>
 
-    <ImageCompressor client:load />
+    <ImageCompressor client:idle />
 
 
     <div class="promo-wrap">
-      <PromoBanner client:load excludeSlug="compress-image" />
+      <PromoBanner client:visible excludeSlug="compress-image" />
     </div>
 
     <section class="seo-content">
