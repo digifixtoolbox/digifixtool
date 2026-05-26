@@ -240,11 +240,11 @@ export default function PdfCompressor() {
           role="button"
           tabIndex={0}
           style={{
-            border: "2px dashed " + (dragOver ? "#0071e3" : "var(--border)"),
+            border: "2px dashed " + (dragOver ? "var(--upload-btn-bg)" : "var(--border)"),
             borderRadius: "20px",
             padding: "56px 24px",
             textAlign: "center",
-            background: dragOver ? "#f0f7ff" : "var(--surface-2)",
+            background: dragOver ? "var(--accent-light)" : "var(--surface-2)",
             cursor: "pointer",
             transition: "border-color 0.18s, background 0.18s",
           }}
@@ -343,7 +343,7 @@ export default function PdfCompressor() {
             overflow: "hidden", maxWidth: "380px", margin: "0 auto 10px",
           }}>
             <div style={{
-              height: "100%", background: "#0071e3", borderRadius: "99px",
+              height: "100%", background: "var(--upload-btn-bg)", borderRadius: "99px",
               width: progress + "%", transition: "width 0.35s ease",
             }} />
           </div>

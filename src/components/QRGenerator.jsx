@@ -112,6 +112,7 @@ export default function QRGenerator() {
             </label>
             <input type="range" min="128" max="512" step="64" value={size}
               onChange={(e) => setSize(Number(e.target.value))}
+              aria-label="QR code size"
               style={{ width: "100%", accentColor: "var(--upload-btn-bg)" }} />
           </div>
 

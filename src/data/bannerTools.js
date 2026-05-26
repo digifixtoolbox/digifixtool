@@ -59,7 +59,7 @@ export const BANNER_TOOLS = [
 ];
 
 export const categoryColor = {
-  Image:            "#0071e3",
+  Image:            "var(--upload-btn-bg)",
   PDF:              "#f56300",
   Text:             "#16a34a",
   Developer:        "#7c3aed",

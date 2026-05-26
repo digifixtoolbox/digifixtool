@@ -166,7 +166,7 @@ export default function ColorPalette() {
           onDragOver={function(e) { e.preventDefault(); setDragOver(true); }}
           onDragLeave={function() { setDragOver(false); }}
           onDrop={handleDrop}
-          style={{ border: "2px dashed " + (dragOver ? "#0071e3" : "var(--border)"), borderRadius: "16px", padding: "48px 24px", textAlign: "center", cursor: "pointer", background: dragOver ? "#f0f7ff" : "var(--surface-2)", transition: "border-color 0.15s, background 0.15s" }}
+          style={{ border: "2px dashed " + (dragOver ? "var(--upload-btn-bg)" : "var(--border)"), borderRadius: "16px", padding: "48px 24px", textAlign: "center", cursor: "pointer", background: dragOver ? "var(--accent-light)" : "var(--surface-2)", transition: "border-color 0.15s, background 0.15s" }}
         >
           <div style={{ fontSize: "48px", marginBottom: "16px" }}><IconPalette size={48} color="#D6409F" stroke={2} /></div>
           <p style={{ fontSize: "17px", fontWeight: "600", marginBottom: "8px", color: "var(--text)" }}>Drop an image here or click to browse</p>

@@ -148,16 +148,16 @@ export default function ImageResizer() {
           <div style={{display:"flex",alignItems:"flex-end",gap:16,flexWrap:"wrap"}}>
             <div style={{display:"flex",flexDirection:"column",gap:6,flex:1,minWidth:120}}>
               <label style={{fontSize:13,fontWeight:600,color:"var(--text)"}}>Width (px)</label>
-              <input type="number" value={width} onChange={handleW} min="1"
+              <input type="number" value={width} onChange={handleW} min="1" aria-label="Width in pixels"
                 style={{border:"1px solid var(--border-light)",borderRadius:10,padding:"10px 14px",fontSize:16,fontWeight:600,outline:"none",width:"100%",background:"var(--surface-2)",color:"var(--text)"}} />
             </div>
-            <div style={{paddingBottom:8,fontSize:22,cursor:"pointer",color:keepAspect?"#2563eb":"#9ca3af"}}
+            <div style={{paddingBottom:8,fontSize:22,cursor:"pointer",color:keepAspect?"var(--upload-btn-bg)":"var(--text-muted)"}}
               onClick={() => setKeepAspect(!keepAspect)}>
               {keepAspect ? "🔒" : "🔓"}
             </div>
             <div style={{display:"flex",flexDirection:"column",gap:6,flex:1,minWidth:120}}>
               <label style={{fontSize:13,fontWeight:600,color:"var(--text)"}}>Height (px)</label>
-              <input type="number" value={height} onChange={handleH} min="1"
+              <input type="number" value={height} onChange={handleH} min="1" aria-label="Height in pixels"
                 style={{border:"1px solid var(--border-light)",borderRadius:10,padding:"10px 14px",fontSize:16,fontWeight:600,outline:"none",width:"100%",background:"var(--surface-2)",color:"var(--text)"}} />
             </div>
           </div>

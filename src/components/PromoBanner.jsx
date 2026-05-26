@@ -34,7 +34,7 @@ export default function PromoBanner({ excludeSlug }) {
   }, []);
 
   var tool = tools[idx];
-  var color = categoryColor[tool.category] || "#0071e3";
+  var color = categoryColor[tool.category] || "var(--upload-btn-bg)";
   var href = tool.href || ("/tools/" + tool.slug + "/");
   var cta = tool.cta || ("Try " + tool.name);
 

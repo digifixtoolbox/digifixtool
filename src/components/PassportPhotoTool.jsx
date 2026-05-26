@@ -299,8 +299,8 @@ export default function PassportPhotoTool() {
         onClick={() => document.getElementById('pass-input').click()}
         style={{
           cursor: 'pointer',
-          border: isDrop ? '2px solid #0071e3' : '2px dashed var(--border)',
-          backgroundColor: isDrop ? '#f0f7ff' : 'var(--surface-2)',
+          border: isDrop ? '2px solid var(--upload-btn-bg)' : '2px dashed var(--border)',
+          backgroundColor: isDrop ? 'var(--accent-light)' : 'var(--surface-2)',
           borderRadius: '16px',
           padding: '56px 24px',
           textAlign: 'center',
@@ -358,7 +358,7 @@ export default function PassportPhotoTool() {
               overflow: 'hidden',
               position: 'relative',
               cursor: 'grab',
-              border: '2px solid #0071e3',
+              border: '2px solid var(--upload-btn-bg)',
               boxShadow: '0 0 0 4px rgba(0,113,227,0.12)',
               borderRadius: 6,
               touchAction: 'none',

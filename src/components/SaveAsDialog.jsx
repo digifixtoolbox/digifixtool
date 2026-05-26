@@ -28,6 +28,7 @@ export default function SaveAsDialog({ defaultName, onSave, onCancel }) {
           value={name}
           onChange={function(e) { setName(e.target.value); }}
           onKeyDown={handleKey}
+          aria-label="File name"
           autoFocus
           style={{ width: "100%", padding: "12px 14px", border: "1px solid var(--border)", borderRadius: "10px", fontSize: "15px", fontFamily: "inherit", background: "var(--surface-2)", color: "var(--text)", outline: "none", boxSizing: "border-box", marginBottom: "20px" }}
         />

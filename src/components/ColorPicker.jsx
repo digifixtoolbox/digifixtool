@@ -50,7 +50,7 @@ export default function ColorPicker() {
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "24px" }}>
         <div style={{ width: "100%", height: "200px", borderRadius: "20px", background: hex, boxShadow: "0 4px 20px rgba(0,0,0,0.12)" }} />
         <div style={{ display: "flex", alignItems: "center", gap: "16px", background: "var(--surface-2)", borderRadius: "14px", padding: "16px 20px", width: "100%", boxSizing: "border-box" }}>
-          <input type="color" value={hex} onChange={function(e) { setHex(e.target.value); }} style={{ width: "56px", height: "56px", borderRadius: "12px", border: "none", cursor: "pointer", padding: "0" }} />
+          <input type="color" value={hex} onChange={function(e) { setHex(e.target.value); }} aria-label="Pick a color" style={{ width: "56px", height: "56px", borderRadius: "12px", border: "none", cursor: "pointer", padding: "0" }} />
           <div>
             <p style={{ fontSize: "13px", color: "var(--text-muted)", marginBottom: "4px", fontWeight: "500" }}>Selected color</p>
             <p style={{ fontSize: "20px", fontWeight: "700", letterSpacing: "0.05em", color: "var(--text)" }}>{hex.toUpperCase()}</p>

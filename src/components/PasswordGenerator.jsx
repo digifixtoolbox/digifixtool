@@ -54,7 +54,7 @@ export default function PasswordGenerator() {
             <label style={{ fontWeight: "600", fontSize: "15px", color: "var(--text)" }}>Password length</label>
             <span style={{ fontWeight: "700", fontSize: "15px", color: "var(--upload-btn-bg)" }}>{length}</span>
           </div>
-          <input type="range" min="6" max="64" value={length} onChange={function(e) { setLength(Number(e.target.value)); }} style={{ width: "100%", accentColor: "var(--upload-btn-bg)" }} />
+          <input type="range" min="6" max="64" value={length} onChange={function(e) { setLength(Number(e.target.value)); }} aria-label="Password length" style={{ width: "100%", accentColor: "var(--upload-btn-bg)" }} />
           <div style={{ display: "flex", justifyContent: "space-between", fontSize: "12px", color: "var(--text-muted)", marginTop: "4px" }}>
             <span>6</span><span>64</span>
           </div>

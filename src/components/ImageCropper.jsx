@@ -176,7 +176,7 @@ export default function ImageCropper() {
                 top: cropBox.y + "px",
                 width: cropBox.w + "px",
                 height: cropBox.h + "px",
-                border: "2px solid #0071e3",
+                border: "2px solid var(--upload-btn-bg)",
                 background: "rgba(0,113,227,0.1)",
                 pointerEvents: "none"
               }} />

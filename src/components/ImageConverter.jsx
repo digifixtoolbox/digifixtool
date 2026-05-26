@@ -145,7 +145,7 @@ export default function ImageConverter() {
               </label>
               <input type="range" min="0.5" max="1" step="0.05" value={quality}
                 onChange={(e) => setQuality(Number(e.target.value))}
-                style={{width:"100%",accentColor:"#2563eb"}} />
+                style={{width:"100%",accentColor:"var(--upload-btn-bg)"}} />
             </div>
           )}
           <button onClick={convert} disabled={isProcessing}
@@ -176,7 +176,7 @@ export default function ImageConverter() {
           )}
           {!convertedUrl && (
             <button onClick={reset}
-              style={{background:"var(--surface)",border:"1px solid var(--border-light)",padding:"14px 24px",borderRadius:999,fontWeight:600,fontSize:15,cursor:"pointer",color:"#374151",alignSelf:"flex-start"}}>
+              style={{background:"var(--surface)",border:"1px solid var(--border-light)",padding:"14px 24px",borderRadius:999,fontWeight:600,fontSize:15,cursor:"pointer",color:"var(--text-muted)",alignSelf:"flex-start"}}>
               Start again
             </button>
           )}

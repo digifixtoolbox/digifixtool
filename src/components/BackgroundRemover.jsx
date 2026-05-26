@@ -135,8 +135,8 @@ export default function BackgroundRemover() {
         <div
           style={{
             ...s.dropzone,
-            borderColor: isDragging ? "#2563eb" : "#d1d5db",
-            background: isDragging ? "#eff6ff" : "var(--surface-2)",
+            borderColor: isDragging ? "var(--upload-btn-bg)" : "var(--border-light)",
+            background: isDragging ? "var(--accent-light)" : "var(--surface-2)",
           }}
           onDrop={handleDrop}
           onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
@@ -146,7 +146,7 @@ export default function BackgroundRemover() {
           <div style={s.uploadIcon}><IconWand size={48} color="#E54D2E" stroke={2} /></div>
           <h2 style={s.dropTitle}>Drop your image here</h2>
           <p style={s.dropText}>JPG, PNG or WebP. AI removes the background in your browser.</p>
-          <p style={{fontSize:12,color:"#6b7280",marginBottom:16}}>Maximum file size: 20MB</p>
+          <p style={{fontSize:12,color:"var(--text-muted)",marginBottom:16}}>Maximum file size: 20MB</p>
           <button style={s.btn} type="button">Choose Image</button>
           <input
             ref={fileInputRef}
@@ -295,7 +295,7 @@ const s = {
   },
   progressFill: {
     height: "100%",
-    background: "#0071e3",
+    background: "var(--upload-btn-bg)",
     borderRadius: 999,
     transition: "width 0.3s ease",
   },
@@ -379,6 +379,6 @@ const s = {
     fontSize: 15,
     cursor: "pointer",
     fontFamily: "inherit",
-    color: "#374151",
+    color: "var(--text-muted)",
   },
 };
