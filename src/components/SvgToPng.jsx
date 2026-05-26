@@ -1,5 +1,6 @@
 import { useState } from "react";
 import SaveAsDialog from "./SaveAsDialog";
+import { iconSvgs } from '../data/iconSvgs.js';
 
 var supportsFileShare = (function() {
   try { return typeof navigator !== 'undefined' && !!navigator.share && !!navigator.canShare && navigator.canShare({ files: [new File([], 't.png', { type: 'image/png' })] }); }
@@ -119,7 +120,7 @@ export default function SvgToPng() {
         onDrop={handleDrop}
         style={{ border: "2px dashed " + (dragOver ? "var(--upload-btn-bg)" : "var(--border)"), borderRadius: "16px", padding: "48px 24px", textAlign: "center", cursor: "pointer", background: dragOver ? "var(--accent-light)" : "var(--surface-2)", transition: "border-color 0.15s, background 0.15s" }}
       >
-        <div style={{ fontSize: "48px", marginBottom: "16px" }}><i className="ti ti-vector" style={{color:'#0090FF'}}></i></div>
+        <div style={{ fontSize: "48px", marginBottom: "16px" }}><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#0090FF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" dangerouslySetInnerHTML={{ __html: iconSvgs['vector'] }} /></div>
         <p style={{ fontSize: "17px", fontWeight: "600", marginBottom: "8px", color: "var(--text)" }}>Drop an SVG here or click to browse</p>
         <p style={{ fontSize: "14px", color: "var(--text-muted)", marginBottom: "8px" }}>Convert any SVG vector to a high-resolution PNG</p>
         <p style={{ fontSize: "12px", color: "var(--text-muted)", marginBottom: "20px" }}>Maximum file size: 50MB</p>
@@ -173,7 +174,7 @@ export default function SvgToPng() {
         <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", marginTop: "16px", justifyContent: "center" }}>
           <button onClick={handleSave} style={saveBtn}>Save</button>
           <button onClick={handleSaveAs} style={saveAsBtn}>Save As...</button>
-          {supportsFileShare && <button onClick={handleShare} style={shareBtn}><i className="ti ti-share" /> Share</button>}
+          {supportsFileShare && <button onClick={handleShare} style={shareBtn}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" dangerouslySetInnerHTML={{ __html: iconSvgs['share'] }} /> Share</button>}
           <button onClick={reset} style={resetBtn}>Reset</button>
         </div>
       )}

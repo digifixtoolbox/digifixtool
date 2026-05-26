@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import SaveAsDialog from "./SaveAsDialog";
+import { iconSvgs } from '../data/iconSvgs.js';
 
 var supportsFileShare = (function() {
   try { return typeof navigator !== 'undefined' && !!navigator.share && !!navigator.canShare && navigator.canShare({ files: [new File([], 't.jpg', { type: 'image/jpeg' })] }); }
@@ -180,7 +181,7 @@ export default function WebpToJpg() {
           onClick={function() { document.getElementById("webp-input").click(); }}
           style={{ border: "2px dashed var(--border)", borderRadius: "16px", padding: "48px 24px", textAlign: "center", cursor: "pointer", background: "var(--surface-2)" }}
         >
-          <div style={{ fontSize: "48px", marginBottom: "16px" }}><i className="ti ti-photo" style={{color:'#0090FF'}}></i></div>
+          <div style={{ fontSize: "48px", marginBottom: "16px" }}><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#0090FF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" dangerouslySetInnerHTML={{ __html: iconSvgs['photo'] }} /></div>
           <p style={{ fontSize: "17px", fontWeight: "600", marginBottom: "8px", color: "var(--text)" }}>Drop WebP images here</p>
           <p style={{ fontSize: "14px", color: "var(--text-muted)", marginBottom: "8px" }}>or click to browse. Multiple files supported.</p>
           <p style={{ fontSize: "12px", color: "var(--text-muted)", marginBottom: "20px" }}>Maximum per file: 50MB</p>
@@ -219,7 +220,7 @@ export default function WebpToJpg() {
               <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", justifyContent: "center" }}>
                 <button onClick={downloadAll} style={saveBtn}>Save All</button>
                 <button onClick={handleBulkSaveAs} style={saveAsBtn}>Save As...</button>
-                {supportsFileShare && <button onClick={handleShareAll} style={shareBtn}><i className="ti ti-share" /> Share</button>}
+                {supportsFileShare && <button onClick={handleShareAll} style={shareBtn}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" dangerouslySetInnerHTML={{ __html: iconSvgs['share'] }} /> Share</button>}
                 <button onClick={reset} style={resetBtn}>Reset</button>
               </div>
             </div>

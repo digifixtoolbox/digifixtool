@@ -1,5 +1,6 @@
 import { useState, useRef, useCallback } from "react";
 import SaveAsDialog from "./SaveAsDialog";
+import { iconSvgs } from '../data/iconSvgs.js';
 
 var _pdfLibPromise = null;
 function loadPdfLib() {
@@ -266,7 +267,7 @@ export default function PdfCompressor() {
             onChange={onInputChange}
           />
 
-          <div style={{ fontSize: "40px", marginBottom: "12px" }}><i className="ti ti-file-minus" style={{color:'#E54D2E'}}></i></div>
+          <div style={{ fontSize: "40px", marginBottom: "12px" }}><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#E54D2E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" dangerouslySetInnerHTML={{ __html: iconSvgs['file-minus'] }} /></div>
 
           {file ? (
             <div>
@@ -398,7 +399,7 @@ export default function PdfCompressor() {
         <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", justifyContent: "center", marginBottom: "10px" }}>
           <button onClick={handleSave} style={saveBtn}>Save</button>
           <button onClick={handleSaveAs} style={saveAsBtn}>Save As...</button>
-          {supportsFileShare && <button onClick={handleShare} style={shareBtn}><i className="ti ti-share" /> Share</button>}
+          {supportsFileShare && <button onClick={handleShare} style={shareBtn}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" dangerouslySetInnerHTML={{ __html: iconSvgs['share'] }} /> Share</button>}
           <button onClick={reset} style={resetBtn}>Reset</button>
         </div>
         {saveAsName !== null && <SaveAsDialog defaultName={saveAsName} onSave={doSaveAs} onCancel={function() { setSaveAsName(null); }} />}

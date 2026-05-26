@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import SaveAsDialog from './SaveAsDialog';
+import { iconSvgs } from '../data/iconSvgs.js';
 
 var supportsFileShare = (function() {
   try { return typeof navigator !== 'undefined' && !!navigator.share && !!navigator.canShare && navigator.canShare({ files: [new File([], 't.jpg', { type: 'image/jpeg' })] }); }
@@ -308,7 +309,7 @@ export default function PassportPhotoTool() {
       >
         <input type="file" id="pass-input" hidden onChange={(e) => processFile(e.target.files[0])} accept="image/*" />
         <div>
-          <span style={{ fontSize: '48px', display: 'block', marginBottom: '10px' }}><i className="ti ti-id" style={{color:'#E07B10'}}></i></span>
+          <span style={{ fontSize: '48px', display: 'block', marginBottom: '10px' }}><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#E07B10" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" dangerouslySetInnerHTML={{ __html: iconSvgs['id'] }} /></span>
           <p style={{ fontSize: '17px', fontWeight: 600, color: 'var(--text)', marginBottom: '8px' }}>Drop your portrait here or <strong>browse</strong></p>
           <p style={{ fontSize: '12px', color: 'var(--text-muted)', marginBottom: '8px' }}>Maximum file size: 50MB</p>
           {error && <p style={{ color: '#dc2626', fontSize: '14px', marginBottom: '8px' }}>{error}</p>}
@@ -454,7 +455,7 @@ export default function PassportPhotoTool() {
       <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', justifyContent: 'center' }}>
         <button onClick={handleSave} style={saveBtn}>Save</button>
         <button onClick={handleSaveAs} style={saveAsBtn}>Save As...</button>
-        {supportsFileShare && <button onClick={handleShare} style={shareBtn}><i className="ti ti-share" /> Share</button>}
+        {supportsFileShare && <button onClick={handleShare} style={shareBtn}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" dangerouslySetInnerHTML={{ __html: iconSvgs['share'] }} /> Share</button>}
         <button onClick={resetAll} style={resetBtn}>Reset</button>
       </div>
       <button

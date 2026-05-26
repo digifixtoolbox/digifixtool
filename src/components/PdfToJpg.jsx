@@ -1,5 +1,6 @@
 import { useState } from "react";
 import SaveAsDialog from "./SaveAsDialog";
+import { iconSvgs } from '../data/iconSvgs.js';
 
 var _pdfjsPromise = null;
 function loadPdfJs() {
@@ -195,7 +196,7 @@ export default function PdfToJpg() {
         onDrop={handleDrop}
         style={{ border: "2px dashed " + (dragOver ? "#0071e3" : "var(--border)"), borderRadius: "16px", padding: "48px 24px", textAlign: "center", cursor: "pointer", background: dragOver ? "#f0f7ff" : "var(--surface-2)", transition: "border-color 0.15s, background 0.15s" }}
       >
-        <div style={{ fontSize: "48px", marginBottom: "16px" }}><i className="ti ti-file-export" style={{color:'#E54D2E'}}></i></div>
+        <div style={{ fontSize: "48px", marginBottom: "16px" }}><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#E54D2E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" dangerouslySetInnerHTML={{ __html: iconSvgs['file-export'] }} /></div>
         <p style={{ fontSize: "17px", fontWeight: "600", marginBottom: "8px", color: "var(--text)" }}>Drop a PDF here or click to browse</p>
         <p style={{ fontSize: "14px", color: "var(--text-muted)", marginBottom: "8px" }}>Each page will be converted to JPG</p>
         <p style={{ fontSize: "12px", color: "var(--text-muted)", marginBottom: "20px" }}>Maximum file size: 100MB</p>
@@ -236,7 +237,7 @@ export default function PdfToJpg() {
           ? <button onClick={function() { handleItemSaveAs(images[0]); }} style={saveAsBtn}>Save As...</button>
           : <button onClick={handleBulkSaveAs} style={saveAsBtn}>Save As...</button>
         }
-        {supportsFileShare && <button onClick={handleShare} style={shareBtn}><i className="ti ti-share" /> Share</button>}
+        {supportsFileShare && <button onClick={handleShare} style={shareBtn}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" dangerouslySetInnerHTML={{ __html: iconSvgs['share'] }} /> Share</button>}
         <button onClick={reset} style={resetBtn}>Reset</button>
       </div>
       {saveAsItem !== null && <SaveAsDialog defaultName={saveAsItem.name} onSave={doSaveAs} onCancel={function() { setSaveAsItem(null); }} />}

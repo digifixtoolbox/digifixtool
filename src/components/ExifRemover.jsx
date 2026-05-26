@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import SaveAsDialog from "./SaveAsDialog";
+import { iconSvgs } from '../data/iconSvgs.js';
 
 function formatSize(bytes) {
   if (bytes < 1024) return bytes + " B";
@@ -163,7 +164,7 @@ export default function ExifRemover() {
             style={{ display: "none" }}
             onChange={function (e) { loadFile(e.target.files[0]); }}
           />
-          <div style={{ fontSize: "48px", marginBottom: "14px", lineHeight: 1 }}><i className="ti ti-shield-off" style={{color:'#30A46C'}}></i></div>
+          <div style={{ fontSize: "48px", marginBottom: "14px", lineHeight: 1 }}><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#30A46C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" dangerouslySetInnerHTML={{ __html: iconSvgs['shield-off'] }} /></div>
           <p style={{ fontSize: "18px", fontWeight: "700", marginBottom: "6px", color: "var(--text)" }}>
             Drop a photo here
           </p>
@@ -266,7 +267,7 @@ export default function ExifRemover() {
               <>
                 <button onClick={download} style={saveBtn}>Save</button>
                 <button onClick={handleSaveAs} style={saveAsBtn}>Save As...</button>
-                {supportsFileShare && <button onClick={handleShare} style={shareBtn}><i className="ti ti-share" /> Share</button>}
+                {supportsFileShare && <button onClick={handleShare} style={shareBtn}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" dangerouslySetInnerHTML={{ __html: iconSvgs['share'] }} /> Share</button>}
               </>
             )}
             <button onClick={reset} style={resetBtn}>Reset</button>

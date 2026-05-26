@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import SaveAsDialog from "./SaveAsDialog";
+import { iconSvgs } from '../data/iconSvgs.js';
 
 var supportsFileShare = (function() {
   try { return typeof navigator !== 'undefined' && !!navigator.share && !!navigator.canShare && navigator.canShare({ files: [new File([], 't.jpg', { type: 'image/jpeg' })] }); }
@@ -142,7 +143,7 @@ export default function BackgroundRemover() {
           onDragLeave={() => setIsDragging(false)}
           onClick={() => fileInputRef.current.click()}
         >
-          <div style={s.uploadIcon}><i className="ti ti-wand" style={{color:'#E54D2E'}}></i></div>
+          <div style={s.uploadIcon}><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#E54D2E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" dangerouslySetInnerHTML={{ __html: iconSvgs['wand'] }} /></div>
           <h2 style={s.dropTitle}>Drop your image here</h2>
           <p style={s.dropText}>JPG, PNG or WebP. AI removes the background in your browser.</p>
           <p style={{fontSize:12,color:"#6b7280",marginBottom:16}}>Maximum file size: 20MB</p>
@@ -201,7 +202,7 @@ export default function BackgroundRemover() {
               <>
                 <button onClick={handleSave} style={saveBtn} type="button">Save</button>
                 <button onClick={handleSaveAs} style={saveAsBtn} type="button">Save As...</button>
-                {supportsFileShare && <button onClick={handleShare} style={shareBtn} type="button"><i className="ti ti-share" /> Share</button>}
+                {supportsFileShare && <button onClick={handleShare} style={shareBtn} type="button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" dangerouslySetInnerHTML={{ __html: iconSvgs['share'] }} /> Share</button>}
               </>
             )}
             <button onClick={reset} style={resetBtn} type="button">Reset</button>

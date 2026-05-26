@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import PromoBanner from '../components/PromoBanner.jsx';
 import ShareSection from '../components/ShareSection.astro';
+import { svgIcon } from '../data/iconSvgs.js';
 
 const tools = [
   // ── Image ──────────────────────────────────────────────────────────────────
@@ -137,7 +138,7 @@ const categories = ['All', 'Image', 'PDF', 'Text', 'Social', 'Developer', 'Utili
           data-search={(tool.name + ' ' + tool.description + ' ' + tool.category + ' ' + tool.tags.join(' ')).toLowerCase()}
         >
           <div class="tool-icon-wrap" data-icon-palette={tool.iconPalette}>
-            <i class={"ti ti-" + tool.iconClass}></i>
+            <Fragment set:html={svgIcon(tool.iconClass, { size: 38 })} />
           </div>
           <div class="tool-body">
             <div class="tool-name-row">

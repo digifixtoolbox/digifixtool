@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import SaveAsDialog from "./SaveAsDialog";
+import { iconSvgs } from '../data/iconSvgs.js';
 
 var supportsFileShare = (function() {
   try { return typeof navigator !== 'undefined' && !!navigator.share && !!navigator.canShare && navigator.canShare({ files: [new File([], 't.jpg', { type: 'image/jpeg' })] }); }
@@ -145,7 +146,7 @@ export default function ImageCropper() {
           style={{ border: "2px dashed var(--border)", borderRadius: "16px", padding: "48px 24px", textAlign: "center", cursor: "pointer", background: "var(--surface-2)" }}
           onClick={function() { document.getElementById("crop-input").click(); }}
         >
-          <div style={{ fontSize: "48px", marginBottom: "16px" }}><i className="ti ti-crop" style={{color:'#30A46C'}}></i></div>
+          <div style={{ fontSize: "48px", marginBottom: "16px" }}><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#30A46C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" dangerouslySetInnerHTML={{ __html: iconSvgs['crop'] }} /></div>
           <p style={{ fontSize: "17px", fontWeight: "600", marginBottom: "8px", color: "var(--text)" }}>Drop an image here</p>
           <p style={{ fontSize: "14px", color: "var(--text-muted)", marginBottom: "8px" }}>or click to browse</p>
           <p style={{ fontSize: "12px", color: "var(--text-muted)", marginBottom: "20px" }}>Maximum file size: 50MB</p>
@@ -188,7 +189,7 @@ export default function ImageCropper() {
             </button>
             <button onClick={handleSave} disabled={!croppedUrl} style={{ ...saveBtn, opacity: croppedUrl ? 1 : 0.5, cursor: croppedUrl ? "pointer" : "not-allowed" }}>Save</button>
             <button onClick={handleSaveAs} disabled={!croppedUrl} style={{ ...saveAsBtn, opacity: croppedUrl ? 1 : 0.5, cursor: croppedUrl ? "pointer" : "not-allowed" }}>Save As...</button>
-            {supportsFileShare && croppedUrl && <button onClick={handleShare} style={shareBtn}><i className="ti ti-share" /> Share</button>}
+            {supportsFileShare && croppedUrl && <button onClick={handleShare} style={shareBtn}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" dangerouslySetInnerHTML={{ __html: iconSvgs['share'] }} /> Share</button>}
             <button onClick={reset} style={resetBtn}>Reset</button>
           </div>
         </div>

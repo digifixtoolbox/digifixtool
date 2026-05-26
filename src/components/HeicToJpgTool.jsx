@@ -1,5 +1,6 @@
 import { useState, useRef, useCallback } from 'react';
 import SaveAsDialog from "./SaveAsDialog";
+import { iconSvgs } from '../data/iconSvgs.js';
 
 // Lazy-load libheif-js (1.46 MB WASM bundle, only fetched on first conversion)
 let _libheifPromise = null;
@@ -582,7 +583,7 @@ export default function HeicToJpgTool() {
               fontFamily: 'inherit',
             }}
           >
-            <i className="ti ti-share" /> Share
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" dangerouslySetInnerHTML={{ __html: iconSvgs['share'] }} /> Share
           </button>
         )}
         <button

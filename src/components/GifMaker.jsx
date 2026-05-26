@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import SaveAsDialog from "./SaveAsDialog";
+import { iconSvgs } from '../data/iconSvgs.js';
 
 var supportsFileShare = (function() {
   try { return typeof navigator !== 'undefined' && !!navigator.share && !!navigator.canShare && navigator.canShare({ files: [new File([], 't.gif', { type: 'image/gif' })] }); }
@@ -231,7 +232,7 @@ export default function GifMaker() {
           <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", justifyContent: "center", marginTop: "12px" }}>
             <button onClick={handleSave} style={saveBtn}>Save</button>
             <button onClick={handleSaveAs} style={saveAsBtn}>Save As...</button>
-            {supportsFileShare && <button onClick={handleShare} style={shareBtn}><i className="ti ti-share" /> Share</button>}
+            {supportsFileShare && <button onClick={handleShare} style={shareBtn}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" dangerouslySetInnerHTML={{ __html: iconSvgs['share'] }} /> Share</button>}
             <button onClick={reset} style={resetBtn}>Reset</button>
           </div>
         </div>

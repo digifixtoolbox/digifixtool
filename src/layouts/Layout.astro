@@ -17,7 +17,7 @@ const ogImage = image || 'https://www.pixmidas.com/og-image.png';
 const ogImageAlt = "PixMidas, Free Online Tools";
 const isToolPage = Astro.url.pathname.startsWith('/tools/');
 const showShare = isToolPage;
-const FONT_URL = 'https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap';
+const FONT_URL = 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap';
 
 let toolCategory = null;
 if (isToolPage) {
@@ -73,16 +73,11 @@ const breadcrumbSchema = isToolPage ? JSON.stringify({
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preconnect" href="https://www.googletagmanager.com" />
-  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
 
   <!-- Non-blocking Inter font -->
   <link rel="preload" as="style" href={FONT_URL} />
   <link rel="stylesheet" href={FONT_URL} media="print" onload="this.media='all'" />
   <noscript><link rel="stylesheet" href={FONT_URL} /></noscript>
-  <link rel="preload" as="style" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.44.0/dist/tabler-icons.min.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.44.0/dist/tabler-icons.min.css" media="print" onload="this.media='all'" />
-  <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.44.0/dist/tabler-icons.min.css" /></noscript>
-
   <!-- Open Graph -->
   <meta property="og:title" content={fullTitle} />
   <meta property="og:description" content={description} />
@@ -151,7 +146,7 @@ const breadcrumbSchema = isToolPage ? JSON.stringify({
 
       <a href="/" class="logo">
         <div style="display: flex; align-items: center; gap: 6px;">
-          <i class="ti ti-bolt" style="font-size: 20px; color: #F5A623;"></i>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F5A623" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M13 3l0 7l6 0l-8 11l0 -7l-6 0l8 -11"/></svg>
           <span style="font-size: 18px; font-weight: 800; letter-spacing: -0.5px; line-height: 1;">
             <span style="color: #F5A623;">Pix</span><span style="color: inherit;">Midas</span>
           </span>

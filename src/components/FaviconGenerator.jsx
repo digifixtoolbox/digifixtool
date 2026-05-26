@@ -1,5 +1,6 @@
 import { useState } from "react";
 import SaveAsDialog from "./SaveAsDialog";
+import { iconSvgs } from '../data/iconSvgs.js';
 
 var supportsFileShare = (function() {
   try { return typeof navigator !== 'undefined' && !!navigator.share && !!navigator.canShare && navigator.canShare({ files: [new File([], 't.zip', { type: 'application/zip' })] }); }
@@ -145,7 +146,7 @@ export default function FaviconGenerator() {
         onDrop={handleDrop}
         style={{ border: "2px dashed " + (dragOver ? "var(--upload-btn-bg)" : "var(--border)"), borderRadius: "16px", padding: "48px 24px", textAlign: "center", cursor: "pointer", background: dragOver ? "var(--accent-light)" : "var(--surface-2)", transition: "border-color 0.15s, background 0.15s" }}
       >
-        <div style={{ fontSize: "48px", marginBottom: "16px" }}><i className="ti ti-browser" style={{color:'#30A46C'}}></i></div>
+        <div style={{ fontSize: "48px", marginBottom: "16px" }}><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#30A46C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" dangerouslySetInnerHTML={{ __html: iconSvgs['browser'] }} /></div>
         <p style={{ fontSize: "17px", fontWeight: "600", marginBottom: "8px", color: "var(--text)" }}>Drop an image here or click to browse</p>
         <p style={{ fontSize: "14px", color: "var(--text-muted)", marginBottom: "8px" }}>JPG, PNG, WebP, or SVG. Square images work best</p>
         <p style={{ fontSize: "12px", color: "var(--text-muted)", marginBottom: "20px" }}>Maximum file size: 50MB</p>
@@ -193,7 +194,7 @@ export default function FaviconGenerator() {
           {zipping ? "Creating ZIP..." : "Save"}
         </button>
         <button onClick={handleSaveAs} disabled={zipping} style={{ ...saveAsBtn, opacity: zipping ? 0.7 : 1, cursor: zipping ? "not-allowed" : "pointer" }}>Save As...</button>
-        {supportsFileShare && <button onClick={handleShare} disabled={zipping} style={{ ...shareBtn, opacity: zipping ? 0.7 : 1, cursor: zipping ? "not-allowed" : "pointer" }}><i className="ti ti-share" /> Share</button>}
+        {supportsFileShare && <button onClick={handleShare} disabled={zipping} style={{ ...shareBtn, opacity: zipping ? 0.7 : 1, cursor: zipping ? "not-allowed" : "pointer" }}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" dangerouslySetInnerHTML={{ __html: iconSvgs['share'] }} /> Share</button>}
         <button onClick={function() { setImageUrl(null); setError(""); }} style={resetBtn}>Reset</button>
       </div>
       {saveAsName !== null && <SaveAsDialog defaultName={saveAsName} onSave={doSaveAs} onCancel={function() { setSaveAsName(null); }} />}

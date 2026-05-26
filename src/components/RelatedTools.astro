@@ -1,5 +1,6 @@
 ---
 import { getRelatedTools } from '../data/tools.js';
+import { svgIcon } from '../data/iconSvgs.js';
 
 interface Props {
   slugs: string[];
@@ -16,7 +17,7 @@ const tools = getRelatedTools(slugs);
       {tools.map((tool) => (
         <a href={`/tools/${tool.slug}/`} class="related-card">
           <div class="related-icon-box" data-icon-palette={tool.iconPalette}>
-            <i class={`ti ti-${tool.iconClass}`}></i>
+            <Fragment set:html={svgIcon(tool.iconClass, { size: 26 })} />
           </div>
           <div class="related-info">
             <span class="related-name">{tool.name}</span>

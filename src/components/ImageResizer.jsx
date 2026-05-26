@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import SaveAsDialog from "./SaveAsDialog";
+import { iconSvgs } from '../data/iconSvgs.js';
 
 var supportsFileShare = (function() {
   try { return typeof navigator !== 'undefined' && !!navigator.share && !!navigator.canShare && navigator.canShare({ files: [new File([], 't.jpg', { type: 'image/jpeg' })] }); }
@@ -129,7 +130,7 @@ export default function ImageResizer() {
           onDrop={(e) => { e.preventDefault(); handleFile(e.dataTransfer.files[0]); }}
           onDragOver={(e) => e.preventDefault()}
         >
-          <div style={{fontSize:48,marginBottom:16}}><i className="ti ti-resize" style={{color:'#0090FF'}}></i></div>
+          <div style={{fontSize:48,marginBottom:16}}><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#0090FF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" dangerouslySetInnerHTML={{ __html: iconSvgs['resize'] }} /></div>
           <h2 style={{fontSize:24,fontWeight:800,marginBottom:8,color:"var(--text)"}}>Drop your image here</h2>
           <p style={{fontSize:15,color:"var(--text-muted)",marginBottom:8}}>JPG, PNG or WebP. Resize to any dimension.</p>
           <p style={{fontSize:12,color:"var(--text-muted)",marginBottom:24}}>Maximum file size: 50MB</p>
@@ -168,7 +169,7 @@ export default function ImageResizer() {
             <div style={btnRow}>
               <button onClick={() => { var a=document.createElement("a"); a.href=resizedUrl; a.download=dlName; a.click(); }} style={saveBtn}>Save</button>
               <button onClick={() => handleSaveAs(resizedUrl, dlName)} style={saveAsBtn}>Save As...</button>
-              {supportsFileShare && <button onClick={handleShare} style={shareBtn}><i className="ti ti-share" /> Share</button>}
+              {supportsFileShare && <button onClick={handleShare} style={shareBtn}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" dangerouslySetInnerHTML={{ __html: iconSvgs['share'] }} /> Share</button>}
               <button onClick={reset} style={resetBtn}>Reset</button>
             </div>
           )}
