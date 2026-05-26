@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { iconSvgs } from '../data/iconSvgs.js';
+import { IconScan } from '@tabler/icons-react';
 
 var _tesseractPromise = null;
 function loadTesseract() {
@@ -86,7 +86,7 @@ export default function ImageToText() {
         onDrop={handleDrop}
         style={{ border: "2px dashed " + (dragOver ? "var(--upload-btn-bg)" : "var(--border)"), borderRadius: "16px", padding: "48px 24px", textAlign: "center", cursor: "pointer", background: dragOver ? "var(--accent-light)" : "var(--surface-2)", transition: "border-color 0.15s, background 0.15s" }}
       >
-        <div style={{ fontSize: "48px", marginBottom: "16px" }}><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#E54D2E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" dangerouslySetInnerHTML={{ __html: iconSvgs['scan'] }} /></div>
+        <div style={{ fontSize: "48px", marginBottom: "16px" }}><IconScan size={48} color="#E54D2E" stroke={2} /></div>
         <p style={{ fontSize: "17px", fontWeight: "600", marginBottom: "8px", color: "var(--text)" }}>Drop an image here or click to browse</p>
         <p style={{ fontSize: "14px", color: "var(--text-muted)", marginBottom: "8px" }}>Supports JPG, PNG, WebP, GIF, BMP</p>
         <p style={{ fontSize: "12px", color: "var(--text-muted)", marginBottom: "20px" }}>Maximum file size: 20MB</p>

@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import SaveAsDialog from "./SaveAsDialog";
-import { iconSvgs } from '../data/iconSvgs.js';
+import { IconWriting, IconShare } from '@tabler/icons-react';
 
 var supportsFileShare = (function() {
   try { return typeof navigator !== 'undefined' && !!navigator.share && !!navigator.canShare && navigator.canShare({ files: [new File([], 't.jpg', { type: 'image/jpeg' })] }); }
@@ -137,7 +137,7 @@ export default function ImageWatermark() {
         onDrop={handleDrop}
         style={{ border: "2px dashed " + (dragOver ? "var(--upload-btn-bg)" : "var(--border)"), borderRadius: "16px", padding: "48px 24px", textAlign: "center", cursor: "pointer", background: dragOver ? "var(--accent-light)" : "var(--surface-2)", transition: "border-color 0.15s, background 0.15s" }}
       >
-        <div style={{ fontSize: "48px", marginBottom: "16px" }}><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#5B5BD6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" dangerouslySetInnerHTML={{ __html: iconSvgs['writing'] }} /></div>
+        <div style={{ fontSize: "48px", marginBottom: "16px" }}><IconWriting size={48} color="#5B5BD6" stroke={2} /></div>
         <p style={{ fontSize: "17px", fontWeight: "600", marginBottom: "8px", color: "var(--text)" }}>Drop an image here or click to browse</p>
         <p style={{ fontSize: "14px", color: "var(--text-muted)", marginBottom: "8px" }}>Supports JPG, PNG, WebP</p>
         <p style={{ fontSize: "12px", color: "var(--text-muted)", marginBottom: "20px" }}>Maximum file size: 50MB</p>
@@ -205,7 +205,7 @@ export default function ImageWatermark() {
       <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", marginTop: "16px", justifyContent: "center" }}>
         <button onClick={handleSave} style={saveBtn}>Save</button>
         <button onClick={handleSaveAs} style={saveAsBtn}>Save As...</button>
-        {supportsFileShare && imageUrl && <button onClick={handleShare} style={shareBtn}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" dangerouslySetInnerHTML={{ __html: iconSvgs['share'] }} /> Share</button>}
+        {supportsFileShare && imageUrl && <button onClick={handleShare} style={shareBtn}><IconShare size={16} stroke={2} /> Share</button>}
         <button onClick={resetAll} style={resetBtn}>Reset</button>
       </div>
       {saveAsName !== null && <SaveAsDialog defaultName={saveAsName} onSave={doSaveAs} onCancel={function() { setSaveAsName(null); }} />}

@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import SaveAsDialog from "./SaveAsDialog";
-import { iconSvgs } from '../data/iconSvgs.js';
+import { IconArrowsExchange, IconShare } from '@tabler/icons-react';
 
 var supportsFileShare = (function() {
   try { return typeof navigator !== 'undefined' && !!navigator.share && !!navigator.canShare && navigator.canShare({ files: [new File([], 't.jpg', { type: 'image/jpeg' })] }); }
@@ -124,7 +124,7 @@ export default function ImageConverter() {
           onClick={() => fileInputRef.current.click()}
           onDrop={(e) => { e.preventDefault(); handleFile(e.dataTransfer.files[0]); }}
           onDragOver={(e) => e.preventDefault()}>
-          <div style={{fontSize:48,marginBottom:16}}><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#0090FF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" dangerouslySetInnerHTML={{ __html: iconSvgs['arrows-exchange'] }} /></div>
+          <div style={{fontSize:48,marginBottom:16}}><IconArrowsExchange size={48} color="#0090FF" stroke={2} /></div>
           <h2 style={{fontSize:24,fontWeight:800,marginBottom:8,color:"var(--text)"}}>Drop your image here</h2>
           <p style={{fontSize:15,color:"var(--text-muted)",marginBottom:8}}>
             {mode === "to-jpg" ? "Upload a PNG or WebP to convert to JPG" : "Upload a JPG or WebP to convert to PNG"}
@@ -169,7 +169,7 @@ export default function ImageConverter() {
               <div style={btnRow}>
                 <button onClick={() => { var a=document.createElement("a"); a.href=convertedUrl; a.download=dlName; a.click(); }} style={saveBtn}>Save</button>
                 <button onClick={() => handleSaveAs(convertedUrl, dlName)} style={saveAsBtn}>Save As...</button>
-                {supportsFileShare && <button onClick={handleShare} style={shareBtn}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" dangerouslySetInnerHTML={{ __html: iconSvgs['share'] }} /> Share</button>}
+                {supportsFileShare && <button onClick={handleShare} style={shareBtn}><IconShare size={16} stroke={2} /> Share</button>}
                 <button onClick={reset} style={resetBtn}>Reset</button>
               </div>
             </>

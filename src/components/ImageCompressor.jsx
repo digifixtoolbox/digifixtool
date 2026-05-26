@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import SaveAsDialog from "./SaveAsDialog";
-import { iconSvgs } from '../data/iconSvgs.js';
+import { IconFileZip, IconShare } from '@tabler/icons-react';
 
 var supportsFileShare = (function() {
   try { return typeof navigator !== 'undefined' && !!navigator.share && !!navigator.canShare && navigator.canShare({ files: [new File([], 't.jpg', { type: 'image/jpeg' })] }); }
@@ -283,7 +283,7 @@ export default function ImageCompressor() {
           onDragLeave={() => setIsDragging(false)}
           onClick={() => fileInputRef.current.click()}
         >
-          <div style={s.uploadIcon}><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#5B5BD6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" dangerouslySetInnerHTML={{ __html: iconSvgs['file-zip'] }} /></div>
+          <div style={s.uploadIcon}><IconFileZip size={48} color="#5B5BD6" stroke={2} /></div>
           <h2 style={s.dropTitle}>Drop your image here</h2>
           <p style={s.dropText}>JPG, PNG or WebP. Runs entirely in your browser.</p>
           <p style={{fontSize:12,color:"#6b7280",marginBottom:16}}>Maximum file size: 50MB</p>
@@ -422,7 +422,7 @@ export default function ImageCompressor() {
                   <button onClick={handleOpenToSave} style={s.downloadBtn} type="button">
                     ↗ Open to Save
                   </button>
-                  {supportsFileShare && <button onClick={handleShare} style={s.saveAsBtn} type="button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" dangerouslySetInnerHTML={{ __html: iconSvgs['share'] }} /> Share</button>}
+                  {supportsFileShare && <button onClick={handleShare} style={s.saveAsBtn} type="button"><IconShare size={16} stroke={2} /> Share</button>}
                 </>
               ) : (
                 <>
@@ -432,7 +432,7 @@ export default function ImageCompressor() {
                   <button onClick={handleSaveAs} style={s.saveAsBtn} type="button">
                     ⬇ Save As…
                   </button>
-                  {supportsFileShare && <button onClick={handleShare} style={s.saveAsBtn} type="button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" dangerouslySetInnerHTML={{ __html: iconSvgs['share'] }} /> Share</button>}
+                  {supportsFileShare && <button onClick={handleShare} style={s.saveAsBtn} type="button"><IconShare size={16} stroke={2} /> Share</button>}
                 </>
               )
             )}

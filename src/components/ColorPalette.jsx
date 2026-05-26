@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import SaveAsDialog from "./SaveAsDialog";
-import { iconSvgs } from '../data/iconSvgs.js';
+import { IconPalette, IconShare } from '@tabler/icons-react';
 
 var supportsFileShare = (function() {
   try { return typeof navigator !== 'undefined' && !!navigator.share && !!navigator.canShare && navigator.canShare({ files: [new File([], 't.png', { type: 'image/png' })] }); }
@@ -168,7 +168,7 @@ export default function ColorPalette() {
           onDrop={handleDrop}
           style={{ border: "2px dashed " + (dragOver ? "#0071e3" : "var(--border)"), borderRadius: "16px", padding: "48px 24px", textAlign: "center", cursor: "pointer", background: dragOver ? "#f0f7ff" : "var(--surface-2)", transition: "border-color 0.15s, background 0.15s" }}
         >
-          <div style={{ fontSize: "48px", marginBottom: "16px" }}><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#D6409F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" dangerouslySetInnerHTML={{ __html: iconSvgs['palette'] }} /></div>
+          <div style={{ fontSize: "48px", marginBottom: "16px" }}><IconPalette size={48} color="#D6409F" stroke={2} /></div>
           <p style={{ fontSize: "17px", fontWeight: "600", marginBottom: "8px", color: "var(--text)" }}>Drop an image here or click to browse</p>
           <p style={{ fontSize: "14px", color: "var(--text-muted)", marginBottom: "8px" }}>Extracts up to 6 dominant colors</p>
           <p style={{ fontSize: "12px", color: "var(--text-muted)", marginBottom: "20px" }}>Maximum file size: 50MB</p>
@@ -209,7 +209,7 @@ export default function ColorPalette() {
           <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", marginTop: "16px", justifyContent: "center" }}>
             <button onClick={handleSave} style={saveBtn}>Save</button>
             <button onClick={handleSaveAs} style={saveAsBtn}>Save As...</button>
-            {supportsFileShare && <button onClick={handleShare} style={shareBtn}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" dangerouslySetInnerHTML={{ __html: iconSvgs['share'] }} /> Share</button>}
+            {supportsFileShare && <button onClick={handleShare} style={shareBtn}><IconShare size={16} stroke={2} /> Share</button>}
             <button onClick={function() { setImageUrl(null); setPalette([]); }} style={resetBtn}>Reset</button>
           </div>
         </div>

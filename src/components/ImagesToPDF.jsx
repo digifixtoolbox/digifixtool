@@ -1,6 +1,6 @@
 import { useState, useRef, useCallback } from "react";
 import SaveAsDialog from "./SaveAsDialog";
-import { iconSvgs } from '../data/iconSvgs.js';
+import { IconFileImport, IconShare } from '@tabler/icons-react';
 import { PDFDocument } from "pdf-lib";
 
 var supportsFileShare = (function() {
@@ -228,7 +228,7 @@ export default function ImagesToPDF() {
         />
         {images.length === 0 ? (
           <div>
-            <div style={{ fontSize: "40px", marginBottom: "12px" }}><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#E54D2E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" dangerouslySetInnerHTML={{ __html: iconSvgs['file-import'] }} /></div>
+            <div style={{ fontSize: "40px", marginBottom: "12px" }}><IconFileImport size={40} color="#E54D2E" stroke={2} /></div>
             <p style={{ fontSize: "17px", fontWeight: "600", color: "#1d1d1f", marginBottom: "6px" }}>
               Drop images here or <span style={{ color: "var(--upload-btn-bg)" }}>browse</span>
             </p>
@@ -303,7 +303,7 @@ export default function ImagesToPDF() {
             <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", marginTop: "10px", justifyContent: "center" }}>
               <button onClick={handleSave} style={saveBtn}>Save</button>
               <button onClick={handleSaveAs} style={saveAsBtn}>Save As...</button>
-              {supportsFileShare && <button onClick={handleShare} style={shareBtn}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" dangerouslySetInnerHTML={{ __html: iconSvgs['share'] }} /> Share</button>}
+              {supportsFileShare && <button onClick={handleShare} style={shareBtn}><IconShare size={16} stroke={2} /> Share</button>}
               <button onClick={reset} style={resetBtn}>Reset</button>
             </div>
           )}

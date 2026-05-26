@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { iconSvgs } from '../data/iconSvgs.js';
+import { IconInfoCircle } from '@tabler/icons-react';
 
 export default function ImageInfo() {
   const fileInputRef = useRef(null);
@@ -68,7 +68,7 @@ export default function ImageInfo() {
           onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
           onDragLeave={() => setIsDragging(false)}
         >
-          <div style={{fontSize:48,marginBottom:16}}><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#5B5BD6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" dangerouslySetInnerHTML={{ __html: iconSvgs['info-circle'] }} /></div>
+          <div style={{fontSize:48,marginBottom:16}}><IconInfoCircle size={48} color="#5B5BD6" stroke={2} /></div>
           <h2 style={{fontSize:24,fontWeight:800,marginBottom:8,color:"var(--text)"}}>Drop your image here</h2>
           <p style={{fontSize:15,color:"var(--text-muted)",marginBottom:8}}>Upload any image to see its dimensions and details.</p>
           <p style={{fontSize:12,color:"var(--text-muted)",marginBottom:24}}>Maximum file size: 50MB</p>

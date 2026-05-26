@@ -11,8 +11,12 @@
     "@astrojs/react": "^3.0.0",
     "@astrojs/sitemap": "^3.1.6",
     "@imgly/background-removal": "^1.7.0",
+    "@tabler/icons-react": "^3.44.0",
     "astro": "^4.0.0",
-    "lucide-react": "^0.383.0",
+    "heic2any": "^0.0.4",
+    "libheif-js": "^1.19.8",
+    "pdf-lib": "^1.17.1",
+    "qrcode": "^1.5.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

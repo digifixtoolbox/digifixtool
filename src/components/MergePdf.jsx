@@ -1,6 +1,6 @@
 import { useState } from "react";
 import SaveAsDialog from "./SaveAsDialog";
-import { iconSvgs } from '../data/iconSvgs.js';
+import { IconShare } from '@tabler/icons-react';
 
 var _pdfLibPromise = null;
 function loadPdfLib() {
@@ -206,7 +206,7 @@ export default function MergePdf() {
         <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", marginBottom: "10px", justifyContent: "center" }}>
           <button onClick={handleSave} style={saveBtn}>Save</button>
           <button onClick={handleSaveAs} style={saveAsBtn}>Save As...</button>
-          {supportsFileShare && <button onClick={handleShare} style={shareBtn}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" dangerouslySetInnerHTML={{ __html: iconSvgs['share'] }} /> Share</button>}
+          {supportsFileShare && <button onClick={handleShare} style={shareBtn}><IconShare size={16} stroke={2} /> Share</button>}
           <button onClick={reset} style={resetBtn}>Reset</button>
         </div>
       )}
