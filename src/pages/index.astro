@@ -146,18 +146,16 @@ const paletteColors = {
           data-new={tool.newTool ? 'true' : 'false'}
           data-search={(tool.name + ' ' + tool.description + ' ' + tool.category + ' ' + tool.tags.join(' ')).toLowerCase()}
         >
-          <div class="tool-badge-row">
-            {tool.popular && <span class="badge">Popular</span>}
-            {tool.newTool && <span class="badge badge-new">New</span>}
+          <div class="tool-icon-wrap" data-icon-palette={tool.iconPalette}>
+            <ToolIcon name={tool.iconClass} size={38} color={paletteColors[tool.iconPalette] || 'currentColor'} stroke={1.75} />
           </div>
-          <div class="tool-content-row">
-            <div class="tool-icon-wrap" data-icon-palette={tool.iconPalette}>
-              <ToolIcon name={tool.iconClass} size={38} color={paletteColors[tool.iconPalette] || 'currentColor'} stroke={1.75} />
+          <div class="tool-text">
+            <div class="tool-badge-row">
+              {tool.popular && <span class="badge">Popular</span>}
+              {tool.newTool && <span class="badge badge-new">New</span>}
             </div>
-            <div class="tool-text">
-              <h3 class="tool-name">{tool.name}</h3>
-              <p class="tool-desc">{tool.description}</p>
-            </div>
+            <h3 class="tool-name">{tool.name}</h3>
+            <p class="tool-desc">{tool.description}</p>
           </div>
           <span class="tool-arrow">→</span>
         </a>
@@ -998,7 +996,9 @@ const paletteColors = {
 
   .tool-card {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
     position: relative;
     background: var(--surface);
     border: 1px solid var(--border-light);
@@ -1033,28 +1033,25 @@ const paletteColors = {
     transform: scale(1.05);
   }
 
-  .tool-content-row {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    flex: 1;
-  }
-
   .tool-text {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 2px;
     flex: 1;
     min-width: 0;
+    justify-content: center;
   }
 
   .tool-badge-row {
     display: flex;
     flex-wrap: wrap;
     gap: 4px;
-    min-height: 24px;
-    margin-bottom: 8px;
     align-items: center;
+    margin-bottom: 4px;
+  }
+
+  .tool-badge-row:empty {
+    display: none;
   }
 
   .tool-name {
