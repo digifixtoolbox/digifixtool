@@ -8,8 +8,8 @@ const tools = [
   // ── Image ──────────────────────────────────────────────────────────────────
   { slug: 'compress-image', name: 'Image Compressor', description: 'Make image files smaller without losing quality.', iconClass: 'file-zip', iconPalette: 'purple', category: 'Image', popular: true, tags: ['photo', 'foto', 'picture', 'photography', 'editing', 'image editing', 'jpg', 'jpeg', 'png', 'webp', 'shrink', 'reduce', 'optimize', 'optimise', 'smaller', 'file size', 'upload', 'lighter', 'web', 'website speed', 'loading', 'performance', 'reduce size', 'make smaller'] },
   { slug: 'resize-image', name: 'Image Resizer', description: 'Resize photos to exact pixel dimensions.', iconClass: 'resize', iconPalette: 'blue', category: 'Image', popular: true, tags: ['photo', 'foto', 'picture', 'photography', 'editing', 'image editing', 'scale', 'dimensions', 'width', 'height', 'pixels', 'resolution', 'thumbnail', 'rescale', 'stretch', 'change size', 'make bigger', 'make smaller', 'fit', 'custom size'] },
-  { slug: 'heic-to-jpg', name: 'HEIC to JPG', description: 'Convert iPhone photos to JPG instantly.', iconClass: 'refresh', iconPalette: 'blue', category: 'Image', popular: true, newTool: true, tags: ['apple', 'iphone', 'heic', 'heif', 'convert', 'photo', 'ios', 'compatibility', 'windows', 'open heic'] },
-  { slug: 'background-remover', name: 'Background Remover', description: 'Remove the background from any image instantly using AI.', iconClass: 'wand', iconPalette: 'coral', category: 'Image', popular: true, newTool: true, tags: ['photo', 'foto', 'picture', 'photography', 'editing', 'image editing', 'background', 'remove background', 'transparent', 'png', 'cutout', 'erase background', 'photo editing', 'ai', 'artificial intelligence', 'subject', 'portrait', 'product photo', 'studio', 'white background', 'silhouette', 'transparency'] },
+  { slug: 'heic-to-jpg', name: 'HEIC to JPG', description: 'Convert iPhone photos to JPG instantly.', iconClass: 'refresh', iconPalette: 'blue', category: 'Image', popular: true, tags: ['apple', 'iphone', 'heic', 'heif', 'convert', 'photo', 'ios', 'compatibility', 'windows', 'open heic'] },
+  { slug: 'background-remover', name: 'Background Remover', description: 'Remove the background from any image instantly using AI.', iconClass: 'wand', iconPalette: 'coral', category: 'Image', popular: true, tags: ['photo', 'foto', 'picture', 'photography', 'editing', 'image editing', 'background', 'remove background', 'transparent', 'png', 'cutout', 'erase background', 'photo editing', 'ai', 'artificial intelligence', 'subject', 'portrait', 'product photo', 'studio', 'white background', 'silhouette', 'transparency'] },
   { slug: 'image-cropper', name: 'Image Cropper', description: 'Crop any image instantly. Draw a selection and download.', iconClass: 'crop', iconPalette: 'green', category: 'Image', tags: ['photo', 'foto', 'picture', 'photography', 'editing', 'image editing', 'photo editing', 'trim', 'cut', 'frame', 'aspect ratio', 'portrait', 'landscape', 'square', 'selection', 'clip', 'cut out', 'remove border'] },
   { slug: 'convert-image', name: 'Image Converter', description: 'Convert PNG to JPG or JPG to PNG in one click.', iconClass: 'arrows-exchange', iconPalette: 'blue', category: 'Image', tags: ['photo', 'foto', 'picture', 'photography', 'editing', 'image editing', 'format', 'jpg', 'jpeg', 'png', 'webp', 'gif', 'bmp', 'tiff', 'change format', 'transform', 'export', 'save as', 'file format'] },
   { slug: 'webp-to-jpg', name: 'WebP to JPG', description: 'Convert WebP images to JPG instantly. Multiple files supported.', iconClass: 'photo', iconPalette: 'blue', category: 'Image', tags: ['photo', 'foto', 'picture', 'photography', 'editing', 'image editing', 'format', 'convert', 'webp converter', 'compatibility', 'apple', 'ios', 'safari', 'chrome', 'browser', 'batch', 'multiple files'] },
@@ -38,7 +38,7 @@ const tools = [
   // ── Social ─────────────────────────────────────────────────────────────────
   { slug: 'social-sizes', name: 'Social Media Sizes', description: 'Find the correct image size for every social platform.', iconClass: 'device-mobile', iconPalette: 'purple', category: 'Social', newTool: true, tags: ['internet', 'web', 'online', 'network', 'media', 'photo', 'foto', 'picture', 'photography', 'design', 'creation', 'instagram', 'facebook', 'twitter', 'x', 'youtube', 'tiktok', 'linkedin', 'pinterest', 'snapchat', 'reddit', 'banner', 'cover photo', 'profile picture', 'post', 'social media', 'dimensions', 'thumbnail', 'story', 'reel', 'header', 'marketing', 'content creator', 'influencer', 'digital marketing', 'ads'] },
   // ── Utility ────────────────────────────────────────────────────────────────
-  { slug: 'qr-code', name: 'QR Code Generator', description: 'Create QR codes for any link, text or phone number.', iconClass: 'qrcode', iconPalette: 'purple', category: 'Utility', popular: true, newTool: true, tags: ['internet', 'web', 'online', 'network', 'creation', 'link', 'url', 'scan', 'barcode', 'mobile', 'phone', 'camera', 'wifi', 'contact', 'vcard', 'share', 'digital', 'contactless', 'payment', 'restaurant menu', 'event', 'marketing', 'print', 'poster', 'business card'] },
+  { slug: 'qr-code', name: 'QR Code Generator', description: 'Create QR codes for any link, text or phone number.', iconClass: 'qrcode', iconPalette: 'purple', category: 'Utility', popular: true, tags: ['internet', 'web', 'online', 'network', 'creation', 'link', 'url', 'scan', 'barcode', 'mobile', 'phone', 'camera', 'wifi', 'contact', 'vcard', 'share', 'digital', 'contactless', 'payment', 'restaurant menu', 'event', 'marketing', 'print', 'poster', 'business card'] },
   { slug: 'color-picker', name: 'Color Picker', description: 'Pick any color and get HEX, RGB and HSL values.', iconClass: 'color-picker', iconPalette: 'pink', category: 'Utility', tags: ['internet', 'web', 'online', 'editing', 'creation', 'media', 'design', 'colour', 'colour picker', 'hex', 'rgb', 'hsl', 'cmyk', 'palette', 'brand', 'css', 'web design', 'graphics', 'shade', 'tint', 'art', 'ui', 'ux', 'branding', 'logo', 'color scheme', 'colour scheme', 'color code', 'colour code', 'website color', 'marketing'] },
   { slug: 'password-generator', name: 'Password Generator', description: 'Generate strong, secure passwords instantly.', iconClass: 'key', iconPalette: 'amber', category: 'Utility', popular: true, tags: ['internet', 'web', 'online', 'network', 'security', 'random', 'strong password', 'secure', 'credentials', 'login', 'account', 'passphrase', 'secret', 'cybersecurity', 'safe', 'protection', 'authentication', 'privacy', 'pin', 'encryption', 'hack proof'] },
 ];
@@ -148,12 +148,6 @@ const paletteColors = {
         >
           <div class="tool-icon-wrap" data-icon-palette={tool.iconPalette}>
             <ToolIcon name={tool.iconClass} size={38} color={paletteColors[tool.iconPalette] || 'currentColor'} stroke={1.75} />
-            {(tool.popular || tool.newTool) && (
-              <div class="tool-icon-badges">
-                {tool.popular && <span class="badge">Popular</span>}
-                {tool.newTool && <span class="badge badge-new">New</span>}
-              </div>
-            )}
           </div>
           <div class="tool-text">
             <h3 class="tool-name">{tool.name}</h3>
@@ -1005,7 +999,8 @@ const paletteColors = {
     background: var(--surface);
     border: 1px solid var(--border-light);
     border-radius: var(--radius);
-    padding: 20px 36px 16px 16px;
+    padding: 16px;
+    padding-right: 36px;
     text-decoration: none;
     color: inherit;
     transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
@@ -1020,7 +1015,6 @@ const paletteColors = {
   }
 
   .tool-icon-wrap {
-    position: relative;
     width: 60px;
     height: 60px;
     min-width: 60px;
@@ -1036,29 +1030,9 @@ const paletteColors = {
     transform: scale(1.05);
   }
 
-  .tool-icon-badges {
-    position: absolute;
-    top: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 3px;
-    white-space: nowrap;
-  }
-
-  .tool-icon-badges .badge,
-  .tool-icon-badges .badge-new {
-    font-size: 9px;
-    padding: 2px 6px;
-    border-radius: 10px;
-    font-weight: 700;
-    line-height: 1.4;
-  }
-
   .tool-text {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     gap: 4px;
     flex: 1;
     min-width: 0;
