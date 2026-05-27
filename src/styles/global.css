@@ -358,12 +358,6 @@ img {
 [data-icon-palette="amber"]  { background: rgba(160,96,16,0.03);  border: 1.5px solid #A06010; }
 [data-icon-palette="pink"]   { background: rgba(160,48,106,0.03); border: 1.5px solid #A0306A; }
 
-[data-icon-palette="purple"] i { color: #5746AF; }
-[data-icon-palette="blue"]   i { color: #1A6EBF; }
-[data-icon-palette="coral"]  i { color: #C44B20; }
-[data-icon-palette="green"]  i { color: #0D7A5A; }
-[data-icon-palette="amber"]  i { color: #A06010; }
-[data-icon-palette="pink"]   i { color: #A0306A; }
 
 [data-theme="dark"] [data-icon-palette="purple"] { background: rgba(87,70,175,0.05); }
 [data-theme="dark"] [data-icon-palette="blue"]   { background: rgba(26,110,191,0.05); }

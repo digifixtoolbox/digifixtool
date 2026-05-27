@@ -44,6 +44,15 @@ const tools = [
 ];
 
 const categories = ['All', 'Image', 'PDF', 'Text', 'Social', 'Developer', 'Utility'];
+
+const paletteColors = {
+  purple: '#5746AF',
+  blue:   '#1A6EBF',
+  coral:  '#C44B20',
+  green:  '#0D7A5A',
+  amber:  '#A06010',
+  pink:   '#A0306A',
+};
 ---
 
 <Layout
@@ -138,14 +147,16 @@ const categories = ['All', 'Image', 'PDF', 'Text', 'Social', 'Developer', 'Utili
           data-search={(tool.name + ' ' + tool.description + ' ' + tool.category + ' ' + tool.tags.join(' ')).toLowerCase()}
         >
           <div class="tool-icon-wrap" data-icon-palette={tool.iconPalette}>
-            <ToolIcon name={tool.iconClass} size={38} />
+            <ToolIcon name={tool.iconClass} size={38} color={paletteColors[tool.iconPalette] || 'currentColor'} stroke={1.75} />
           </div>
           <div class="tool-body">
-            <div class="tool-name-row">
-              <h3 class="tool-name">{tool.name}</h3>
-              {tool.popular && <span class="badge">Popular</span>}
-              {tool.newTool && <span class="badge badge-new">New</span>}
-            </div>
+            {(tool.popular || tool.newTool) && (
+              <div class="tool-badge-row">
+                {tool.popular && <span class="badge">Popular</span>}
+                {tool.newTool && <span class="badge badge-new">New</span>}
+              </div>
+            )}
+            <h3 class="tool-name">{tool.name}</h3>
             <p class="tool-desc">{tool.description}</p>
           </div>
           <span class="tool-arrow">→</span>
@@ -1015,7 +1026,11 @@ const categories = ['All', 'Image', 'PDF', 'Text', 'Social', 'Developer', 'Utili
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    font-size: 38px;
+    transition: transform 0.15s ease;
+  }
+
+  .tool-card:hover .tool-icon-wrap {
+    transform: scale(1.05);
   }
 
   .tool-body {
@@ -1023,12 +1038,11 @@ const categories = ['All', 'Image', 'PDF', 'Text', 'Social', 'Developer', 'Utili
     min-width: 0;
   }
 
-  .tool-name-row {
+  .tool-badge-row {
     display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 3px;
     flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: 2px;
   }
 
   .tool-name {
