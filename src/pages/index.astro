@@ -108,6 +108,7 @@ const paletteColors = {
     <div class="filter-bar-wrap">
       <div class="filter-bar">
         <button class="filter-btn" data-category="All" aria-pressed="true">All</button>
+        <button class="filter-btn filter-btn-new" data-category="New" aria-pressed="false">New</button>
         <button class="filter-btn filter-btn-popular" data-category="Popular" aria-pressed="false">Popular</button>
         <button class="filter-btn" data-category="Image" aria-pressed="false">Image</button>
         <button class="filter-btn" data-category="PDF" aria-pressed="false">PDF</button>
@@ -115,7 +116,6 @@ const paletteColors = {
         <button class="filter-btn" data-category="Social" aria-pressed="false">Social</button>
         <button class="filter-btn" data-category="Developer" aria-pressed="false">Code</button>
         <button class="filter-btn" data-category="Utility" aria-pressed="false">Tools</button>
-        <button class="filter-btn filter-btn-new" data-category="New" aria-pressed="false">New</button>
       </div>
     </div>
 
@@ -937,25 +937,25 @@ const paletteColors = {
   }
 
   .filter-btn.filter-btn-popular[aria-pressed="true"] {
-    background: var(--upload-btn-bg);
-    border-color: var(--upload-btn-bg);
+    background: #0071e3;
+    border-color: #0071e3;
     color: #fff;
   }
 
   :global([data-theme="dark"]) .filter-btn.filter-btn-popular[aria-pressed="true"] {
-    background: #60a5fa;
-    border-color: #60a5fa;
-    color: #000;
+    background: #0071e3;
+    border-color: #0071e3;
+    color: #fff;
   }
 
   .filter-btn-new {
     background: transparent;
-    border: 1.5px solid #00A040;
+    border: 1.5px solid #d1d5db;
     color: #000;
   }
 
   .filter-btn-new:hover {
-    background: rgba(0, 160, 64, 0.1);
+    background: rgba(0, 160, 64, 0.08);
     border-color: #00A040;
     color: #000;
   }
@@ -968,12 +968,12 @@ const paletteColors = {
 
   :global([data-theme="dark"]) .filter-btn.filter-btn-new {
     background: transparent;
-    border-color: #00A040;
+    border-color: #d1d5db;
     color: #fff;
   }
 
   :global([data-theme="dark"]) .filter-btn.filter-btn-new:hover {
-    background: rgba(0, 160, 64, 0.1);
+    background: rgba(0, 160, 64, 0.08);
     border-color: #00A040;
     color: #fff;
   }
@@ -1033,7 +1033,7 @@ const paletteColors = {
   .tool-text {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 2px;
     flex: 1;
     min-width: 0;
   }
