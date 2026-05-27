@@ -146,16 +146,18 @@ const paletteColors = {
           data-new={tool.newTool ? 'true' : 'false'}
           data-search={(tool.name + ' ' + tool.description + ' ' + tool.category + ' ' + tool.tags.join(' ')).toLowerCase()}
         >
-          <div class="tool-icon-wrap" data-icon-palette={tool.iconPalette}>
-            <ToolIcon name={tool.iconClass} size={38} color={paletteColors[tool.iconPalette] || 'currentColor'} stroke={1.75} />
+          <div class="tool-badge-row">
+            {tool.popular && <span class="badge">Popular</span>}
+            {tool.newTool && <span class="badge badge-new">New</span>}
           </div>
-          <div class="tool-body">
-            <div class="tool-badge-row">
-              {tool.popular && <span class="badge">Popular</span>}
-              {tool.newTool && <span class="badge badge-new">New</span>}
+          <div class="tool-content-row">
+            <div class="tool-icon-wrap" data-icon-palette={tool.iconPalette}>
+              <ToolIcon name={tool.iconClass} size={38} color={paletteColors[tool.iconPalette] || 'currentColor'} stroke={1.75} />
             </div>
-            <h3 class="tool-name">{tool.name}</h3>
-            <p class="tool-desc">{tool.description}</p>
+            <div class="tool-text">
+              <h3 class="tool-name">{tool.name}</h3>
+              <p class="tool-desc">{tool.description}</p>
+            </div>
           </div>
           <span class="tool-arrow">→</span>
         </a>
@@ -996,18 +998,17 @@ const paletteColors = {
 
   .tool-card {
     display: flex;
-    align-items: center;
-    gap: 16px;
+    flex-direction: column;
+    position: relative;
     background: var(--surface);
     border: 1px solid var(--border-light);
     border-radius: var(--radius);
-    padding: 18px 20px;
+    padding: 16px 36px 16px 16px;
     text-decoration: none;
     color: inherit;
     transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
     box-shadow: var(--shadow-sm);
     cursor: pointer;
-    min-height: 80px;
   }
 
   .tool-card:hover {
@@ -1019,6 +1020,7 @@ const paletteColors = {
   .tool-icon-wrap {
     width: 60px;
     height: 60px;
+    min-width: 60px;
     border-radius: 14px;
     display: flex;
     align-items: center;
@@ -1031,7 +1033,17 @@ const paletteColors = {
     transform: scale(1.05);
   }
 
-  .tool-body {
+  .tool-content-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    flex: 1;
+  }
+
+  .tool-text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
     flex: 1;
     min-width: 0;
   }
@@ -1041,15 +1053,17 @@ const paletteColors = {
     flex-wrap: wrap;
     gap: 4px;
     min-height: 24px;
-    margin-bottom: 4px;
+    margin-bottom: 8px;
     align-items: center;
   }
 
   .tool-name {
-    font-size: 18px;
-    font-weight: 700;
-    letter-spacing: -0.02em;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.3;
     color: var(--text);
+    margin: 0;
   }
 
   .badge {
@@ -1072,21 +1086,25 @@ const paletteColors = {
   }
 
   .tool-desc {
-    font-size: 14px;
+    font-size: 13px;
     color: var(--text-muted);
     line-height: 1.4;
+    margin: 0;
   }
 
   .tool-arrow {
-    font-size: 18px;
-    color: var(--text-light);
-    flex-shrink: 0;
-    transition: color 0.15s, transform 0.15s;
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: var(--text-muted);
+    transition: color 0.15s, right 0.15s;
   }
 
   .tool-card:hover .tool-arrow {
     color: var(--accent);
-    transform: translateX(4px);
+    right: 10px;
   }
 
   .no-results {
@@ -1237,29 +1255,28 @@ const paletteColors = {
     }
 
     .tool-card {
-      padding: 14px 16px;
-      gap: 12px;
-      min-height: 72px;
+      padding: 14px 32px 14px 14px;
       border-radius: 16px;
     }
 
     .tool-icon-wrap {
       width: 48px;
       height: 48px;
+      min-width: 48px;
       border-radius: 12px;
-      font-size: 26px;
     }
 
     .tool-name {
-      font-size: 16px;
+      font-size: 14px;
     }
 
     .tool-desc {
-      font-size: 13px;
+      font-size: 12px;
     }
 
     .tool-arrow {
-      font-size: 15px;
+      font-size: 14px;
+      right: 12px;
     }
 
     .trust-section {
