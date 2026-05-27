@@ -1003,7 +1003,8 @@ const paletteColors = {
     background: var(--surface);
     border: 1px solid var(--border-light);
     border-radius: var(--radius);
-    padding: 16px 36px 16px 16px;
+    padding: 16px;
+    padding-right: 36px;
     text-decoration: none;
     color: inherit;
     transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
@@ -1026,6 +1027,7 @@ const paletteColors = {
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    align-self: center;
     transition: transform 0.15s ease;
   }
 
@@ -1036,10 +1038,10 @@ const paletteColors = {
   .tool-text {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 2px;
     flex: 1;
     min-width: 0;
-    justify-content: center;
   }
 
   .tool-badge-row {
