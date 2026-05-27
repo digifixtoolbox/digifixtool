@@ -2,6 +2,15 @@ import { useState, useEffect, useRef } from "react";
 import { BANNER_TOOLS, categoryColor } from "../data/bannerTools.js";
 import { iconMap } from '../data/tablerIconMap.js';
 
+const paletteColors = {
+  purple: '#5746AF',
+  blue:   '#1A6EBF',
+  coral:  '#C44B20',
+  green:  '#0D7A5A',
+  amber:  '#A06010',
+  pink:   '#A0306A',
+};
+
 export default function PromoBanner({ excludeSlug }) {
   const [tools] = useState(function () {
     return excludeSlug
@@ -52,7 +61,7 @@ export default function PromoBanner({ excludeSlug }) {
         data-icon-palette={tool.iconPalette}
         style={{ width: "48px", height: "48px", borderRadius: "12px", flexShrink: "0", display: "flex", alignItems: "center", justifyContent: "center", background: "transparent" }}
       >
-        {(() => { const Icon = iconMap[tool.iconClass]; return Icon ? <Icon size={28} stroke={2} /> : null; })()}
+        {(() => { const Icon = iconMap[tool.iconClass]; return Icon ? <Icon size={28} stroke={1.75} color={paletteColors[tool.iconPalette] || 'currentColor'} /> : null; })()}
       </div>
       <span style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
         <span className="promo-hook">{tool.hook}</span>
