@@ -150,12 +150,10 @@ const paletteColors = {
             <ToolIcon name={tool.iconClass} size={38} color={paletteColors[tool.iconPalette] || 'currentColor'} stroke={1.75} />
           </div>
           <div class="tool-body">
-            {(tool.popular || tool.newTool) && (
-              <div class="tool-badge-row">
-                {tool.popular && <span class="badge">Popular</span>}
-                {tool.newTool && <span class="badge badge-new">New</span>}
-              </div>
-            )}
+            <div class="tool-badge-row">
+              {tool.popular && <span class="badge">Popular</span>}
+              {tool.newTool && <span class="badge badge-new">New</span>}
+            </div>
             <h3 class="tool-name">{tool.name}</h3>
             <p class="tool-desc">{tool.description}</p>
           </div>
@@ -1042,7 +1040,9 @@ const paletteColors = {
     display: flex;
     flex-wrap: wrap;
     gap: 4px;
-    margin-bottom: 2px;
+    min-height: 24px;
+    margin-bottom: 4px;
+    align-items: center;
   }
 
   .tool-name {
