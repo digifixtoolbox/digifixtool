@@ -116,7 +116,6 @@ export default function ImagesToPDF() {
       setPdfUrl(url);
       setDone(true);
     } catch (err) {
-      console.error(err);
       setError("Failed to create PDF. Please check your images and try again.");
     } finally {
       setConverting(false);

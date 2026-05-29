@@ -145,7 +145,6 @@ export default function PdfCompressor() {
       setStatus("done");
 
     } catch (err) {
-      console.error("Compression error:", err);
       setError(
         "Compression failed. The PDF may be password-protected, corrupted, " +
         "or use features not supported in this browser."

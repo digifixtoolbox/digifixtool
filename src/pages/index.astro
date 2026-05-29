@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import PromoBanner from '../components/PromoBanner.jsx';
 import ShareSection from '../components/ShareSection.astro';
 import ToolIcon from '../components/ToolIcon.jsx';
+import { paletteColors } from '../data/paletteColors.js';
 
 const tools = [
   { slug: 'compress-image',       name: 'Image Compressor',          description: 'Make image files smaller without losing quality.',                       iconClass: 'file-zip',        iconPalette: 'blue',   category: 'Image',     popular: true,             tags: ['photo', 'foto', 'picture', 'photography', 'editing', 'image editing', 'jpg', 'jpeg', 'png', 'webp', 'shrink', 'reduce', 'optimize', 'optimise', 'smaller', 'file size', 'upload', 'lighter', 'web', 'website speed', 'loading', 'performance', 'reduce size', 'make smaller'] },
@@ -39,14 +40,6 @@ const tools = [
 
 const categories = ['All', 'Image', 'PDF', 'Text', 'Social', 'Developer', 'Utility'];
 
-const paletteColors = {
-  purple: '#5746AF',
-  blue:   '#1A6EBF',
-  coral:  '#C44B20',
-  green:  '#0D7A5A',
-  amber:  '#A06010',
-  pink:   '#A0306A',
-};
 ---
 
 <Layout

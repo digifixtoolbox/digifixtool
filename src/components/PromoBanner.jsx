@@ -1,15 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { BANNER_TOOLS, categoryColor } from "../data/bannerTools.js";
 import { iconMap } from '../data/tablerIconMap.js';
-
-const paletteColors = {
-  purple: '#5746AF',
-  blue:   '#1A6EBF',
-  coral:  '#C44B20',
-  green:  '#0D7A5A',
-  amber:  '#A06010',
-  pink:   '#A0306A',
-};
+import { paletteColors } from '../data/paletteColors.js';
 
 export default function PromoBanner({ excludeSlug }) {
   const [tools] = useState(function () {
